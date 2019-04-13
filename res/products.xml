@@ -1,0 +1,1162 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<products>
+		<steps>
+			<item id="STEP-2-SMALL">
+				<description>
+				<en>40cm x 40cm x 25cm</en>
+				<hu> Két lépcsőfokos lépcső <br></br><br></br>Mérete: 40cm x 40cm x 25cm</hu>				
+				</description>
+				<dimension>Mérete: 40cm x 40cm x 25cm</dimension>
+				<variants>patterns</variants>
+				<image>/images/shop/steps/step_2_small</image>
+				<link_to_first_info>products/descriptions/steps/first_info</link_to_first_info>
+				<link_to_add_info>products/descriptions/steps/additional_info</link_to_add_info>
+				<link_to_prod_info>products/descriptions/steps/product_info</link_to_prod_info>
+				<category>stepsAndRamps</category>
+				<image_num>4</image_num>
+				<image_pref>width</image_pref>
+				<price>
+					<huf>10000</huf>
+				</price>			
+			</item>
+		
+			<item id="STEP-2-LARGE">
+				<description>
+				<en>40cm x 50cm x 40cm</en>
+				<hu>Nagy két lépcsőfokos lépcső <br></br><br></br>  Mérete: 40cm x 50cm x 40cm</hu>				
+				</description>
+				<dimension>Mérete: 40cm x 50cm x 40cm</dimension>
+				<variants>patterns</variants>
+				<image>/images/shop/steps/step_2_large</image>
+				<image_num>4</image_num>
+				<link_to_first_info>products/descriptions/steps/first_info</link_to_first_info>
+				<link_to_add_info>products/descriptions/steps/additional_info</link_to_add_info>
+				<link_to_prod_info>products/descriptions/steps/product_info</link_to_prod_info>
+				<category>stepsAndRamps</category>
+				<image_pref>width</image_pref>
+				<price>
+					<huf>11000</huf>
+				</price>			
+			</item>
+			
+			<item id="STEP-3-SMALL">
+				<description>
+				<en>35cm x 40cm x 40cm</en>
+				<hu>Három lépcsőfokos lépcső <br></br><br></br> Mérete: 35cm x 40cm x 40cm</hu>				
+				</description>
+				<dimension>Mérete: 35cm x 40cm x 40cm</dimension>
+				<image>/images/shop/steps/step_3_small</image>
+				<variants>patterns</variants>
+				<image_num>4</image_num>
+				<link_to_first_info>products/descriptions/steps/first_info</link_to_first_info>
+				<link_to_add_info>products/descriptions/steps/additional_info</link_to_add_info>
+				<link_to_prod_info>products/descriptions/steps/product_info</link_to_prod_info>
+				<category>stepsAndRamps</category>
+				<image_pref>width</image_pref>
+				<price>
+					<huf>12000</huf>
+				</price>			
+				<categories>shirt</categories>
+			</item>
+			<item id="STEP-3-MEDIUM">
+				<description>
+				<en>35cm x 40cm x 50cm</en>
+				<hu>Nagyobb három lépcsőfokos lépcső <br></br><br></br> Mérete: 35cm x 40cm x 50cm</hu>				
+				</description>
+				<dimension>Mérete: 35cm x 40cm x 50cm</dimension>
+				<image>/images/shop/steps/step_3_medium</image>
+				<variants>patterns</variants>
+				<image_num>4</image_num>
+				<link_to_first_info>products/descriptions/steps/first_info</link_to_first_info>
+				<link_to_add_info>products/descriptions/steps/additional_info</link_to_add_info>
+				<link_to_prod_info>products/descriptions/steps/product_info</link_to_prod_info>
+				<category>stepsAndRamps</category>
+				<image_pref>width</image_pref>
+				<price>
+					<huf>14000</huf>
+				</price>			
+			</item>
+			<item id="STEP-3-LARGE">
+				<description>
+				<en>35cm x 60cm x 40cm</en>
+				<hu>Legnagyobb három lépcsőfokos lépcső <br></br><br></br> Mérete: 35cm x 60cm x 40cm</hu>				
+				</description>
+				<dimension>Mérete: 35cm x 60cm x 40cm</dimension>
+				<image>/images/shop/steps/step_3_large</image>
+				<variants>patterns</variants>
+				<link_to_first_info>products/descriptions/steps/first_info</link_to_first_info>
+				<link_to_add_info>products/descriptions/steps/additional_info</link_to_add_info>
+				<link_to_prod_info>products/descriptions/steps/product_info</link_to_prod_info>
+				<category>stepsAndRamps</category>
+				<image_num>4</image_num>
+				<image_pref>width</image_pref>
+				<price>
+					<huf>16000</huf>
+				</price>			
+			</item>
+		</steps>
+		
+		<ramps>
+			<item id="RAMP-SMALL">
+					<description>
+					<en>80cm x 30cm x 40cm</en>
+					<hu>Rámpa <br></br><br></br> Mérete: 80cm x 30cm x 40cm</hu>				
+					</description>
+					<dimension>Mérete: 80cm x 30cm x 40cm</dimension>
+					<image>/images/shop/ramps/ramp_small</image>
+					<variants>patterns</variants>
+					<image_num>6</image_num>
+					<link_to_first_info>products/descriptions/ramps/first_info</link_to_first_info>
+					<link_to_add_info>products/descriptions/ramps/additional_info</link_to_add_info>
+					<link_to_prod_info>products/descriptions/steps/product_info</link_to_prod_info>
+					<category>stepsAndRamps</category>
+					<image_pref>width</image_pref>
+					<price>
+						<huf>9000</huf>
+					</price>			
+			</item>
+			
+			<item id="RAMP-SMALL-WIDE">
+					<description>
+					<en>80cm x 40cm x 40cm</en>
+					<hu>Szélesebb rámpa <br></br><br></br> Mérete: 80cm x 40cm x 40cm</hu>				
+					</description>
+					<dimension>Mérete: 80cm x 40cm x 40cm</dimension>
+					<image>/images/shop/ramps/ramp_small_wide</image>
+					<variants>patterns</variants>
+					<image_num>6</image_num>
+					<link_to_first_info>products/descriptions/ramps/first_info</link_to_first_info>
+					<link_to_add_info>products/descriptions/ramps/additional_info</link_to_add_info>
+					<link_to_prod_info>products/descriptions/steps/product_info</link_to_prod_info>
+					<category>stepsAndRamps</category>
+					<image_pref>width</image_pref>
+					<price>
+						<huf>11000</huf>
+					</price>			
+			</item>
+			
+			<item id="RAMP-LARGE">
+				<description>
+				<en>90cm x 40cm x 40cm</en>
+				<hu>Legnagyobb rámpa <br></br><br></br> Mérete: 90cm x 40cm x 40cm</hu>				
+				</description>
+				<dimension>Mérete: 90cm x 40cm x 40cm</dimension>
+				<image>/images/shop/ramps/ramp_large</image>
+				<variants>patterns</variants>
+				<image_num>3</image_num>
+				<link_to_first_info>products/descriptions/ramps/first_info</link_to_first_info>
+				<link_to_add_info>products/descriptions/ramps/additional_info</link_to_add_info>
+				<link_to_prod_info>products/descriptions/steps/product_info</link_to_prod_info>
+				<category>stepsAndRamps</category>
+				<image_pref>width</image_pref>
+				<price>
+					<huf>13000</huf>
+				</price>			
+			</item>		
+		
+		</ramps>
+		<others>
+			<item id="BLANKET-1">
+				<description>
+				<en></en>
+				<hu>Bújózsák</hu>				
+				</description>
+				<image>/images/shop/others/blanket_1</image>
+				<variants>patterns</variants>
+				<image_num>7</image_num>
+				<link_to_first_info>products/descriptions/blankets/first_info</link_to_first_info>
+				<link_to_add_info>products/descriptions/blankets/additional_info</link_to_add_info>
+				<link_to_prod_info>products/descriptions/steps/product_info</link_to_prod_info>
+				<category>stepsAndRamps</category>
+				<image_pref>width</image_pref>
+				<price>
+					<huf>8000</huf>
+				</price>			
+			</item>	
+			
+			<item id="COUCH-1">
+				<description>
+				<en></en>
+				<hu>Babzsák</hu>				
+				</description>
+				<image>/images/shop/others/couch_1</image>
+				<variants>patterns</variants>
+				<image_num>5</image_num>
+				<link_to_first_info>products/descriptions/couches/first_info</link_to_first_info>
+				<link_to_add_info>products/descriptions/couches/additional_info</link_to_add_info>
+				<link_to_prod_info>products/descriptions/steps/product_info</link_to_prod_info>
+				<category>stepsAndRamps</category>
+				<image_pref>width</image_pref>
+				<price>
+					<huf>10000</huf>
+				</price>			
+			</item>	
+		
+		</others>
+		
+		<variants>
+			<patterns>
+				<item id="PATTERN_1">
+						<description>
+						<en></en>
+						<hu>Pöttyös bárna</hu>				
+						</description>
+						<image>/images/shop/patterns/pattern_1</image>
+						<price>
+							<huf>0</huf>
+						</price>			
+				</item>
+				<item id="PATTERN_22">
+					<description>
+					<en></en>
+					<hu>Szürke és fekete tappancsos,pöttyös</hu>				
+					</description>
+					<image>/images/shop/patterns/pattern_22</image>
+					<price>
+						<huf>0</huf>
+					</price>			
+				</item>
+				<!--item id="PATTERN_2">
+					<description>
+					<en></en>
+					<hu>Szürke tappancsos </hu>				
+					</description>
+					<image>/images/shop/patterns/pattern_2</image>
+					<price>
+						<huf>0</huf>
+					</price>			
+				</item-->	
+				<!--item id="PATTERN_4">
+					<description>
+					<en></en>
+					<hu>Fekete alapon rózsaszín tappancsos</hu>				
+					</description>
+					<image>/images/shop/patterns/pattern_4</image>
+					<price>
+						<huf>0</huf>
+					</price>			
+				</item-->		
+				<item id="PATTERN_6">
+					<description>
+					<en></en>
+					<hu>Méhsejt mintás </hu>				
+					</description>
+					<image>/images/shop/patterns/pattern_6</image>
+					<price>
+						<huf>0</huf>
+					</price>			
+				</item>	
+				<item id="PATTERN_8">
+					<description>
+					<en></en>
+					<hu>Rózsaszín alapon fehér csillagos</hu>				
+					</description>
+					<image>/images/shop/patterns/pattern_8</image>
+					<price>
+						<huf>0</huf>
+					</price>			
+				</item>	
+				<item id="PATTERN_9">
+					<description>
+					<en></en>
+					<hu>Fehér - bézs kutyafejes </hu>				
+					</description>
+					<image>/images/shop/patterns/pattern_9</image>
+					<price>
+						<huf>0</huf>
+					</price>			
+				</item>	
+				<item id="PATTERN_10">
+					<description>
+					<en></en>
+					<hu>Woof csontos és mancsos </hu>				
+					</description>
+					<image>/images/shop/patterns/pattern_10</image>
+					<price>
+						<huf>0</huf>
+					</price>			
+				</item>	
+				<item id="PATTERN_11">
+					<description>
+					<en></en>
+					<hu>Szürke alapon fehér csillagos</hu>				
+					</description>
+					<image>/images/shop/patterns/pattern_11</image>
+					<price>
+						<huf>0</huf>
+					</price>			
+				</item>
+				<!--item id="PATTERN_12">
+					<description>
+					<en></en>
+					<hu>Sötétkék kutyafejes tappancsos</hu>				
+					</description>
+					<image>/images/shop/patterns/pattern_12</image>
+					<price>
+						<huf>0</huf>
+					</price>			
+				</item-->
+				<item id="PATTERN_13">
+					<description>
+					<en></en>
+					<hu>Puzzle</hu>				
+					</description>
+					<image>/images/shop/patterns/pattern_13</image>
+					<price>
+						<huf>0</huf>
+					</price>			
+				</item>
+				<item id="PATTERN_14">
+					<description>
+					<en></en>
+					<hu>Halvány bézs alapon nagytappancsos</hu>				
+					</description>
+					<image>/images/shop/patterns/pattern_14</image>
+					<price>
+						<huf>0</huf>
+					</price>			
+				</item>
+				<!--item id="PATTERN_15">
+					<description>
+					<en></en>
+					<hu>Szürkealapon rózsaszín szíves tappancsos</hu>				
+					</description>
+					<image>/images/shop/patterns/pattern_15</image>
+					<price>
+						<huf>0</huf>
+					</price>			
+				</item-->
+				<item id="PATTERN_16">
+					<description>
+					<en></en>
+					<hu>Sötétrózsaszín kutyafejes-tappancsos</hu>				
+					</description>
+					<image>/images/shop/patterns/pattern_16</image>
+					<price>
+						<huf>0</huf>
+					</price>			
+				</item>
+				<item id="PATTERN_17">
+					<description>
+					<en></en>
+					<hu>Westi mintás</hu>				
+					</description>
+					<image>/images/shop/patterns/pattern_17</image>
+					<price>
+						<huf>0</huf>
+					</price>			
+				</item>
+				<item id="PATTERN_19">
+					<description>
+					<en></en>
+					<hu>Sok tappancsos</hu>				
+					</description>
+					<image>/images/shop/patterns/pattern_19</image>
+					<price>
+						<huf>0</huf>
+					</price>			
+				</item>
+				<item id="PATTERN_20">
+					<description>
+					<en></en>
+					<hu>Sötétkék alapon rózsaszín westi</hu>				
+					</description>
+					<image>/images/shop/patterns/pattern_20</image>
+					<price>
+						<huf>0</huf>
+					</price>			
+				</item>
+				<item id="PATTERN_21">
+					<description>
+					<en></en>
+					<hu>Westi mintás</hu>				
+					</description>
+					<image>/images/shop/patterns/pattern_21</image>
+					<price>
+						<huf>0</huf>
+					</price>			
+				</item>
+				
+				<!--item id="PATTERN_23">
+					<description>
+					<en></en>
+					<hu>Világoskék alapon kutyatappancsok</hu>				
+					</description>
+					<image>/images/shop/patterns/pattern_22</image>
+					<price>
+						<huf>0</huf>
+					</price>			
+				</item>
+				<item id="PATTERN_24">
+					<description>
+					<en></en>
+					<hu>Krémszínű kutyusosSzürke bulldogos</hu>				
+					</description>
+					<image>/images/shop/patterns/pattern_22</image>
+					<price>
+						<huf>0</huf>
+					</price>			
+				</item>
+				<item id="PATTERN_25">
+					<description>
+					<en></en>
+					<hu>Fehér alapon bézs tappancsok</hu>				
+					</description>
+					<image>/images/shop/patterns/pattern_22</image>
+					<price>
+						<huf>0</huf>
+					</price>			
+				</item>
+				<item id="PATTERN_26">
+					<description>
+					<en></en>
+					<hu>Sötétszürke alapon fehér mancsok és csontok</hu>				
+					</description>
+					<image>/images/shop/patterns/pattern_22</image>
+					<price>
+						<huf>0</huf>
+					</price>			
+				</item>
+				<item id="PATTERN_27">
+					<description>
+					<en></en>
+					<hu>Zöld alapon többszínű mancs</hu>				
+					</description>
+					<image>/images/shop/patterns/pattern_22</image>
+					<price>
+						<huf>0</huf>
+					</price>			
+				</item>
+				<item id="PATTERN_28">
+					<description>
+					<en></en>
+					<hu>Kék alapon többszínű mancs</hu>				
+					</description>
+					<image>/images/shop/patterns/pattern_22</image>
+					<price>
+						<huf>0</huf>
+					</price>			
+				</item>
+				<item id="PATTERN_29">
+					<description>
+					<en></en>
+					<hu>Szürke tappancsos fehér szívekkel</hu>				
+					</description>
+					<image>/images/shop/patterns/pattern_22</image>
+					<price>
+						<huf>0</huf>
+					</price>			
+				</item>
+				<item id="PATTERN_30">
+					<description>
+					<en></en>
+					<hu>Szürke alapon rózsaszín pöttyök és fehér szívek</hu>				
+					</description>
+					<image>/images/shop/patterns/pattern_22</image>
+					<price>
+						<huf>0</huf>
+					</price>			
+				</item>
+				<item id="PATTERN_29">
+					<description>
+					<en></en>
+					<hu>Szürke alapon piros pöttyös szívecskés</hu>				
+					</description>
+					<image>/images/shop/patterns/pattern_22</image>
+					<price>
+						<huf>0</huf>
+					</price>			
+				</item>
+				<item id="PATTERN_30">
+					<description>
+					<en></en>
+					<hu>Rókás</hu>				
+					</description>
+					<image>/images/shop/patterns/pattern_22</image>
+					<price>
+						<huf>0</huf>
+					</price>			
+				</item-->
+			
+			</patterns>
+			<shampoo_variants>
+				<item id="PATTERN_CITROM">
+					<description>
+					<en></en>
+					<hu>Citromfű</hu>				
+					</description>
+					<image>/images/shop/mybulldog/shampoos/citrom</image>
+					<price>
+						<huf>0</huf>
+					</price>			
+				</item>
+				<item id="PATTERN_LEVENDER">
+					<description>
+					<en></en>
+					<hu>Levendula</hu>				
+					</description>
+					<image>/images/shop/mybulldog/shampoos/levender</image>
+					<price>
+						<huf>0</huf>
+					</price>			
+				</item>			
+			
+			</shampoo_variants>
+			<groomer_variants>
+				<item id="GROOMER_SMALL">
+					<description>
+					<en></en>
+					<hu>Mini - 6,5cm x 6,5cm méretű</hu>				
+					</description>
+					<image>/images/shop/mybulldog/groomers/small</image>
+					<price>
+						<huf>0</huf>
+					</price>			
+				</item>
+				<item id="GROOMER_LARGE">
+					<description>
+					<en></en>
+					<hu>Normál - 12,5cm x 6,5cm méretű</hu>				
+					</description>
+					<image>/images/shop/mybulldog/groomers/large</image>
+					<price>
+						<huf>2000</huf>
+					</price>			
+				</item>						
+			</groomer_variants>
+			<snack_variants>
+				<item id="SNACK_APPLE">
+					<description>
+					<en></en>
+					<hu>Alma-csalán</hu>				
+					</description>
+					<image>/images/shop/mybulldog/snacks/apple</image>
+					<price>
+						<huf>0</huf>
+					</price>			
+				</item>
+				<item id="SNACK_BANANA">
+					<description>
+					<en></en>
+					<hu>Banán- kurkuma</hu>				
+					</description>
+					<image>/images/shop/mybulldog/snacks/banana</image>
+					<price>
+						<huf>0</huf>
+					</price>			
+				</item>	
+				<item id="SNACK_LEVENDER">
+					<description>
+					<en></en>
+					<hu>Levendula- ánizs</hu>				
+					</description>
+					<image>/images/shop/mybulldog/snacks/levender</image>
+					<price>
+						<huf>0</huf>
+					</price>			
+				</item>
+				<item id="SNACK_BLUEBERRY">
+					<description>
+					<en></en>
+					<hu>Kékáfonya-menta</hu>				
+					</description>
+					<image>/images/shop/mybulldog/snacks/blueberry</image>
+					<price>
+						<huf>0</huf>
+					</price>			
+				</item>
+			</snack_variants>
+			<cream_variants>
+				<item id="CREAM_SHEABUTTER">
+					<description>
+					<en></en>
+					<hu> Finomítatlan sheavaj jojóba olajjal</hu>				
+					</description>
+					<image>/images/shop/mybulldog/creams/sheabutter</image>
+					<price>
+						<huf>0</huf>
+					</price>			
+				</item>
+				<item id="CREAM_COCOABUTTER">
+					<description>
+					<en></en>
+					<hu>Finomítatlan kakaóvaj körömvirággal és kamillával</hu>				
+					</description>
+					<image>/images/shop/mybulldog/creams/cocoabutter</image>
+					<price>
+						<huf>0</huf>
+					</price>			
+				</item>						
+			</cream_variants>
+			<behappy_variants>
+				<item id="PATTERN_A">
+					<description>
+					<en></en>
+					<hu>A</hu>				
+					</description>
+					<image>/images/shop/behappy/patterns/pattern_a</image>
+					<price>
+						<huf>0</huf>
+					</price>			
+				</item>
+				<item id="PATTERN_B">
+					<description>
+					<en></en>
+					<hu>B</hu>				
+					</description>
+					<image>/images/shop/behappy/patterns/pattern_b</image>
+					<price>
+						<huf>0</huf>
+					</price>			
+				</item>
+				<item id="PATTERN_C">
+					<description>
+					<en></en>
+					<hu>C</hu>				
+					</description>
+					<image>/images/shop/behappy/patterns/pattern_c</image>
+					<price>
+						<huf>0</huf>
+					</price>			
+				</item>
+				<item id="PATTERN_D">
+					<description>
+					<en></en>
+					<hu>D</hu>				
+					</description>
+					<image>/images/shop/behappy/patterns/pattern_d</image>
+					<price>
+						<huf>0</huf>
+					</price>			
+				</item>
+				<item id="PATTERN_E">
+					<description>
+					<en></en>
+					<hu>E</hu>				
+					</description>
+					<image>/images/shop/behappy/patterns/pattern_e</image>
+					<price>
+						<huf>0</huf>
+					</price>			
+				</item>
+				<item id="PATTERN_F">
+					<description>
+					<en></en>
+					<hu>F</hu>				
+					</description>
+					<image>/images/shop/behappy/patterns/pattern_f</image>
+					<price>
+						<huf>0</huf>
+					</price>			
+				</item>
+				<item id="PATTERN_G">
+					<description>
+					<en></en>
+					<hu>G</hu>				
+					</description>
+					<image>/images/shop/behappy/patterns/pattern_g</image>
+					<price>
+						<huf>0</huf>
+					</price>			
+				</item>
+				<item id="PATTERN_H">
+					<description>
+					<en></en>
+					<hu>H</hu>				
+					</description>
+					<image>/images/shop/behappy/patterns/pattern_h</image>
+					<price>
+						<huf>0</huf>
+					</price>			
+				</item>
+				<item id="PATTERN_I">
+					<description>
+					<en></en>
+					<hu>I</hu>				
+					</description>
+					<image>/images/shop/behappy/patterns/pattern_i</image>
+					<price>
+						<huf>0</huf>
+					</price>			
+				</item>
+				<item id="PATTERN_J">
+					<description>
+					<en></en>
+					<hu>J</hu>				
+					</description>
+					<image>/images/shop/behappy/patterns/pattern_j</image>
+					<price>
+						<huf>0</huf>
+					</price>			
+				</item>
+				<item id="PATTERN_K">
+					<description>
+					<en></en>
+					<hu>K</hu>				
+					</description>
+					<image>/images/shop/behappy/patterns/pattern_k</image>
+					<price>
+						<huf>0</huf>
+					</price>			
+				</item>
+				<item id="PATTERN_L">
+					<description>
+					<en></en>
+					<hu>L</hu>				
+					</description>
+					<image>/images/shop/behappy/patterns/pattern_l</image>
+					<price>
+						<huf>0</huf>
+					</price>			
+				</item>
+				<item id="PATTERN_M">
+					<description>
+					<en></en>
+					<hu>M</hu>				
+					</description>
+					<image>/images/shop/behappy/patterns/pattern_m</image>
+					<price>
+						<huf>0</huf>
+					</price>			
+				</item>
+				<item id="PATTERN_N">
+					<description>
+					<en></en>
+					<hu>N</hu>				
+					</description>
+					<image>/images/shop/behappy/patterns/pattern_n</image>
+					<price>
+						<huf>0</huf>
+					</price>			
+				</item>
+				<item id="PATTERN_O">
+					<description>
+					<en></en>
+					<hu>O</hu>				
+					</description>
+					<image>/images/shop/behappy/patterns/pattern_o</image>
+					<price>
+						<huf>0</huf>
+					</price>			
+				</item>
+				<item id="PATTERN_P">
+					<description>
+					<en></en>
+					<hu>P</hu>				
+					</description>
+					<image>/images/shop/behappy/patterns/pattern_p</image>
+					<price>
+						<huf>0</huf>
+					</price>			
+				</item>
+			</behappy_variants>
+		</variants>
+		
+		<mybulldog>
+			<item id="BULLDOG_SHAMPOO">
+				<description>
+				<en></en>
+				<hu>Természetes Kutyasampon Gyógynövénnyel | 250ml</hu>				
+				</description>
+				<image>/images/shop/mybulldog/shampoos</image>
+				<item_is_pattern>yes</item_is_pattern>
+				<variants>shampoo_variants</variants>
+				<category>myBullDog</category>
+				<image_pref>height</image_pref>
+				<link_to_first_info>products/descriptions/mybulldog/shampoo/first_info</link_to_first_info>
+				<link_to_add_info>products/descriptions/mybulldog/shampoo/additional_info</link_to_add_info>
+				<price>
+					<huf>3590</huf>
+				</price>			
+			</item>
+
+			<item id="BULLDOG_PROTECTION">
+				<description>
+				<en></en>
+				<hu>Természetes permet levendulával és citromfűvel | 200ml</hu>				
+				</description>
+				<image>/images/shop/mybulldog/protections</image>
+				<category>myBullDog</category>
+				<image_pref>height</image_pref>
+				<link_to_first_info>products/descriptions/mybulldog/shampoo/first_info</link_to_first_info>
+				<link_to_add_info>products/descriptions/mybulldog/protection/additional_info</link_to_add_info>
+				<price>
+					<huf>3590</huf>
+				</price>			
+			</item>
+			<item id="BULLDOG_GROOMER">
+				<description>
+				<en></en>
+				<hu>My Bulldog Groomer by Zooro</hu>				
+				</description>
+				<image>/images/shop/mybulldog/groomers</image>
+				<link_to_first_info>products/descriptions/mybulldog/shampoo/first_info</link_to_first_info>
+				<link_to_add_info>products/descriptions/mybulldog/groomer/additional_info</link_to_add_info>
+				<category>myBullDog</category>
+				<item_is_pattern>yes</item_is_pattern>
+				<variants>groomer_variants</variants>
+				<image_pref>height</image_pref>
+				<price>
+					<huf>2990</huf>
+				</price>			
+			</item>
+
+			<item id="BULLDOG_SNACKS">
+				<description>
+				<en></en>
+				<hu>Egészséges kutya jutalomfalat gyógynövényekkel - 100g</hu>				
+				</description>
+				<image>/images/shop/mybulldog/snacks</image>
+				<image_pref>height</image_pref>
+				<category>myBullDog</category>
+				<variants>snack_variants</variants>
+				<link_to_add_info>products/descriptions/mybulldog/snacks/additional_info</link_to_add_info>
+				<link_to_first_info>products/descriptions/mybulldog/shampoo/first_info</link_to_first_info>
+				<item_is_pattern>yes</item_is_pattern>
+				<price>
+					<huf>1890</huf>
+				</price>			
+			</item>
+	
+			<item id="BULLDOG_CREAM">
+				<description>
+				<en></en>
+				<hu>Természetes orr- és mancsápoló krém | 50ml</hu>				
+				</description>
+				<image>/images/shop/mybulldog/creams</image>
+				<image_pref>height</image_pref>
+				<category>myBullDog</category>
+				<variants>cream_variants</variants>
+				<link_to_add_info>products/descriptions/mybulldog/cream/additional_info</link_to_add_info>
+				<link_to_first_info>products/descriptions/mybulldog/shampoo/first_info</link_to_first_info>
+				<item_is_pattern>yes</item_is_pattern>
+				<price>
+					<huf>1990</huf>
+				</price>			
+			</item>
+			<item id="BULLDOG_TONIC">
+				<description>
+				<en></en>
+				<hu>Természetes redő- és szemkörnyék ápoló tonik | 200ml</hu>				
+				</description>
+				<image>/images/shop/mybulldog/tonics</image>
+				<link_to_first_info>products/descriptions/mybulldog/shampoo/first_info</link_to_first_info>
+				<link_to_add_info>products/descriptions/mybulldog/tonic/additional_info</link_to_add_info>
+				<image_pref>height</image_pref>
+				<category>myBullDog</category>
+				<price>
+					<huf>4290</huf>
+				</price>			
+			</item>
+		
+		</mybulldog>
+		
+		<behappy>
+			<item id="COLLAR">
+				<description>
+				<en></en>
+				<hu>Nyakörv</hu>				
+				</description>
+				<image>/images/shop/behappy/collar</image>
+				<link_to_first_info>products/descriptions/behappy/collar/first_info</link_to_first_info>
+				<link_to_add_info>products/descriptions/behappy/collar/additional_info</link_to_add_info>
+				<image_num>1</image_num>
+				<image_pref>width</image_pref>
+				<variants>behappy_variants</variants>
+				<category>beHappy</category>
+				<price>
+					<huf>3500</huf>
+				</price>			
+			</item>
+			<item id="STRAP">
+				<description>
+				<en></en>
+				<hu>Póráz</hu>				
+				</description>
+				<image>/images/shop/behappy/strap</image>
+				<link_to_first_info>products/descriptions/behappy/strap/first_info</link_to_first_info>
+				<link_to_add_info>products/descriptions/behappy/strap/additional_info</link_to_add_info>
+				<image_num>3</image_num>
+				<image_pref>width</image_pref>
+				<variants>behappy_variants</variants>
+				<category>beHappy</category>
+				<price>
+					<huf>4100</huf>
+				</price>			
+			</item>
+			<item id="COMBINATION">
+				<description>
+				<en></en>
+				<hu>Nyakörv-póráz szett</hu>				
+				</description>
+				<image>/images/shop/behappy/combined</image>
+				<link_to_first_info>products/descriptions/behappy/combination/first_info</link_to_first_info>
+				<link_to_add_info>products/descriptions/behappy/combination/additional_info</link_to_add_info>
+				<image_num>6</image_num>
+				<image_pref>width</image_pref>
+				<variants>behappy_variants</variants>
+				<category>beHappy</category>
+				<price>
+					<huf>6200</huf>
+				</price>			
+			</item>
+		
+		</behappy>
+	
+		
+		<descriptions>
+			<ramps>
+				<first_info>
+					<ul>
+						<li><b>A rámpa magassága egyedileg választható 30-50 cm között. Az Ön által kívánt méretet a megrendelésnél látható "Megjegyzés" rovatba írja be.</b></li>
+						<li>A kutyalépcső és a rámpa <b>12 napon</b> belül készül el, mivel egyedileg kézzel készülnek.</li>
+						<li>A kutyafekhelyek <b>10 napon</b> belül készülnek el, mivel egyedi kézzel készített termékek.</li>
+						<li>Míg az egyéb termékek <b>5 munkanapon</b> belül kerülnek beszerzésre.</li>
+					</ul>
+				
+				</first_info>
+				<additional_info>
+							Rétegelt bútorlapból készül, Wellsoft vagy polár anyaggal kárpitozva.<br></br>
+							Kihajtható lába van, zsanérral rögzítve az alaplaphoz.<br></br>
+								A lábrész hevederpánttal kapcsolódik az alaplaphoz. A rámpák terhelhetősége 20kg<br></br>
+								Választható, hogy milyen színű anyaggal legyen bevonva.
+				
+				</additional_info>
+			
+			</ramps>
+			<steps>
+				<first_info>
+					<ul>
+						<li>A kutyalépcső és a rámpa <b>12 napon</b> belül készül el, mivel egyedileg kézzel készülnek.</li>
+						<li>A kutyafekhelyek <b>10 napon</b> belül készülnek el, mivel egyedi kézzel készített termékek.</li>
+						<li>Míg az egyéb termékek <b>5 munkanapon</b> belül kerülnek beszerzésre.</li>
+					</ul>				
+				</first_info>
+				<additional_info>
+						Tökéletes kistestű és nagyobb testű kutyusoknak egyaránt.<br></br>A lépcsők terhelhetősége 60kg.
+						Rétegelt bútorlaból készül, Wellsoft vagy polár anyaggal kárpitozva.<br></br>
+						Választható, hogy milyen színű anyaggal legyen bevonva.		
+				</additional_info>
+				<product_info>
+						<br></br>A terméket csak eredeti állapotában és csomagolásában, 
+							hiánytalan mennyiségi, minőségi állapotában vesszük vissza. <br></br>
+							Amennyiben a visszaküldött terméket utánvéttel adja fel, azt nem áll módunkban átvenni. <br></br>
+							Az esetleges méret problémából adódó cserék esetén, a felmerülő költségek (szállítási költség, utánvét költsége), 
+							minden esetben a vevőt terhelik
+				
+				</product_info>
+			
+			</steps>
+			<blankets>
+				<first_info>
+					<ul>
+						<li>58cm széles és 50 cm hosszú</li>
+						<li>A kutyafekhelyek <b>10 napon</b> belül készülnek el, mivel egyedi kézzel készített termékek.</li>
+					</ul>
+				</first_info>
+			
+				<additional_info>
+					<ul>
+						<li>58cm széles és 50 cm hosszú</li>
+						<li>Pihe-puha bújózsàk kedvencednek</li>
+						<li>Belseje sima fehér színű wellsoft anyag, a takaró része kívülről pedig választható mintás wellsoft anyagból készül.</li>
+						<li>Annak érdekében, hogy az alja kevésbé koszolódjon, sötétkék vásznat kap.</li>
+						<li>A bélés kivehető, így a huzat bármikor mosható.</li>
+						<li>Mosási javaslat: 30 fokon</li>
+					</ul>
+				</additional_info>
+			</blankets>
+			<couches>
+				<first_info>
+					<ul>
+						<li>50-55cm átmérőjű fekvőfelület</li>
+						<li>A kutyafekhelyek <b>10 napon</b> belül készülnek el, mivel egyedi kézzel készített termékek</li>
+					</ul>
+				</first_info>
+				<additional_info>
+					“A tökéletes kényelem!” Felveszi a kutyus formáját, hogy kedvence minél kényelmesebben tudjon pihenni.
+					Az alja és az oldalai vászonból készülnek, cipzárral ellátott, így a bélésben található töltőanyag eltávolítható.
+					A bélésen is található cipzár, így szükség esetén utántölthető!
+					A babzsák fekvő felülete pedig választható mintás wellsoft anyagból készül.
+					Mosási javaslat: 30 fokon, bélést eltávolítva
+				
+				</additional_info>
+			
+			</couches>
+			<mybulldog>
+				<shampoo>
+					<first_info>
+						A My Bulldog termékek <b>5 munkanapon</b> belül kerülnek beszerzésre					
+					</first_info>
+					<additional_info>
+						 Természetes bio kutyasamponunk organikus összetevőkből áll. 
+						 Samponjaink teljesen vegán alapanyagokból készülnek, 
+						 ezért nyíltan állíthatjuk, hogy nincs párja a természetes kutyakozmetikumok között. Érzékeny bőrre ajánlott.<br></br>
+						 250ml | Használatot könnyítő pumpás adagolóval
+						 Mindegyik samponunkat ajánljuk allergiás és érzékeny bőrű kutyáknak egyaránt.
+						<br></br>
+						Kizárólag cukortenzid alapú (növényi, kémiai eljárásoktól mentes) habzóanyagokkal készült
+						kíméletes fürdető gél hidratáló növényi glicerinnel, valódi búzacsíra fehérjeével, és B5 provitaminnal. 
+						A megfelelő ápolásról az E-vitamin, és a bio szűz olívaolaj, kókuszolaj, napraforgó olaj, ricinusolaj, 
+						finomítatlan sheavaj gondoskodnak. Valódi, bio illóolajokkal készült.
+					
+					</additional_info>
+				
+				</shampoo>
+				<protection>
+					<additional_info>
+						Permetünk Kullancsriasztó hatása bizonyos ideig tart, ezért csak kiegészítőként ajánlott, 
+						ha maximalis védelemre van szükséged. Javallott, ha séta előtt bepermetezed kutyusod szőrét és ezt 
+						ismételgeted séta közben 3-4 óránként. A citromfű és a levendula használata igen hatásos nem csak kullancsok, 
+						de a szúnyogok ellen is védelmet biztosít.<br></br>
+						200ml | Bio ökogazdálkodásból származó illóolajokkal | Permetezést könnyítő karos szórófejjel<br></br>
+						A tápláló olajoknak köszönhetően a szőrt fénylővé varázsolja, hosszabb szőrű kutyáknál pedig a fésülést 
+						is megkönnyítheti valamint a csomósodást is gátolhatja.A gyógynövények illóolajai, 
+						melyeket felhasználtunk a permet összeállításakor rendkívüli hatással bírnak, hiszen antibakteriális és gombaülő hatással is bírnak.
+						Mivel teljesen természetes így nem irritálja a kutyák bőrét, így érzékenyebb fajtáknak is ajánljuk.
+					
+					</additional_info>
+				
+				</protection>
+				<groomer>
+					<additional_info>
+						Alapanyagai lebomlóak és újrahasznosíthatóak.
+						Használata során nem sérti fel kutyád bőrét, ugyanis a fogai nem olyan mélyek. 
+						Nem egy aljszőr nyíró eszköz, ezért tényleg csak annyi szőrtől szabadítja meg kutyád, amennyi tényleg szükséges.
+						Rövid vagy középhosszú szőrre ajánlott. A hajszerű, hosszú szőrzet fésülésére nem alkalmas.<br></br>
+						A mini Groomer 6,5cm x 6,5cm méretű<br></br>
+						A normál Groomer 12,5cm x 6,5cm méretű<br></br>
+					
+					</additional_info>
+				
+				</groomer>
+				
+				<snacks>
+					<additional_info>
+						Egészséges és természetes kutyakeksz, mely tökéletes ösztönzést jelent kutyusod számára. 
+						Kutyakekszeink fejlesztése során nagy figyelmet fordítottunk arra, hogy kedvenceink jutalmazásánál ne keljen a testsúly és 
+						az egészségtelen táplálkozási problémákra figyelni.	
+						<ul>
+							<li>cukormentes</li>
+							<li>adalékmentes</li>
+							<li>színezékmentes</li>
+							<li>mesterséges hozzávalóktól mentes</li>
+							<li>ízfokozó mentes</li>
+							<li>tartósítószer mentes</li>
+						
+						</ul>
+						A My Bulldog Snack alkalmas kölyökkutyák jutalmazására is ugyanis nem tartalmaz olyan alapanyagokat amelyek gondot okoznának a kölyökkutyák emésztésének, 
+						fejlődésüket és egészségüket a gyógynövények és valódi gyümölcsök pedig támogatják.
+						A csomagon található simítózárnak köszönhetően biztonságosan tudod tárolni a jutalomafaltokat és 
+						nem kell attól félned, hogy kiborul valamint így tovább élvezhető a keksz állaga is.
+					</additional_info>
+				
+				</snacks>
+				
+				<cream>
+					<additional_info>
+						Mancsápoló krémünk védelmet nyújt télen a sós latyakos hidegben, 
+						nyáron pedig a forró beton ellen.  Fejlesztésünk eredménye egy adalékmentes, állatkísérletmentes, bio, 
+						kegyetlenségmentes, kőolajszármazék mentes, pálmaolajmentes, parabénmentes, SLS és vegyszermentes teljesen vegán tappancsápoló 
+						krém. Hatása gyógynövényi hatóanyagai és nem vízbázisa miatt ilyen csodálatos.<br></br>
+						50ml  |  Finomítatlan alapanyagokból, tápláló olajokkal és gyógynövényekkel<br></br>
+						A mancsápoló egy újabb hóbortnak tűnhet, aminek semmi értelme, pedig minden kutyának szüksége van mancsápolásra, hiszen a meleg, 
+						poros járdák és télen a sózott, jeges utak igénybeveszik a tappancsokat. Sokszor nagyon kellemetlen berepedezések és kopások keletkeznek, 
+						ha elmarad az ápolás. Néhány fajtának pedig az orra sem nedvesedik, ezért egy vastag száraz, szarus réteg keletkezik az orrukon 
+						(mint például bulldogok, mopszok), amiben könnyen megtelepednek a gombás fertőzések. Rendszeres ápolással ez viszont elkerülhető.
+						100% természetes alapanyagokból áll. Nincs benne kőolajszármazék, pálmaolaj, mesterséges illatanyagak, egészségre káros hozzávalók. 
+						A fonimítatlan sheavajat, kókuszolajat, kakóvajat úgy válogattuk össze, hogy már az első használat után látványos legyen a mancsápoló hatása.
+						A mancsápolóban használt oljaok mindegyikének rengeteg csodálatos tulajdonsága van, hiszen hamar felszívódnak, antibakteriálisak és gombaölő hatásukről is rendkívül híresek.
+						Éppen ezért, ha minden séta előtt és után vékony rétegben bekenjük a kutyánk tappancsát elkerülhetjük az égő, viszkető tappancsokat. Különösen télen kell odafigyelni, hogy mindennap ápoljuk kutyánk tappancsait.
+					
+					</additional_info>
+				
+				</cream>
+				
+				<tonic>
+					<additional_info>
+						A gyógynövényi hatóanyagainak, mint a zsályának is köszönhető, hogy enyhíti a gyulladt bőrfelületet.
+						Gyógyszertári minőségű bórvíz az oldatunk alapja, melyhez ellenőrzött biogazdálkodásból származó zsálya illóolajat adunk,
+						így maximálisan biztonságos a hatása.<br></br>
+						<ul>
+						Alkalmazási területek: 
+							<li>Ráncok-redők</li>
+							<li>Szemkörnyék</li>
+							<li>Fülek</li>
+							<li>Tappancsok</li>
+						</ul>
+						<ul>
+						Fő összetevők: 
+							<li>Zsálya: fertőzésgátló, baktériumölő hatású, gombaölő, vírusölő hatású hegesítő hatású</li>
+							<li>Bórvíz: nyugtató, gyulladáscsökkentő, összehúzó, hegesítő hámképző hatású</li>
+						</ul>
+						
+					
+					</additional_info>
+				
+				</tonic>
+			
+			</mybulldog>
+			<behappy>
+				<collar>
+					<first_info>
+						<ul>
+							<li><b>A nyakörvek a kutyus nyakmérete alapján készülnek, melyek +- állíthatóak. Emiatt kérjük, hogy megrendeléskor, a "Megjegyzés" rovatba írja le kedvence nyakméretét.</b></li>
+							<li>A nyakörvek és a pórázok <b>12 napon</b> belül készül el, mivel egyedileg kézzel készülnek.</li>
+							
+						</ul>
+					
+					</first_info>
+					<additional_info>
+								A nyakörvek 25 mm szélesek és a kutyus nyakmérete alapján készülnek. Minden nyakörv fekete biztonsági csattal készül.
+					
+					</additional_info>
+				</collar>
+				<strap>
+					<first_info>
+						<ul>
+							<li>A nyakörvek és a pórázok <b>12 napon</b> belül készül el, mivel egyedileg kézzel készülnek.</li>
+							
+						</ul>
+					
+					</first_info>
+					<additional_info>
+								A pórázak 25 mm szélesek és 120 cm hosszúak. Egyedi méretben is kérhető megbeszélés alapján, ebben az esetben, kérem vegye fel velünk a kapcsolatot.
+					
+					</additional_info>
+				
+				</strap>
+				<combination>
+					<first_info>
+						<ul>
+							<li><b>A nyakörvek a kutyus nyakmérete alapján készülnek, melyek +- állíthatóak. Emiatt kérjük, hogy megrendeléskor, a "Megjegyzés" rovatba írja le kedvence nyakméretét.</b></li>
+							<li>A nyakörvek és a pórázok <b>12 napon</b> belül készül el, mivel egyedileg kézzel készülnek.</li>
+							
+						</ul>
+					
+					</first_info>
+					<additional_info>
+								A pórázak 25 mm szélesek és 120 cm hosszúak. Egyedi méretben is kérhető megbeszélés alapján, ebben az esetben, kérem vegye fel velünk a kapcsolatot.
+								<br></br>A nyakörvek 25 mm szélesek és a kutyus nyakmérete alapján készülnek. Minden nyakörv fekete biztonsági csattal készül.
+					</additional_info>
+				
+				</combination>
+			
+			</behappy>
+
+
+</descriptions>
+</products>
+
+
+
+
+
+
+
+
+
+
+
+

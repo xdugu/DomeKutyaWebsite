@@ -1,0 +1,253 @@
+@import url('https://fonts.googleapis.com/css?family=Parisienne');
+@import url('https://fonts.googleapis.com/css?family=Montserrat');
+@import url('https://fonts.googleapis.com/css?family=El+Messiri');
+@import url('https://fonts.googleapis.com/css?family=Charm');
+@import url('https://fonts.googleapis.com/css?family=Indie+Flower');
+
+body {
+  width: 100%;
+  -webkit-overflow-scrolling: touch;
+  font-family: 'Montserrat', calibri, aria, verdana, sans-serif;
+  background-color: white;
+  background-image: url("/images/background.jpg");
+  /*background-repeat: repeat;*/
+  color: black;
+}
+html
+{
+	overflow-y: scroll;
+}
+
+h1, h2, h5 {
+  font-family: 'Montserrat', tahoma, arial, verdana, sans-serif;
+  color: black;
+  text-align: center;
+}
+h1 {
+  font-size: 2.5vw;
+  text-shadow: 0.1vw 0.1vw 0.8vw white;
+ }
+h2 {
+  font-size: 1.75vw;
+  text-shadow: 0.1vw 0.1vw 0.8vw white;
+}
+h5 {
+  font-size: 0.8vw;
+}
+p {
+  margin-left: 1vw;
+  margin-right: 1vw;
+  text-align: left;
+  font-size: 1.3vw;
+  font-family: 'Montserrat', calibri; 
+}
+a
+{
+	text-decoration: none;
+}
+
+
+button:hover
+{
+	cursor:pointer;
+}
+
+:root /*Variables*/
+{
+	--main-theme: #E00000;/*Crimson;*/
+	--secondary-color: black;
+} 
+
+/*Yati trend header*/
+div#header_main {
+  position: relative;
+  width: 100%;
+  display: block;
+  height: 14vh;
+
+ }
+ 
+ div#header_main img{
+	 height: 80%;
+	 width: auto;
+	
+ }
+
+ 
+ div#header_main span span{
+	 font-family: 'Charm';
+ }
+.brand_text{ /*YATI Trend*/
+	 font-family: Parisienne, sans-serif;
+	 color: black;
+ }
+
+ 
+ /*Mobile Navigation*/
+div#mobile-menu-nav {
+	color: white;
+	background-color:var(--main-theme);
+}
+
+ 
+ul#mobile-submenu{ /* main list */
+  position: relative;
+  display: none;
+  cursor: pointer;
+  list-style-type: none; /* prevent bullets from appearing */
+  background-color: var(--main-theme);
+  padding: 0vw;
+  margin: 0vw;
+  clear: both;
+  z-index:1000;
+}
+ul#mobile-submenu > li /*li as direct children/*/
+{
+	padding: 5vw 0vw;
+	display: block;
+	text-align: center;
+	vertical-align: middle;
+	border-bottom: 0.4vw solid white;
+	text-decoration: none;
+	text-align: center;
+	cursor: pointer;
+	color: white;
+}
+
+ul#mobile-submenu > li:last-child
+{
+	border-bottom: 0;
+}
+
+
+ul#mobile-submenu  >li:hover
+{
+	background-color: white;
+	color: black;
+}
+ul#mobile-submenu  >li.toHide:hover{ /*this is to undo the above when the list item is actually a submenu*/
+	 background-color: var(--main-theme);
+	 color: white;
+}
+
+/*Below is for the sub sub menu */
+ul#mobile-submenu .toHide{
+	display:none;	
+}
+
+ul#mobile-submenu li ul{
+	text-decoration:none;
+	margin: 0vw;
+	list-style: none;
+	padding: 0;
+	list-style-type: none;	
+}
+ul#mobile-submenu li ul li a
+{
+	text-align: center;
+	cursor: pointer;
+	border-bottom: 0vw;
+	padding: 3vw;
+	color: var(--secondary-color);	
+}
+/*We fill the list space so a large area is clickable*/
+li a
+{
+	display:block;	
+}
+
+/*For desktops and tablets*/
+#desk_menu{
+	background-color: var(--main-theme);
+}
+
+#desk_menu div, #desk_menu a
+{
+	line-height: 35px;
+}
+
+
+ul#mobile-submenu ul li:hover
+{
+	background-color: white;
+	color: black;
+}
+
+
+#background_img
+{
+	position: fixed;
+	top: 15vw;
+	left: 5vw;
+	z-index: -100;
+	opacity: 0;
+	height: 150vw;
+	width: auto;
+	transition: opacity 3s linear;
+}
+
+/*#shop_list ul:nth-of-type(even)/* Every second item to have margin left */
+/*{
+	margin-left: 3vw;
+}
+
+#shop_list ul:nth-of-type(odd)/* Every second item to have margin left */
+/*{
+	clear: both;
+	margin-left: 5vw;
+}*/
+
+
+.price-total{
+	font-weight: bold;
+	color: var(--main-theme);
+}
+
+/*slick*/
+ .slick-prev:before, .slick-next:before{
+    color:black;
+}
+	
+.slick-prev {
+  left: 5px;
+  z-index: 1;
+}
+  .slick-next {
+  right: 5px;
+  z-index: 1;
+}
+.fa{
+ color:white
+}
+.fa:hover{
+ color: black;
+}
+
+.underlined{
+	text-decoration: underline;
+}
+
+.bold{
+	font-weight: bold;
+}
+.discount-info{
+	font-family:' El Messiri', calibri;
+	
+}
+@media only screen and (min-width: 601px) {
+  #register-button{
+	 margin-left: 1vw;
+ }
+
+  div#header_main img{
+	 height: 100%;
+	 width: auto;
+	
+ }
+	
+	#privacy{
+	width:50%;
+	}
+}
+
+

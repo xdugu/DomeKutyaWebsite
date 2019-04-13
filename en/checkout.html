@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title> Yati-Trend | Checkout </title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+<!--link rel="stylesheet" href="css/shop-list-design.css"/-->
+<link rel="stylesheet" type="text/css" href="/css/w3.css"/>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+ <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-131830139-2"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.4/angular.min.js"></script>
+<script src="https://www.paypalobjects.com/api/checkout.js"></script>
+
+<link rel="stylesheet" href="/css/normalize.css"/>
+<link rel="stylesheet" href="/css/common.css"/>
+<link rel="stylesheet" href="/css/checkout.css"/>
+
+<script src="/scripts/common.js" ></script>
+<script src="/scripts/shop.js" ></script>
+<script src="/scripts/checkout.js" ></script>
+
+</head> 
+
+<body>
+
+<div id="header_placeholder"> </div>
+<div id="product_shelf_placeholder" class="w3-container w3-margin-top" ng-app="myApp" ng-controller="Checkout" ng-init="agreed=false">
+	
+
+	<div class="w3-card w3-mobile" style="width:70%">
+	<div class="w3-large w3-center" >Contact Details</div>
+	<form name="form1" novalidate class="entry">
+		<input type="text" class="w3-input" name="name" ng-model="user.firstName" required placeholder="First Name"  autocomplete="name"/>
+		<span class="w3-text-red" ng-show="form1.name.$touched && form1.name.$invalid">Name is required</span>
+		
+		<input type="email" class="w3-input" name="email" ng-model="user.email" placeholder="Email" required  autocomplete="email"/>
+		<span class="w3-text-red" ng-show="form1.email.$touched && form1.email.$invalid">Email is required</span>
+		
+		<input type="tel" class="w3-input" name="number" ng-model="user.number" placeholder="Phone Number" autocomplete="tel" required /><br/>
+		<span class="w3-text-red" ng-show="form1.number.$touched && form1.number.$invalid">Phone number is required</span>
+	</form>
+	</div>
+	<div class="w3-card w3-margin-top w3-mobile" style="width:70%">
+		<div class="w3-large w3-center" >Shipping Details</div>
+		<form  name="form" novalidate class="entry">
+			<input type="text" class="w3-input" name="addr" ng-model="user.address1" required placeholder="Address"  autocomplete="address-line1" />
+			<span class="w3-text-red" ng-show="form.addr.$touched && form.addr.$invalid">Address is required</span>
+			
+			<input type="text" class="w3-input" ng-model="user.address2" placeholder="Address 2 (optional)"  autocomplete="address-line2"/>
+			<input type="text" class="w3-input" name="city" ng-model="user.city" required placeholder="City/Town"/>
+			<span class="w3-text-red" ng-show="form.city.$touched && form.city.$invalid">City/Town is required</span>
+			
+			<input type="text" class="w3-input" name="pcode"ng-model="user.postCode" required placeholder="Post Code"  autocomplete="postal-code"/>
+			<span class="w3-text-red" ng-show="form.pcode.$touched && form.pcode.$invalid">PostCode is required</span>
+			
+			
+			<input type="text" class="w3-input" name="country" ng-model="user.country" disabled />
+
+		</form>
+	</div>
+
+	<label id="terms"  class="w3-block w3-margin-bottom w3-margin-top">
+		<input type="checkbox" ng-disabled="!form.$valid || !form1.$valid" ng-model="agreed"> I agree to the <a class="underlined" href="help.html?show=contract" target="_blank">terms and conditions</a> of this order
+	</label>
+	
+	<a id="payment-proceed" ng-show="agreed" ng-click="proceedToPayment()" class="w3-button w3-black  w3-margin-bottom w3-padding w3-mobile" style="width:50%">Proceed to Payment</a>		
+
+
+	
+
+</div>
+
+
+</body>
+</html>

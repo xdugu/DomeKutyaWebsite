@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+<title> Dome Kutya | Kutya lepcso és rámpa web uszlet</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="UTF-8">
+<meta name="theme-color" content="white">
+<link rel="icon" type="image/jpeg" href="../images/logo.jpg">
+
+<link rel="stylesheet" type="text/css" href="../slick/slick.css"/>
+<link rel="stylesheet" type="text/css" href="../slick/slick-theme.css"/>
+<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/icon?family=Material+Icons"/>
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
+<link rel="stylesheet" type="text/css" href="../css/w3.css"/>
+<link rel="stylesheet" type="text/css" href="../css/normalize.css"/>
+<link rel="stylesheet" type="text/css" href="../css/common.css"/>
+<link rel="stylesheet" type="text/css" href="../css/index.css"/>
+
+ <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-131830139-2"></script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.4/angular.min.js"></script>
+<script type="text/javascript" src="/slick/slick.min.js"></script>
+ 
+<script src="../scripts/common.js" ></script>
+<script src="../scripts/index.js" ></script>
+<script src="../scripts/shop.js" ></script>
+
+<style>
+#list a{
+	height:55vh;
+}
+
+#list a div div{
+	height:55vh;	
+}
+
+@media only screen and (min-width: 900px) {
+#list a{
+	height:90vh;	
+}
+#list a div div{
+	height:90vh;	
+}
+
+}
+
+</style>
+
+</head> 
+
+<body  ng-app="myApp" ng-controller="HomePage">
+
+<div id="header_placeholder" class="w3-white"> </div>
+<div id="privacy_placeholder"></div>
+<div class="w3-container w3-margin-top"  >
+	<div class="w3-padding w3-mobile w3-round w3-text-white" style="width:60%;background-color:var(--main-theme)">
+		Rendeljetek tőlünk április 30-ig legalább <b>9000 Ft</b> értékben bármilyen terméket és 
+		megajándékozzuk kedvencét egy My Bulldog Shop Snack Természetes kutyakeksz csomaggal (levendulás vagy áfonya-mentás ízesítésben)
+	</div>
+ </div>
+
+
+<div id="list" class="w3-container" style="">
+	<a href="/hu/Categories.html?steps" class="w3-mobile w3-margin-top w3-left" style="width:48.5%; overflow:hidden;" >
+		<div class="slide">
+			<div style="overflow: hidden;" class="w3-display-container display">
+				<img  src="/images/shop/steps/step_2_small/img_1.jpg" style="width:100%;height:auto;margin:auto"></img>
+				<div class="w3-display-topleft w3-xxlarge w3-wide w3-text-white" style="">Lépcsők</div>
+			</div>
+			<div style="overflow: hidden;" class="w3-display-container display">
+				<img  src="/images/shop/steps/step_3_small/img_1.jpg" style="width:100%;height:auto;margin:auto"></img>
+				<div class="w3-display-topleft w3-xxlarge w3-wide w3-text-black" style="">Lépcsők</div>
+			</div>
+			
+		</div>
+	</a> 
+	<a href="/hu/Categories.html?ramps" class="w3-mobile w3-margin-top w3-left" style="width:48.5%; overflow:hidden;" >
+		<div class="slide">
+			<div style="overflow: hidden;" class="w3-display-container display">
+				<img  src="/images/shop/ramps/ramp_large/img_1.jpg" style="width:100%;height:auto;margin:auto"/>
+				<div class="w3-display-topleft w3-xxlarge w3-wide w3-text-white" style="">Rámpák</div>
+			</div>
+			<div style="overflow: hidden;" class="w3-display-container display">
+				<img  src="/images/shop/ramps/ramp_small/img_1.jpg" style="width:100%;height:auto;margin:auto"></img>
+				<div class="w3-display-topleft w3-xxlarge w3-wide w3-text-white" style="">Rámpák</div>
+			</div>
+			
+		</div>
+	</a> 
+	<a href="/hu/Categories.html?mybulldog" class="w3-mobile w3-margin-top w3-left" style="width:48.5%; overflow:hidden;" >
+		<div class="slide w3-white" >
+			<div style="overflow: hidden" class="w3-display-container display" >
+				<img  src="/images/shop/mybulldog/tonics/img_1.jpg" style="width:auto;height:100%;margin:auto"/>
+				<div class="w3-display-topleft w3-xxlarge w3-wide w3-text-black" style="">My Bulldog</div>
+			</div>
+			<div style="overflow: hidden;" class="w3-display-container display">
+				<img  src="/images/shop/mybulldog/creams/img_1.jpg" style="width:auto;height:100%;margin:auto"></img>
+				<div class="w3-display-topleft w3-xxlarge w3-wide w3-text-black" style="">My Bulldog</div>
+			</div>
+			
+		</div>
+	</a> 
+	<a href="/hu/Categories.html?others" class="w3-mobile w3-margin-top w3-left" style="width:48.5%; overflow:hidden;" >
+		<div class="slide w3-white" >
+			<div style="overflow: hidden" class="w3-display-container display" >
+				<img  src="/images/shop/others/blanket_1/img_1.jpg" style="width:100%;height:auto;margin:auto"/>
+				<div class="w3-display-topleft w3-xxlarge w3-wide w3-text-black" style="">Bújózsák</div>
+			</div>
+			<div style="overflow: hidden;" class="w3-display-container display">
+				<img  src="/images/shop/others/couch_1/img_1.jpg" style="width:100%;height:auto;margin:auto"></img>
+				<div class="w3-display-topleft w3-xxlarge w3-wide w3-text-black" style="">Babzsák</div>
+			</div>
+			
+		</div>
+	</a> 
+	<a href="/hu/Categories.html?behappy" class="w3-mobile w3-margin-top w3-left" style="width:48.5%; overflow:hidden;" >
+		<div class="slide w3-white" >
+			<div style="overflow: hidden" class="w3-display-container display" >
+				<img  src="/images/shop/behappy/strap/img_1.jpg" style="width:auto;height:100%;margin:auto"/>
+				<div class="w3-display-topleft w3-xxlarge w3-wide w3-text-white" style="">BeHappy</div>
+			</div>
+			<div style="overflow: hidden;" class="w3-display-container display">
+				<img  src="/images/shop/behappy/combined/img_1.jpg" style="width:100%;height:auto;margin:auto"></img>
+				<div class="w3-display-topleft w3-xxlarge w3-wide w3-text-white" style="">BeHappy</div>
+			</div>
+			
+		</div>
+	</a> 
+</div>
+
+
+
+<div ng-include="'/hu/footer.html'" class="w3-margin-top">
+
+
+</div>
+
+
+</body>
+</html>

@@ -1,0 +1,24 @@
+
+
+.sub-menu:hover{
+ color:white;
+ }
+ .display{
+	height:70vh;
+ }
+ 
+
+/* Using mobile first design so setting for bigger screens*/
+@media only screen and (min-width: 601px) {
+#list a:nth-child(odd){
+	margin-left:1vw;
+}
+#list a:nth-child(even){
+	margin-left:1vw;
+}
+.display{
+	height:60vw;
+}
+
+}
+

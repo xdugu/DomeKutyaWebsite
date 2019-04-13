@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+<title> Dome Kutya | Kosár tartalma </title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="utf-8"/>
+<link rel="icon" type="image/jpeg" href="../images/logo.jpg">
+<link rel="stylesheet" type="text/css" href="../css/w3.css"/>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<link rel="stylesheet" href="../css/normalize.css"/>
+<link rel="stylesheet" href="../css/categories.css"/>
+<link rel="stylesheet" href="../css/common.css"/>
+
+ <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-131830139-2"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>		
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.4/angular.min.js"></script>
+
+
+<script src="../scripts/common.js" ></script>
+<script src="../scripts/shop.js" ></script>
+<script src="../scripts/basket.js" ></script>
+<script src="../scripts/directives/directives.js" ></script>
+</head> 
+
+<body>
+
+<div id="header_placeholder"> </div>
+<div id="product_shelf_placeholder" class="" ng-app="myApp" ng-controller="Basket">
+	<div ng-hide="order.items.length==0" class="w3-xlarge w3-center w3-margin-top" style="font-weight: bold">Kosár</div>
+	<div ng-show="order.items.length==0" class="w3-xlarge w3-center w3-margin-top" style="font-weight: bold">Az Ön kosara üres</div>
+	
+<div class="w3-row">
+	<div class="w3-col l6 w3-padding">
+		<div ng-repeat="item in order.items" class="w3-card w3-margin-top w3-padding w3-white animate-order" style="width: 100%;overflow:hidden;">
+			<div> {{item.description}}</div>
+				<div class="w3-row">
+					<div class="w3-col s5 w3-center" style="height:20vh; overflow: hidden;">
+						<img class="preview_img w3-hide-small" ng-src="{{item.stepImg}}" style="width:auto;height:100%;"></img>
+						<img class="preview_img w3-hide-medium w3-hide-large" ng-src="{{item.stepImg}}" style="width:auto;height:100%;"></img>
+					</div>
+					<span ng-hide="item.patternIsItem || !item.hasVariant" class="w3-jumbo w3-col s2 w3-center w3-text-red">+</span>
+					<div ng-if="!item.patternIsItem && item.hasVariant" class="w3-col s5 w3-center" style="height:20vh; overflow: hidden;">
+						<img class="preview_img w3-hide-small " ng-src="{{item.patternImg}}" style="width:70%;height:auto;"></img>
+						<img class="preview_img w3-hide-medium w3-hide-large" ng-src="{{item.patternImg}}" style="width:100%;height:auto;"></img>
+					</div>
+				</div>
+				<div class="w3-display-container" style="height:10vh;">
+					<div id="" class="w3-display-middle quantity w3-hide-small" style="height: 2vw;">
+						<span ng-click="changeQuantity($index,-1)" class="w3-black w3-round w3-padding w3-hover-grey">-</span>
+						<span class="w3-padding">{{item.quantity}}</span>
+						<span ng-click="changeQuantity($index,1)" class="w3-black w3-round w3-padding w3-hover-grey">+</span>
+					</div>
+					<!-- Duplicate of above for positioning-->
+					<div id="" class="w3-display-left quantity w3-hide-large w3-hide-medium" style="height: 2vw;">
+						<span ng-click="changeQuantity($index,-1)" class="w3-black w3-round w3-padding w3-hover-grey">-</span>
+						<span class="w3-padding">{{item.quantity}}</span>
+						<span ng-click="changeQuantity($index,1)" class="w3-black w3-round w3-padding w3-hover-grey">+</span>
+					</div>
+					<div my-cost-str="item.price * item.quantity" id="price" class="w3-display-right price"></div>
+					<div id="remove" ng-click="removeItem($index)" class="w3-display-bottomright" style="text-decoration: underline">Eltávolít</div>
+				</div>		
+		</div>
+	</div>
+	<div class="w3-col l6 w3-padding w3-mobile">
+		<div ng-hide="order.items.length==0">
+			<select class="w3-padding w3-margin-top" ng-model="order.contact.country" ng-change="updateDeliveryCost()" style="width:100%;">
+							<option value="default">Válasszon országot a szállítási költség kalkulálásához</option>
+							<option value="Hungary">Magyarország</option>
+							<option value="Germany">Németország</option>
+							<option value="Italy">Olaszország</option>
+							<option value="Switzerland">Svájc</option>
+							<option value="Romania">Románia</option>
+							<option value="France">Franciaország</option>
+							<option value="UK">Egyesült Királyság</option>
+			</select>
+			
+			<div ng-hide="order.contact.country =='default'" class="w3-white w3-padding w3-margin-top">
+				<div class="w3-large w3-margin-top ">Szállítás: <span my-cost-str="order.delivery" class="price" ></span></div>
+				<div class="w3-xlarge w3-margin-top ">Végösszeg: <span my-cost-str="order.total" class="price-total"></span></div>
+				
+				<a class="w3-button w3-black w3-round w3-large w3-margin-top w3-padding" href="checkout.html">Tovább a fizetéshez</a>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+</body>
+</html>

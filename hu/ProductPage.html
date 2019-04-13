@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+<title> Dome Kutya | Termékoldal</title>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<meta charset="UTF-8">
+<link rel="icon" type="image/jpeg" href="../images/logo.jpg">
+<link rel="stylesheet" type="text/css" href="../slick/slick.css"/>
+<link rel="stylesheet" type="text/css" href="../slick/slick-theme.css"/>
+<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/icon?family=Material+Icons" >
+<link rel="stylesheet" type="text/css" href="../css/w3.css"/>
+<link rel="stylesheet" type="text/css" href="../css/normalize.css"/>
+<link rel="stylesheet" type="text/css" href="../css/common.css"/>
+<link rel="stylesheet" type="text/css" href="../css/product.css"/>
+
+ <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-131830139-2"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.4/angular.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.2/angular-animate.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.4/angular-sanitize.js"></script>
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
+<script type="text/javascript" src="../slick/slick.min.js"></script>
+
+<script src="../scripts/common.js" ></script>
+<script src="../scripts/shop.js" ></script>
+<script src="../scripts/product_page.js" ></script>
+<script src="../scripts/directives/directives.js" ></script>
+
+<style>
+/* width */
+::-webkit-scrollbar{
+  width: 10px;
+}
+
+
+/* Track */
+::-webkit-scrollbar-track{
+  background: #f1f1f1; 
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb:horizontal{
+  background: #888; 
+}
+::-webkit-scrollbar-thumb:vertical{
+   background: #888; 
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb :hover {
+  background: #555; 
+}
+#img_stage div{
+	max-height:90vh;
+}
+
+
+@media only screen and (min-width: 600px) and (max-width: 900px) {
+#img_stage div{
+	max-height:900px;
+}
+}
+@media only screen and (min-width: 901px){
+#img_stage div{
+	max-height:800px;
+}
+}
+
+
+</style>
+</head> 
+
+<body ng-app="myApp" ng-controller="ProductDisplay" ng-init="showImg=false">
+
+<div id="header_placeholder"> </div>
+<div id="privacy_placeholder"></div>
+
+	
+<div class="w3-row w3-white w3-margin-bottom">
+ <div id="img_stage" class="w3-margin-top w3-col l6">
+	<div style=" overflow:hidden; width:100%;" ng-repeat="x in [].constructor(product.numOfImg) track by $index">
+		<img ng-if="product.imgSrc!=null" class="sub_image" ng-src="{{product.imgSrc}}/img_{{$index+1}}.jpg" style="width:100%;height:auto;margin:auto"></img>
+		<!-- To prevent situation where the imgSrc is not loaded causing get errors -->
+	</div>
+ </div>
+
+ <div class="w3-container w3-col l6 w3-white" style="">
+	<div id="product_title"  class="w3-margin-top w3-margin-bottom w3-large" ng-bind-html="product.description"></div>
+	<div my-cost-str="product.price + patterns[product.pattern].price"id="product_price" class="w3-margin-top w3-margin-bottom price w3-wide w3-large"></div>
+	<div ng-bind-html="product.firstInfo"></div>
+
+	<div  class="w3-container" style="width:100%;padding:0;white-space:nowrap;overflow-x:auto;">
+		<img class="w3-round" ng-repeat="pattern in patterns track by $index" ng-class="{'selected':$parent.product.pattern==($index)}" ng-src="{{pattern.img}}/img_1.jpg" ng-click="$parent.product.pattern=$index;$parent.showImg=true" style="height:15vh;width:auto;margin:0 1%;"></img>		
+	</div>
+	
+	<div ng-show="showImg==true" class="animate-height w3-center w3-margin-top w3-display-container">
+		<img class="w3-round-xlarge" style="height:100%;width:auto" ng-src="{{patterns[product.pattern].img}}/img_1.jpg">  </img>
+		<span class="w3-display-topright material-icons w3-xxlarge" ng-click="showImg=false">cancel</span>
+	</div>
+	<div ng-show="showImg==true" class="w3-margin w3-large w3-center">{{patterns[product.pattern].description}}</div>
+
+	<div class="w3-row w3-margin-top"  style="">
+		<button id="add_basket_button" class="w3-button w3-xlarge w3-black w3-hover-green  w3-col m6 l12" style="" ng-click="checkBasket();showImg=false">Kosárba</button>
+	</div>
+	<div class="w3-container w3-margin-top w3-row " id="added-prompt" style="padding:0;opacity:0">
+		<div class="w3-center w3-animate-left w3-padding w3-green w3-large w3-col m6 l12">A termék hozzá lett adva a kosárhoz</div>
+	</div>
+	
+	
+	<div class="gapper w3-hide-small w3-hide-medium" style="height:50px">
+	</div>
+	
+	<div ng-controller="Accordions" ng-init="des=false;del=false;ret=false;" class="w3-margin-bottom more-info">
+		<div ng-click="des=!des;del=false;ret=false" class="w3-border-bottom w3-border-black w3-padding" style="width:100%;height=auto;overflow:auto">
+				<span class="w3-left w3-large">Termékleírás</span>
+				<span class="w3-right w3-large"> <i ng-show="des==false">+</i><i ng-show="des==true">-</i></span>
+		<div ng-show="des==true" class="w3-margin-top">
+			<img ng-if="product.imgSrc!=null" ng-src="{{product.imgSrc}}/description_1.jpg" style="width:100%;height:auto;margin:auto"></img>
+			<div ng-bind-html="product.addInfo"></div>
+		</div>
+		</div>
+		<div ng-click="del=!del;des=false;ret=false" class="w3-border-bottom w3-border-black w3-padding" style="width:100%;height=auto;overflow:auto">
+				<span class="w3-left w3-large">Szállítás</span>
+				<span class="w3-right w3-large"> <i ng-show="del==false">+</i><i ng-show="del==true">-</i></span>
+		<div ng-show="del==true" class="w3-margin-top"><div ng-include="'legal/delivery-min.html'"></div></div>
+		</div>
+		<div ng-click="ret=!ret;del=false;des=false" class="w3-border-bottom w3-border-black w3-padding" style="width:100%;height=auto;overflow:auto">
+				<span class="w3-left w3-large">Áruvisszaküldés/csere</span>
+				<span class="w3-right w3-large"> <i ng-show="ret==false">+</i><i ng-show="ret==true">-</i></span>
+		<div ng-show="ret==true" class="w3-margin-top" ng-bind-html="product.prodInfo"></div>
+		</div>
+	
+	</div>
+	
+	
+	
+   </div><!--column 2-->
+	
+</div><!--row-->
+
+	
+
+<div ng-include="'footer.html'" class="w3-margin-top">
+
+
+</div>
+
+</body>
+</html>
