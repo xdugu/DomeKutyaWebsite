@@ -32,24 +32,25 @@ app.controller('Accordions', function() {
 app.controller('ProductDisplay',function($scope, $timeout,$http,$location,$window){
 	$scope.product={description:"", dimension:"", price:"",pattern:0,imgSrc:null,id:"",numOfImg:1,
 					hasVariants:false,patternIsItem:false,firstInfo:"",addInfo:"",prodInfo:"",category:"",imgPref:""};
+	$scope.currency = localStorage.getObj("order").currency;
 	$scope.patterns=[];
 	$scope.accessories = [];
 	
 	$scope.backbone = {lang:null};
 	$scope.backbone.lang= localStorage.getObj("lang");//for choosing of language	
 	$scope.changeLanguage = Common_changeLanguage;
+	$scope.itemInfo;
 	
 	if(window.location.href.toLowerCase().search('step')>=0)
 			$scope.category = "steps";
 	else
 		$scope.category = "ramps";
-
-	$http.get('/res/products.xml').then(function(library){
-		loadProduct(library.data);
+	
+	$scope.product.id = Common_getUrlParam('itemId=');
+		
+	$http.get('https://0j7ds3u9r6.execute-api.eu-central-1.amazonaws.com/v1/Request/ItemData?itemId='+ $scope.product.id ).then(function(res){
+		loadProduct(res);
 	});
-	//loadProduct(products);
-	 $('#show_size_prompt').hide(); 
-	 $('#product_size').change(handleSizeChange);
 	  
 	$scope.checkBasket = function(){
 
@@ -60,72 +61,74 @@ app.controller('ProductDisplay',function($scope, $timeout,$http,$location,$windo
 				 pattern=$scope.patterns[$scope.product.pattern].id;
 			 let data = {stepId:$scope.product.id, patternId: pattern, quantity:1,
 						hasVariant: $scope.product.hasVariants, patternIsItem: $scope.product.patternIsItem, category: $scope.product.category};
+			 data.id = $scope.product.id;
+			 data.description = $scope.product.description;
+			if($scope.product.hasVariants==true){
+				data.description+= ", " + $scope.patterns[$scope.product.pattern].description;
+				data.patternImg= $scope.patterns[$scope.product.pattern].img + "/img_1.jpg";
+				data.patternPrice=$scope.patterns[$scope.product.pattern].Price;
+			}
+			 data.category = "stepsAndRamps"; //$scope.product.Category;
+			 data.price = $scope.product.price;
+			 data.stepImg = $scope.product.imgSrc + "/img_1.jpg";
+			 
 			 Shop_addToBasket(data);
 	 }
 	 
  
 	 
-	function loadProduct(library)
+	function loadProduct(res)
 	{
-		let productId = Common_getUrlParam('id=');
-		$scope.product.id = productId;
-		parser = new DOMParser();
-		let database = parser.parseFromString(library,"text/xml");			
-		let myPath = window.location.href; //we will use the path name later to determine the language
-		//let tags=Common_getItemById(database, window.location.href);
-		let specificItem = Common_getItemInner(database,"//item[@id='"+ productId +"']/description/en");
-		if(specificItem==null)
-			return;
+		$scope.itemInfo = res.data;
+		
+
 		if($location.absUrl().search('/en/')>0)
 		{
-			$scope.product.description = specificItem;
+			$scope.product.description = $scope.itemInfo.Description.en;
 		}
-		else $scope.product.description = Common_getItemInner(database,"//item[@id='"+ productId +"']/description/hu");
+		else $scope.product.description = $scope.itemInfo.Description.hu;
 
-		$scope.product.dimension = Common_getItemInner(database,"//item[@id='"+ productId +"']/dimension");
 		
-		$scope.product.price = parseInt(Common_getItemInner(database,"//item[@id='"+ productId +"']/price/huf"));
+		$scope.product.price = $scope.itemInfo.Price.huf;
 		
-		$scope.product.imgSrc = Common_getItemInner(database,"//item[@id='"+ productId +"']/image");
+		$scope.product.imgSrc = $scope.itemInfo.Image.location;
 		
-		$scope.product.imgPref = Common_getItemInner(database,"//item[@id='"+ productId +"']/image_pref");
+		$scope.product.imgPref = $scope.itemInfo.Image.imagePref;
 		
-		$scope.product.category = Common_getItemInner(database,"//item[@id='"+ productId +"']/category");
-		let numOfImg = parseInt(Common_getItemInner(database,"//item[@id='"+ productId +"']/image_num"));
+		$scope.product.category = $scope.itemInfo.Image.Category;
+		let numOfImg = 3;// parseInt(Common_getItemInner(database,"//item[@id='"+ productId +"']/image_num"));
 		
-		let mylink = (Common_getItemInner(database,"//item[@id='"+ productId +"']/link_to_first_info"));
-		$scope.product.firstInfo = Common_getItemInner(database,mylink);
-		mylink = (Common_getItemInner(database,"//item[@id='"+ productId +"']/link_to_add_info"));
-		$scope.product.addInfo = Common_getItemInner(database,mylink);
-		mylink = (Common_getItemInner(database,"//item[@id='"+ productId +"']/link_to_prod_info"));
-		$scope.product.prodInfo = Common_getItemInner(database,mylink);
+		
+		$scope.product.firstInfo = $scope.itemInfo.additionalInfo.FirstInfo;
+		$scope.product.addInfo = $scope.itemInfo.additionalInfo.AdditonalInfo;
+		$scope.product.prodInfo = $scope.itemInfo.additionalInfo.ProductInfo;
+		/*
 		mylink = Common_getItemInner(database,"//item[@id='"+ productId +"']/item_is_pattern");
 		if (mylink=="yes")
 			$scope.product.patternIsItem=true;
 		else
 			$scope.product.patternIsItem=false;
-		
+		*/
 		
 		if(!isNaN(numOfImg))
 			$scope.product.numOfImg = numOfImg;
-		////////////////////////////////////////////////////////////////////////////////////////////
-		let variant = Common_getItemInner(database,"//item[@id='"+ productId +"']/variants");
-		if(variant!=null)
+////////////////////////////////////////////////////////////
+		if($scope.itemInfo.Variants.hasVariants)
 		{
 			$scope.product.hasVariants = true;
-			let nodes = database.evaluate('products/variants/' + variant+ '/item', database, null, XPathResult.ANY_TYPE, null);
-			let tags =  nodes.iterateNext();
-			while(tags){
-			let pattern = {img:"", id:tags.id, description:"",price: 0};
+			for(let i=0;i<$scope.itemInfo.patterns.length;i++){
+			let pattern = {img:"", id:$scope.itemInfo.patterns[i].PatternId, description:"",price: 0};
 			
-			pattern.img = Common_getItemInner(database,"//item[@id='"+tags.id+"']/image");
+			pattern.img = $scope.itemInfo.patterns[i].Image.location;
 			
-			pattern.description = Common_getItemInner(database,"//item[@id='"+ tags.id+"']/description/hu");
+			if($location.absUrl().search('/en/')>0)
+				pattern.description = $scope.itemInfo.patterns[i].Description.en;
+			else
+				pattern.description = $scope.itemInfo.patterns[i].Description.hu;
 			
-			pattern.price = parseInt(Common_getItemInner(database,"//item[@id='"+ tags.id+"']/price/huf"));
+			pattern.price = $scope.itemInfo.patterns[i].Price.huf;
 			
 				$scope.patterns.push(pattern);
-				tags = nodes.iterateNext();
 			}
 			
 		}
@@ -150,7 +153,7 @@ app.controller('ProductDisplay',function($scope, $timeout,$http,$location,$windo
 			
 		       }
 				
-			},100);    
+			},200);    
 
 		
 			

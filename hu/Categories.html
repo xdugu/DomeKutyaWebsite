@@ -47,7 +47,7 @@
 
 <div id="category-name" class="w3-xxlarge w3-center" style="font-family: Charm"></div>
 <div id="product-shelf-placeholder" class="w3-container" style="padding:0;margin:0">
-	<a ng-repeat="product in products" href="{{product.href}}" class="w3-left w3-center w3-large w3-mobile my-product w3-white" style="width:48.5%; margin-top:2vh;">
+	<a ng-repeat="product in products track by $index" href="{{product.href}}" class="w3-left w3-center w3-large w3-mobile my-product w3-white" style="width:48.5%; margin-top:2vh;">
 
 			<div style="width:100%; overflow-y:hidden;" class="category-image">
 				<img class="shop_img w3-center" ng-src="{{product.imgSrc}}/img_1.jpg" style="width:auto; height:100%; margin:auto"></img> 

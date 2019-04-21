@@ -12,6 +12,7 @@ Storage.prototype.getObj = function(key) {
 var app = angular.module('myApp',[]);
 app.controller('Basket', function($scope, $http) {
 	$scope.order=localStorage.getObj("order");
+	$scope.currency = "EUR"
 	
 
 	

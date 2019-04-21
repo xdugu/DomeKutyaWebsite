@@ -12,6 +12,7 @@ var currentVersion=3;
 
 order={ items:[], 
 		subTotal:0, 
+		currency: "HUF",
 		delivery:0,
 		total:0,
 		discount: 0,
@@ -57,7 +58,7 @@ var deliveryData={
 //Called when customer wants to add an item into the basket
 function Shop_addToBasket(itemToAdd)
 {
-		let prod = {stepId:"",patternId:"",quantity:1,price:0,stepImg:"",patternImg:"",description:"",hasVariant:false,patternIsItem:false,delivery:0,category:"",id:""};
+		let prod = {stepId:"",patternId:"",quantity:1,price:0,patternPrice:0,stepImg:"",patternImg:"",description:"",hasVariant:false,patternIsItem:false,delivery:0,category:"",id:""};
 		let myOrder=localStorage.getObj("order");
 		let myBasket = myOrder.items;
 		
@@ -114,7 +115,6 @@ function Shop_refreshBasket()
 	}
 	else
 		$(".basket-num").html('');
-	Shop_fillItemData();
 }
 
 
@@ -133,7 +133,7 @@ function Shop_changeQuantity(item,changeBy)
 				myBasket[i].quantity=1;
 		}		
 	}	
-	myOrder = Shop_updateTotal(myOrder);
+	//myOrder = Shop_updateTotal(myOrder);
 	localStorage.setObj("order",myOrder);
 	Shop_refreshBasket();
 	return myOrder;
@@ -144,7 +144,7 @@ function Shop_removeItem(id)
 	let myOrder=localStorage.getObj("order");
 	let myBasket=myOrder.items.splice(id,1);
 	
-	myOrder = Shop_updateTotal(myOrder);
+	//myOrder = Shop_updateTotal(myOrder);
 	localStorage.setObj("order",myOrder);
 	Shop_refreshBasket();
 	return myOrder;
@@ -210,7 +210,7 @@ function Shop_fillItemData()
 function Shop_updateContact(contact){
 	let myOrder=localStorage.getObj("order");
 	myOrder.contact=contact;
-	myOrder = Shop_updateTotal(myOrder);
+	let res= Shop_updateTotal(myOrder);
 	localStorage.setObj("order", myOrder);
 	
 	return myOrder;
@@ -223,75 +223,22 @@ function Shop_updatePaymentMethod(method){
 	return myOrder;
 }
 //
-function Shop_updateTotal(myOrder)
+async function Shop_updateTotal(myOrder)
 {
-	let myBasket=myOrder.items;
+	//res = await $.post("https://0j7ds3u9r6.execute-api.eu-central-1.amazonaws.com/v1/Request/CalculatePrice",myOrder);
 	
-	let totalPrice=0;
-	let groupPricingDetected=false;
-	let maxGroupPrice=0;
-	let totalPOD = 0;
-	let individualPOD=0;
-	let maxGroupPricePOD = 0;
-	
-	for(let i=0; i<myBasket.length; i++){
-		
-		switch(myOrder.contact.country)
-		{
-			case 'Hungary':
-				myBasket[i].delivery = Common_getNestedValue(deliveryData,myBasket[i].category+".HU."+ myOrder.paymentMethod);
-				individualPOD= Common_getNestedValue(deliveryData,myBasket[i].category+".HU.payOnDelivery");
-				myOrder.contact.countryCode='HU';//country code updated for as per paypal requirement
-				break;
-			case 'UK':
-				myBasket[i].delivery = Common_getNestedValue(deliveryData,myBasket[i].category+".UK."+ myOrder.paymentMethod);
-				myOrder.contact.countryCode='GB';
-				break;
-			case 'Germany':
-				myBasket[i].delivery = Common_getNestedValue(deliveryData,myBasket[i].category+".OTH."+ myOrder.paymentMethod);
-				myOrder.contact.countryCode='DE';
-				break;
-			case 'Austria':
-				myBasket[i].delivery = Common_getNestedValue(deliveryData,myBasket[i].category+".OTH."+ myOrder.paymentMethod);
-				myOrder.contact.countryCode='AT';
-				break;
-			default:
-				myBasket[i].delivery = Common_getNestedValue(deliveryData,myBasket[i].category+".OTH."+ myOrder.paymentMethod);
-				myOrder.contact.countryCode='OTH';			
-		}
-		if(deliveryData[myBasket[i].category].pricing=="individual"){
-			totalPrice+=(myBasket[i].delivery * myBasket[i].quantity);
-			totalPOD+=(individualPOD *  myBasket[i].quantity);
-		}
-		else{//we have an item with group pricing
-			groupPricingDetected=true;
-			if(myBasket[i].delivery>maxGroupPrice)
-				 maxGroupPrice = myBasket[i].delivery;
-			 if(individualPOD>maxGroupPricePOD)
-				 maxGroupPricePOD =  individualPOD;
-		}
-	
-	}
-	
-	if(totalPrice==0){
-		myOrder.delivery =  maxGroupPrice;
-		myOrder.payOnDeliveryAdditional = maxGroupPricePOD - myOrder.delivery;
-	}
-	else{
-		myOrder.delivery = totalPrice;	
-		myOrder.payOnDeliveryAdditional = totalPOD - myOrder.delivery;
-	}
-	
-	myOrder.subTotal=0;
-	for(let i=0; i<myBasket.length;i++)
+	try{
+			res = await $.ajax({
+		  type: "POST",
+		  url: "https://0j7ds3u9r6.execute-api.eu-central-1.amazonaws.com/v1/Request/CalculatePrice",
+		  data: JSON.stringify(myOrder),
+		  dataType: "json"
+		});
+	} catch(error)
 	{
-			myOrder.subTotal+= myBasket[i].price * myBasket[i].quantity;
+		return myOrder;
 	}
-	
-	myOrder.total=myOrder.delivery + myOrder.subTotal;
-	
-	return myOrder;
-	
+	return res.data;
 }
 
 	

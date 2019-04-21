@@ -6,17 +6,6 @@ Storage.prototype.getObj = function(key) {
     return JSON.parse(this.getItem(key))
 }
 
-products =  "<?xml version=\"1.0\" encoding=\"UTF-8\"?>"+
-			"<clothes><mens><shirts>" +
-			"<item id=\"SHIRT-MEN-01\">" +
-			"<description> <en>Stylish african shirts</en> <hu>Szep Ghanai nadrag</hu></description>" +
-			"<image>images/shop/men/shirt_men_01</image>" +
-			"<price><huf>5200</huf></price>" +		 
-			"<sizes>S,M,L</sizes>" +
-			"<categories>shirt</categories></item> </shirts>" +
-			"<shorts><item id=\"SHORT-MEN-01\"><description><en>Stylish african shorts</en><hu>Szep Ghanai nadrag</hu></description>" +
-			"<image>images/shop/men/short_men_01</image><price><huf>11800</huf></price><sizes>S,M,L</sizes><categories>short</categories></item></shorts></mens>" +
-			"</clothes>";
 
 var categoryName="steps";
 
@@ -27,47 +16,32 @@ app.controller('Categories', function($scope, $http, $timeout, $location) {
 	$scope.backbone = {lang:null};
 	$scope.backbone.lang= localStorage.getObj("lang");//for choosing of language	
 	$scope.changeLanguage = Common_changeLanguage;
+	$scope.currency = "EUR";
+	
+	
 	/////////////////////////////////
-	$http.get('/res/products.xml').then(function(library){
-		fillTemplate(library.data);
-	});
-	
-	
-	function fillTemplate(library){
-		let myPath = window.location.href; //we willuse the path name later to determine the language
-		let path= getProductPath();
-		$scope.category = categoryName;
-		parser = new DOMParser();
-		library = parser.parseFromString(library,"text/xml");
-		let nodes = library.evaluate(path, library, null, XPathResult.ANY_TYPE, null);
-		let tags =  nodes.iterateNext();
-		while(tags){
-			let product = {description:"",price:"",imgSrc:"",href:"",imgPref:""};
-			product.href = 'ProductPage.html?id=' + tags.id;
-			
-		let specificItem = Common_getItemInner(library,"//item[@id='"+ tags.id +"']/description/en");
-		if(specificItem==null)
-			return;
+	let category = Common_getUrlParam("category=")
+	$http.get('https://0j7ds3u9r6.execute-api.eu-central-1.amazonaws.com/v1/Request/Category?category='+ category).then(function(res){
+		$scope.categoryData = res.data;
+		
+		
+		for(let i=0; i< $scope.categoryData.length;i++){
+		let product = {description:"",price:"",imgSrc:"",href:"",imgPref:""};
 		if($location.absUrl().search('/en/')>0)
-		{
-			product.description = specificItem;
-		}
-		else product.description = Common_getItemInner(library,"//item[@id='"+tags.id+"']/description/hu");
-		
-		product.dimension = Common_getItemInner(library,"//item[@id='"+ tags.id+"']/dimension");
-		
-		product.price = Common_getItemInner(library,"//item[@id='"+ tags.id+"']/price/huf");
-		
-		product.imgSrc = Common_getItemInner(library,"//item[@id='"+ tags.id +"']/image");
-		
-		product.imgPref = Common_getItemInner(library,"//item[@id='"+ tags.id +"']/image_pref");
-		
-		
-		
+			product.description = $scope.categoryData[i].Description.en;
+		else 
+			product.description = $scope.categoryData[i].Description.hu;
+			
+			product.price = $scope.categoryData[i].Price.huf;
+			
+			product.imgSrc = $scope.categoryData[i].Image.location;
+			
+			product.imgPref = $scope.categoryData[i].Image.imagePref;
+			
+			product.href = 'ProductPage.html?itemId=' +  $scope.categoryData[i].ItemId;
+			
 			$scope.products.push(product);
-			tags = nodes.iterateNext();
 		}
-		
 		
 		$timeout(function (){		
 			if($scope.products[0].imgPref=="width")
@@ -76,8 +50,12 @@ app.controller('Categories', function($scope, $http, $timeout, $location) {
 				
 			}
 		}, 100);
-		
-	}
+	});
+	
+		getProductPath();
+	
+	
+	
 
 
 });
@@ -86,7 +64,8 @@ app.controller('Categories', function($scope, $http, $timeout, $location) {
 //depending on the language
 function getProductPath()
 {
-	let pathname = window.location.href;
+	let pathname = window.location.href.toLowerCase();
+	
 	
 	if(pathname.search("steps")>0){
 		if(pathname.search("/en")>0)
