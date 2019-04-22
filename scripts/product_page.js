@@ -37,7 +37,8 @@ app.controller('ProductDisplay',function($scope, $timeout,$http,$location,$windo
 	$scope.accessories = [];
 	
 	$scope.backbone = {lang:null};
-	$scope.backbone.lang= localStorage.getObj("lang");//for choosing of language	
+	$scope.backbone.lang= localStorage.getObj("lang");//for choosing of language
+	$scope.basketId = localStorage.getObj("basketId");
 	$scope.changeLanguage = Common_changeLanguage;
 	$scope.itemInfo;
 	
@@ -48,31 +49,29 @@ app.controller('ProductDisplay',function($scope, $timeout,$http,$location,$windo
 	
 	$scope.product.id = Common_getUrlParam('itemId=');
 		
-	$http.get('https://0j7ds3u9r6.execute-api.eu-central-1.amazonaws.com/v1/Request/ItemData?itemId='+ $scope.product.id ).then(function(res){
+	$http.get('https://0j7ds3u9r6.execute-api.eu-central-1.amazonaws.com/v2/Request/ItemData?itemId='+ $scope.product.id ).then(function(res){
 		loadProduct(res);
 	});
 	  
 	$scope.checkBasket = function(){
 
 		  $('#show_size_prompt').hide();			 
-			 runButtonAnimation();
-			 let pattern="";
-			 if($scope.product.hasVariants==true)
-				 pattern=$scope.patterns[$scope.product.pattern].id;
-			 let data = {stepId:$scope.product.id, patternId: pattern, quantity:1,
-						hasVariant: $scope.product.hasVariants, patternIsItem: $scope.product.patternIsItem, category: $scope.product.category};
-			 data.id = $scope.product.id;
-			 data.description = $scope.product.description;
-			if($scope.product.hasVariants==true){
-				data.description+= ", " + $scope.patterns[$scope.product.pattern].description;
-				data.patternImg= $scope.patterns[$scope.product.pattern].img + "/img_1.jpg";
-				data.patternPrice=$scope.patterns[$scope.product.pattern].Price;
-			}
-			 data.category = "stepsAndRamps"; //$scope.product.Category;
-			 data.price = $scope.product.price;
-			 data.stepImg = $scope.product.imgSrc + "/img_1.jpg";
-			 
-			 Shop_addToBasket(data);
+			
+			 $http({
+				method: 'POST',
+				crossDomain : true,
+				url: 'https://0j7ds3u9r6.execute-api.eu-central-1.amazonaws.com/v2/Request/Basket/AddToBasket',
+				data: JSON.stringify({itemId: $scope.product.id, patternId:$scope.patterns[$scope.product.pattern].id, basketId:$scope.basketId}),
+				headers: {'Content-Type': 'application/json'}
+			}).then(function(res){
+				if(res.data.Result=="OK"){
+					$scope.basketId = res.data.data.basketId;
+					localStorage.setObj("basketId", $scope.basketId);
+					$(".basket-num").html(res.data.data.basketNum);
+					runButtonAnimation();
+				}
+			});
+
 	 }
 	 
  
@@ -102,14 +101,7 @@ app.controller('ProductDisplay',function($scope, $timeout,$http,$location,$windo
 		$scope.product.firstInfo = $scope.itemInfo.additionalInfo.FirstInfo;
 		$scope.product.addInfo = $scope.itemInfo.additionalInfo.AdditonalInfo;
 		$scope.product.prodInfo = $scope.itemInfo.additionalInfo.ProductInfo;
-		/*
-		mylink = Common_getItemInner(database,"//item[@id='"+ productId +"']/item_is_pattern");
-		if (mylink=="yes")
-			$scope.product.patternIsItem=true;
-		else
-			$scope.product.patternIsItem=false;
-		*/
-		
+
 		if(!isNaN(numOfImg))
 			$scope.product.numOfImg = numOfImg;
 ////////////////////////////////////////////////////////////
@@ -153,7 +145,7 @@ app.controller('ProductDisplay',function($scope, $timeout,$http,$location,$windo
 			
 		       }
 				
-			},200);    
+			},500);    
 
 		
 			

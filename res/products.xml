@@ -197,6 +197,106 @@
 		
 		<variants>
 			<patterns>
+				<item id="PATTERN_23">
+					<description>
+					<en></en>
+					<hu>Világoskék alapon kutyatappancsok</hu>				
+					</description>
+					<image>/images/shop/patterns/pattern_23</image>
+					<price>
+						<huf>0</huf>
+					</price>			
+				</item>
+				<item id="PATTERN_24">
+					<description>
+					<en></en>
+					<hu>Krémszínű kutyusosSzürke bulldogos</hu>				
+					</description>
+					<image>/images/shop/patterns/pattern_24</image>
+					<price>
+						<huf>0</huf>
+					</price>			
+				</item>
+				<item id="PATTERN_25">
+					<description>
+					<en></en>
+					<hu>Fehér alapon bézs tappancsok</hu>				
+					</description>
+					<image>/images/shop/patterns/pattern_25</image>
+					<price>
+						<huf>0</huf>
+					</price>			
+				</item>
+				<item id="PATTERN_26">
+					<description>
+					<en></en>
+					<hu>Sötétszürke alapon fehér mancsok és csontok</hu>				
+					</description>
+					<image>/images/shop/patterns/pattern_26</image>
+					<price>
+						<huf>0</huf>
+					</price>			
+				</item>
+				<item id="PATTERN_27">
+					<description>
+					<en></en>
+					<hu>Zöld alapon többszínű mancs</hu>				
+					</description>
+					<image>/images/shop/patterns/pattern_27</image>
+					<price>
+						<huf>0</huf>
+					</price>			
+				</item>
+				<item id="PATTERN_28">
+					<description>
+					<en></en>
+					<hu>Kék alapon többszínű mancs</hu>				
+					</description>
+					<image>/images/shop/patterns/pattern_28</image>
+					<price>
+						<huf>0</huf>
+					</price>			
+				</item>
+				<!--item id="PATTERN_29">
+					<description>
+					<en></en>
+					<hu>Szürke tappancsos fehér szívekkel</hu>				
+					</description>
+					<image>/images/shop/patterns/pattern_29</image>
+					<price>
+						<huf>0</huf>
+					</price>			
+				</item-->
+				<item id="PATTERN_30">
+					<description>
+					<en></en>
+					<hu>Szürke alapon rózsaszín pöttyök és fehér szívek</hu>				
+					</description>
+					<image>/images/shop/patterns/pattern_30</image>
+					<price>
+						<huf>0</huf>
+					</price>			
+				</item>
+				<item id="PATTERN_31">
+					<description>
+					<en></en>
+					<hu>Szürke alapon piros pöttyös szívecskés</hu>				
+					</description>
+					<image>/images/shop/patterns/pattern_31</image>
+					<price>
+						<huf>0</huf>
+					</price>			
+				</item>
+				<item id="PATTERN_32">
+					<description>
+					<en></en>
+					<hu>Rókás</hu>				
+					</description>
+					<image>/images/shop/patterns/pattern_32</image>
+					<price>
+						<huf>0</huf>
+					</price>			
+				</item>
 				<item id="PATTERN_1">
 						<description>
 						<en></en>
@@ -378,106 +478,7 @@
 					</price>			
 				</item>
 				
-				<!--item id="PATTERN_23">
-					<description>
-					<en></en>
-					<hu>Világoskék alapon kutyatappancsok</hu>				
-					</description>
-					<image>/images/shop/patterns/pattern_22</image>
-					<price>
-						<huf>0</huf>
-					</price>			
-				</item>
-				<item id="PATTERN_24">
-					<description>
-					<en></en>
-					<hu>Krémszínű kutyusosSzürke bulldogos</hu>				
-					</description>
-					<image>/images/shop/patterns/pattern_22</image>
-					<price>
-						<huf>0</huf>
-					</price>			
-				</item>
-				<item id="PATTERN_25">
-					<description>
-					<en></en>
-					<hu>Fehér alapon bézs tappancsok</hu>				
-					</description>
-					<image>/images/shop/patterns/pattern_22</image>
-					<price>
-						<huf>0</huf>
-					</price>			
-				</item>
-				<item id="PATTERN_26">
-					<description>
-					<en></en>
-					<hu>Sötétszürke alapon fehér mancsok és csontok</hu>				
-					</description>
-					<image>/images/shop/patterns/pattern_22</image>
-					<price>
-						<huf>0</huf>
-					</price>			
-				</item>
-				<item id="PATTERN_27">
-					<description>
-					<en></en>
-					<hu>Zöld alapon többszínű mancs</hu>				
-					</description>
-					<image>/images/shop/patterns/pattern_22</image>
-					<price>
-						<huf>0</huf>
-					</price>			
-				</item>
-				<item id="PATTERN_28">
-					<description>
-					<en></en>
-					<hu>Kék alapon többszínű mancs</hu>				
-					</description>
-					<image>/images/shop/patterns/pattern_22</image>
-					<price>
-						<huf>0</huf>
-					</price>			
-				</item>
-				<item id="PATTERN_29">
-					<description>
-					<en></en>
-					<hu>Szürke tappancsos fehér szívekkel</hu>				
-					</description>
-					<image>/images/shop/patterns/pattern_22</image>
-					<price>
-						<huf>0</huf>
-					</price>			
-				</item>
-				<item id="PATTERN_30">
-					<description>
-					<en></en>
-					<hu>Szürke alapon rózsaszín pöttyök és fehér szívek</hu>				
-					</description>
-					<image>/images/shop/patterns/pattern_22</image>
-					<price>
-						<huf>0</huf>
-					</price>			
-				</item>
-				<item id="PATTERN_29">
-					<description>
-					<en></en>
-					<hu>Szürke alapon piros pöttyös szívecskés</hu>				
-					</description>
-					<image>/images/shop/patterns/pattern_22</image>
-					<price>
-						<huf>0</huf>
-					</price>			
-				</item>
-				<item id="PATTERN_30">
-					<description>
-					<en></en>
-					<hu>Rókás</hu>				
-					</description>
-					<image>/images/shop/patterns/pattern_22</image>
-					<price>
-						<huf>0</huf>
-					</price>			
-				</item-->
+				
 			
 			</patterns>
 			<shampoo_variants>
