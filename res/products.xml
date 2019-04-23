@@ -210,7 +210,7 @@
 				<item id="PATTERN_24">
 					<description>
 					<en></en>
-					<hu>Krémszínű kutyusosSzürke bulldogos</hu>				
+					<hu>Krémszínű kutyusos</hu>				
 					</description>
 					<image>/images/shop/patterns/pattern_24</image>
 					<price>
@@ -293,6 +293,26 @@
 					<hu>Rókás</hu>				
 					</description>
 					<image>/images/shop/patterns/pattern_32</image>
+					<price>
+						<huf>0</huf>
+					</price>			
+				</item>
+				<item id="PATTERN_33">
+					<description>
+					<en></en>
+					<hu>Szürke bulldogos</hu>				
+					</description>
+					<image>/images/shop/patterns/pattern_33</image>
+					<price>
+						<huf>0</huf>
+					</price>			
+				</item>
+				<item id="PATTERN_34">
+					<description>
+					<en></en>
+					<hu>Barna kutyás</hu>				
+					</description>
+					<image>/images/shop/patterns/pattern_34</image>
 					<price>
 						<huf>0</huf>
 					</price>			
