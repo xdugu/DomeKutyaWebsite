@@ -32,12 +32,13 @@ app.controller('Accordions', function() {
 app.controller('ProductDisplay',function($scope, $timeout,$http,$location,$window){
 	$scope.product={description:"", dimension:"", price:"",pattern:0,imgSrc:null,id:"",numOfImg:1,
 					hasVariants:false,patternIsItem:false,firstInfo:"",addInfo:"",prodInfo:"",category:"",imgPref:""};
-	$scope.currency = localStorage.getObj("order").currency;
+	$scope.shopping = localStorage.getObj("shopping");
+	$scope.currency = $scope.shopping.currency;
 	$scope.patterns=[];
 	$scope.accessories = [];
 	
 	$scope.backbone = {lang:null};
-	$scope.backbone.lang= localStorage.getObj("lang");//for choosing of language
+	$scope.backbone.lang= $scope.shopping.contact.lang;//for choosing of language
 	$scope.basketId = localStorage.getObj("basketId");
 	$scope.changeLanguage = Common_changeLanguage;
 	$scope.itemInfo;
@@ -98,9 +99,9 @@ app.controller('ProductDisplay',function($scope, $timeout,$http,$location,$windo
 		let numOfImg = 3;// parseInt(Common_getItemInner(database,"//item[@id='"+ productId +"']/image_num"));
 		
 		
-		$scope.product.firstInfo = $scope.itemInfo.additionalInfo.FirstInfo;
-		$scope.product.addInfo = $scope.itemInfo.additionalInfo.AdditonalInfo;
-		$scope.product.prodInfo = $scope.itemInfo.additionalInfo.ProductInfo;
+		$scope.product.firstInfo = $scope.itemInfo.additionalInfo.FirstInfo.hu;
+		$scope.product.addInfo = $scope.itemInfo.additionalInfo.AdditionalInfo.hu;
+		$scope.product.prodInfo = $scope.itemInfo.additionalInfo.ProductInfo.hu;
 
 		if(!isNaN(numOfImg))
 			$scope.product.numOfImg = numOfImg;

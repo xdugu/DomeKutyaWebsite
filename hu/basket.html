@@ -33,7 +33,7 @@
 <div class="w3-row" ng-hide="order.Items.length==0">
 	<div class="w3-col l6 w3-padding">
 		<div ng-repeat="item in order.Items" class="w3-card w3-margin-top w3-padding w3-white animate-order" style="width: 100%;overflow:hidden;">
-			<div> {{item.Description.hu}}</div>
+			<div>{{item.Description.hu}} </div>
 				<div class="w3-row">
 					<div class="w3-col s5 w3-center" style="height:20vh; overflow: hidden;">
 						<img class="preview_img w3-hide-small" ng-src="{{item.Image.location}}/img_1.jpg" style="width:auto;height:100%;"></img>
@@ -64,7 +64,7 @@
 	</div>
 	<div class="w3-col l6 w3-padding w3-mobile">
 		<div ng-hide="order.length==0">
-			<select class="w3-padding w3-margin-top" ng-model="contact.country" ng-change="updateDeliveryCost()" style="width:100%;">
+			<select class="w3-padding w3-margin-top" ng-model="shopping.contact.country" ng-change="updateDeliveryCost()" style="width:100%;">
 							<option value="default">Válasszon országot a szállítási költség kalkulálásához</option>
 							<option value="Hungary">Magyarország</option>
 							<option value="Germany">Németország</option>
@@ -75,7 +75,7 @@
 							<option value="UK">Egyesült Királyság</option>
 			</select>
 			
-			<div ng-hide="contact.country =='default'" class="w3-white w3-padding w3-margin-top">
+			<div ng-hide="shopping.contact.country =='default'" class="w3-white w3-padding w3-margin-top">
 				<div class="w3-large w3-margin-top ">Szállítás: <span my-cost-str="order.Costs.delivery" class="price" ></span></div>
 				<div class="w3-xlarge w3-margin-top ">Végösszeg: <span my-cost-str="order.Costs.total" class="price-total"></span></div>
 				

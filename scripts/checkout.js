@@ -8,11 +8,12 @@ app.run(function() {
 $('input, select').on('change',function() { $(this).trigger('input'); });
 });
 app.controller('Checkout', function($scope, $http, $timeout) {
-	order = localStorage.getObj("order");
-	$scope.user=order.contact;
+	$scope.order = localStorage.getObj("shopping");
+	$scope.user=$scope.order.contact;
 	
 	$scope.proceedToPayment= function (){
-		Shop_updateContact($scope.user);
+		$scope.order.contact = $scope.user;
+		localStorage.setObj("shopping", $scope.order);
 		window.location.href = 'review.html';
 	}
 
@@ -24,7 +25,7 @@ app.controller('Checkout', function($scope, $http, $timeout) {
 					 $(scrollingElement).animate({
 						  scrollTop: document.body.scrollHeight
 					   }, 2000);
-				},100);
+				},200);
 			}
         }
     });
