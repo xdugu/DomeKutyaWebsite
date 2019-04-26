@@ -32,14 +32,14 @@
 	<div class="w3-row">
 	<div class="w3-col l6 w3-padding">
 		<div ng-repeat="item in order.Items" class="w3-card w3-margin-top w3-padding w3-white" style="width: 100%;overflow:hidden;">
-			<div> {{item.Description.hu}}, {{item.Pattern.Description.hu}}</div>
+			<div> {{item.Description.hu}}</div>
 				<div class="w3-row">
 					<div class="w3-col s5 w3-center" style="height:20vh; overflow: hidden;">
 						<img class="preview_img w3-hide-small" ng-src="{{item.Image.location}}/img_1.jpg" style="width:auto;height:100%;"></img>
 						<img class="preview_img w3-hide-medium w3-hide-large" ng-src="{{item.Image.location}}/img_1.jpg" style="width:auto;height:100%;"></img>
 					</div>
-					<span ng-hide="!item.Variants.hasVariants" class="w3-jumbo w3-col s2 w3-center w3-text-red">+</span>
-					<div ng-if="item.Variants.hasVariants" class="w3-col s5 w3-center" style="height:20vh; overflow: hidden;">
+					<span ng-hide="!item.Variants.hasVariants || item.Variants.itemIsVariant" class="w3-jumbo w3-col s2 w3-center w3-text-red">+</span>
+					<div ng-if="item.Variants.hasVariants && !item.Variants.itemIsVariant" class="w3-col s5 w3-center" style="height:20vh; overflow: hidden;">
 						<img class="preview_img w3-hide-small " ng-src="{{item.Pattern.Image.location}}/img_1.jpg" style="width:70%;height:auto;"></img>
 						<img class="preview_img w3-hide-medium w3-hide-large" ng-src="{{item.Pattern.Image.location}}/img_1.jpg" style="width:100%;height:auto;"></img>						
 					</div>
@@ -102,7 +102,7 @@
 		  </div>
 		   <div class="w3-container" ng-show="backbone.showConfirmed==true">
 		   
-			<div class="w3-medium" style="margin-top:1vh">A következő e-mail címre <strong>{{order.contact.email}}</strong> küldjük el az utaláshoz szükséges információkat.
+			<div class="w3-medium" style="margin-top:1vh">A következő e-mail címre <strong>{{shopping.contact.email}}</strong> küldjük el az utaláshoz szükséges információkat.
 			Kérjük, hogy az utalást 24 órán belül tegye meg, hogy legyen időnk feldolgozni a rendelését.
 			</div>
 		  </div>
@@ -114,12 +114,12 @@
 		 <span ng-click="backButtonPressed()" class="material-icons w3-large w3-display-topright" style="cursor:pointer">cancel</span>
 		  <div class="w3-container" ng-show="backbone.showConfirmed==false">
 			<div class="w3-medium" style="margin-top:1vh">Kérjük erősítse meg, hogy utánvéttel szeretne fizetni. A megerősítéshez küldünk Önnek egy e-mailt.
-			Kérjük vegye figyelembe, hogy utánvét esetén a végösszeghez hozzáadódik az utánvét díja, mely <span class="price">{{order.payOnDeliveryAdditional}} Ft</span>. Így a végösszeg <span my-cost-str="{{order.total + order.payOnDeliveryAdditional}}" class="price"></span>
+			Kérjük vegye figyelembe, hogy utánvét esetén a végösszeghez hozzáadódik az utánvét díja, mely <span class="price">{{order.Costs.payOnDeliveryAdditional}} Ft</span>. Így a végösszeg <span my-cost-str="order.Costs.total + order.Costs.payOnDeliveryAdditional" class="price"></span>
 			</div>
 			<a ng-click="backbone.showConfirmed=true;updatePaymentMethod('payOnDelivery')" class="w3-button w3-red w3-margin-top w3-margin-bottom">Megerősít</a>
 		  </div>
 		   <div class="w3-container" ng-show="backbone.showConfirmed==true">
-			<div class="w3-medium" style="margin-top:1vh">A megrendelés megerősítését a következő e-mail címre küldjük <strong>{{order.contact.email}}</strong>. Megrendelését hamarosan kézbesítjük!
+			<div class="w3-medium" style="margin-top:1vh">A megrendelés megerősítését a következő e-mail címre küldjük <strong>{{shopping.contact.email}}</strong>. Megrendelését hamarosan kézbesítjük!
 			</div>
 		  </div>
 		</div>

@@ -39,8 +39,8 @@
 						<img class="preview_img w3-hide-small" ng-src="{{item.Image.location}}/img_1.jpg" style="width:auto;height:100%;"></img>
 						<img class="preview_img w3-hide-medium w3-hide-large" ng-src="{{item.Image.location}}/img_1.jpg" style="width:auto;height:100%;"></img>
 					</div>
-					<span ng-hide="!item.Variants.hasVariants" class="w3-jumbo w3-col s2 w3-center w3-text-red">+</span>
-					<div ng-if="item.Variants.hasVariants" class="w3-col s5 w3-center" style="height:20vh; overflow: hidden;">
+					<span ng-hide="!item.Variants.hasVariants || item.Variants.itemIsVariant" class="w3-jumbo w3-col s2 w3-center w3-text-red">+</span>
+					<div ng-if="item.Variants.hasVariants && !item.Variants.itemIsVariant" class="w3-col s5 w3-center" style="height:20vh; overflow: hidden;">
 						<img class="preview_img w3-hide-small " ng-src="{{item.Pattern.Image.location}}/img_1.jpg" style="width:70%;height:auto;"></img>
 						<img class="preview_img w3-hide-medium w3-hide-large" ng-src="{{item.Pattern.Image.location}}/img_1.jpg" style="width:100%;height:auto;"></img>
 					</div>
