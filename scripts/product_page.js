@@ -78,7 +78,7 @@ app.controller('ProductDisplay',function($scope, $timeout,$http,$location,$windo
 	 
 	function loadProduct(res)
 	{
-		$scope.itemInfo = res.data;
+		$scope.itemInfo = res.data.data;
 		
 
 		if($location.absUrl().search('/en/')>0)
