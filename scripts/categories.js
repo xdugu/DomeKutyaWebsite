@@ -16,7 +16,7 @@ app.controller('Categories', function($scope, $http, $timeout, $location) {
 	$scope.backbone = {lang:null};
 	$scope.backbone.lang= localStorage.getObj("lang");//for choosing of language	
 	$scope.changeLanguage = Common_changeLanguage;
-	$scope.currency = "EUR";
+	$scope.currency = localStorage.getObj("shopping").currency;
 	
 	
 	/////////////////////////////////
@@ -24,13 +24,19 @@ app.controller('Categories', function($scope, $http, $timeout, $location) {
 	$http.get('https://0j7ds3u9r6.execute-api.eu-central-1.amazonaws.com/v1/Request/Category?category='+ category).then(function(res){
 		$scope.categoryData = res.data;
 		
-		
+		if($location.absUrl().search('/en/')>0)//Using Category info on first item
+			$('#category-name').append($scope.categoryData[0].CategoryName.en);
+		else
+			$('#category-name').append($scope.categoryData[0].CategoryName.hu);
+			
 		for(let i=0; i< $scope.categoryData.length;i++){
 		let product = {description:"",price:"",imgSrc:"",href:"",imgPref:""};
-		if($location.absUrl().search('/en/')>0)
+		if($location.absUrl().search('/en/')>0){
 			product.description = $scope.categoryData[i].Description.en;
-		else 
+		}
+		else {
 			product.description = $scope.categoryData[i].Description.hu;
+		}
 			
 			product.price = $scope.categoryData[i].Price.huf;
 			
@@ -39,6 +45,7 @@ app.controller('Categories', function($scope, $http, $timeout, $location) {
 			product.imgPref = $scope.categoryData[i].Image.imagePref;
 			
 			product.href = 'ProductPage.html?itemId=' +  $scope.categoryData[i].ItemId;
+			 
 			
 			$scope.products.push(product);
 		}
@@ -52,65 +59,13 @@ app.controller('Categories', function($scope, $http, $timeout, $location) {
 		}, 100);
 	});
 	
-		getProductPath();
-	
-	
+
 	
 
 
 });
 
-//this function is called to get the search string rquired for xpath xml query and will also set the header
-//depending on the language
-function getProductPath()
-{
-	let pathname = window.location.href.toLowerCase();
-	
-	
-	if(pathname.search("steps")>0){
-		if(pathname.search("/en")>0)
-			$('#category-name').append('Lépcsők');
-		else 
-			$('#category-name').append('Lépcsők');
-		categoryName = "steps"
-		return "products/steps/item";
-	}
-	if(pathname.search("ramps")>0){
-		if(pathname.search("/en")>0)
-			$('#category-name').append('Rámpák');
-		else 
-			$('#category-name').append('Rámpák');
-		categoryName = "ramps"
-		return "products/ramps/item";
-	}
-	if(pathname.search("mybulldog")>0){
-		if(pathname.search("/en")>0)
-			$('#category-name').append('My Bulldog');
-		else 
-			$('#category-name').append('My Bulldog');
-		categoryName = "mybulldog"
-		return "products/mybulldog/item";
-	}
-	if(pathname.search("others")>0){
-		if(pathname.search("/en")>0)
-			$('#category-name').append('Bújózsák és Babzsák');
-		else 
-			$('#category-name').append('Bújózsák és Babzsák');
-		categoryName = "Bújózsák és Babzsák"
-		return "products/others/item";
-	}
-	if(pathname.search("behappy")>0){
-		if(pathname.search("/en")>0)
-			$('#category-name').append('BeHappy');
-		else 
-			$('#category-name').append('BeHappy');
-		categoryName = "BeHappy"
-		return "products/behappy/item";
-	}
 
-	
-	
-}
 
 
 

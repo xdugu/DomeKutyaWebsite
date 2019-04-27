@@ -43,10 +43,6 @@ app.controller('ProductDisplay',function($scope, $timeout,$http,$location,$windo
 	$scope.changeLanguage = Common_changeLanguage;
 	$scope.itemInfo;
 	
-	if(window.location.href.toLowerCase().search('step')>=0)
-			$scope.category = "steps";
-	else
-		$scope.category = "ramps";
 	
 	$scope.product.id = Common_getUrlParam('itemId=');
 		
@@ -54,21 +50,24 @@ app.controller('ProductDisplay',function($scope, $timeout,$http,$location,$windo
 		loadProduct(res);
 	});
 	  
-	$scope.checkBasket = function(){
-
+	$scope.checkBasket = function(){//called when customer presses the "Add to Basket" button
+			let data = {itemId: $scope.product.id, basketId:$scope.basketId};
+			if($scope.itemInfo.Variants.hasVariants){
+				data['patternId']=$scope.patterns[$scope.product.pattern].id;
+			}
 		  $('#show_size_prompt').hide();			 
 			
 			 $http({
 				method: 'POST',
 				crossDomain : true,
 				url: 'https://0j7ds3u9r6.execute-api.eu-central-1.amazonaws.com/v2/Request/Basket/AddToBasket',
-				data: JSON.stringify({itemId: $scope.product.id, patternId:$scope.patterns[$scope.product.pattern].id, basketId:$scope.basketId}),
+				data: JSON.stringify(data),
 				headers: {'Content-Type': 'application/json'}
 			}).then(function(res){
 				if(res.data.Result=="OK"){
 					$scope.basketId = res.data.data.basketId;
 					localStorage.setObj("basketId", $scope.basketId);
-					$(".basket-num").html(res.data.data.basketNum);
+					Shop_updateBasketSize(res.data.data.basketNum);
 					runButtonAnimation();
 				}
 			});
@@ -95,8 +94,8 @@ app.controller('ProductDisplay',function($scope, $timeout,$http,$location,$windo
 		
 		$scope.product.imgPref = $scope.itemInfo.Image.imagePref;
 		
-		$scope.product.category = $scope.itemInfo.Image.Category;
-		let numOfImg = 3;// parseInt(Common_getItemInner(database,"//item[@id='"+ productId +"']/image_num"));
+		$scope.product.category = $scope.itemInfo.Category;
+		let numOfImg = $scope.itemInfo.Image.numberOfImages;
 		
 		
 		$scope.product.firstInfo = $scope.itemInfo.additionalInfo.FirstInfo.hu;

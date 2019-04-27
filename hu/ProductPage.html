@@ -116,7 +116,7 @@
 				<span class="w3-left w3-large">Termékleírás</span>
 				<span class="w3-right w3-large"> <i ng-show="des==false">+</i><i ng-show="des==true">-</i></span>
 		<div ng-show="des==true" class="w3-margin-top">
-			<img ng-if="product.imgSrc!=null" ng-src="{{product.imgSrc}}/description_1.jpg" style="width:100%;height:auto;margin:auto"></img>
+			<img ng-if="product.category=='Steps'" ng-src="{{product.imgSrc}}/description_1.jpg" style="width:100%;height:auto;margin:auto"></img>
 			<div ng-bind-html="product.addInfo"></div>
 		</div>
 		</div>

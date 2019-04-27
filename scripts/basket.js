@@ -24,7 +24,7 @@ app.controller('Basket', function($scope, $http) {
 				if(res.data.Result=="OK"){
 					let temp = res.data.data;
 					$scope.order = temp.Item;
-					$(".basket-num").html( temp.Item.Items.length);
+					Shop_updateBasketSize(temp.Item.Items.length);
 				}
 			});
 	
@@ -32,6 +32,7 @@ app.controller('Basket', function($scope, $http) {
 	
 	$scope.changeQuantity= function (index, direction){
 		if($scope.order.Items[index].Quantity + direction>=1){
+			Shop_updateBasketSize($scope.order.Items[index].Quantity + direction);
 		$http({
 				method: 'POST',
 				crossDomain : true,
@@ -58,7 +59,7 @@ app.controller('Basket', function($scope, $http) {
 			}).then(function(res){
 				if(res.data.Result=="OK"){
 					$scope.order = res.data.data;
-					$(".basket-num").html(res.data.data.Items.length);
+					Shop_updateBasketSize(res.data.data.Items.length);
 				}
 			});
 	}
@@ -75,7 +76,7 @@ app.controller('Basket', function($scope, $http) {
 				if(res.data.Result=="OK"){
 					let temp = res.data.data;
 					$scope.order = temp.Item;
-					$(".basket-num").html( temp.Item.Items.length);
+					Shop_updateBasketSize( temp.Item.Items.length);
 					localStorage.setObj("shopping",$scope.shopping);
 				}
 			});

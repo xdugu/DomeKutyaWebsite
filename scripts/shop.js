@@ -26,7 +26,7 @@ var shopping={ contact:{firstName:"",lastName:"",email:"",address1:"",address2:"
 function Shop_refreshBasket()
 {
 	let old=localStorage.getObj("order");
-	if (old!=null){
+	if (old!=null){//old local storage item tobe removed
 		localStorage.removeItem("order");
 	}
 	let myOrder=localStorage.getObj("shopping");
@@ -47,6 +47,16 @@ function Shop_refreshBasket()
 		$(".basket-num").html('');
 }
 
+function Shop_updateBasketSize(len){//function is called to store the last given basket size
+	if(len>0)
+		$(".basket-num").html(len);	
+	else
+		$(".basket-num").html('');
+	
+	let myOrder=localStorage.getObj("shopping");
+	myOrder.lastBasketSize = len;
+	localStorage.setObj("shopping",myOrder);
+}
 
 
 
