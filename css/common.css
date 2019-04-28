@@ -51,6 +51,9 @@ button:hover
 {
 	cursor:pointer;
 }
+.hoverable{
+	cursor:pointer;
+}
 
 :root /*Variables*/
 {

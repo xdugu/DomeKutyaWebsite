@@ -58,6 +58,13 @@ function Shop_updateBasketSize(len){//function is called to store the last given
 	localStorage.setObj("shopping",myOrder);
 }
 
+function Shop_updateCurrency(curr){	
+	let myOrder=localStorage.getObj("shopping");
+	myOrder.currency = curr;
+	localStorage.setObj("shopping",myOrder);
+	location.reload();//Reload to ensure we correctly update page
+}
+
 
 
 	

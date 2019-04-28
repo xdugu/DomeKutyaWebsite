@@ -30,6 +30,21 @@
 	<div ng-hide="order.Items.length==0" class="w3-xlarge w3-center w3-margin-top" style="font-weight: bold">Kosár</div>
 	<div ng-show="order.Items.length==0" class="w3-xlarge w3-center w3-margin-top" style="font-weight: bold">Az Ön kosara üres</div>
 	
+<!--Currency chooser  -->
+<div class="w3-large  w3-hide-small w3-margin">
+	<span class="w3-white w3-padding w3-round-large hoverable">
+		<span class="button" onclick="Shop_updateCurrency('HUF')" ng-class="{'w3-tag w3-red':currency=='HUF'}">HUF</span> | 
+		<span class="button" onclick="Shop_updateCurrency('EUR')" ng-class="{'w3-tag w3-red':currency=='EUR'}">EURO</span>
+	</span>
+</div>
+
+<div class="w3-large w3-center w3-hide-large w3-hide-medium w3-margin">
+	<span class="w3-white w3-padding w3-round-large hoverable">
+		<span class="button" onclick="Shop_updateCurrency('HUF')" ng-class="{'w3-tag w3-red':currency=='HUF'}">HUF</span> | 
+		<span class="button" onclick="Shop_updateCurrency('EUR')" ng-class="{'w3-tag w3-red':currency=='EUR'}">EURO</span>
+	</span>
+</div>
+	
 <div class="w3-row" ng-hide="order.Items.length==0">
 	<div class="w3-col l6 w3-padding">
 		<div ng-repeat="item in order.Items" class="w3-card w3-margin-top w3-padding w3-white animate-order" style="width: 100%;overflow:hidden;">
@@ -57,7 +72,8 @@
 						<span class="w3-padding">{{item.Quantity}}</span>
 						<span ng-click="changeQuantity($index,1)" class="w3-black w3-round w3-padding w3-hover-grey">+</span>
 					</div>
-					<div my-cost-str="item.Price.huf * item.Quantity" id="price" class="w3-display-right price"></div>
+					<div ng-if="currency=='HUF'"my-cost-str="item.Price.huf * item.Quantity" id="price" class="w3-display-right price"></div>
+					<div ng-if="currency=='EUR'"my-cost-str="item.Price.eur * item.Quantity" id="price" class="w3-display-right price"></div>
 					<div id="remove" ng-click="removeItem($index)" class="w3-display-bottomright" style="text-decoration: underline">Eltávolít</div>
 				</div>		
 		</div>

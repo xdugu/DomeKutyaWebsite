@@ -44,8 +44,25 @@
 
 <div id="header_placeholder"> </div>
 <div id="privacy_placeholder"></div>
-
 <div id="category-name" class="w3-xxlarge w3-center" style="font-family: Charm"></div>
+
+
+<!--Currency chooser  -->
+<div class="w3-large  w3-hide-small w3-margin">
+	<span class="w3-white w3-padding w3-round-large hoverable">
+		<span class="button" onclick="Shop_updateCurrency('HUF')" ng-class="{'w3-tag w3-red':currency=='HUF'}">HUF</span> | 
+		<span class="button" onclick="Shop_updateCurrency('EUR')" ng-class="{'w3-tag w3-red':currency=='EUR'}">EURO</span>
+	</span>
+</div>
+
+<div class="w3-large w3-center w3-hide-large w3-hide-medium w3-margin">
+	<span class="w3-white w3-padding w3-round-large hoverable">
+		<span class="button" onclick="Shop_updateCurrency('HUF')" ng-class="{'w3-tag w3-red':currency=='HUF'}">HUF</span> | 
+		<span class="button" onclick="Shop_updateCurrency('EUR')" ng-class="{'w3-tag w3-red':currency=='EUR'}">EURO</span>
+	</span>
+</div>
+
+
 <div id="product-shelf-placeholder" class="w3-container" style="padding:0;margin:0">
 	<a ng-repeat="product in products" href="{{product.href}}" class="w3-left w3-center w3-large w3-mobile my-product w3-white" style="width:48.5%;margin-top:2vh;">
 
@@ -54,7 +71,8 @@
 			</div>
 
 		<div class="description w3-padding" ng-bind-html="product.description"></div>
-		<div my-cost-str="product.price" class="price w3-padding "></div>
+		<div ng-show="currency=='HUF'" my-cost-str="product.price.huf" class="price w3-padding "></div>
+		<div ng-show="currency=='EUR'" my-cost-str="product.price.eur" class="price w3-padding "></div>
 	</a>
 	<a ng-if="categoryData[0].Category =='Steps'" href="contact.html" class="w3-left w3-center w3-large w3-mobile my-product w3-white" style="width:48.5%; margin-top:2vh;">
 			<div style="width:100%; overflow-y:hidden;" class="category-image">

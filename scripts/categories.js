@@ -38,7 +38,7 @@ app.controller('Categories', function($scope, $http, $timeout, $location) {
 			product.description = $scope.categoryData[i].Description.hu;
 		}
 			
-			product.price = $scope.categoryData[i].Price.huf;
+			product.price = $scope.categoryData[i].Price;
 			
 			product.imgSrc = $scope.categoryData[i].Image.location;
 			

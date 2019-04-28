@@ -76,6 +76,7 @@
 <div id="header_placeholder"> </div>
 <div id="privacy_placeholder"></div>
 
+
 	
 <div class="w3-row w3-white w3-margin-bottom">
  <div id="img_stage" class="w3-margin-top w3-col l6">
@@ -87,7 +88,25 @@
 
  <div class="w3-container w3-col l6 w3-white" style="">
 	<div id="product_title"  class="w3-margin-top w3-margin-bottom w3-large" ng-bind-html="product.description"></div>
-	<div my-cost-str="product.price + patterns[product.pattern].price"id="product_price" class="w3-margin-top w3-margin-bottom price w3-wide w3-large"></div>
+	<div ng-show="currency=='HUF' && !itemInfo.Variants.hasVariants" my-cost-str="product.price.huf" id="product_price" class="w3-margin-top w3-margin-bottom price w3-wide w3-large"></div>
+	<div ng-show="currency=='HUF' && itemInfo.Variants.hasVariants" my-cost-str="product.price.huf + itemInfo.patterns[product.pattern].Price.huf" id="product_price" class="w3-margin-top w3-margin-bottom price w3-wide w3-large"></div>
+	<div ng-show="currency=='EUR' && !itemInfo.Variants.hasVariants" my-cost-str="product.price.eur" id="product_price" class="w3-margin-top w3-margin-bottom price w3-wide w3-large"></div>
+	<div ng-show="currency=='EUR' && itemInfo.Variants.hasVariants" my-cost-str="product.price.eur + itemInfo.patterns[product.pattern].Price.eur" id="product_price" class="w3-margin-top w3-margin-bottom price w3-wide w3-large"></div>
+
+	<!--Currency chooser  -->
+		<div class="w3-large  w3-hide-small w3-margin">
+			<span class="w3-white w3-padding w3-round-large hoverable">
+				<span class="button" onclick="Shop_updateCurrency('HUF')" ng-class="{'w3-tag w3-red':currency=='HUF'}">HUF</span> | 
+				<span class="button" onclick="Shop_updateCurrency('EUR')" ng-class="{'w3-tag w3-red':currency=='EUR'}">EURO</span>
+			</span>
+		</div>
+
+		<div class="w3-large w3-hide-large w3-hide-medium">
+			<span class="w3-white w3-padding w3-round-large hoverable">
+				<span class="button" onclick="Shop_updateCurrency('HUF')" ng-class="{'w3-tag w3-red':currency=='HUF'}">HUF</span> | 
+				<span class="button" onclick="Shop_updateCurrency('EUR')" ng-class="{'w3-tag w3-red':currency=='EUR'}">EURO</span>
+			</span>
+		</div>
 	<div ng-bind-html="product.firstInfo"></div>
 
 	<div  class="w3-container" style="width:100%;padding:0;white-space:nowrap;overflow-x:auto;">

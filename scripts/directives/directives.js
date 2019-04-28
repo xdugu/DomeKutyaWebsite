@@ -12,25 +12,33 @@ angular.module('myApp').directive('myCostStr', function() {
 				return 'I need a "cost" attribute to work';
 			}
 			
-			if(myCost<1000)
-			{
-				myCost=myCost.toString();
+			if($scope.currency=="EUR"){
+				myCost = Number.parseFloat(myCost).toFixed(2);
+				myCost+= " EUR";
+				
 			}
-			else
-			{
-				let partBeforePoint = Math.trunc(myCost/1000);
-				let partAfterPoint = myCost - partBeforePoint * 1000;
-				if(partAfterPoint<10)
-				myCost= partBeforePoint.toString() +'.00'+ partAfterPoint.toString();
-				else if(partAfterPoint<100)
-					myCost= partBeforePoint.toString() +'.0'+ partAfterPoint.toString();
+			else {
+				if(myCost<1000)
+				{
+					myCost=myCost.toString();
+				}
 				else
-					myCost= partBeforePoint.toString() +'.'+ partAfterPoint.toString();
+				{
+					let partBeforePoint = Math.trunc(myCost/1000);
+					let partAfterPoint = myCost - partBeforePoint * 1000;
+					if(partAfterPoint<10)
+					myCost= partBeforePoint.toString() +'.00'+ partAfterPoint.toString();
+					else if(partAfterPoint<100)
+						myCost= partBeforePoint.toString() +'.0'+ partAfterPoint.toString();
+					else
+						myCost= partBeforePoint.toString() +'.'+ partAfterPoint.toString();
+				}
+				myCost+=" HUF";
 			}
 		  return myCost;	
 		}
 		$scope.$watch(attr.myCostStr, function(value) {
-				elem.text(calc(value)+" " + $scope.currency);
+				elem.text(calc(value));
 		});
     }
   };

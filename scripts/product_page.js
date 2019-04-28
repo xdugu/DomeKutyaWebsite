@@ -88,7 +88,7 @@ app.controller('ProductDisplay',function($scope, $timeout,$http,$location,$windo
 		else $scope.product.description = $scope.itemInfo.Description.hu;
 
 		
-		$scope.product.price = $scope.itemInfo.Price.huf;
+		$scope.product.price = $scope.itemInfo.Price;
 		
 		$scope.product.imgSrc = $scope.itemInfo.Image.location;
 		
