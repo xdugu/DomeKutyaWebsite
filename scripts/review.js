@@ -47,18 +47,19 @@ app.controller('Review', function($scope, $http) {
 	
 	///////////////////////////////////////////////
 	$scope.updatePaymentMethod = function(method){
-		$scope.order = Shop_updatePaymentMethod(method);
-			Shop_finishedShopping();
-			localStorage.removeItem("user");
+		//$scope.order = Shop_updatePaymentMethod(method);
+			//Shop_finishedShopping();
+			//localStorage.removeItem("user");
 			$scope.createOrderCode();
-			$scope.order['comments']=$scope.temp.comments;
-			$scope.order.lang = localStorage.getObj("lang");
-			$scope.order.requestType="SubmitOrder";
+			$scope.shopping['comments']=$scope.temp.comments;
+			$scope.shopping['basketId']= $scope.basketId;
+			$scope.shopping['requestType']="SubmitOrder";
+			$scope.shopping.paymentMethod = method;
 			$http({
 				method: 'POST',
 				crossDomain : true,
-				url: 'https://dj4flfnnla.execute-api.eu-central-1.amazonaws.com/testing/SubmitOrder',
-				data: JSON.stringify($scope.order),
+				url: 'https://0j7ds3u9r6.execute-api.eu-central-1.amazonaws.com/v2/Request/SubmitOrder',
+				data: JSON.stringify($scope.shopping),
 				headers: {'Content-Type': 'application/json'}
 			});
 		
@@ -66,9 +67,12 @@ app.controller('Review', function($scope, $http) {
 	
 	$scope.createOrderCode = function (){
 		let currDate = new Date();
-		let str = currDate.getFullYear() + Common_pad(currDate.getMonth()+1) + Common_pad(currDate.getDate()) + $scope.order.contact.firstName;
-		str = str.replace(" ", "");//remove all spaces
-		$scope.order.orderCode = str;
+		let str = currDate.getFullYear() + Common_pad(currDate.getMonth()+1) + Common_pad(currDate.getDate()) + $scope.shopping.contact.firstName;
+		let pos = str.search(" ");//We will take only the first or last name as part of the reference
+		if(pos>0){
+			str = str.substring(0,pos);
+		}
+		$scope.shopping.orderCode = str;
 	}
 	
 	$scope.backButtonPressed = function (){

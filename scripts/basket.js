@@ -14,6 +14,7 @@ app.controller('Basket', function($scope, $http) {
 	$scope.basketId = localStorage.getObj("basketId");
 	$scope.shopping= localStorage.getObj("shopping");
 	$scope.currency = $scope.shopping.currency;
+
 	 $http({
 				method: 'POST',
 				crossDomain : true,
@@ -26,6 +27,9 @@ app.controller('Basket', function($scope, $http) {
 					$scope.order = temp.Item;
 					Shop_updateBasketSize(temp.Item.Items.length);
 				}
+			}).catch(function(err){
+				Shop_updateBasketSize(0);//Probably the basket could not be found
+				$scope.order=null;
 			});
 	
 
