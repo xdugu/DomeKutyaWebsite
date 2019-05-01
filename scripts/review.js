@@ -8,6 +8,7 @@ Storage.prototype.getObj = function(key) {
     return JSON.parse(this.getItem(key))
 }
 
+
 var paypalObject, totalAsString;
 
 var app = angular.module('myApp', []);
@@ -15,20 +16,21 @@ app.run(function() {
 // Trigger input event on change to fix auto-complete
 $('input, select').on('change',function() { $(this).trigger('input'); });
 });
-app.controller('Review', function($scope, $http) {
+app.controller('Review', function($scope, $http, $timeout) {
 	$scope.shopping = localStorage.getObj("shopping");
 	$scope.basketId = localStorage.getObj("basketId");
 	$scope.order={};
 	$scope.temp = {comments:""};
+	$scope.sourceUrl = ""
 	
 	$scope.backbone =  {showPaypalReceipt:false, showBank:false, showConfirmed:false, showPayLater:false};
 	//////////////////////////////////////////////
-	$scope.currency = shopping.currency;
+	$scope.currency = $scope.shopping.currency;
 	 $http({
 				method: 'POST',
 				crossDomain : true,
 				url: 'https://0j7ds3u9r6.execute-api.eu-central-1.amazonaws.com/v2/Request/Basket/GetBasket',
-				data: JSON.stringify({basketId:$scope.basketId, includeCost: true, country:$scope.shopping.contact.country}),
+				data: JSON.stringify({basketId:$scope.basketId, includeCost: true, country:$scope.shopping.contact.country, currency: $scope.currency}),
 				headers: {'Content-Type': 'application/json'}
 			}).then(function(res){
 				if(res.data.Result=="OK"){
@@ -39,7 +41,7 @@ app.controller('Review', function($scope, $http) {
 			});
 	
 	
-	
+	//$("#paypal").attr({src: $scope.sourceUrl});
 	
 	
 	
@@ -92,64 +94,73 @@ app.controller('Review', function($scope, $http) {
 		
 		
 	}
+	var script = document.createElement("script");
+	script.src = "https://www.paypal.com/sdk/js?client-id=AXIR5FN2_aHZDPJ0B04WvLl7gtekClOeAInB4B6t4Gt8AgzHW6cHsxhpjle6S1dXc0TlwckcxtwIpnPe&currency="+ $scope.currency;
 	
-	paypal.Button.render({
-				// Configure environment
-				env: 'sandbox',
-				client: {
-				  sandbox: 'ASI3d7KzALQpAbEV15c_bf07VmOIm0sYmPDSgnHM-BVlOfDRmNVOPkJswGmzawaQTPt4xpxdZ6jFEpLe',
-				  production: 'demo_production_client_id'
-				},
-				style: {
-				  size: 'large',
-				  color: 'blue',
-				  shape: 'rect',
-				},
-				// Set up a payment
-		payment: function(data, actions) {
-		  return actions.payment.create({
-			transactions: [{
+	script.onload = function(){
+	paypal.Buttons({
+
+		createOrder: function(data, actions) {
+		
+		  return actions.order.create({
+			payer:{
+				email_address:  $scope.shopping.contact.email,
+				phone: {
+					phone_number:{
+						national_number: $scope.shopping.contact.number.toString()
+						}
+				}
+			},
+			purchase_units: [{
 			  amount: {
-				total:  $scope.order.Costs.total.toString(),
-				currency: $scope.currency,		
-				details: {
-				  subtotal: $scope.order.Costs.subTotal.toString(),
-				  shipping: $scope.order.Costs.delivery.toString()
+				value:  $scope.order.Costs.total.toString(),
+				currency_code: $scope.currency,		
+				breakdown: {
+				  item_total: {
+					  value: $scope.order.Costs.subTotal.toString(),
+					  currency_code: $scope.currency
+				  },
+				  shipping: {
+					  value: $scope.order.Costs.delivery.toString(),
+					  currency_code: $scope.currency
+				  }
 				}
 			  },
 			  description: 'Dome Kutya Order',
-			  custom: $scope.basketId,
+			  custom_id: $scope.basketId,
 			  //invoice_number: '12345', Insert a unique invoice number
 			  payment_options: {
 				allowed_payment_method: 'INSTANT_FUNDING_SOURCE'
 			  },
 			  soft_descriptor: 'Dome Kutya',
-			  item_list: {
-				items: createPayPalObject($scope.currency, $scope.order.Items),
-				shipping_address: {
-				  recipient_name: $scope.shopping.contact.firstName,
-				  line1: $scope.shopping.contact.address1,
-				  line2: $scope.shopping.contact.address2,
-				  city: $scope.shopping.contact.city,
+			  items: createPayPalObject($scope.currency, $scope.order.Items),
+			  shipping:{
+				name:{full_name: $scope.shopping.contact.firstName},
+				address: {
+				  address_line_1: $scope.shopping.contact.address1,
+				  address_line_2: $scope.shopping.contact.address2,
+				  admin_area_2: $scope.shopping.contact.city,
 				  country_code: 'HU',
 				  postal_code: $scope.shopping.contact.postCode,
-				  phone: $scope.shopping.contact.number,
 				}
 			  }
-			}],
-			note_to_payer: 'Contact us at infodomelepcso@gmail.com for any questions on your order.'
+				
+			  
+			}]
+			//note_to_payer: 'Contact us at infodomelepcso@gmail.com for any questions on your order.'
 		  });
 		},
-						// Execute the payment
-						onAuthorize: function(data, actions) {
-						  return actions.payment.execute().then(function() {
-							// Show a confirmation message to the buyer
-							//window.alert('Thank you for your purchase!');
-							$scope.backbone.showPaypalReceipt=true;
-							$scope.$apply();
-						  });
-						}
-					  }, '#paypal-button');
+		onApprove: function(data, actions) {
+		  // Capture the funds from the transaction
+		  return actions.order.capture().then(function(details) {
+			// Show a success message to your buyer
+			alert('Transaction completed by ' + details.payer.name.given_name);
+			$scope.backbone.showPaypalReceipt=true;
+				$scope.$apply();
+		  });
+		}}).render('#paypal-button');
+	}
+	document.head.appendChild(script);
   
 });
 
@@ -162,13 +173,13 @@ function createPayPalObject(currency,obj)
 		let wholeId = obj[i].ItemId;
 		if(obj[i].Variants.hasVariants)
 			wholeId +=","+obj[i].Pattern.PatternId;
-		
+		let price ={value:"",currency_code:currency};
 		if(currency=='HUF')
-			price = obj[i].Price.huf.toString();
+			price.value = obj[i].Price.huf.toString();
 		else
-			price = obj[i].Price.eur.toString();
+			price.value = obj[i].Price.eur.toString();
 		
-		myContainer.push({name:itemName,sku:wholeId,price:price,quantity:obj[i].Quantity.toString(), currency:currency});		
+		myContainer.push({name:itemName,sku:wholeId,unit_amount:price,quantity:obj[i].Quantity.toString(), currency:currency, category:'PHYSICAL_GOODS'});		
 	}
 	
 	return myContainer;

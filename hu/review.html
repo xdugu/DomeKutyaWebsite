@@ -16,16 +16,19 @@
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-131830139-2"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.4/angular.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script src="https://www.paypalobjects.com/api/checkout.js"></script>
+
 
 <script src="../scripts/common.js" ></script>
 <script src="../scripts/shop.js" ></script>
 <script src="../scripts/review.js" ></script>
 <script src="../scripts/directives/directives.js" ></script>
 
+<!--script id="paypal" src="https://www.paypal.com/sdk/js?client-id=AXIR5FN2_aHZDPJ0B04WvLl7gtekClOeAInB4B6t4Gt8AgzHW6cHsxhpjle6S1dXc0TlwckcxtwIpnPe&currency=EUR"></script-->
+
 </head> 
 
 <body ng-app="myApp">
+
 
 <div id="header_placeholder"> </div>
 <div class="w3-margin-top" ng-controller="Review" ng-init="showBank=false;comment='fdfsf'">
@@ -47,7 +50,8 @@
 				</div>
 				<div class="w3-display-container" style="height:10vh;">
 				<div id="quantity" class="w3-display-left ">Mennyiség: {{item.Quantity}}</div>
-					<div my-cost-str="item.Price.huf * item.Quantity" id="price" class="w3-display-right price"></div>
+					<div ng-if="currency=='HUF'"my-cost-str="item.Price.huf * item.Quantity" id="price" class="w3-display-right price"></div>
+					<div ng-if="currency=='EUR'"my-cost-str="item.Price.eur * item.Quantity" id="price" class="w3-display-right price"></div>
 				</div>		
 		</div>
 		<div class="w3-white w3-card w3-padding w3-margin-top">
@@ -83,7 +87,9 @@
 	
 	
 	<div class="w3-padding">
-		<div id="paypal-button" class="w3-margin-top"></div>
+		<div class="w3-row">
+			<div id="paypal-button" class="w3-col l3 m6 w3-mobile w3-margin-top w3-white w3-round"></div>
+		</div>
 		<div class="w3-row">
 			<div ng-click="backbone.showBank=true" class="w3-col l3 m6 w3-mobile w3-button w3-black  w3-margin-bottom w3-margin-top w3-padding w3-round">Banki átutalás</div>	
 		</div>
