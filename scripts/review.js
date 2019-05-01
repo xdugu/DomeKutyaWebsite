@@ -92,8 +92,88 @@ app.controller('Review', function($scope, $http) {
 		
 		
 	}
+	
+	paypal.Button.render({
+				// Configure environment
+				env: 'sandbox',
+				client: {
+				  sandbox: 'ASI3d7KzALQpAbEV15c_bf07VmOIm0sYmPDSgnHM-BVlOfDRmNVOPkJswGmzawaQTPt4xpxdZ6jFEpLe',
+				  production: 'demo_production_client_id'
+				},
+				style: {
+				  size: 'large',
+				  color: 'blue',
+				  shape: 'rect',
+				},
+				// Set up a payment
+		payment: function(data, actions) {
+		  return actions.payment.create({
+			transactions: [{
+			  amount: {
+				total:  $scope.order.Costs.total.toString(),
+				currency: $scope.currency,		
+				details: {
+				  subtotal: $scope.order.Costs.subTotal.toString(),
+				  shipping: $scope.order.Costs.delivery.toString()
+				}
+			  },
+			  description: 'Dome Kutya Order',
+			  custom: $scope.basketId,
+			  //invoice_number: '12345', Insert a unique invoice number
+			  payment_options: {
+				allowed_payment_method: 'INSTANT_FUNDING_SOURCE'
+			  },
+			  soft_descriptor: 'Dome Kutya',
+			  item_list: {
+				items: createPayPalObject($scope.currency, $scope.order.Items),
+				shipping_address: {
+				  recipient_name: $scope.shopping.contact.firstName,
+				  line1: $scope.shopping.contact.address1,
+				  line2: $scope.shopping.contact.address2,
+				  city: $scope.shopping.contact.city,
+				  country_code: 'HU',
+				  postal_code: $scope.shopping.contact.postCode,
+				  phone: $scope.shopping.contact.number,
+				}
+			  }
+			}],
+			note_to_payer: 'Contact us at infodomelepcso@gmail.com for any questions on your order.'
+		  });
+		},
+						// Execute the payment
+						onAuthorize: function(data, actions) {
+						  return actions.payment.execute().then(function() {
+							// Show a confirmation message to the buyer
+							//window.alert('Thank you for your purchase!');
+							$scope.backbone.showPaypalReceipt=true;
+							$scope.$apply();
+						  });
+						}
+					  }, '#paypal-button');
   
 });
+
+function createPayPalObject(currency,obj)
+{
+	myContainer = [];
+	for(let i=0; i<obj.length; i++)
+	{
+		let itemName =  obj[i].Description.hu;
+		let wholeId = obj[i].ItemId;
+		if(obj[i].Variants.hasVariants)
+			wholeId +=","+obj[i].Pattern.PatternId;
+		
+		if(currency=='HUF')
+			price = obj[i].Price.huf.toString();
+		else
+			price = obj[i].Price.eur.toString();
+		
+		myContainer.push({name:itemName,sku:wholeId,price:price,quantity:obj[i].Quantity.toString(), currency:currency});		
+	}
+	
+	return myContainer;
+	
+}
 
 
 	
