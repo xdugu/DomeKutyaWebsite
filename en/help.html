@@ -1,7 +1,7 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="hu">
 <head>
-<title> Yati-Trend | Legal Information </title>
+<title> Dome Kutya | Jogi információk </title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="icon" type="image/jpeg" href="../images/logo.jpg">
@@ -29,88 +29,32 @@
  
 	<div class="w3-white">
 
-	<div ng-click="content.showInfo=true;content.info='about'" class=" w3-padding w3-margin-top w3-center heading" >About Us</div>
+	<div ng-click="content.showInfo=true;content.info='our-details'" class=" w3-padding w3-center heading">Impresszum</div>
 	
-	<div ng-click="content.showInfo=true;content.info='introduction'" class=" w3-padding w3-center heading">Introduction</div>
+	<div ng-click="content.showInfo=true;content.info='contract'" class=" w3-padding w3-center heading">Általános Szerződési Feltételek. (ÁSZF)</div>
 	
-	<div ng-click="content.showInfo=true;content.info='our-details'" class=" w3-padding w3-center heading">Our Details</div>
+	<div ng-click="content.showInfo=true;content.info='use-of-personal-data'" class=" w3-padding w3-center heading">Adatvédelmi irányelvek</div>
+	
+	<div ng-click="content.showInfo=true;content.info='shipping'" class=" w3-padding w3-center heading">Szállítás és kézbesítés</div>
 		
-	<div ng-click="content.showInfo=true;content.info='shipping'" class=" w3-padding w3-center heading">Shipping & Delivery</div>
-		
-	<div ng-click="content.showInfo=true;content.info='price-and-payment'" class=" w3-padding w3-center heading">Price and Payment</div>
-	
-	<div ng-click="content.showInfo=true;content.info='returns'" class=" w3-padding w3-center heading">Exchanges & Returns</div>
-
-	<div ng-click="content.showInfo=true;content.info='products-and-quality'" class=" w3-padding w3-center heading">Products & Quality</div>	
-	
-	<div ng-click="content.showInfo=true;content.info='size'" class=" w3-padding w3-center heading">Size Chart</div>
-		
-	<div ng-click="content.showInfo=true;content.info='use-of-our-website'" class=" w3-padding w3-center heading">Terms of Use</div>
-	
-	<div ng-click="content.showInfo=true;content.info='liability'" class=" w3-padding w3-center heading">Liability</div>
-	
-	<div ng-click="content.showInfo=true;content.info='property-rights'" class=" w3-padding w3-center heading">Property Rights</div>
-	
-	<div ng-click="content.showInfo=true;content.info='comments-and-suggestions'" class=" w3-padding w3-center heading">Comments & Suggestions</div>
-	
-	<div ng-click="content.showInfo=true;content.info='use-of-cookies'" class=" w3-padding w3-center heading">Use Of Cookies</div>
-	
-	<div ng-click="content.showInfo=true;content.info='contract'" class=" w3-padding w3-center heading">Contract</div>
-	
-	<div ng-click="content.showInfo=true;content.info='use-of-personal-data'" class=" w3-padding w3-center heading">Use Of Personal Data</div>
 	
 	</div>
 	
 	<div class="w3-modal " ng-show="content.showInfo==true" style="display:block;z-index:1000;padding-top:7vh">
 	 <span ng-click="content.showInfo=false" class="material-icons w3-xxlarge w3-text-white" style="z-index:1000;cursor:pointer;position:fixed;top:0vw;right:2vw">cancel</span>
 		<div class="w3-modal-content w3-animate-top w3-card-4 w3-round " style="overflow:auto;width:100%;max-height:95%">
-		  <div ng-if="content.info=='about'" class="w3-container links">
-			This is just a test
-		  </div>
+
 		  <div ng-if="content.info=='our-details'" class="w3-container links">
-			 <div class="w3-xlarge bold w3-center underlined">Our Details</div>
-			<div>
-			</div>
+			<div ng-include="'legal/our_details.html'"></div>
 		  </div>
-		  <div ng-if="content.info=='shipping'" class="w3-container links">
-		  <div class="w3-xlarge bold w3-center underlined">Shipping And Delivery</div>
-			<div>
-			</div>
+		  <div ng-if="content.info=='shipping'" class="w3-container links" style="height:90vh;">
+			<div ng-include="'legal/delivery.html'"></div>
 		  </div>
-		  <div ng-if="content.info=='price-and-payment'" class="w3-container links">
-			<div class="w3-xlarge bold w3-center underlined">Price And Payment</div>
-			<div>
-			</div>
+			<div ng-if="content.info=='use-of-personal-data'" class="w3-container links">
+			<div ng-include="'legal/use-of-personal-data.html'"></div>
 		  </div>
-		  <div ng-if="content.info=='returns'" class="w3-container links">
-		    <div class="w3-xlarge"><b>Returns</b></div>
-				<div>
-				</div>
-		  </div>
-		  <div ng-if="content.info=='introduction'" class="w3-container links">
-		  </div>
-		  <div ng-if="content.info=='size'" class="w3-container links">
-			This is just a test
-		  </div>
-		  <div ng-if="content.info=='legal'" class="w3-container links">
-			This is just a test
-		  </div>
-		  <div ng-if="content.info=='use-of-our-website'" class="w3-container links">
-		  </div>
-		  <div ng-if="content.info=='property-rights'" class="w3-container links">
-		  </div>
-		  <div ng-if="content.info=='products-and-quality'" class="w3-container links">
-			<div class="w3-xlarge bold w3-center underlined">Products And Quality</div>
-		  </div>
-		  <div ng-if="content.info=='comments-and-suggestions'" class="w3-container links">
-		  </div>
-			
 		  <div ng-if="content.info=='contract'" class="w3-container links">
-			<div ng-include="'legal/contract-hu.html'"></div>
-		  </div>
-		  <div ng-show="content.info=='use-of-personal-data'" class="w3-container links">
-			<div class="w3-xlarge"><b>Use Of Personal Data</b></div>
-			<div ng-include="'legal/personal-hu.html'"></div>
+			<div ng-include="'legal/contract.html'"></div>
 		  </div>
 		  <div ng-show="content.info=='use-of-cookies'" class="w3-container links">
 			<div class="w3-xlarge"><b>Use Of Cookies</b></div>

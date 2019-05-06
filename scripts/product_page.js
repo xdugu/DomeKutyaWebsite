@@ -97,10 +97,16 @@ app.controller('ProductDisplay',function($scope, $timeout,$http,$location,$windo
 		$scope.product.category = $scope.itemInfo.Category;
 		let numOfImg = $scope.itemInfo.Image.numberOfImages;
 		
-		
-		$scope.product.firstInfo = $scope.itemInfo.additionalInfo.FirstInfo.hu;
+		if($location.absUrl().search('/en/')>0){
+		$scope.product.firstInfo = $scope.itemInfo.additionalInfo.FirstInfo.en;
+		$scope.product.addInfo = $scope.itemInfo.additionalInfo.AdditionalInfo.en;
+		$scope.product.prodInfo = $scope.itemInfo.additionalInfo.ProductInfo.en;
+		}
+		else{
+			$scope.product.firstInfo = $scope.itemInfo.additionalInfo.FirstInfo.hu;
 		$scope.product.addInfo = $scope.itemInfo.additionalInfo.AdditionalInfo.hu;
 		$scope.product.prodInfo = $scope.itemInfo.additionalInfo.ProductInfo.hu;
+		}
 
 		if(!isNaN(numOfImg))
 			$scope.product.numOfImg = numOfImg;

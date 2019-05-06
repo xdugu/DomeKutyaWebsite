@@ -1,7 +1,7 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="hu">
 <head>
-<title> Dome Kutya | Dog Steps Shop</title>
+<title> Dome Kutya | Webhely beállításai</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta charset="UTF-8">
 <meta name="theme-color" content="white">
@@ -103,15 +103,16 @@
 <body ng-app="myApp" ng-controller="Settings">
 
 <div id="header_placeholder" class="w3-white">
+</div>
 
  
  <div class="w3-container w3-white w3-card w3-mobile" style="width:50%">
-	 <div class="w3-xlarge"> <b>Cookie Settings</b> </div><br>
-	<label class="container">Google Analytics Cookie
+	 <div class="w3-xlarge"> <b>Sütik beállítása(Cookie)</b> </div><br>
+	<label class="container">Google Analytics
 	  <input type="checkbox" ng-model="cookie" ng-change="changeCookie(cookie)">
 	  <span class="checkmark"></span>
 	</label>
-	<div ng-include="legal/cookie_policy.html"> </div>
+	<!--div ng-include="'legal/cookie_policy.html'"> </div-->
  </div>
 
 </body>

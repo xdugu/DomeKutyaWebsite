@@ -1,20 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<title> Dome Kutya | Dog Steps Shop</title>
+<title> Dome Kutya | Dog Stairs and Ramps Shop</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta charset="UTF-8">
 <meta name="theme-color" content="white">
-<link rel="icon" type="image/jpeg" href="/images/logo.jpg">
+<link rel="icon" type="image/jpeg" href="../images/logo.jpg">
 
-<link rel="stylesheet" type="text/css" href="/slick/slick.css"/>
-<link rel="stylesheet" type="text/css" href="/slick/slick-theme.css"/>
+<link rel="stylesheet" type="text/css" href="../slick/slick.css"/>
+<link rel="stylesheet" type="text/css" href="../slick/slick-theme.css"/>
 <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/icon?family=Material+Icons"/>
 <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
-<link rel="stylesheet" type="text/css" href="/css/w3.css"/>
-<link rel="stylesheet" type="text/css" href="/css/normalize.css"/>
-<link rel="stylesheet" type="text/css" href="/css/common.css"/>
-<link rel="stylesheet" type="text/css" href="/css/index.css"/>
+<link rel="stylesheet" type="text/css" href="../css/w3.css"/>
+<link rel="stylesheet" type="text/css" href="../css/normalize.css"/>
+<link rel="stylesheet" type="text/css" href="../css/common.css"/>
+<link rel="stylesheet" type="text/css" href="../css/index.css"/>
 
  <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-131830139-2"></script>
@@ -23,18 +23,44 @@
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.4/angular.min.js"></script>
 <script type="text/javascript" src="/slick/slick.min.js"></script>
  
-<script src="/scripts/common.js" ></script>
-<script src="/scripts/index.js" ></script>
-<script src="/scripts/shop.js" ></script>
+<script src="../scripts/common.js" ></script>
+<script src="../scripts/index.js" ></script>
+<script src="../scripts/shop.js" ></script>
 
 <style>
 #list a{
-	height:55vh;
+	height:50vh;
+}
+
+#list a div div{
+	height:50vh;	
 }
 
 @media only screen and (min-width: 1200px) {
 #list a{
-	height:90vh;	
+	height:70vh;
+}
+#list a div div{
+	height:70vh;	
+}
+
+}
+@media only screen and (max-width: 1000px) and (min-height: 800px)  {/*For tablets in portrait*/
+#list a{
+	height:35vh;
+}
+#list a div div{
+	height:35vh;	
+}
+
+}
+
+@media only screen and (min-width: 1000px) and (min-height: 1000px)  {/*For ipad pro*/
+#list a{
+	height:35vh;
+}
+#list a div div{
+	height:35vh;	
 }
 
 }
@@ -48,15 +74,73 @@
 <div id="header_placeholder" class="w3-white"> </div>
 <div id="privacy_placeholder"></div>
 
+
 <div id="list" class="w3-container" style="">
-<a ng-repeat="product in products" ng-href="{{product.link}}" class="w3-mobile w3-margin-top w3-left" style="width:48.5%; overflow:hidden;" >
-	<div class="slide">
-		<div style="overflow: hidden;" class="w3-display-container display" ng-repeat="x in [].constructor(3) track by $index">
-			<img  ng-src="{{product.src}}/img_{{$index+1}}.jpg" style="width:100%;height:auto;margin:auto"></img>
-			<div class="w3-display-topleft w3-xxlarge w3-wide w3-text-white" style="">{{product.label}}</div>
+	<a href="Categories.html?category=Steps" class="w3-mobile w3-margin-top w3-left" style="width:48.5%; overflow:hidden;" >
+		<div class="slide">
+			<div style="overflow: hidden;" class="w3-display-container display">
+				<img  src="/images/shop/steps/step_2_small/img_1.jpg" style="width:100%;height:auto;margin:auto" ></img>
+				<div class="w3-display-topleft w3-wide w3-xxlarge w3-text-white" >Stairs</div>
+			</div>
+			<div style="overflow: hidden;" class="w3-display-container display">
+				<img  src="/images/shop/steps/step_3_small/img_1.jpg" style=" width:100%;height:auto;margin:auto" ></img>
+				<div class="w3-display-topleft w3-wide w3-xxlarge w3-text-black" >Stairs</div>
+			</div>
+			
 		</div>
-	</div>
-</a> 
+	</a> 
+	<a href="Categories.html?category=Ramps" class="w3-mobile w3-margin-top w3-left" style="width:48.5%; overflow:hidden;" >
+		<div class="slide">
+			<div style="overflow: hidden;" class="w3-display-container display">
+				<img  src="/images/shop/ramps/ramp_large/img_1.jpg" style="width:100%;height:auto;margin:auto"/>
+				<div class="w3-display-topleft w3-xxlarge w3-wide w3-text-white" style="">Ramps</div>
+			</div>
+			<div style="overflow: hidden;" class="w3-display-container display">
+				<img  src="/images/shop/ramps/ramp_small/img_1.jpg" style="width:100%;height:auto;margin:auto"></img>
+				<div class="w3-display-topleft w3-xxlarge w3-wide w3-text-white" style="">Ramps</div>
+			</div>
+			
+		</div>
+	</a> 
+	<a href="Categories.html?category=MyBulldog" class="w3-mobile w3-margin-top w3-left" style="width:48.5%; overflow:hidden;" >
+		<div class="slide w3-white" >
+			<div style="overflow: hidden" class="w3-display-container display" >
+				<img  src="/images/shop/mybulldog/tonics/img_1.jpg" style="width:auto;height:100%;margin:auto"/>
+				<div class="w3-display-topleft w3-xxlarge w3-wide w3-text-black" style="">My Bulldog</div>
+			</div>
+			<div style="overflow: hidden;" class="w3-display-container display">
+				<img  src="/images/shop/mybulldog/creams/img_1.jpg" style="width:auto;height:100%;margin:auto"></img>
+				<div class="w3-display-topleft w3-xxlarge w3-wide w3-text-black" style="">My Bulldog</div>
+			</div>
+			
+		</div>
+	</a> 
+	<a href="Categories.html?category=Others" class="w3-mobile w3-margin-top w3-left" style="width:48.5%; overflow:hidden;" >
+		<div class="slide w3-white" >
+			<div style="overflow: hidden" class="w3-display-container display" >
+				<img  src="/images/shop/others/blanket_1/img_1.jpg" style="width:100%;height:auto;margin:auto"/>
+				<div class="w3-display-topleft w3-xxlarge w3-wide w3-text-black" style="">Blankets</div>
+			</div>
+			<div style="overflow: hidden;" class="w3-display-container display">
+				<img  src="/images/shop/others/couch_1/img_1.jpg" style="width:100%;height:auto;margin:auto"></img>
+				<div class="w3-display-topleft w3-xxlarge w3-wide w3-text-black" style="">Bean Bags</div>
+			</div>
+			
+		</div>
+	</a> 
+	<a href="Categories.html?category=BeHappy" class="w3-mobile w3-margin-top w3-left" style="width:48.5%; overflow:hidden;" >
+		<div class="slide w3-white" >
+			<div style="overflow: hidden" class="w3-display-container display" >
+				<img  src="/images/shop/behappy/strap/img_1.jpg" style="width:auto;height:100%;margin:auto"/>
+				<div class="w3-display-topleft w3-xxlarge w3-wide w3-text-white" style="">BeHappy</div>
+			</div>
+			<div style="overflow: hidden;" class="w3-display-container display">
+				<img  src="/images/shop/behappy/combined/img_1.jpg" style="width:100%;height:auto;margin:auto"></img>
+				<div class="w3-display-topleft w3-xxlarge w3-wide w3-text-white" style="">BeHappy</div>
+			</div>
+			
+		</div>
+	</a> 
 </div>
 
 

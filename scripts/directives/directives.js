@@ -9,7 +9,7 @@ angular.module('myApp').directive('myCostStr', function() {
 			//let myCost=parseInt(attr.myCostStr);
 			if(myCost==null)
 			{
-				return 'I need a "cost" attribute to work';
+				return '';
 			}
 			
 			if($scope.currency=="EUR"){

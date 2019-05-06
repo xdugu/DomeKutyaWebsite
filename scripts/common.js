@@ -101,18 +101,25 @@ function Common_getUrlParam(param){
 
 function Common_changeLanguage(lang){
 	
-	
+	let store = localStorage.getObj("shopping");
 	let pathname = window.location.href;
 	
 	if(pathname.search('/hu/')>=0 && lang==='en')
 	{
 		window.location.href = pathname.replace('/hu','/en');
+		store.contact.lang="en";
+		localStorage.setObj("shopping",store);
 	}
 	else if(pathname.search('/en/')>=0 && lang==='hu')
 	{
-		window.location.href = pathname.replace('/en','/hu');		
+		window.location.href = pathname.replace('/en','/hu');
+		store.contact.lang="hu";
+		localStorage.setObj("shopping",store);
 	}
-	localStorage.setObj("lang",'hu');
+	else{
+		store.contact.lang="hu";
+		localStorage.setObj("shopping",store);
+	}
 }
 
 
