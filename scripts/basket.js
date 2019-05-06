@@ -14,7 +14,12 @@ app.controller('Basket', function($scope, $http) {
 	$scope.basketId = localStorage.getObj("basketId");
 	$scope.shopping= localStorage.getObj("shopping");
 	$scope.currency = $scope.shopping.currency;
-
+	
+	if($scope.basketId==null || $scope.basketId=="" || $scope.basketId.length<2){
+		$scope.order=null;
+		return;
+	}
+		
 	 $http({
 				method: 'POST',
 				crossDomain : true,
@@ -29,6 +34,7 @@ app.controller('Basket', function($scope, $http) {
 				}
 			}).catch(function(err){
 				Shop_updateBasketSize(0);//Probably the basket could not be found
+				localStorage.setObj("basketId","");
 				$scope.order=null;
 			});
 	
@@ -81,6 +87,7 @@ app.controller('Basket', function($scope, $http) {
 					let temp = res.data.data;
 					$scope.order = temp.Item;
 					Shop_updateBasketSize( temp.Item.Items.length);
+					$scope.shopping.contact.countryCode = Shop_getCountryCode($scope.shopping.contact.country);
 					localStorage.setObj("shopping",$scope.shopping);
 				}
 			});

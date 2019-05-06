@@ -13,7 +13,7 @@ angular.module('myApp').directive('myCostStr', function() {
 			}
 			
 			if($scope.currency=="EUR"){
-				myCost = Number.parseFloat(myCost).toFixed(2);
+				myCost = "€" + Number.parseFloat(myCost).toFixed(2);
 				myCost+= " EUR";
 				
 			}

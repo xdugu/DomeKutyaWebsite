@@ -65,6 +65,35 @@ function Shop_updateCurrency(curr){
 	location.reload();//Reload to ensure we correctly update page
 }
 
+//As required by paypal, returns the country code
+function Shop_getCountryCode(country){
+	
+	switch(country){
+		
+		case "Hungary":
+			return "HU";
+		case "Germany":
+			return "DE";
+		case "UK":
+			return "GB";
+		case "Switzerland":
+			return "CH";
+		case "France":
+			return "FR";
+		case "Switzerland":
+			return "CH";
+		case "Romania":
+			return "RO";
+		case "Italy":
+			return "IT";
+		case "Slovakia":
+			return "SK";
+		default:
+			return "HU";
+		
+	}
+}
+
 
 
 	

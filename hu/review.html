@@ -90,11 +90,11 @@
 		<div class="w3-row">
 			<div id="paypal-button" class="w3-col l3 m6 w3-mobile w3-margin-top w3-white w3-round"></div>
 		</div>
-		<div class="w3-row">
+		<div class="w3-row" ng-show="shopping.contact.country=='Hungary' && currency=='HUF'">
 			<div ng-click="backbone.showBank=true" class="w3-col l3 m6 w3-mobile w3-button w3-black  w3-margin-bottom w3-margin-top w3-padding w3-round">Banki átutalás</div>	
 		</div>
 		<div class="w3-row">
-			<div ng-show="shopping.contact.country=='Hungary'" ng-click="backbone.showPayLater=true" class="w3-col l3 m6 w3-mobile w3-button w3-purple  w3-margin-bottom w3-margin-top w3-padding w3-round">Utánvétes fizetés</div>	
+			<div ng-show="shopping.contact.country=='Hungary' && currency=='HUF'" ng-click="backbone.showPayLater=true" class="w3-col l3 m6 w3-mobile w3-button w3-purple  w3-margin-bottom w3-margin-top w3-padding w3-round">Utánvétes fizetés</div>	
 		</div>
 	</div>
 	
@@ -111,6 +111,16 @@
 		   
 			<div class="w3-medium" style="margin-top:1vh">A következő e-mail címre <strong>{{shopping.contact.email}}</strong> küldjük el az utaláshoz szükséges információkat.
 			Kérjük, hogy az utalást 24 órán belül tegye meg, hogy legyen időnk feldolgozni a rendelését.
+			</div>
+		  </div>
+		</div>
+	</div>
+	<div class="w3-modal" ng-show="backbone.showPaypalReceipt==true" style="display:block;z-index:1000">
+		<div class="w3-modal-content w3-animate-top w3-card-4" style="top:25vh;">
+		 <span ng-click="backButtonPressed()" class="material-icons w3-large w3-display-topright" style="cursor:pointer">cancel</span>
+		  <div class="w3-container">
+			<div class="w3-large w3-text-green" style="font-weight:bold">Rendelés megerősítése</div>
+			<div class="w3-medium" style="margin-top:1vh">Köszönjük, hogy leadta rendelését. Igyekszünk, hogy a megrendelt termék minél hamarabb eljusson Önhöz.
 			</div>
 		  </div>
 		</div>

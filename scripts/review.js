@@ -40,23 +40,20 @@ app.controller('Review', function($scope, $http, $timeout) {
 				}
 			});
 	
-	
-	//$("#paypal").attr({src: $scope.sourceUrl});
-	
-	
-	
-	
-	
 	///////////////////////////////////////////////
 	$scope.updatePaymentMethod = function(method){
-		//$scope.order = Shop_updatePaymentMethod(method);
-			//Shop_finishedShopping();
-			//localStorage.removeItem("user");
+			localStorage.removeItem("shopping");
+			localStorage.removeItem("basketId");
 			$scope.createOrderCode();
 			$scope.shopping['comments']=$scope.temp.comments;
 			$scope.shopping['basketId']= $scope.basketId;
 			$scope.shopping['requestType']="SubmitOrder";
-			$scope.shopping.paymentMethod = method;
+			if(typeof(method)== "string")
+				$scope.shopping.paymentMethod = method;
+			else{
+				$scope.shopping.paymentMethod = "paypal";
+				$scope.shopping.paypalDetail = method.data;
+			}
 			$http({
 				method: 'POST',
 				crossDomain : true,
@@ -78,7 +75,7 @@ app.controller('Review', function($scope, $http, $timeout) {
 	}
 	
 	$scope.backButtonPressed = function (){
-		if( $scope.backbone.showConfirmed==true)
+		if( $scope.backbone.showConfirmed==true || $scope.backbone.showPaypalReceipt==true )
 		{
 			window.location.href = 'index.html';
 		}
@@ -95,7 +92,8 @@ app.controller('Review', function($scope, $http, $timeout) {
 		
 	}
 	var script = document.createElement("script");
-	script.src = "https://www.paypal.com/sdk/js?client-id=AXIR5FN2_aHZDPJ0B04WvLl7gtekClOeAInB4B6t4Gt8AgzHW6cHsxhpjle6S1dXc0TlwckcxtwIpnPe&currency="+ $scope.currency;
+	paypalId = "AXIR5FN2_aHZDPJ0B04WvLl7gtekClOeAInB4B6t4Gt8AgzHW6cHsxhpjle6S1dXc0TlwckcxtwIpnPe";
+	script.src = "https://www.paypal.com/sdk/js?client-id=" + paypalId + "&currency="+ $scope.currency;
 	
 	script.onload = function(){
 	paypal.Buttons({
@@ -140,7 +138,7 @@ app.controller('Review', function($scope, $http, $timeout) {
 				  address_line_1: $scope.shopping.contact.address1,
 				  address_line_2: $scope.shopping.contact.address2,
 				  admin_area_2: $scope.shopping.contact.city,
-				  country_code: 'HU',
+				  country_code: $scope.shopping.contact.countryCode,
 				  postal_code: $scope.shopping.contact.postCode,
 				}
 			  }
@@ -154,9 +152,9 @@ app.controller('Review', function($scope, $http, $timeout) {
 		  // Capture the funds from the transaction
 		  return actions.order.capture().then(function(details) {
 			// Show a success message to your buyer
-			alert('Transaction completed by ' + details.payer.name.given_name);
+			$scope.updatePaymentMethod({data: details});
 			$scope.backbone.showPaypalReceipt=true;
-				$scope.$apply();
+			$scope.$apply();
 		  });
 		}}).render('#paypal-button');
 	}

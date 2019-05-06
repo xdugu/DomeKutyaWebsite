@@ -31,7 +31,7 @@
 .category-image {
 	height:55vh;
 }
-@media only screen and (min-width: 1200px) {
+@media only screen and (min-width: 1000px) {
 .category-image {
 	height:80vh;
 }
@@ -70,7 +70,7 @@
 				<img class="shop_img w3-center" ng-src="{{product.imgSrc}}/img_1.jpg" style="width:auto; height:100%; margin:auto"></img> 
 			</div>
 
-		<div class="description w3-padding" ng-bind-html="product.description"></div>
+		<div class="description w3-padding w3-large" ng-bind-html="product.description"></div>
 		<div ng-show="currency=='HUF'" my-cost-str="product.price.huf" class="price w3-padding "></div>
 		<div ng-show="currency=='EUR'" my-cost-str="product.price.eur" class="price w3-padding "></div>
 	</a>
