@@ -33,7 +33,7 @@ angular.module('myApp').directive('myCostStr', function() {
 					else
 						myCost= partBeforePoint.toString() +'.'+ partAfterPoint.toString();
 				}
-				myCost+=" HUF";
+				myCost+=" Ft";
 			}
 		  return myCost;	
 		}
