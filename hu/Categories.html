@@ -22,13 +22,33 @@
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.4/angular-sanitize.js"></script>
 <script type="text/javascript" src="../slick/slick.min.js"></script>
  
-<script src="../scripts/common.js" ></script>
-<script src="../scripts/shop.js" ></script>
-<script src="../scripts/categories.js"></script>
-<script src="../scripts/directives/directives.js" ></script>
+<script src="../scripts/v1/common.js" ></script>
+<script src="../scripts/v1/shop.js" ></script>
+<script src="../scripts/v1/categories.js"></script>
+<script src="../scripts/v1/directives/directives.js" ></script>
 
 <style>
+.category-image {
+	height:45vh;
+}
+@media only screen and (min-width: 1200px) {/*for desktop*/
+.category-image {
+	height:70vh;
+}
+}
+@media only screen and (max-width: 1000px) and (min-height: 800px)  {/*For tablets in portrait*/
+.category-image {
+	height:30vh;
+}
 
+}
+
+@media only screen and (min-width: 1000px) and (min-height: 1000px)  {/*For ipad pro*/
+.category-image {
+	height:35vh;
+}
+
+}
 
 
 </style>
