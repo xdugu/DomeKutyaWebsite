@@ -37,7 +37,7 @@ div#product-shelf-placeholder
 }
 
 .category-image {
-	height:60vh;
+	height:45vh;
 }
 @media only screen and (min-width: 1200px) {/*for desktop*/
 .category-image {

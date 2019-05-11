@@ -22,10 +22,10 @@
 <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
 <script type="text/javascript" src="../slick/slick.min.js"></script>
 
-<script src="../scripts/v1/common.js" ></script>
-<script src="../scripts/v1/shop.js" ></script>
-<script src="../scripts/v1/product_page.js" ></script>
-<script src="../scripts/v1/directives/directives.js" ></script>
+<script src="../scripts/v2/common.js" ></script>
+<script src="../scripts/v2/shop.js" ></script>
+<script src="../scripts/v2/product_page.js" ></script>
+<script src="../scripts/v2/directives/directives.js" ></script>
 
 <style>
 /* width */
@@ -118,6 +118,16 @@
 		<span class="w3-display-topright material-icons w3-xxlarge" ng-click="showImg=false">cancel</span>
 	</div>
 	<div ng-show="showImg==true" class="w3-margin w3-large w3-center">{{patterns[product.pattern].description}}</div>
+	
+	<div  ng-if="itemInfo.Variants.hasVariants2" class="w3-margin-top w3-margin-bottom"  style="">
+	<form name="form1" class="w3-row">
+		<input type="number" class="w3-input w3-col m4 s6" name="variant" ng-model="itemInfo.Variants.variant2Val" 
+			required placeholder="{{itemInfo.Variants.variant2Name.hu}}" min="{{itemInfo.Variants.variant2Min}}" max="{{itemInfo.Variants.variant2Max}}"  />
+		<span class="w3-col m2 s3 w3-xlarge"><b>cm</b></span>
+	</form>
+	<div ng-show="form1.$invalid  && showVariant2Error" class="w3-text-red bold">Kérjük valasszon {{itemInfo.Variants.variant2Min}}
+	 és {{itemInfo.Variants.variant2Max}} között</div>
+	</div>
 
 	<div class="w3-row w3-margin-top"  style="">
 		<button id="add_basket_button" class="w3-button w3-xlarge w3-black w3-hover-green  w3-col m6 l12" style="" ng-click="checkBasket();showImg=false">Kosárba</button>
@@ -136,18 +146,18 @@
 				<span class="w3-right w3-large"> <i ng-show="des==false">+</i><i ng-show="des==true">-</i></span>
 		<div ng-show="des==true" class="w3-margin-top">
 			<img ng-if="product.category=='Steps'" ng-src="{{product.imgSrc}}/description_1.jpg" style="width:100%;height:auto;margin:auto"></img>
-			<div ng-bind-html="product.addInfo"></div>
+			<br><div ng-bind-html="product.addInfo"></div>
 		</div>
 		</div>
 		<div ng-click="del=!del;des=false;ret=false" class="w3-border-bottom w3-border-black w3-padding" style="width:100%;height=auto;overflow:auto">
 				<span class="w3-left w3-large">Szállítás</span>
 				<span class="w3-right w3-large"> <i ng-show="del==false">+</i><i ng-show="del==true">-</i></span>
-		<div ng-show="del==true" class="w3-margin-top"><div ng-include="'legal/delivery-min.html'"></div></div>
+		<br><div ng-show="del==true" class="w3-margin-top"><div ng-include="'legal/delivery-min.html'"></div></div>
 		</div>
 		<div ng-click="ret=!ret;del=false;des=false" class="w3-border-bottom w3-border-black w3-padding" style="width:100%;height=auto;overflow:auto">
 				<span class="w3-left w3-large">Áruvisszaküldés/csere</span>
 				<span class="w3-right w3-large"> <i ng-show="ret==false">+</i><i ng-show="ret==true">-</i></span>
-		<div ng-show="ret==true" class="w3-margin-top" ng-bind-html="product.prodInfo"></div>
+		<br><div ng-show="ret==true" class="w3-margin-top" ng-bind-html="product.prodInfo"></div>
 		</div>
 	
 	</div>

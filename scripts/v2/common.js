@@ -51,6 +51,20 @@ function isPathCorrect(){//function to check if path has either /hu or /en to in
 	
 }
 
+//Sanity to check to make sure we always reflect the right languages. Clled on every page refresh
+function Common_checkLang(){
+	let shopping=localStorage.getObj("shopping");
+	let path = window.location.href;
+	if (path.search("/hu/")>0 && shopping.contact.lang!=="hu"){
+		shopping.contact.lang="hu";
+		localStorage.setObj("shopping",shopping);
+	}
+	else if(path.search("/en/")>0 && shopping.contact.lang!=="en"){
+		shopping.contact.lang="en";
+		localStorage.setObj("shopping",shopping);
+	}	
+}
+
 function Common_menuClicked()
 {
 	$("#mobile-submenu").toggle();

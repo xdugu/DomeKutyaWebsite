@@ -132,7 +132,7 @@ app.controller('Review', function($scope, $http, $timeout) {
 				allowed_payment_method: 'INSTANT_FUNDING_SOURCE'
 			  },
 			  soft_descriptor: 'Dome Kutya',
-			  items: createPayPalObject($scope.currency, $scope.order.Items),
+			  items: createPayPalObject($scope.currency, $scope.order.Items, $scope.shopping.contact.lang),
 			  shipping:{
 				name:{full_name: $scope.shopping.contact.firstName},
 				address: {
@@ -163,12 +163,12 @@ app.controller('Review', function($scope, $http, $timeout) {
   
 });
 
-function createPayPalObject(currency,obj)
+function createPayPalObject(currency,obj,lang)
 {
 	myContainer = [];
 	for(let i=0; i<obj.length; i++)
 	{
-		let itemName =  obj[i].Description.hu;
+		let itemName =  obj[i].Description[lang];
 		let wholeId = obj[i].ItemId;
 		if(obj[i].Variants.hasVariants)
 			wholeId +=","+obj[i].Pattern.PatternId;

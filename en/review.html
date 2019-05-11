@@ -18,12 +18,10 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
 
-<script src="../scripts/common.js" ></script>
-<script src="../scripts/shop.js" ></script>
-<script src="../scripts/review.js" ></script>
-<script src="../scripts/directives/directives.js" ></script>
-
-<!--script id="paypal" src="https://www.paypal.com/sdk/js?client-id=AXIR5FN2_aHZDPJ0B04WvLl7gtekClOeAInB4B6t4Gt8AgzHW6cHsxhpjle6S1dXc0TlwckcxtwIpnPe&currency=EUR"></script-->
+<script src="../scripts/v2/common.js" ></script>
+<script src="../scripts/v2/shop.js" ></script>
+<script src="../scripts/v2/review.js" ></script>
+<script src="../scripts/v2/directives/directives.js" ></script>
 
 </head> 
 
@@ -102,15 +100,15 @@
 		<div class="w3-modal-content w3-animate-top w3-card-4" style="top:25vh;">
 		 <span ng-click="backButtonPressed()" class="material-icons w3-large w3-display-topright" style="cursor:pointer">cancel</span>
 		  <div class="w3-container" ng-show="backbone.showConfirmed==false">
-			<div class="w3-medium" style="margin-top:1vh">Kérjük erősítse meg, hogy valóban banki átutalással szerete-e fizetni. Amennyiben megerősíti, küldeni fogunk Önnek egy e-mailt, 
-			amelyben megtalálja az utaláshoz szükséges adatokat, illetve a referencia számot.
+			<div class="w3-medium" style="margin-top:1vh">Please confirm that you want to pay by bank transfer. We will send you an email
+			with our account details and payment reference number
 			</div>
-			<a ng-click="backbone.showConfirmed=true;updatePaymentMethod('bankTransfer');" class="w3-button w3-red w3-margin-top w3-margin-bottom">Megerősít</a>
+			<a ng-click="backbone.showConfirmed=true;updatePaymentMethod('bankTransfer');" class="w3-button w3-red w3-margin-top w3-margin-bottom">Confirm</a>
 		  </div>
 		   <div class="w3-container" ng-show="backbone.showConfirmed==true">
 		   
-			<div class="w3-medium" style="margin-top:1vh">A következő e-mail címre <strong>{{shopping.contact.email}}</strong> küldjük el az utaláshoz szükséges információkat.
-			Kérjük, hogy az utalást 24 órán belül tegye meg, hogy legyen időnk feldolgozni a rendelését.
+			<div class="w3-medium" style="margin-top:1vh">We have sent an email to <strong>{{shopping.contact.email}}</strong> with instructions of bank transfer. Please do
+				this within 24 hours to allow us to process your order.
 			</div>
 		  </div>
 		</div>
@@ -119,8 +117,8 @@
 		<div class="w3-modal-content w3-animate-top w3-card-4" style="top:25vh;">
 		 <span ng-click="backButtonPressed()" class="material-icons w3-large w3-display-topright" style="cursor:pointer">cancel</span>
 		  <div class="w3-container">
-			<div class="w3-large w3-text-green" style="font-weight:bold">Rendelés megerősítése</div>
-			<div class="w3-medium" style="margin-top:1vh">Köszönjük, hogy leadta rendelését. Igyekszünk, hogy a megrendelt termék minél hamarabb eljusson Önhöz.
+			<div class="w3-large w3-text-green" style="font-weight:bold">Order Confirmation</div>
+			<div class="w3-medium" style="margin-top:1vh">Thank you for placing your order. We will work hard to get it to you as quickly as possible.
 			</div>
 		  </div>
 		</div>
@@ -130,13 +128,13 @@
 		<div class="w3-modal-content w3-animate-top w3-card-4" style="top:25vh;">
 		 <span ng-click="backButtonPressed()" class="material-icons w3-large w3-display-topright" style="cursor:pointer">cancel</span>
 		  <div class="w3-container" ng-show="backbone.showConfirmed==false">
-			<div class="w3-medium" style="margin-top:1vh">Kérjük erősítse meg, hogy utánvéttel szeretne fizetni. A megerősítéshez küldünk Önnek egy e-mailt.
-			Kérjük vegye figyelembe, hogy utánvét esetén a végösszeghez hozzáadódik az utánvét díja, mely <span class="price">{{order.Costs.payOnDeliveryAdditional}} Ft</span>. Így a végösszeg <span my-cost-str="order.Costs.total + order.Costs.payOnDeliveryAdditional" class="price"></span>
+			<div class="w3-medium" style="margin-top:1vh">Please confirm that you want to pay on delivery. We will send you an email to confirm.
+			Please note that this will increase the total price by <span class="price">{{order.Costs.payOnDeliveryAdditional}} Ft</span>. Your total to pay will be <span my-cost-str="order.Costs.total + order.Costs.payOnDeliveryAdditional" class="price"></span>
 			</div>
-			<a ng-click="backbone.showConfirmed=true;updatePaymentMethod('payOnDelivery')" class="w3-button w3-red w3-margin-top w3-margin-bottom">Megerősít</a>
+			<a ng-click="backbone.showConfirmed=true;updatePaymentMethod('payOnDelivery')" class="w3-button w3-red w3-margin-top w3-margin-bottom">Confirm</a>
 		  </div>
 		   <div class="w3-container" ng-show="backbone.showConfirmed==true">
-			<div class="w3-medium" style="margin-top:1vh">A megrendelés megerősítését a következő e-mail címre küldjük <strong>{{shopping.contact.email}}</strong>. Megrendelését hamarosan kézbesítjük!
+			<div class="w3-medium" style="margin-top:1vh">Thank you. We have sent an email to  <strong>{{shopping.contact.email}}</strong>. We will dispatch your order soon
 			</div>
 		  </div>
 		</div>

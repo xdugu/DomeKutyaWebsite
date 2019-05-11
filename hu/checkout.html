@@ -19,9 +19,9 @@
 <link rel="stylesheet" href="../css/common.css"/>
 <link rel="stylesheet" href="../css/checkout.css"/>
 
-<script src="../scripts/v1/common.js" ></script>
-<script src="../scripts/v1/shop.js" ></script>
-<script src="../scripts/v1/checkout.js" ></script>
+<script src="../scripts/v2/common.js" ></script>
+<script src="../scripts/v2/shop.js" ></script>
+<script src="../scripts/v2/checkout.js" ></script>
 
 </head> 
 
@@ -36,6 +36,8 @@
 	<form name="form1" novalidate class="entry">
 		<input type="text" class="w3-input" name="name" ng-model="user.firstName" required placeholder="Név"  autocomplete="name"/>
 		<span class="w3-text-red" ng-show="form1.name.$touched && form1.name.$invalid">Név megadása szükséges</span>
+		
+		<input type="text" class="w3-input" name="dogs" ng-model="user.dogsName" placeholder="A kutyád neve"  />
 		
 		<input type="email" class="w3-input" name="email" ng-model="user.email" placeholder="Email cím" required  autocomplete="email"/>
 		<span class="w3-text-red" ng-show="form1.email.$touched && form1.email.$invalid">E-mail cím megadása szüksége</span>

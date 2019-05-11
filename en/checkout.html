@@ -19,9 +19,9 @@
 <link rel="stylesheet" href="../css/common.css"/>
 <link rel="stylesheet" href="../css/checkout.css"/>
 
-<script src="../scripts/common.js" ></script>
-<script src="../scripts/shop.js" ></script>
-<script src="../scripts/checkout.js" ></script>
+<script src="../scripts/v2/common.js" ></script>
+<script src="../scripts/v2/shop.js" ></script>
+<script src="../scripts/v2/checkout.js" ></script>
 
 </head> 
 
@@ -36,6 +36,8 @@
 	<form name="form1" novalidate class="entry">
 		<input type="text" class="w3-input" name="name" ng-model="user.firstName" required placeholder="Full Name"  autocomplete="name"/>
 		<span class="w3-text-red" ng-show="form1.name.$touched && form1.name.$invalid">Your name is required</span>
+		
+		<input type="text" class="w3-input" name="dogs" ng-model="user.dogsName" placeholder="Your dog's name"  />
 		
 		<input type="email" class="w3-input" name="email" ng-model="user.email" placeholder="Email address" required  autocomplete="email"/>
 		<span class="w3-text-red" ng-show="form1.email.$touched && form1.email.$invalid">E-mail address is required</span>

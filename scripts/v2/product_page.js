@@ -36,6 +36,7 @@ app.controller('ProductDisplay',function($scope, $timeout,$http,$location,$windo
 	$scope.currency = $scope.shopping.currency;
 	$scope.patterns=[];
 	$scope.accessories = [];
+	$scope.showVariant2Error = false;
 	
 	$scope.backbone = {lang:null};
 	$scope.backbone.lang= $scope.shopping.contact.lang;//for choosing of language
@@ -52,6 +53,21 @@ app.controller('ProductDisplay',function($scope, $timeout,$http,$location,$windo
 	  
 	$scope.checkBasket = function(){//called when customer presses the "Add to Basket" button
 			let data = {itemId: $scope.product.id, basketId:$scope.basketId};
+			if($scope.itemInfo.Variants.hasVariants2){
+				if(isNaN($scope.itemInfo.Variants.variant2Val) || 
+				$scope.itemInfo.Variants.variant2Val<$scope.itemInfo.Variants.variant2Min ||
+				$scope.itemInfo.Variants.variant2Val>$scope.itemInfo.Variants.variant2Max)
+				{
+					$scope.showVariant2Error = true;
+					return;
+				}
+				else
+				{
+					$scope.showVariant2Error = false;
+					data['variant2Val']=$scope.itemInfo.Variants.variant2Val;
+				}
+			}
+			
 			if($scope.itemInfo.Variants.hasVariants){
 				data['patternId']=$scope.patterns[$scope.product.pattern].id;
 			}

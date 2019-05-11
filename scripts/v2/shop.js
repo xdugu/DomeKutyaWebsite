@@ -8,10 +8,10 @@ Storage.prototype.getObj = function(key) {
     return JSON.parse(this.getItem(key))
 }
 
-var currentVersion=4;
+var currentVersion=5;//add dog's name variable
 
 var shopping={ contact:{firstName:"",lastName:"",email:"",address1:"",address2:"",city:"",
-				country:"default",number:"",postCode:"", countryCode:"", 
+				country:"default",number:"",postCode:"", countryCode:"", dogsName:"", 
 				lang:"hu"},
 				currency:"HUF", paymentMethod:"bankTransfer", lastBasketSize: 0
 }
@@ -29,15 +29,16 @@ function Shop_refreshBasket()
 	if (old!=null){//old local storage item tobe removed
 		localStorage.removeItem("order");
 	}
+	let savedVersion = parseInt(localStorage.getItem("version"));//This is important so we know to refresh everything if we have just updated the software
 	let myOrder=localStorage.getObj("shopping");
 	
-	if(myOrder==null)
+	if(myOrder==null || isNaN(savedVersion) || savedVersion<currentVersion)
 	{
 		myOrder=shopping;
 		localStorage.setObj("shopping",myOrder);
-
+		localStorage.setItem("version", currentVersion.toString());
 	}
-	
+	Common_checkLang();
 	
 	if (myOrder.lastBasketSize>0)
 	{
