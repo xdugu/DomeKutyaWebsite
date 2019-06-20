@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title> Dome Kutya | Product Page</title>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<meta charset="UTF-8">
+
+
+ <!-- Global site tag (gtag.js) - Google Analytics -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.4/angular.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.2/angular-animate.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.4/angular-sanitize.js"></script>
+
+<link rel="stylesheet" type="text/css" href="https://www.w3schools.com/w3css/4/w3.css"></style>
+
+<script src="webtest.js" ></script>
+
+
+<style>
+
+</style>
+</head> 
+
+<body ng-app="myApp" ng-controller="ProductDisplay" ng-init="showImg=false;choice=0;chosenVal;">
+
+<div id="header_placeholder"> </div>
+<div id="privacy_placeholder"></div>
+
+
+	
+<form id="choose" ng-switch="productRadio.variant2Details.type" name="chooseForm" >
+  
+	 <label ng-switch-when="input"><input type="number" name="variant"/><b class="w3-margin-left" >cm</b></label>
+
+	
+	  <div ng-switch-when="radio" ng-repeat="item in productRadio.variant2Details.options track by $index">
+			<input type="radio" ng-model="$parent.choice" value="{{$index}}"/>
+			<span  ng-switch="item.type">
+				<label  ng-switch-when="input">Height: <input ng-model="$parent.chosenVal" min="20" max="50" type="number" name="sub{{$index}}"/><b class="w3-margin-left" >cm</b>
+				<br>
+				<div ng-show="$parent.chooseForm['sub'+$index.toString()].$invalid && $parent.choice==$index" class="w3-text-red bold">Please enter a valid number</div>
+		
+				</label>
+				<span ng-switch-when="text">{{item.value}}</span>
+
+			</span>
+			
+			
+	  </div>
+ 
+</form>
+<br>
+
+<button> Add toBasket </button>
+	
+
+</body>
+</html>
