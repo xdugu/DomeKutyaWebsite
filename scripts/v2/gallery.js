@@ -26,21 +26,11 @@ app.controller('Gallery',function($scope, $timeout,$http,$location,$window){
 				autoplaySpeed: 2000,
 				centerMode: true,
 				variableWidth: true,
+				lazyLoad: 'ondemand'
+				
 				//asNavFor: '.preview-stage'				
 			  });
-			/*
-			$('.preview-stage').slick({
-				dots: false,
-				arrows: true,
-				infinite: true,
-				slidesToShow: 4,
-				slidesToScroll: 1,
-				autoplay: false,
-				variableWidth: true,
-				centerMode: true,
-				asNavFor: '#img_stage',
-				focusOnSelect: true
-			  });*/
+
 			}
 			,100);    
 			
