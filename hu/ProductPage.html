@@ -110,7 +110,7 @@
 	<div ng-bind-html="product.firstInfo"></div>
 
 	<div  class="w3-container" style="width:100%;padding:0;white-space:nowrap;overflow-x:auto;">
-		<img class="w3-round" ng-repeat="pattern in patterns track by $index" ng-class="{'selected':$parent.product.pattern==($index)}" ng-src="{{pattern.img}}/img_1.jpg" ng-click="$parent.product.pattern=$index;$parent.showImg=true" style="height:15vh;width:auto;margin:0 1%;"></img>		
+		<img class="w3-round" lazy-load="{{pattern.img}}/img_1.jpg" ng-repeat="pattern in patterns track by $index" ng-class="{'selected':$parent.product.pattern==($index)}" mine="{{pattern.img}}/img_1.jpg" ng-click="$parent.product.pattern=$index;$parent.showImg=true" style="height:15vh;width:auto;margin:0 1%;"></img>		
 	</div>
 	
 	<div ng-show="showImg==true" class="animate-height w3-center w3-margin-top w3-display-container">

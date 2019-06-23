@@ -43,3 +43,31 @@ angular.module('myApp').directive('myCostStr', function() {
     }
   };
 });
+
+
+angular
+    .module('myApp')
+    .directive('lazyLoad', lazyLoad)
+
+function lazyLoad(){
+    return {
+        restrict: 'A',
+        link: function(scope, element, attrs){
+            const observer = new IntersectionObserver(loadImg);
+            const img = angular.element(element)[0];
+			img.src = "/images/loading.gif";
+            observer.observe(img)
+
+            function loadImg(changes){
+                changes.forEach(change => {
+                    if(change.intersectionRatio > 0){
+						if(!change.target.src.includes(attrs.lazyLoad)){
+							change.target.src = attrs.lazyLoad;
+						}
+                    }
+                })
+            }    
+
+        }
+    }
+}
