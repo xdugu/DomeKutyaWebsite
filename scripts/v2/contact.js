@@ -14,7 +14,7 @@ app.controller('Contact', function($scope, $http, $timeout) {
 	$http({
 				method: 'POST',
 				crossDomain : true,
-				url: 'https://0j7ds3u9r6.execute-api.eu-central-1.amazonaws.com/v2/Request/CustomerRequest',
+				url: 'https://api.kutyalepcso.com/v2/Request/CustomerRequest',
 				data: JSON.stringify($scope.user),
 				headers: {'Content-Type': 'application/json'}
 			});

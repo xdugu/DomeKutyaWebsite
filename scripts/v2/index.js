@@ -16,8 +16,7 @@ app.controller('HomePage', function($http,$scope,$q,$timeout) {
 $scope.backbone = {lang:null};
 $scope.backbone.lang= localStorage.getObj("lang");//for choosing of language	
 $scope.changeLanguage = Common_changeLanguage;
-$scope.products = $http.get('/res/home.json');
-$scope.database = $http.get('/res/products.xml');
+
 
 //we are loading the ids of the products we want to display on the homepage
 $q.all([$scope.products, $scope.database]).then(function(values) {

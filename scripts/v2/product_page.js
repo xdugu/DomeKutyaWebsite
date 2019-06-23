@@ -48,7 +48,7 @@ app.controller('ProductDisplay',function($scope, $timeout,$http,$location,$windo
 	
 	$scope.product.id = Common_getUrlParam('itemId=');
 		
-	$http.get('https://0j7ds3u9r6.execute-api.eu-central-1.amazonaws.com/v2/Request/ItemData?itemId='+ $scope.product.id ).then(function(res){
+	$http.get('https://api.kutyalepcso.com/v2/Request/ItemData?itemId='+ $scope.product.id ).then(function(res){
 		loadProduct(res);
 	});
 	  
@@ -106,7 +106,7 @@ app.controller('ProductDisplay',function($scope, $timeout,$http,$location,$windo
 			 $http({
 				method: 'POST',
 				crossDomain : true,
-				url: 'https://0j7ds3u9r6.execute-api.eu-central-1.amazonaws.com/v2/Request/Basket/AddToBasket',
+				url: 'https://api.kutyalepcso.com/v2/Request/Basket/AddToBasket',
 				data: JSON.stringify(data),
 				headers: {'Content-Type': 'application/json'}
 			}).then(function(res){

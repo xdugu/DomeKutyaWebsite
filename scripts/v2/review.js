@@ -29,7 +29,7 @@ app.controller('Review', function($scope, $http, $timeout) {
 	 $http({
 				method: 'POST',
 				crossDomain : true,
-				url: 'https://0j7ds3u9r6.execute-api.eu-central-1.amazonaws.com/v2/Request/Basket/GetBasket',
+				url: 'https://api.kutyalepcso.com/v2/Request/Basket/GetBasket',
 				data: JSON.stringify({basketId:$scope.basketId, includeCost: true, country:$scope.shopping.contact.country, currency: $scope.currency}),
 				headers: {'Content-Type': 'application/json'}
 			}).then(function(res){
@@ -57,7 +57,7 @@ app.controller('Review', function($scope, $http, $timeout) {
 			$http({
 				method: 'POST',
 				crossDomain : true,
-				url: 'https://0j7ds3u9r6.execute-api.eu-central-1.amazonaws.com/v2/Request/SubmitOrder',
+				url: 'https://api.kutyalepcso.com/v2/Request/SubmitOrder',
 				data: JSON.stringify($scope.shopping),
 				headers: {'Content-Type': 'application/json'}
 			});

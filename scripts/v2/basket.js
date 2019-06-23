@@ -23,7 +23,7 @@ app.controller('Basket', function($scope, $http) {
 	 $http({
 				method: 'POST',
 				crossDomain : true,
-				url: 'https://0j7ds3u9r6.execute-api.eu-central-1.amazonaws.com/v2/Request/Basket/GetBasket',
+				url: 'https://api.kutyalepcso.com/v2/Request/Basket/GetBasket',
 				data: JSON.stringify({basketId:$scope.basketId, includeCost: true, country:$scope.shopping.contact.country, currency:$scope.currency }),
 				headers: {'Content-Type': 'application/json'}
 			}).then(function(res){
@@ -46,7 +46,7 @@ app.controller('Basket', function($scope, $http) {
 		$http({
 				method: 'POST',
 				crossDomain : true,
-				url: 'https://0j7ds3u9r6.execute-api.eu-central-1.amazonaws.com/v2/Request/Basket/ChangeQuantity',
+				url: 'https://api.kutyalepcso.com/v2/Request/Basket/ChangeQuantity',
 				data: JSON.stringify({basketId:$scope.basketId, index: index, increment: direction, country:$scope.shopping.contact.country,currency:$scope.currency}),
 				headers: {'Content-Type': 'application/json'}
 			}).then(function(res){
@@ -63,7 +63,7 @@ app.controller('Basket', function($scope, $http) {
 		$http({
 				method: 'POST',
 				crossDomain : true,
-				url: 'https://0j7ds3u9r6.execute-api.eu-central-1.amazonaws.com/v2/Request/Basket/RemoveItem',
+				url: 'https://api.kutyalepcso.com/v2/Request/Basket/RemoveItem',
 				data: JSON.stringify({basketId:$scope.basketId, index: index, country:$scope.shopping.contact.country, currency:$scope.currency}),
 				headers: {'Content-Type': 'application/json'}
 			}).then(function(res){
@@ -79,7 +79,7 @@ app.controller('Basket', function($scope, $http) {
 		$http({
 				method: 'POST',
 				crossDomain : true,
-				url: 'https://0j7ds3u9r6.execute-api.eu-central-1.amazonaws.com/v2/Request/Basket/GetBasket',
+				url: 'https://api.kutyalepcso.com/v2/Request/Basket/GetBasket',
 				data: JSON.stringify({basketId:$scope.basketId, includeCost: true, country:$scope.shopping.contact.country, currency:$scope.currency}),
 				headers: {'Content-Type': 'application/json'}
 			}).then(function(res){

@@ -21,7 +21,7 @@ app.controller('Categories', function($scope, $http, $timeout, $location) {
 	
 	/////////////////////////////////
 	let category = Common_getUrlParam("category=")
-	$http.get('https://0j7ds3u9r6.execute-api.eu-central-1.amazonaws.com/v1/Request/Category?category='+ category).then(function(res){
+	$http.get('https://api.kutyalepcso.com/v2/Request/Category?category='+ category).then(function(res){
 		$scope.categoryData = res.data.data;
 		
 		if($location.absUrl().search('/en/')>0)//Using Category info on first item
