@@ -63,7 +63,7 @@
 <div id="main" class="w3-container" >
 	 <div id="img_stage" class="w3-margin-top w3-mobile w3-center" style=" overflow-y:hidden; height:80vh;" >
 		<div style=" overflow-x:auto; height:80vh;" class=" w3-border w3-border-white w3-margin-left" ng-repeat="x in [].constructor(25) track by $index">
-			<img class="sub_image" ng-src="../images/customer/img_{{$index+1}}.jpg" style="height:100%;width:auto; margin:auto"></img>
+			<img class="sub_image" data-lazy="{{'../images/customer/img_'+($index+1)+'.jpg'}}" style="height:100%;width:auto; margin:auto"></img>
 			<!-- To prevent situation where the imgSrc is not loaded causing get errors -->
 		</div>
 	 </div>
