@@ -53,9 +53,9 @@ function lazyLoad(){
     return {
         restrict: 'A',
         link: function(scope, element, attrs){
-            const observer = new IntersectionObserver(loadImg);
-            const img = angular.element(element)[0];
+			const img = angular.element(element)[0];
 			img.src = "/images/loading.gif";
+            const observer = new IntersectionObserver(loadImg);           
             observer.observe(img)
 
             function loadImg(changes){
