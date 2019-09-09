@@ -1,0 +1,5 @@
+# Rule For all web crawlers
+User-agent: *
+Disallow: /hu/basket.html
+
+Sitemap: https://dome.kutyalepcso.com/sitemap.xml 

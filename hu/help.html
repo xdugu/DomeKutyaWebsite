@@ -22,14 +22,6 @@
 <script src="../scripts/v3/shop.js" ></script>
 <script src="../scripts/v3/help.js" ></script>
 
-<style>
-
-h1{
- font-size:2em !important;
- font-weight: bold !important;
-}
-</style>
-
 </head> 
 
 <body ng-app="myApp" ng-controller="Help">
@@ -50,7 +42,7 @@ h1{
 	
 	<div class="w3-modal " ng-show="content.showInfo==true" style="display:block;z-index:1000;padding-top:7vh">
 	 <span ng-click="content.showInfo=false" class="material-icons w3-xxlarge w3-text-white" style="z-index:1000;cursor:pointer;position:fixed;top:0vw;right:2vw">cancel</span>
-		<div class="w3-modal-content w3-animate-top w3-card-4 w3-round " style="overflow-y:overflow-x:hidden;auto;width:100%;max-height:95%">
+		<div class="w3-modal-content w3-animate-top w3-card-4 w3-round " style="overflow:auto;width:100%;max-height:95%">
 
 		  <div ng-if="content.info=='our-details'" class="w3-container links">
 			<div ng-include="'legal/our_details.html'"></div>
