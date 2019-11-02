@@ -69,10 +69,22 @@
 
 </head> 
 
-<body  ng-app="myApp" ng-controller="HomePage">
+<body  ng-app="myApp" ng-controller="HomePage" ng-init="">
 
 <div id="header_placeholder" class="w3-white"> </div>
 <div id="privacy_placeholder"></div>
+
+<div ng-show="notifyChristmas" class="w3-display-container w3-padding w3-margin-top w3-mobile w3-center">
+	<span class="material-icons w3-xlarge w3-display-topright w3-text-black hoverable" ng-click="removeNotification()" style="margin-top: 0px; margin-right:5px">cancel</span>
+	<div class="w3-row w3-white w3-padding w3-round">
+	<div class="w3-col s2 w3-hide-small"><img src="/images/dome_christmas.jpg" style="width: 100%; height: auto"></img></div>
+	<div class="w3-col s12 m10 w3-padding"><b class="w3-xlarge w3-row">
+		<img class="w3-col s4 w3-hide-medium w3-hide-large" src="/images/dome_christmas.jpg"/><span class="w3-col s8 m12 w3-padding-24">Nyakunkon a Karàcsony</span></b>
+	Rendelj kedvencednek <b>december 12-ig</b> és még Karàcsony előtt kézbesítjük!<br><br>
+	December 12 után érkezett rendelések kézbesítését nem tudjuk garantalni Karácsonyra.</div>
+	</div>
+</div>
+
 
 
 <div id="list" class="w3-container" style="">
@@ -128,19 +140,7 @@
 			
 		</div>
 	</a> 
-	<a href="/hu/Categories.html?category=BeHappy" class="w3-mobile w3-margin-top w3-left" style="width:48.5%; overflow:hidden;" >
-		<div class="slide w3-white" >
-			<div style="overflow: hidden" class="w3-display-container display" >
-				<img  src="/images/shop/behappy/strap/img_1.jpg" style="width:auto;height:100%;margin:auto"/>
-				<div class="w3-display-topleft w3-xxlarge w3-wide w3-text-white" style="">BeHappy</div>
-			</div>
-			<div style="overflow: hidden;" class="w3-display-container display">
-				<img  src="/images/shop/behappy/combined/img_1.jpg" style="width:100%;height:auto;margin:auto"></img>
-				<div class="w3-display-topleft w3-xxlarge w3-wide w3-text-white" style="">BeHappy</div>
-			</div>
-			
-		</div>
-	</a> 
+
 </div>
 
 

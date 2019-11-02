@@ -16,26 +16,19 @@ app.controller('HomePage', function($http,$scope,$q,$timeout) {
 $scope.backbone = {lang:null};
 $scope.backbone.lang= localStorage.getObj("lang");//for choosing of language	
 $scope.changeLanguage = Common_changeLanguage;
+$scope.notifyChristmas = localStorage.getObj("notifyChristmas");
+if($scope.notifyChristmas == null){
+	$scope.notifyChristmas = true;
+}
 
+$scope.removeNotification = function(){
+	$scope.notifyChristmas= false;
+	localStorage.setObj("notifyChristmas", false);
+}
 
 //we are loading the ids of the products we want to display on the homepage
 $q.all([$scope.products, $scope.database]).then(function(values) {
-	/*let pathname = window.location.href;
 	
-	if(pathname.search('/en')>0)
-		$scope.products = values[0].data.en;
-	else $scope.products = values[0].data.hu;
-	
-	parser = new DOMParser();
-    let database = parser.parseFromString(values[1].data,"text/xml");
-    for(let i=0; i<$scope.products.length; i++)
-	{
-		
-		let tag=Common_getItemById(database, $scope.products[i].item);
-
-			$scope.products[i].src = tag.getElementsByTagName('image')[0].innerHTML;
-	}
-	*/
 	 $timeout(function (){
 		  $('.slide').slick({
 		dots: false,
