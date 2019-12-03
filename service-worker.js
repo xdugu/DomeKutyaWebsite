@@ -140,7 +140,7 @@ workbox.routing.registerRoute(
     plugins: [
       new workbox.expiration.Plugin({
         maxEntries: 50,
-        maxAgeSeconds: 60 * 30, // 30 minutes
+        maxAgeSeconds: 86400 * 30, // 1 month
       }),
     ],
   }),
@@ -154,7 +154,7 @@ workbox.routing.registerRoute(
     plugins: [
       new workbox.expiration.Plugin({
         maxEntries: 30,
-        maxAgeSeconds:  1 * 60 * 60, // 24 
+        maxAgeSeconds:  86400 * 30, // 1 month 
 		 purgeOnQuotaError: true, // Opt-in to automatic cleanup.
       }),
     ],

@@ -190,7 +190,9 @@ app.controller('ProductDisplay',function($scope, $timeout,$http,$location,$windo
 					slidesToScroll: 1,
 					adaptiveHeight: true,
 					autoplay: false,	
+					//lazyLoad: 'ondemand',
 				  });
+				  
 				}
 				else{
 					$('.sub_image').css({"height":'80vh',"width":'auto',"display":'block'});

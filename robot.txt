@@ -1,5 +1,10 @@
 # Rule For all web crawlers
 User-agent: *
 Disallow: /hu/basket.html
+Disallow: /hu/settings.html
+Disallow: /en/basket.html
+Disallow: /en/settings.html
+Disallow: /hu/checkout.html
+Disallow: /hu/checkout.html
 
 Sitemap: https://dome.kutyalepcso.com/sitemap.xml 

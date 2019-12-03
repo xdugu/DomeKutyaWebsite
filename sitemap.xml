@@ -1,55 +1,93 @@
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
- <!--
- created with Free Online Sitemap Generator www.xml-sitemaps.com 
--->
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
 <url>
 <loc>https://dome.kutyalepcso.com/hu/index.html</loc>
-<lastmod>2019-04-06</lastmod>
+	<xhtml:link 
+               rel="alternate"
+               hreflang="en"
+               href="https://dome.kutyalepcso.com/en/index.html"/>
+	<xhtml:link 
+               rel="alternate"
+               hreflang="hu"
+               href="https://dome.kutyalepcso.com/hu/index.html"/>
 <priority>1.00</priority>
 </url>
 <url>
-<loc>
-https://dome.kutyalepcso.com/hu/Categories.html?steps
-</loc>
-<lastmod>2019-04-06</lastmod>
+<loc>https://dome.kutyalepcso.com/hu/Categories.html?steps</loc>
+<xhtml:link 
+               rel="alternate"
+               hreflang="en"
+               href="https://dome.kutyalepcso.com/en/Categories.html?steps"/>
+	<xhtml:link 
+               rel="alternate"
+               hreflang="hu"
+               href="https://dome.kutyalepcso.com/hu/Categories.html?steps"/>
 <priority>0.80</priority>
 <changefreq>monthly</changefreq>
 </url>
 <url>
-<loc>
-https://dome.kutyalepcso.com/hu/Categories.html?ramps
-</loc>
-<lastmod>2019-04-06</lastmod>
+<loc>https://dome.kutyalepcso.com/hu/Categories.html?ramps</loc>
+<xhtml:link 
+               rel="alternate"
+               hreflang="en"
+               href="https://dome.kutyalepcso.com/en/Categories.html?ramps"/>
+<xhtml:link 
+               rel="alternate"
+               hreflang="hu"
+               href="https://dome.kutyalepcso.com/hu/Categories.html?ramps"/>
 <priority>0.80</priority>
 <changefreq>monthly</changefreq>
 </url>
 <url>
 <loc>https://dome.kutyalepcso.com/hu/Categories.html?others</loc>
-<lastmod>2019-04-06</lastmod>
+<xhtml:link 
+               rel="alternate"
+               hreflang="en"
+               href="https://dome.kutyalepcso.com/en/Categories.html?others"/>
+<xhtml:link 
+               rel="alternate"
+               hreflang="hu"
+               href="https://dome.kutyalepcso.com/hu/Categories.html?others"/>
 <priority>0.6</priority>
 <changefreq>monthly</changefreq>
 </url>
-<url>
-<loc>https://dome.kutyalepcso.com/hu/Categories.html?behappy</loc>
-<lastmod>2019-04-06</lastmod>
-<priority>0.6</priority>
-<changefreq>monthly</changefreq>
-</url>
-<url>
-<loc>https://dome.kutyalepcso.com/hu/Categories.html?mybulldog</loc>
-<lastmod>2019-04-06</lastmod>
-<priority>0.6</priority>
-<changefreq>monthly</changefreq>
-</url>
+
 <url>
 <loc>https://dome.kutyalepcso.com/hu/contact.html</loc>
-<lastmod>2019-04-06</lastmod>
+<xhtml:link 
+               rel="alternate"
+               hreflang="en"
+               href="https://dome.kutyalepcso.com/en/contact.html"/>
+<xhtml:link 
+               rel="alternate"
+               hreflang="hu"
+               href="https://dome.kutyalepcso.com/hu/contact.html"/>
 <priority>0.8</priority>
 <changefreq>monthly</changefreq>
 </url>
 <url>
 <loc>https://dome.kutyalepcso.com/hu/about.html</loc>
-<lastmod>2019-04-06</lastmod>
+<xhtml:link 
+               rel="alternate"
+               hreflang="en"
+               href="https://dome.kutyalepcso.com/en/about.html"/>
+<xhtml:link 
+               rel="alternate"
+               hreflang="hu"
+               href="https://dome.kutyalepcso.com/hu/about.html"/>
+<priority>0.80</priority>
+<changefreq>monthly</changefreq>
+</url>
+<url>
+<loc>https://dome.kutyalepcso.com/hu/gallery.html</loc>
+<xhtml:link 
+               rel="alternate"
+               hreflang="en"
+               href="https://dome.kutyalepcso.com/en/gallery.html"/>
+<xhtml:link 
+               rel="alternate"
+               hreflang="hu"
+               href="https://dome.kutyalepcso.com/hu/gallery.html"/>
 <priority>0.80</priority>
 <changefreq>monthly</changefreq>
 </url>
