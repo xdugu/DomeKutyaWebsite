@@ -120,6 +120,7 @@
 	<div ng-show="showImg==true" class="w3-margin w3-large w3-center">{{patterns[product.pattern].description}}</div>
 	
 	<div  ng-if="itemInfo.Variants.hasVariants2" class="w3-margin-top w3-margin-bottom w3-large"  style="">
+	 <b>{{itemInfo.Variants.variant2Name[backbone.lang]}}</b>
 		<form id="choose" ng-switch="itemInfo.Variants.variant2Details.type" name="chooseForm" >
 		  <label ng-switch-when="input">{{itemInfo.Variants.variant2Details.txt[backbone.lang]}}: 
 			<input type="number" name="variant" min="{{itemInfo.Variants.variant2Details.minVal}}" max="{{itemInfo.Variants.variant2Details.maxVal}}"placeholder=""
