@@ -102,16 +102,34 @@ function Common_checkSubMenu(menu)
 	}
 }
 
-function Common_getUrlParam(param){
-	let url = window.location.href;
-	pos = url.search(param);
-	if(pos>=0)
-	{
-		return url.substring(param.length+pos, url.length);
+function Common_parseUrlParam(){
+	url =  decodeURI(window.location.href);
+	let returnParams = {};
+	paramPos = url.indexOf('?');
+	if(paramPos<0)
+		return {};
+	url = url.substring(paramPos+1);//don't need the '?' any more
+	for(;;){
+		paramPos = url.indexOf('=');
+		valPos = url.indexOf('&');
+		if(paramPos>0 && valPos>0){
+			returnParams[url.substring(0,paramPos)] = url.substring(paramPos+1,valPos);
+			url = url.substring(valPos+1);
+		}
+		else if(paramPos>0 && valPos<0){
+			returnParams[url.substring(0,paramPos)] = url.substring(paramPos+1);
+			url='';
+		}
+		else if(paramPos<0){
+			break;
+		}
+		
 	}
-	else return null;
+	
+	return returnParams;
 	
 }
+
 
 function Common_changeLanguage(lang){
 	

@@ -50,6 +50,15 @@
 }
 
 }
+.show-wide{
+	width: 100%;
+	height: auto;
+}
+
+.show-high{
+	height: 100%;
+	width: auto;
+}
 
 
 </style>
@@ -80,17 +89,18 @@
 
 
 <div id="product-shelf-placeholder" class="w3-container" style="padding:0;margin:0">
-	<a ng-repeat="product in products" href="{{product.href}}" class="w3-left w3-center w3-large w3-mobile my-product w3-white" style="width:48.5%;margin-top:2vh;">
+	<a ng-repeat="product in categoryData" href="ProductPage.html?{{product.href}}" class="w3-left w3-center w3-large w3-mobile my-product w3-white" style="width:48.5%;margin-top:2vh;">
 
 			<div style="width:100%; overflow:hidden;" class="category-image">
-				<img class="shop_img w3-center" ng-src="{{product.imgSrc}}/img_1.jpg" style="width:auto; height:100%; margin:auto"></img> 
+				<img class="shop_img w3-center" ng-src="https://adugutesting.s3.eu-central-1.amazonaws.com/{{product.Images.path}}{{product.Images.list[0].name}}" 
+					ng-class="{'show-wide': product.Images.list[0].sizing == 'width', 'show-high': product.Images.list[0].sizing == 'height'}"
+					style="margin:auto"></img> 
 			</div>
 
-		<div class="description w3-padding w3-large" ng-bind-html="product.description"></div>
-		<div ng-show="currency=='HUF'" my-cost-str="product.price.huf" class="price w3-padding "></div>
-		<div ng-show="currency=='EUR'" my-cost-str="product.price.eur" class="price w3-padding "></div>
+		<div class="description w3-padding w3-large" ng-bind-html="product.Title[lang]"></div>
+		<div  class="price w3-padding">{{product.Price[cur] | currency: cur : 0}}</div>
 	</a>
-	<a ng-if="categoryData[0].Category =='Steps'" href="contact.html" class="w3-left w3-center w3-large w3-mobile my-product w3-white" style="width:48.5%; margin-top:2vh;">
+	<!--a ng-if="categoryData[0].Category =='Steps'" href="contact.html" class="w3-left w3-center w3-large w3-mobile my-product w3-white" style="width:48.5%; margin-top:2vh;">
 			<div style="width:100%; overflow-y:hidden;" class="category-image">
 				<img class="shop_img w3-center" ng-src="/images/shop/steps/step_custom/img_1.jpg" style="width:100%; height:auto;"></img> 
 			</div>
@@ -104,7 +114,7 @@
 			</div>
 		<div class="description w3-padding">Minnie 2:1 Ramp</div>
 		<div class="w3-paddingtop" style="color: var(--main-theme)"> Click to send a pricing request</div>
-	</a>
+	</a-->
 
 </div>
 

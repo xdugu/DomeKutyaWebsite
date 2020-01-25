@@ -20,43 +20,31 @@ app.controller('Categories', function($scope, $http, $timeout, $location) {
 	
 	
 	/////////////////////////////////
-	let category = Common_getUrlParam("category=")
-	$http.get('https://api.kutyalepcso.com/v2/Request/Category?category='+ category).then(function(res){
-		$scope.categoryData = res.data.data;
-		
-		if($location.absUrl().search('/en/')>0)//Using Category info on first item
-			$('#category-name').append($scope.categoryData[0].CategoryName.en);
-		else
-			$('#category-name').append($scope.categoryData[0].CategoryName.hu);
-			
-		for(let i=0; i< $scope.categoryData.length;i++){
-		let product = {description:"",price:"",imgSrc:"",href:"",imgPref:""};
-		if($location.absUrl().search('/en/')>0){
-			product.description = $scope.categoryData[i].Description.en;
-		}
-		else {
-			product.description = $scope.categoryData[i].Description.hu;
-		}
-			
-			product.price = $scope.categoryData[i].Price;
-			
-			product.imgSrc = $scope.categoryData[i].Image.location;
-			
-			product.imgPref = $scope.categoryData[i].Image.imagePref;
-			
-			product.href = 'ProductPage.html?itemId=' +  $scope.categoryData[i].ItemId;
-			 
-			
-			$scope.products.push(product);
+	let params = Common_parseUrlParam();
+	$http.get('https://h0jg4s8gpa.execute-api.eu-central-1.amazonaws.com/v1/open/get/category?category='
+			 + params.category + '&storeId='+ params.storeId + '>Product').then(function(res){
+		$scope.categoryData = res.data;
+		$scope.lang = 'hu';
+		$scope.cur= 'huf';
+
+		let level = $scope.categoryData[0].Category.split('>');
+
+		for(let i = 0; i < $scope.categoryData.length; i++){
+			$scope.categoryData[i].Images.list.forEach(function(img, index){
+				//checking aspect ratio to work out how to display image
+				if(img.width/img.height < 0.75)
+					$scope.categoryData[i].Images.list[index].sizing = "height";
+				else
+					$scope.categoryData[i].Images.list[index].sizing = "width";
+
+			});
+			$scope.categoryData[i].href = 'itemId=' + $scope.categoryData[i].ItemId + '&storeId=' + $scope.categoryData[i].StoreId;
+
 		}
 		
-		$timeout(function (){		
-			if($scope.products[0].imgPref=="width")
-			{
-				$('.shop_img').css({width:"100%",height:"auto"});
-				
-			}
-		}, 100);
+		$('#category-name').append(level[level.length -1]);
+			
+		
 	});
 	
 

@@ -23,32 +23,103 @@ var currentProductId;
  
  
 
-var app = angular.module('myApp', ['ngAnimate','ngSanitize']);
+var app = angular.module('myApp', ['ngAnimate','ngSanitize', 'slickCarousel']);
 app.controller('Accordions', function() {
 	
 });
 
 
-app.controller('ProductDisplay',function($scope, $timeout,$http,$location,$window){
-	$scope.product={description:"", dimension:"", price:"",pattern:0,imgSrc:null,id:"",numOfImg:1,
-					hasVariants:false,patternIsItem:false,firstInfo:"",addInfo:"",prodInfo:"",category:"",imgPref:""};
+app.controller('ProductDisplay',function($scope, $http){
+	$scope.product = {}
 	$scope.shopping = localStorage.getObj("shopping");
 	$scope.currency = $scope.shopping.currency;
 	$scope.patterns=[];
 	$scope.accessories = [];
 	$scope.showVariant2Error = false;
-	$scope.chosenVariant2Option = {index: 0};
+	$scope.pickedSpec = [];
 	
 	$scope.backbone = {lang:null};
 	$scope.backbone.lang= $scope.shopping.contact.lang;//for choosing of language
 	$scope.basketId = localStorage.getObj("basketId");
 	$scope.changeLanguage = Common_changeLanguage;
 	$scope.itemInfo;
+
+	$scope.slickConfig={
+		dots: true,
+		infinite: true,
+		slidesToShow: 1,
+		slidesToScroll: 1,
+		autoplay: false,
+		lazyLoad: 'ondemand',
+		event: {
+			init: function (event, slick) {
+				// Work on dynamic height of slider
+				let relDiv = slick.$slider[0];
+				currImage = $scope.itemInfo.Images.list[0];
+				let idealHeight = (slick.listWidth * currImage.height)/currImage.width;
+				$(relDiv).height(idealHeight);				
+			},
+			afterChange: function (event, slick, currentSlide, nextSlide) {
+				// Work on dynamic height of slider
+				let relDiv = slick.$slider[0];
+				currImage = $scope.itemInfo.Images.list[currentSlide];
+				let idealHeight = (slick.listWidth * currImage.height)/currImage.width;
+				$(relDiv).animate({height: idealHeight});
+			}
+		}	
+		};
 	
-	
-	$scope.product.id = Common_getUrlParam('itemId=');
+	// called when user selects another variant ans will workout the price
+	$scope.updateProductPrice = function(){
+		if($scope.itemInfo.Variants.variants.length > 0){
+			let chosenArray = [];
+			$scope.pickedSpec.forEach(function(variant){
+				chosenArray.push(variant.name);
+			})
+			function combiMatches(combi){
+				return JSON.stringify(combi.combination) == JSON.stringify(chosenArray);
+			}
+			let combi = $scope.itemInfo.Variants.combinations.find(combiMatches);
+			$scope.itemInfo.Price = Object.assign($scope.itemInfo.Price, combi.price);
+			$([document.documentElement, document.body]).animate({
+				scrollTop: $("#product_price").offset().top
+			}, 1000);
+		}
+	}
+
+	// called after item is loaded
+	function setupVariants(){
+		if($scope.itemInfo.Variants.variants.length > 0){
+			//pre-choose the first combination in list
+			function findFirstValid(candidate){
+				if($scope.itemInfo.TrackStock)
+					return !candidate.disabled && candidate.quantity > 0
+				else
+					return !candidate.disabled;
+			}
+			let combi = $scope.itemInfo.Variants.combinations.find(findFirstValid);
+
+			// in case none are valid, choose the first option
+			if(combi == undefined)
+				combi = $scope.itemInfo.Variants.combinations[0];
+
+			// now loop through each variant to pick right combi
+			$scope.itemInfo.Variants.variants.forEach(function(variant, index){
+				variant.options.forEach(function(option){
+					 if(combi.combination[index] == option.name){
+						$scope.pickedSpec.push(option);
+					 }
+				});
+			});
+
+			$scope.itemInfo.Price = Object.assign($scope.itemInfo.Price, combi.price);
+		}
+	}
+	params = Common_parseUrlParam();
+	//$scope.product.id = params.itemId;
 		
-	$http.get('https://api.kutyalepcso.com/v2/Request/ItemData?itemId='+ $scope.product.id ).then(function(res){
+	$http.get('https://h0jg4s8gpa.execute-api.eu-central-1.amazonaws.com/v1/open/get/product?itemId='
+			+ params.itemId + `&storeId=${params.storeId}` ).then(function(res){
 		loadProduct(res);
 	});
 	  
@@ -125,83 +196,9 @@ app.controller('ProductDisplay',function($scope, $timeout,$http,$location,$windo
 	function loadProduct(res)
 	{
 		$scope.itemInfo = res.data.data;
-		
-
-		if($location.absUrl().search('/en/')>0)
-		{
-			$scope.product.description = $scope.itemInfo.Description.en;
-		}
-		else $scope.product.description = $scope.itemInfo.Description.hu;
-
-		
-		$scope.product.price = $scope.itemInfo.Price;
-		
-		$scope.product.imgSrc = $scope.itemInfo.Image.location;
-		
-		$scope.product.imgPref = $scope.itemInfo.Image.imagePref;
-		
-		$scope.product.category = $scope.itemInfo.Category;
-		let numOfImg = $scope.itemInfo.Image.numberOfImages;
-		
-		if($location.absUrl().search('/en/')>0){
-		$scope.product.firstInfo = $scope.itemInfo.additionalInfo.FirstInfo.en;
-		$scope.product.addInfo = $scope.itemInfo.additionalInfo.AdditionalInfo.en;
-		$scope.product.prodInfo = $scope.itemInfo.additionalInfo.ProductInfo.en;
-		}
-		else{
-			$scope.product.firstInfo = $scope.itemInfo.additionalInfo.FirstInfo.hu;
-		$scope.product.addInfo = $scope.itemInfo.additionalInfo.AdditionalInfo.hu;
-		$scope.product.prodInfo = $scope.itemInfo.additionalInfo.ProductInfo.hu;
-		}
-
-		if(!isNaN(numOfImg))
-			$scope.product.numOfImg = numOfImg;
+		setupVariants();
 ////////////////////////////////////////////////////////////
-		if($scope.itemInfo.Variants.hasVariants)
-		{
-			$scope.product.hasVariants = true;
-			for(let i=0;i<$scope.itemInfo.patterns.length;i++){
-			let pattern = {img:"", id:$scope.itemInfo.patterns[i].PatternId, description:"",price: 0};
-			
-			pattern.img = $scope.itemInfo.patterns[i].Image.location;
-			
-			if($location.absUrl().search('/en/')>0)
-				pattern.description = $scope.itemInfo.patterns[i].Description.en;
-			else
-				pattern.description = $scope.itemInfo.patterns[i].Description.hu;
-			
-			pattern.price = $scope.itemInfo.patterns[i].Price.huf;
-			
-				$scope.patterns.push(pattern);
-			}
-			
-		}
-		 else $scope.product.hasVariants=false;
 
-
-			$timeout( function(){
-				
-				if($scope.product.numOfImg>1)
-				{
-				$('#img_stage').slick({
-					dots: true,
-					infinite: true,
-					slidesToShow: 1,
-					slidesToScroll: 1,
-					adaptiveHeight: true,
-					autoplay: false,	
-					//lazyLoad: 'ondemand',
-				  });
-				  
-				}
-				else{
-					$('.sub_image').css({"height":'80vh',"width":'auto',"display":'block'});
-			
-		       }
-				
-			},500);    
-
-		
 			
 	}
 });

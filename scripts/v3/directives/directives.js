@@ -1,21 +1,15 @@
 
 
-angular.module('myApp').directive('myCostStr', function() {
-  return {
-	restrict: 'A',
-    link: function($scope,elem, attr) {
-		function calc(myCost)
-		{
-			//let myCost=parseInt(attr.myCostStr);
+angular.module('myApp').filter('myCurrency', function() {
+  return function (myCost, currency){
 			if(myCost==null)
 			{
 				return '';
 			}
 			
-			if($scope.currency=="EUR"){
+			if(currency.toLowerCase() == "eur"){
 				myCost = "€" + Number.parseFloat(myCost).toFixed(2);
-				myCost+= " EUR";
-				
+				myCost+= " EUR";				
 			}
 			else {
 				if(myCost<1000)
@@ -37,11 +31,6 @@ angular.module('myApp').directive('myCostStr', function() {
 			}
 		  return myCost;	
 		}
-		$scope.$watch(attr.myCostStr, function(value) {
-				elem.text(calc(value));
-		});
-    }
-  };
 });
 
 

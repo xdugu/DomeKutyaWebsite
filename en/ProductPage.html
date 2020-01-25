@@ -22,6 +22,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.4/angular-sanitize.js"></script>
 <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
 <script type="text/javascript" src="../slick/slick.min.js"></script>
+<script type="text/javascript" src="/slick/angular-slick.js"></script>
 
 <script src="../scripts/v3/common.js" ></script>
 <script src="../scripts/v3/shop.js" ></script>
@@ -80,19 +81,20 @@
 
 	
 <div class="w3-row w3-white w3-margin-bottom">
- <div id="img_stage" class="w3-margin-top w3-col l6">
-	<div style=" overflow:hidden; width:100%;" ng-repeat="x in [].constructor(product.numOfImg) track by $index">
-		<img ng-if="product.imgSrc!=null" class="sub_image" ng-src="{{product.imgSrc}}/img_{{$index+1}}.jpg" style="width:100%;height:auto;margin:auto"></img>
-		<!-- To prevent situation where the imgSrc is not loaded causing get errors -->
-	</div>
- </div>
+
+	<slick ng-if="itemInfo!=null" settings="slickConfig" id="img_stage" class="w3-margin-top w3-col l6" >
+		<div style="overflow-y:hidden;" ng-repeat="img in itemInfo.Images.list track by $index">
+			<img class="sub_image" ng-src="https://adugutesting.s3.eu-central-1.amazonaws.com/{{$parent.itemInfo.Images.path}}{{img.name}}" style="width:100%;height:auto;margin:auto"></img>
+			<!-- To prevent situation where the imgSrc is not loaded causing get errors -->
+		</div>
+	 </slick>
+
 
  <div class="w3-container w3-col l6 w3-white" style="">
-	<div id="product_title"  class="w3-margin-top w3-margin-bottom w3-large" ng-bind-html="product.description"></div>
-	<div ng-show="currency=='HUF' && !itemInfo.Variants.hasVariants" my-cost-str="product.price.huf" id="product_price" class="w3-margin-top w3-margin-bottom price w3-wide w3-large"></div>
-	<div ng-show="currency=='HUF' && itemInfo.Variants.hasVariants" my-cost-str="product.price.huf + itemInfo.patterns[product.pattern].Price.huf" id="product_price" class="w3-margin-top w3-margin-bottom price w3-wide w3-large"></div>
-	<div ng-show="currency=='EUR' && !itemInfo.Variants.hasVariants" my-cost-str="product.price.eur" id="product_price" class="w3-margin-top w3-margin-bottom price w3-wide w3-large">&euro;</div>
-	<div ng-show="currency=='EUR' && itemInfo.Variants.hasVariants" my-cost-str="product.price.eur + itemInfo.patterns[product.pattern].Price.eur" id="product_price" class="w3-margin-top w3-margin-bottom price w3-wide w3-large">&euro;</div>
+	<div id="product_title"  class="w3-margin-top w3-margin-bottom w3-large" ng-bind-html="itemInfo.Title[backbone.lang]"></div>
+	<div  id="product_price" class="w3-margin-top w3-margin-bottom price w3-wide w3-large">
+		{{itemInfo.Price[currency.toLowerCase()] | myCurrency: currency}}
+	</div>
 
 	<!--Currency chooser  -->
 		<div class="w3-large  w3-hide-small">
@@ -108,16 +110,45 @@
 				<span class="button" onclick="Shop_updateCurrency('EUR')" ng-class="{'w3-tag w3-red':currency=='EUR'}">EURO</span>
 			</span>
 		</div>
-	<div ng-bind-html="product.firstInfo"></div>
-
-	<div  class="w3-container" style="width:100%;padding:0;white-space:nowrap;overflow-x:auto;">
-		<img class="w3-round" lazy-load="{{pattern.img}}/img_1.jpg" ng-repeat="pattern in patterns track by $index" ng-class="{'selected':$parent.product.pattern==($index)}" mine="{{pattern.img}}/img_1.jpg" ng-click="$parent.product.pattern=$index;$parent.showImg=true" style="height:15vh;width:auto;margin:0 1%;"></img>		
+	
+	<!-- Choosing of Variants-->
+	<div ng-repeat="variant in itemInfo.Variants.variants" class="w3-margin-top">
+		<div  ng-if="variant.type == 'group'" ng-init="info={show: false}">
+			<b class="w3-large">{{variant.text[backbone.lang]}}</b>
+			<div  class="w3-container" style="width:100%;padding:0;white-space:nowrap;overflow-x:auto;">
+				<img class="w3-round" lazy-load="https://adugutesting.s3.eu-central-1.amazonaws.com/{{pattern.Images.path}}{{pattern.Images.list[0].name}}" 
+						ng-repeat="pattern in variant.groupInfo" 
+						ng-class="{'selected':$parent.product.pattern==($index)}"
+						ng-click="$parent.product.pattern=$index; $parent.info.show = true" 
+						style="height:15vh;width:auto;margin:0 1%;"></img>		
+			</div>
+			<div ng-show="info.show" class="animate-height w3-center w3-margin-top w3-display-container">
+				<img class="w3-round-xlarge" style="height:100%;width:auto" 
+				ng-src="https://adugutesting.s3.eu-central-1.amazonaws.com/{{variant.groupInfo[product.pattern].Images.path}}{{variant.groupInfo[product.pattern].Images.list[0].name}}">  
+				</img>
+				<span class="w3-display-topright material-icons w3-xxlarge hoverable" ng-click="info.show=false">cancel</span>
+			</div>
+		</div>
+		<div ng-if="variant.type == 'individual'" class="w3-large w3-border w3-border-red w3-round w3-padding">
+			<span><b>{{variant.text[backbone.lang]}}</b></span><br>
+			<select required  
+				ng-options="item.text[backbone.lang] for item in variant.options" 
+					 ng-model="pickedSpec[$index]" ng-change="updateProductPrice()">
+			</select>
+			<input required ng-if="pickedSpec[$index].requiresInput && pickedSpec[$index].inputType == 'number'"
+				type="number" min="{{pickedSpec[$index].min}}" max="{{pickedSpec[$index].max}}"/>
+			<input required ng-if="pickedSpec[$index].requiresInput && pickedSpec[$index].inputType == 'text'"
+				type="text" class="w3-input"/>
+			<div ng-show="pickedSpec[$index].inputType == 'number'" class="w3-small w3-text-red">
+				<b>Please enter a number between {{pickedSpec[$index].min}} and {{pickedSpec[$index].max}}</b>
+			</div>
+			<div ng-show="pickedSpec[$index].inputType == 'text' && pickedSpec[$index].requiresInput">
+				Please enter a valid text
+			</div>
+		</div>
 	</div>
 	
-	<div ng-show="showImg==true" class="animate-height w3-center w3-margin-top w3-display-container">
-		<img class="w3-round-xlarge" style="height:100%;width:auto" ng-src="{{patterns[product.pattern].img}}/img_1.jpg">  </img>
-		<span class="w3-display-topright material-icons w3-xxlarge" ng-click="showImg=false">cancel</span>
-	</div>
+	
 	<div ng-show="showImg==true" class="w3-margin w3-large w3-center">{{patterns[product.pattern].description}}</div>
 	<div  ng-if="itemInfo.Variants.hasVariants2" class="w3-margin-top w3-large"  style="">
 	<b>{{itemInfo.Variants.variant2Name[backbone.lang]}}</b>
@@ -165,7 +196,7 @@
 				<span class="w3-right w3-large"> <i ng-show="des==false">+</i><i ng-show="des==true">-</i></span>
 		<div ng-show="des==true" class="w3-margin-top">
 			<img ng-if="product.category=='Steps'" ng-src="{{product.imgSrc}}/description_1.jpg" style="width:100%;height:auto;margin:auto"></img>
-			<br><div ng-bind-html="product.addInfo"></div>
+			<br><div ng-bind-html="itemInfo.Description[backbone.lang]"></div>
 		</div>
 		</div>
 		<div ng-click="del=!del;des=false;ret=false" class="w3-border-bottom w3-border-black w3-padding" style="width:100%;height=auto;overflow:auto">
