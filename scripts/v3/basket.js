@@ -14,6 +14,8 @@ app.controller('Basket', function($scope, $http) {
 	$scope.basketId = localStorage.getObj("basketId");
 	$scope.shopping= localStorage.getObj("shopping");
 	$scope.currency = $scope.shopping.currency;
+	$scope.backbone = {lang:null};
+	$scope.backbone.lang= $scope.shopping.contact.lang;//for choosing of language
 	
 	if($scope.basketId==null || $scope.basketId=="" || $scope.basketId.length<2){
 		$scope.order=null;
@@ -24,7 +26,7 @@ app.controller('Basket', function($scope, $http) {
 				method: 'POST',
 				crossDomain : true,
 				url: `https://h0jg4s8gpa.execute-api.eu-central-1.amazonaws.com/v1/open/get/basket`,
-				data: JSON.stringify({basketId:$scope.basketId, storeId:'TestStore', country:$scope.shopping.contact.country, currency:$scope.currency }),
+				data: JSON.stringify({basketId:$scope.basketId, storeId:'TestStore', countryCode:Shop_getCountryCode($scope.shopping.contact.country), currency:$scope.currency }),
 				headers: {'Content-Type': 'application/json'}
 			}).then(function(res){
 					$scope.order = res.data;
@@ -43,13 +45,11 @@ app.controller('Basket', function($scope, $http) {
 		$http({
 				method: 'POST',
 				crossDomain : true,
-				url: 'https://api.kutyalepcso.com/v2/Request/Basket/ChangeQuantity',
-				data: JSON.stringify({basketId:$scope.basketId, index: index, increment: direction, country:$scope.shopping.contact.country,currency:$scope.currency}),
+				url: 'https://h0jg4s8gpa.execute-api.eu-central-1.amazonaws.com/v1/open/update/basket/quantity',
+				data: JSON.stringify({basketId:$scope.basketId, storeId: 'TestStore', index: index, increment: direction, countryCode:Shop_getCountryCode($scope.shopping.contact.country),currency:$scope.currency}),
 				headers: {'Content-Type': 'application/json'}
 			}).then(function(res){
-				if(res.data.Result=="OK"){
-					$scope.order = res.data.data;
-				}
+					$scope.order = res.data;
 			});
 		}
 	}
@@ -60,14 +60,12 @@ app.controller('Basket', function($scope, $http) {
 		$http({
 				method: 'POST',
 				crossDomain : true,
-				url: 'https://api.kutyalepcso.com/v2/Request/Basket/RemoveItem',
-				data: JSON.stringify({basketId:$scope.basketId, index: index, country:$scope.shopping.contact.country, currency:$scope.currency}),
+				url: 'https://h0jg4s8gpa.execute-api.eu-central-1.amazonaws.com/v1/open/update/basket/remove',
+				data: JSON.stringify({basketId:$scope.basketId, storeId:'TestStore', index: index, countryCode: Shop_getCountryCode($scope.shopping.contact.country), currency:$scope.currency}),
 				headers: {'Content-Type': 'application/json'}
 			}).then(function(res){
-				if(res.data.Result=="OK"){
-					$scope.order = res.data.data;
-					Shop_updateBasketSize(res.data.data.Items.length);
-				}
+					$scope.order = res.data;
+					Shop_updateBasketSize($scope.order.Items.length);
 			});
 	}
 	
@@ -76,17 +74,14 @@ app.controller('Basket', function($scope, $http) {
 		$http({
 				method: 'POST',
 				crossDomain : true,
-				url: 'https://api.kutyalepcso.com/v2/Request/Basket/GetBasket',
-				data: JSON.stringify({basketId:$scope.basketId, includeCost: true, country:$scope.shopping.contact.country, currency:$scope.currency}),
+				url: `https://h0jg4s8gpa.execute-api.eu-central-1.amazonaws.com/v1/open/get/basket`,
+				data: JSON.stringify({basketId:$scope.basketId, storeId: 'TestStore',  countryCode: Shop_getCountryCode($scope.shopping.contact.country), currency:$scope.currency}),
 				headers: {'Content-Type': 'application/json'}
 			}).then(function(res){
-				if(res.data.Result=="OK"){
-					let temp = res.data.data;
-					$scope.order = temp.Item;
-					Shop_updateBasketSize( temp.Item.Items.length);
+					$scope.order = res.data;
+					Shop_updateBasketSize($scope.order.Items.length);
 					$scope.shopping.contact.countryCode = Shop_getCountryCode($scope.shopping.contact.country);
 					localStorage.setObj("shopping",$scope.shopping);
-				}
 			});
 	}
 	
