@@ -27,6 +27,13 @@
 	border: 5px solid red;
 }
 
+input.ng-invalid.ng-dirty{
+	border: 3px solid red;
+}
+input.ng-invalid.ng-touched{
+	border: 3px solid red;
+}
+
 .price
 {
 	/*font-family: Verdana, serif;	*/

@@ -23,19 +23,16 @@ app.controller('Basket', function($scope, $http) {
 	 $http({
 				method: 'POST',
 				crossDomain : true,
-				url: 'https://api.kutyalepcso.com/v2/Request/Basket/GetBasket',
-				data: JSON.stringify({basketId:$scope.basketId, includeCost: true, country:$scope.shopping.contact.country, currency:$scope.currency }),
+				url: `https://h0jg4s8gpa.execute-api.eu-central-1.amazonaws.com/v1/open/get/basket`,
+				data: JSON.stringify({basketId:$scope.basketId, storeId:'TestStore', country:$scope.shopping.contact.country, currency:$scope.currency }),
 				headers: {'Content-Type': 'application/json'}
 			}).then(function(res){
-				if(res.data.Result=="OK"){
-					let temp = res.data.data;
-					$scope.order = temp.Item;
-					Shop_updateBasketSize(temp.Item.Items.length);
-				}
+					$scope.order = res.data;
+					Shop_updateBasketSize($scope.order.Items.length);
 			}).catch(function(err){
 				Shop_updateBasketSize(0);//Probably the basket could not be found
-				localStorage.setObj("basketId","");
-				$scope.order=null;
+				//localStorage.setObj("basketId","");
+				//$scope.order=null;
 			});
 	
 
