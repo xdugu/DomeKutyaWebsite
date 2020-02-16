@@ -54,20 +54,26 @@ app.controller('ProductDisplay',function($scope, $http){
 				// Work on dynamic height of slider
 				let relDiv = slick.$slider[0];
 				currImage = $scope.itemInfo.Images.list[0];
-				let idealHeight = (slick.listWidth * currImage.height)/currImage.width;
-				$(relDiv).height(idealHeight);				
+				if(currImage.sizing == 'width'){
+					let idealHeight = (slick.listWidth * currImage.height)/currImage.width;
+					$(relDiv).height(idealHeight);
+				}
+				
 			},
 			afterChange: function (event, slick, currentSlide, nextSlide) {
 				// Work on dynamic height of slider
 				let relDiv = slick.$slider[0];
 				currImage = $scope.itemInfo.Images.list[currentSlide];
-				let idealHeight = (slick.listWidth * currImage.height)/currImage.width;
-				$(relDiv).animate({height: idealHeight});
+				if(currImage.sizing == 'width'){
+					let idealHeight = (slick.listWidth * currImage.height)/currImage.width;
+					$(relDiv).animate({height: idealHeight});
+				}
+
 			}
 		}	
 		};
 	
-	// called when user selects another variant ans will workout the price
+	// called when user selects another variant and will workout the price
 	$scope.updateProductPrice = function(){
 		if($scope.itemInfo.Variants.variants.length > 0){
 			let chosenArray = [];
@@ -107,6 +113,11 @@ app.controller('ProductDisplay',function($scope, $http){
 				variant.options.forEach(function(option){
 					 if(combi.combination[index] == option.name){
 						$scope.pickedSpec.push(option);
+						if(variant.type == "group"){
+							groupKeys = Object.keys(variant.groupInfo);
+							$scope.pickedSpec[$scope.pickedSpec.length - 1].chosenVariant = 
+									variant.groupInfo[groupKeys[0]][0];
+						}
 					 }
 				});
 			});
@@ -128,7 +139,7 @@ app.controller('ProductDisplay',function($scope, $http){
 				$scope.showAllErrors = true;
 				return;
 			}
-			let data = {itemId: $scope.itemInfo.ItemId, basketId:$scope.basketId, storeId: 'TestStore'};
+			let data = {itemId: $scope.itemInfo.ItemId, basketId:$scope.basketId, storeId: 'KutyaLepcso'};
 			data.combination = $scope.pickedSpec;
 						 
 			
@@ -152,6 +163,12 @@ app.controller('ProductDisplay',function($scope, $http){
 	function loadProduct(res)
 	{
 		$scope.itemInfo = res.data.data;
+		$scope.itemInfo.Images.list.forEach(function(img, index){
+			if(img.width / img.height < 1)
+				$scope.itemInfo.Images.list[index].sizing ='height'
+			else
+				$scope.itemInfo.Images.list[index].sizing ='width'
+		})
 		setupVariants();
 	}
 });

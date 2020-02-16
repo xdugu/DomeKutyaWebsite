@@ -237,6 +237,17 @@ ul#mobile-submenu ul li:hover
 	font-family:' El Messiri', calibri;
 	
 }
+.show-wide{
+	width: 100%;
+	height: auto;
+}
+
+.show-high{
+	height: 100%;
+	width: auto;
+	max-height: 450px;
+}
+
 @media only screen and (min-width: 601px) {
   #register-button{
 	 margin-left: 1vw;

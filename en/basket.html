@@ -53,15 +53,15 @@
 
 	<div class="w3-col l6 w3-padding">
 		<div ng-repeat="item in order.Items" class="w3-card w3-margin-top w3-padding w3-white animate-order" style="width: 100%;overflow:hidden;">
-				<div>
-					<img ng-src="https://adugutesting.s3.eu-central-1.amazonaws.com/{{item.Images.path}}{{item.Images.list[0].name}}"
+				<div ng-init="pickedImage = getVariantImage(item)">
+					<img ng-src="http://adugu-common.s3.eu-central-1.amazonaws.com/{{item.Images.path}}{{pickedImage}}"
 						style="height:70px; width:auto">
 					</img>
 					<span>{{item.Title[backbone.lang]}}</span>
 				</div>
 				<div ng-repeat="combi in item.Combination">
 					<span ng-if="item.Variants.variants[$index].type == 'group'">
-						<img ng-src="https://adugutesting.s3.eu-central-1.amazonaws.com/{{combi.chosenVariant.Images.path}}{{combi.chosenVariant.Images.list[0].name}}"
+						<img ng-src="http://adugu-common.s3.eu-central-1.amazonaws.com/{{combi.chosenVariant.Images.path}}{{combi.chosenVariant.Images.list[0].name}}"
 						style="height:50px; width:auto"/>
 						<span><b>{{item.Variants.variants[$index].text[backbone.lang]}}: </b>
 							 {{combi.chosenVariant.Title[backbone.lang]}}
@@ -86,7 +86,7 @@
 						<span class="w3-padding">{{item.Quantity}}</span>
 						<span ng-click="changeQuantity($index,1)" class="w3-black w3-round w3-padding w3-hover-grey">+</span>
 					</div>
-					<div id="price" class="w3-display-right price">{{item.Price.huf * item.Quantity | myCurrency : currency}}</div>
+					<div id="price" class="w3-display-right price">{{item.Price[currency.toLowerCase()] * item.Quantity | myCurrency : currency}}</div>
 					<div id="remove" ng-click="removeItem($index)" class="w3-display-bottomright" style="text-decoration: underline">Remove</div>
 				</div>		
 		</div>

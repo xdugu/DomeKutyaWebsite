@@ -5,8 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta charset="utf-8"/>
 
-<link rel="icon" type="image/jpeg" href="../images/logo.jpg">
-<link rel="stylesheet" type="text/css" href="../css/w3.css"/>
+<link rel="icon" type="image/jpeg" href="/images/logo.jpg">
+<link rel="stylesheet" type="text/css" href="/css/w3.css"/>
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 <link rel="stylesheet" href="../css/normalize.css"/>
 <link rel="stylesheet" href="../css/common.css"/>
@@ -33,29 +33,51 @@
 	<div class="w3-large w3-center w3-xxlarge" style="font-weight:bold">Order Review</div>
 	<div class="w3-row">
 	<div class="w3-col l6 w3-padding">
-		<div ng-repeat="item in order.Items" class="w3-card w3-margin-top w3-padding w3-white" style="width: 100%;overflow:hidden;">
-			<div> {{item.Description.en}}</div>
-				<div class="w3-row">
-					<div class="w3-col s5 w3-center" style="height:20vh; overflow: hidden;">
-						<img class="preview_img w3-hide-small" ng-src="{{item.Image.location}}/img_1.jpg" style="width:auto;height:100%;"></img>
-						<img class="preview_img w3-hide-medium w3-hide-large" ng-src="{{item.Image.location}}/img_1.jpg" style="width:auto;height:100%;"></img>
-					</div>
-					<span ng-hide="!item.Variants.hasVariants || item.Variants.itemIsVariant" class="w3-jumbo w3-col s2 w3-center w3-text-red">+</span>
-					<div ng-if="item.Variants.hasVariants && !item.Variants.itemIsVariant" class="w3-col s5 w3-center" style="height:20vh; overflow: hidden;">
-						<img class="preview_img w3-hide-small " ng-src="{{item.Pattern.Image.location}}/img_1.jpg" style="width:70%;height:auto;"></img>
-						<img class="preview_img w3-hide-medium w3-hide-large" ng-src="{{item.Pattern.Image.location}}/img_1.jpg" style="width:100%;height:auto;"></img>						
-					</div>
+		<div ng-repeat="item in order.Items" class="w3-card w3-margin-top w3-padding w3-white animate-order" style="width: 100%;overflow:hidden;">
+			<div ng-init="pickedImage = getVariantImage(item)">
+				<img ng-src="http://adugu-common.s3.eu-central-1.amazonaws.com/{{item.Images.path}}{{pickedImage}}"
+					style="height:70px; width:auto">
+				</img>
+				<span>{{item.Title[backbone.lang]}}</span>
+			</div>
+			<div ng-repeat="combi in item.Combination">
+				<span ng-if="item.Variants.variants[$index].type == 'group'">
+					<img ng-src="http://adugu-common.s3.eu-central-1.amazonaws.com/{{combi.chosenVariant.Images.path}}{{combi.chosenVariant.Images.list[0].name}}"
+					style="height:50px; width:auto"/>
+					<span><b>{{item.Variants.variants[$index].text[backbone.lang]}}: </b>
+						 {{combi.chosenVariant.Title[backbone.lang]}}
+					</span>										
+				</span>
+				<span ng-if="item.Variants.variants[$index].type == 'individual'">
+					<b>{{item.Variants.variants[$index].text[backbone.lang]}}: </b>
+					{{combi.text[backbone.lang]}}
+					<span ng-if="combi.requiresInput">: {{combi.enteredValue}}</span>
+				</span>
+
+			</div>
+			<div class="w3-display-container" style="height:10vh;">
+				<div id="" class="w3-display-middle quantity w3-hide-small" style="height: 2vw;">
+					<span ng-click="changeQuantity($index,-1)" class="w3-black w3-round w3-padding w3-hover-grey">-</span>
+					<span class="w3-padding">{{item.Quantity}}</span>
+					<span ng-click="changeQuantity($index,1)" class="w3-black w3-round w3-padding w3-hover-grey">+</span>
 				</div>
-				<div class="w3-display-container" style="height:10vh;">
-				<div id="quantity" class="w3-display-left ">Quantity: {{item.Quantity}}</div>
-					<div ng-if="currency=='HUF'"my-cost-str="item.Price.huf * item.Quantity" id="price" class="w3-display-right price"></div>
-					<div ng-if="currency=='EUR'"my-cost-str="item.Price.eur * item.Quantity" id="price" class="w3-display-right price"></div>
-				</div>		
-		</div>
-		<div class="w3-white w3-card w3-padding w3-margin-top">
-			<div class="w3-margin-top" style="font-weight: bold">Delivery: <span my-cost-str="order.Costs.delivery" class="price"></span></div>
-			<div class="w3-xlarge" style="font-weight: bold">Total: <span my-cost-str="order.Costs.total" class="price"></span></div>
-		</div>
+				<!-- Duplicate of above for positioning-->
+				<div id="" class="w3-display-left quantity w3-hide-large w3-hide-medium" style="height: 2vw;">
+					<span ng-click="changeQuantity($index,-1)" class="w3-black w3-round w3-padding w3-hover-grey">-</span>
+					<span class="w3-padding">{{item.Quantity}}</span>
+					<span ng-click="changeQuantity($index,1)" class="w3-black w3-round w3-padding w3-hover-grey">+</span>
+				</div>
+				<div id="price" class="w3-display-right price">{{item.Price[currency.toLowerCase()] * item.Quantity | myCurrency : currency}}</div>
+				<div id="remove" ng-click="removeItem($index)" class="w3-display-bottomright" style="text-decoration: underline">Remove</div>
+			</div>		
+	</div>
+	<div ng-hide="shopping.contact.country =='default'" class="w3-white w3-padding w3-margin-top">
+		<div class="w3-large w3-margin-top">Subtotal: <span class="price">{{order.Costs.Posta.subTotal | myCurrency : currency}}</span></div>
+		<div class="w3-large w3-margin-top">Delivery: <span class="price">{{order.Costs.Posta.delivery | myCurrency : currency}}</span></div>
+		<div class="w3-xlarge w3-margin-top">Total: <span class="price-total">{{ order.Costs.Posta.total | myCurrency : currency}}</span></div>
+		
+		<a class="w3-button w3-black w3-round w3-large w3-margin-top w3-padding" href="checkout.html">Proceed to Checkout</a>
+	</div>
 	</div>
 	
 	<div class="w3-col l6 w3-padding">	
@@ -129,7 +151,8 @@
 		 <span ng-click="backButtonPressed()" class="material-icons w3-large w3-display-topright" style="cursor:pointer">cancel</span>
 		  <div class="w3-container" ng-show="backbone.showConfirmed==false">
 			<div class="w3-medium" style="margin-top:1vh">Please confirm that you want to pay on delivery. We will send you an email to confirm.
-			Please note that this will increase the total price by <span class="price">{{order.Costs.payOnDeliveryAdditional}} Ft</span>. Your total to pay will be <span my-cost-str="order.Costs.total + order.Costs.payOnDeliveryAdditional" class="price"></span>
+			Please note that this will increase the total price by <span class="price">{{order.Costs.Posta.payOnDeliveryAdditional}} Ft</span>. 
+			Your total to pay will be <span class="price">{{order.Costs.Posta.total + order.Costs.Posta.payOnDeliveryAdditional | myCurrency : currency}}</span>
 			</div>
 			<a ng-click="backbone.showConfirmed=true;updatePaymentMethod('payOnDelivery')" class="w3-button w3-red w3-margin-top w3-margin-bottom">Confirm</a>
 		  </div>

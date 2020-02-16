@@ -82,9 +82,13 @@
 	
 <div class="w3-row w3-white w3-margin-bottom">
 
-	<slick ng-if="itemInfo!=null" settings="slickConfig" id="img_stage" class="w3-margin-top w3-col l6" >
-		<div style="overflow-y:hidden;" ng-repeat="img in itemInfo.Images.list track by $index">
-			<img class="sub_image" ng-src="https://adugutesting.s3.eu-central-1.amazonaws.com/{{$parent.itemInfo.Images.path}}{{img.name}}" style="width:100%;height:auto;margin:auto"></img>
+	<slick ng-if="itemInfo!=null" settings="slickConfig" id="img_stage" class="w3-margin-top w3-col l6">
+		<div style="overflow:hidden;" ng-repeat="img in itemInfo.Images.list track by $index">
+			<img class="sub_image" ng-src="http://adugu-common.s3.eu-central-1.amazonaws.com/{{$parent.itemInfo.Images.path}}{{img.name}}" 
+				style="margin:auto;" 
+				ng-class="{'show-wide': itemInfo.Images.list[0].sizing == 'width', 'show-high':itemInfo.Images.list[0].sizing == 'height'}"
+				>
+			</img>
 			<!-- To prevent situation where the imgSrc is not loaded causing get errors -->
 		</div>
 	 </slick>
@@ -114,22 +118,23 @@
 	<!-- Choosing of Variants-->
 	<form name="selections">
 		<div ng-repeat="variant in itemInfo.Variants.variants" ng-init="parentIndex = $index" class="w3-margin-top">
-			<div  ng-if="variant.type == 'group'" ng-init="info={show: false}">
+			<div  ng-if="variant.type == 'group'" ng-init="info={show: false};"
 				<b class="w3-large">{{variant.text[backbone.lang]}}</b>
 				<!--Making sliding image gallery for options of type 'group'-->
-				<div  class="w3-container" style="width:100%;padding:0;white-space:nowrap;overflow-x:auto;"
-						ng-init="$parent.$parent.pickedSpec[parentIndex].chosenVariant = variant.groupInfo[0]">
-					<img class="w3-round" lazy-load="https://adugutesting.s3.eu-central-1.amazonaws.com/{{pattern.Images.path}}{{pattern.Images.list[0].name}}" 
-							ng-repeat="pattern in variant.groupInfo" 
-							ng-class="{'selected':pickedSpec[parentIndex].chosenVariant == pattern}"
-							ng-click="$parent.pickedSpec[parentIndex].chosenVariant = pattern; $parent.info.show = true" 
-							style="height:15vh;width:auto;margin:0 1%;"></img>		
-				</div>
-				<div ng-show="info.show" class="animate-height w3-center w3-margin-top w3-display-container">
-					<img class="w3-round-xlarge" style="height:100%;width:auto" 
-					ng-src="https://adugutesting.s3.eu-central-1.amazonaws.com/{{pickedSpec[parentIndex].chosenVariant.Images.path}}{{pickedSpec[parentIndex].chosenVariant.Images.list[0].name}}">  
-					</img>
-					<span class="w3-display-topright material-icons w3-xxlarge hoverable" ng-click="info.show=false">cancel</span>
+				<div ng-repeat="group in variant.options" class="w3-margin-top">
+					<div  class="w3-container" style="width:100%;padding:0;white-space:nowrap;overflow-x:auto;">
+						<img class="w3-circle" lazy-load="http://adugu-common.s3.eu-central-1.amazonaws.com/{{pattern.Images.path}}{{pattern.Images.list[0].name}}" 
+								ng-repeat="pattern in variant.groupInfo[group.name]" 
+								ng-class="{'selected':pickedSpec[parentIndex].chosenVariant.ItemId == pattern.ItemId}"
+								ng-click="$parent.pickedSpec[parentIndex].chosenVariant = pattern;updateProductPrice(); $parent.info.show = true" 
+								style="height:15vh;width:auto;margin:0 1%;"></img>		
+					</div>
+					<!--div ng-show="info.show" class="animate-height w3-center w3-margin-top w3-display-container">
+						<img class="w3-round-xlarge" style="height:100%;width:auto" 
+						ng-src="https://adugutesting.s3.eu-central-1.amazonaws.com/{{pickedSpec[parentIndex].chosenVariant.Images.path}}{{pickedSpec[parentIndex].chosenVariant.Images.list[0].name}}">  
+						</img>
+						<span class="w3-display-topright material-icons w3-xxlarge hoverable" ng-click="info.show=false">cancel</span>
+					</div-->
 				</div>
 			</div>
 			<div ng-if="variant.type == 'individual'" class="w3-large w3-border w3-border-grey w3-round w3-padding">

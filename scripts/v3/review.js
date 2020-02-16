@@ -24,41 +24,42 @@ app.controller('Review', function($scope, $http, $timeout) {
 	$scope.sourceUrl = ""
 	
 	$scope.backbone =  {showPaypalReceipt:false, showBank:false, showConfirmed:false, showPayLater:false};
+	$scope.backbone.lang= $scope.shopping.contact.lang;//for choosing of language
 	//////////////////////////////////////////////
 	$scope.currency = $scope.shopping.currency;
 	 $http({
 				method: 'POST',
 				crossDomain : true,
-				url: 'https://api.kutyalepcso.com/v2/Request/Basket/GetBasket',
-				data: JSON.stringify({basketId:$scope.basketId, includeCost: true, country:$scope.shopping.contact.country, currency: $scope.currency}),
+				url: `https://h0jg4s8gpa.execute-api.eu-central-1.amazonaws.com/v1/open/get/basket`,
+				data: JSON.stringify({basketId:$scope.basketId, storeId:'KutyaLepcso', countryCode:Shop_getCountryCode($scope.shopping.contact.country), currency:$scope.currency }),
 				headers: {'Content-Type': 'application/json'}
 			}).then(function(res){
-				if(res.data.Result=="OK"){
-					let temp = res.data.data;
-					$scope.order = temp.Item;
-					$(".basket-num").html( temp.Item.Items.length);
-				}
+					$scope.order = res.data;
+					$(".basket-num").html(res.data.Items.length);
 			});
 	
 	///////////////////////////////////////////////
-	$scope.updatePaymentMethod = function(method){
-			localStorage.removeItem("shopping");
-			localStorage.removeItem("basketId");
+	$scope.updatePaymentMethod = function(method, details){
+			//localStorage.removeItem("shopping");
+			//localStorage.removeItem("basketId");
 			$scope.createOrderCode();
 			$scope.shopping['comments']=$scope.temp.comments;
 			$scope.shopping['basketId']= $scope.basketId;
-			$scope.shopping['requestType']="SubmitOrder";
-			if(typeof(method)== "string")
-				$scope.shopping.paymentMethod = method;
-			else{
-				$scope.shopping.paymentMethod = "paypal";
-				$scope.shopping.paypalDetail = method.data;
+			$scope.shopping.paymentMethod = 'payBeforeDelivery';
+			if(method == 'payOnDelivery'){
+				$scope.shopping.paymentMethod = 'payOnDelivery';
+				$scope.shopping.paymentType = 'payOnDelivery';
 			}
+			else
+				$scope.shopping.paymentType = method;
+
+			$scope.shopping.paymentDetails = details;
+			
 			$http({
 				method: 'POST',
 				crossDomain : true,
-				url: 'https://api.kutyalepcso.com/v2/Request/SubmitOrder',
-				data: JSON.stringify($scope.shopping),
+				url: 'https://h0jg4s8gpa.execute-api.eu-central-1.amazonaws.com/v1/open/update/basket/order',
+				data: angular.toJson($scope.shopping),
 				headers: {'Content-Type': 'application/json'}
 			});
 		
@@ -86,15 +87,32 @@ app.controller('Review', function($scope, $http, $timeout) {
 		}
 			
 	}
+
+	// will return the most appropriate image to be displayed
+	$scope.getVariantImage = function (item){
+		let itemCombi = [];
+
+		item.Combination.forEach(function(combi){
+			itemCombi.push(combi.name);
+		});
+
+		for(let i = 0; i <  item.Variants.combinations.length; i++){
+			let combi = item.Variants.combinations[i];
+		   if(JSON.stringify(combi.combination) == JSON.stringify(itemCombi) &&
+			   combi.linkedImage != null){
+			   return combi.linkedImage;
+		   }
+		}
+
+		return item.Images.list[0].name;
+   }
+   
 	
-	$scope.confirmOrder = function(){
-		
-		
-	}
+
 	var script = document.createElement("script");
 	paypalIdTest = "AXIR5FN2_aHZDPJ0B04WvLl7gtekClOeAInB4B6t4Gt8AgzHW6cHsxhpjle6S1dXc0TlwckcxtwIpnPe";
 	paypalIdLive = "AXb7KnR0LgCQXoWW4uo9XDxgCJVx4cpKUEHJSDUeSRPTZCoHnb7kV0Vd-4MMRWX1Z3-yXfV2Z7k44MTO";
-	script.src = "https://www.paypal.com/sdk/js?client-id=" + paypalIdLive + "&currency="+ $scope.currency;
+	script.src = "https://www.paypal.com/sdk/js?client-id=" + paypalIdTest + "&currency="+ $scope.currency;
 	
 	script.onload = function(){
 	paypal.Buttons({
@@ -112,15 +130,15 @@ app.controller('Review', function($scope, $http, $timeout) {
 			},
 			purchase_units: [{
 			  amount: {
-				value:  $scope.order.Costs.total.toString(),
+				value:  $scope.order.Costs.Posta.total.toString(),
 				currency_code: $scope.currency,		
 				breakdown: {
 				  item_total: {
-					  value: $scope.order.Costs.subTotal.toString(),
+					  value: $scope.order.Costs.Posta.subTotal.toString(),
 					  currency_code: $scope.currency
 				  },
 				  shipping: {
-					  value: $scope.order.Costs.delivery.toString(),
+					  value: $scope.order.Costs.Posta.delivery.toString(),
 					  currency_code: $scope.currency
 				  }
 				}
@@ -153,7 +171,7 @@ app.controller('Review', function($scope, $http, $timeout) {
 		  // Capture the funds from the transaction
 		  return actions.order.capture().then(function(details) {
 			// Show a success message to your buyer
-			$scope.updatePaymentMethod({data: details});
+			$scope.updatePaymentMethod('paypal', details);
 			$scope.backbone.showPaypalReceipt=true;
 			$scope.$apply();
 		  });
@@ -168,10 +186,20 @@ function createPayPalObject(currency,obj,lang)
 	myContainer = [];
 	for(let i=0; i<obj.length; i++)
 	{
-		let itemName =  obj[i].Description[lang];
+		let itemName =  obj[i].Title[lang];
 		let wholeId = obj[i].ItemId;
-		if(obj[i].Variants.hasVariants)
-			wholeId +=","+obj[i].Pattern.PatternId;
+
+		if(obj[i].Variants.variants.length > 0){
+			//wholeId +=","+obj[i].Pattern.PatternId;
+			for(let j = 0; j < obj[i].Combination.length; j++){
+				let combi = obj[i].Combination[j];
+				if(combi.hasOwnProperty('chosenVariant')){
+					wholeId += ',' + combi.chosenVariant.Title[lang];
+				}
+				else
+					wholeId += ',' + combi.text[lang];
+			}
+		}
 		let price ={value:"",currency_code:currency};
 		if(currency=='HUF')
 			price.value = obj[i].Price.huf.toString();

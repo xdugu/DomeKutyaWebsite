@@ -26,7 +26,7 @@ app.controller('Basket', function($scope, $http) {
 				method: 'POST',
 				crossDomain : true,
 				url: `https://h0jg4s8gpa.execute-api.eu-central-1.amazonaws.com/v1/open/get/basket`,
-				data: JSON.stringify({basketId:$scope.basketId, storeId:'TestStore', countryCode:Shop_getCountryCode($scope.shopping.contact.country), currency:$scope.currency }),
+				data: JSON.stringify({basketId:$scope.basketId, storeId:'KutyaLepcso', countryCode:Shop_getCountryCode($scope.shopping.contact.country), currency:$scope.currency }),
 				headers: {'Content-Type': 'application/json'}
 			}).then(function(res){
 					$scope.order = res.data;
@@ -46,7 +46,7 @@ app.controller('Basket', function($scope, $http) {
 				method: 'POST',
 				crossDomain : true,
 				url: 'https://h0jg4s8gpa.execute-api.eu-central-1.amazonaws.com/v1/open/update/basket/quantity',
-				data: JSON.stringify({basketId:$scope.basketId, storeId: 'TestStore', index: index, increment: direction, countryCode:Shop_getCountryCode($scope.shopping.contact.country),currency:$scope.currency}),
+				data: JSON.stringify({basketId:$scope.basketId, storeId: 'KutyaLepcso', index: index, increment: direction, countryCode:Shop_getCountryCode($scope.shopping.contact.country),currency:$scope.currency}),
 				headers: {'Content-Type': 'application/json'}
 			}).then(function(res){
 					$scope.order = res.data;
@@ -61,7 +61,7 @@ app.controller('Basket', function($scope, $http) {
 				method: 'POST',
 				crossDomain : true,
 				url: 'https://h0jg4s8gpa.execute-api.eu-central-1.amazonaws.com/v1/open/update/basket/remove',
-				data: JSON.stringify({basketId:$scope.basketId, storeId:'TestStore', index: index, countryCode: Shop_getCountryCode($scope.shopping.contact.country), currency:$scope.currency}),
+				data: JSON.stringify({basketId:$scope.basketId, storeId:'KutyaLepcso', index: index, countryCode: Shop_getCountryCode($scope.shopping.contact.country), currency:$scope.currency}),
 				headers: {'Content-Type': 'application/json'}
 			}).then(function(res){
 					$scope.order = res.data;
@@ -75,7 +75,7 @@ app.controller('Basket', function($scope, $http) {
 				method: 'POST',
 				crossDomain : true,
 				url: `https://h0jg4s8gpa.execute-api.eu-central-1.amazonaws.com/v1/open/get/basket`,
-				data: JSON.stringify({basketId:$scope.basketId, storeId: 'TestStore',  countryCode: Shop_getCountryCode($scope.shopping.contact.country), currency:$scope.currency}),
+				data: JSON.stringify({basketId:$scope.basketId, storeId: 'KutyaLepcso',  countryCode: Shop_getCountryCode($scope.shopping.contact.country), currency:$scope.currency}),
 				headers: {'Content-Type': 'application/json'}
 			}).then(function(res){
 					$scope.order = res.data;
@@ -83,6 +83,25 @@ app.controller('Basket', function($scope, $http) {
 					$scope.shopping.contact.countryCode = Shop_getCountryCode($scope.shopping.contact.country);
 					localStorage.setObj("shopping",$scope.shopping);
 			});
+	}
+
+	// will return the most appropriateimage to be displayed
+	$scope.getVariantImage = function (item){
+		 let itemCombi = [];
+
+		 item.Combination.forEach(function(combi){
+			 itemCombi.push(combi.name);
+		 });
+
+		 for(let i = 0; i <  item.Variants.combinations.length; i++){
+			 let combi = item.Variants.combinations[i];
+			if(JSON.stringify(combi.combination) == JSON.stringify(itemCombi) &&
+				combi.linkedImage != null){
+				return combi.linkedImage;
+			}
+		 }
+
+		 return item.Images.list[0].name;
 	}
 	
 	

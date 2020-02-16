@@ -32,7 +32,7 @@ app.controller('Categories', function($scope, $http, $timeout, $location) {
 		for(let i = 0; i < $scope.categoryData.length; i++){
 			$scope.categoryData[i].Images.list.forEach(function(img, index){
 				//checking aspect ratio to work out how to display image
-				if(img.width/img.height < 0.75)
+				if(img.width/img.height < 0.9)
 					$scope.categoryData[i].Images.list[index].sizing = "height";
 				else
 					$scope.categoryData[i].Images.list[index].sizing = "width";
