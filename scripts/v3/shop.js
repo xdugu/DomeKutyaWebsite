@@ -10,10 +10,12 @@ Storage.prototype.getObj = function(key) {
 
 var currentVersion=5;//add dog's name variable
 
-var shopping={ contact:{firstName:"",lastName:"",email:"",address1:"",address2:"",city:"",
-				country:"default",number:"",postCode:"", countryCode:"", dogsName:"", 
+var shopping={ contact:{firstName: null ,lastName:null,email:null,address1:null,address2:null,city:null,
+				country:"default",number:null,postCode:null, countryCode:null, dogsName:null, 
 				lang:"hu"},
-				currency:"HUF", paymentMethod:"bankTransfer", lastBasketSize: 0
+				currency:"HUF", paymentMethod:'payBeforeDelivery',
+				paymentType:"bankTransfer", lastBasketSize: 0,
+				deliveryMethod: "Posta"
 }
 	
 

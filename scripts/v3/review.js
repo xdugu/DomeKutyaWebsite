@@ -20,7 +20,7 @@ app.controller('Review', function($scope, $http, $timeout) {
 	$scope.shopping = localStorage.getObj("shopping");
 	$scope.basketId = localStorage.getObj("basketId");
 	$scope.order={};
-	$scope.temp = {comments:""};
+	$scope.temp = {comments: null};
 	$scope.sourceUrl = ""
 	
 	$scope.backbone =  {showPaypalReceipt:false, showBank:false, showConfirmed:false, showPayLater:false};
@@ -44,7 +44,6 @@ app.controller('Review', function($scope, $http, $timeout) {
 			//localStorage.removeItem("basketId");
 			$scope.createOrderCode();
 			$scope.shopping['comments']=$scope.temp.comments;
-			$scope.shopping['basketId']= $scope.basketId;
 			$scope.shopping.paymentMethod = 'payBeforeDelivery';
 			if(method == 'payOnDelivery'){
 				$scope.shopping.paymentMethod = 'payOnDelivery';
@@ -59,7 +58,7 @@ app.controller('Review', function($scope, $http, $timeout) {
 				method: 'POST',
 				crossDomain : true,
 				url: 'https://h0jg4s8gpa.execute-api.eu-central-1.amazonaws.com/v1/open/update/basket/order',
-				data: angular.toJson($scope.shopping),
+				data: angular.toJson({orderDetails: $scope.shopping, storeId:"KutyaLepcso", basketId:$scope.basketId}),
 				headers: {'Content-Type': 'application/json'}
 			});
 		
