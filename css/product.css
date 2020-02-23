@@ -2,13 +2,9 @@
 @import url('https://fonts.googleapis.com/css?family=Parisienne');
 @import url('https://fonts.googleapis.com/css?family=Montserrat');
 @import url('https://fonts.googleapis.com/css?family=Catamaran');
-@import url('https://fonts.googleapis.com/css?family=Muli');
 
-:root /*Variables*/
-{
-	/*--main-theme: Goldenrod;/*Crimson;*/
-	--home-button: #C0C0C0;
-}
+
+
 .animate-height{
 	transition: all 1s;
 	height: 40vh;
@@ -24,7 +20,7 @@
 
 
 .selected{
-	border: 5px solid red;
+	border: 5px solid black;
 }
 
 input.ng-invalid.ng-dirty{
@@ -34,13 +30,7 @@ input.ng-invalid.ng-touched{
 	border: 3px solid red;
 }
 
-.price
-{
-	/*font-family: Verdana, serif;	*/
-	font-family: Muli, serif;
-	color: var(--main-theme);
-	font-weight: bold;
-}
+
 
 .more-info
 {

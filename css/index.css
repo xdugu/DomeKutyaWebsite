@@ -1,12 +1,11 @@
+.halo-product span{
+	padding: 5%;
+	transition: all 0.5s linear;
+}
 
-
-.sub-menu:hover{
- color:white;
- }
- .display{
-	height:70vh;
- }
- 
+.halo-product:hover span{
+	padding: 15%;
+}
 
 /* Using mobile first design so setting for bigger screens*/
 @media only screen and (min-width: 601px) {

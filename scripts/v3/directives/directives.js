@@ -1,6 +1,6 @@
 
 
-angular.module('myApp').filter('myCurrency', function() {
+angular.module('AduguShopApp').filter('myCurrency', function() {
   return function (myCost, currency){
 			if(myCost==null)
 			{
@@ -35,7 +35,7 @@ angular.module('myApp').filter('myCurrency', function() {
 
 
 angular
-    .module('myApp')
+    .module('AduguShopApp')
     .directive('lazyLoad', lazyLoad)
 
 function lazyLoad(){
@@ -60,3 +60,37 @@ function lazyLoad(){
         }
     }
 }
+
+angular.module('AduguShopApp').directive('myImageSizerv2', function($interval) {
+	return {
+	  restrict: 'A',
+	  link: function($scope,elem, attr) {
+		  let lastSize = 0;
+		  let promise = $interval(function(){
+			  indexOfShortestImage=0;
+			  shortestHeight=2000;
+			  images = $(elem).find('img');
+			  for(let i=0;i< images.length; i++){
+				  if(!images[i].complete)
+					  return;
+				  if(images[i].height<shortestHeight && images[i].src.indexOf('loading')<0)
+				  {
+					  shortestHeight = images[i].height;
+					  indexOfShortestImage = i;
+				  }
+			  }
+			  if(shortestHeight != lastSize && shortestHeight!=2000){
+				  //check if image has changed size and that also all the images are not just loading gifs
+			  //$(elem).find('img').css({'height': shortestHeight.toString() + 'px'});
+			  for(let i =0; i <images.length; i++){
+				  let diff = shortestHeight - images[i].height;
+				  $(images[i]).parent().css({'height':  shortestHeight.toString() + 'px', 'overflow-y': 'hidden'})
+			  }
+			   //$(elem).find('img').css({'margin-bottom':  '100px'});
+			   lastSize = shortestHeight;
+			  }
+  
+		  },1000);
+	  }
+	};
+  });

@@ -11,12 +11,12 @@ Storage.prototype.getObj = function(key) {
 
 var paypalObject, totalAsString;
 
-var app = angular.module('myApp', []);
+var app = angular.module('AduguShopApp', []);
 app.run(function() {
-// Trigger input event on change to fix auto-complete
-$('input, select').on('change',function() { $(this).trigger('input'); });
+	// Trigger input event on change to fix auto-complete
+	$('input, select').on('change',function() { $(this).trigger('input'); });
 });
-app.controller('Review', function($scope, $http, $timeout) {
+app.controller('Review', ['$scope', 'ApiManager', function($scope, ApiManager) {
 	$scope.shopping = localStorage.getObj("shopping");
 	$scope.basketId = localStorage.getObj("basketId");
 	$scope.order={};
@@ -27,21 +27,23 @@ app.controller('Review', function($scope, $http, $timeout) {
 	$scope.backbone.lang= $scope.shopping.contact.lang;//for choosing of language
 	//////////////////////////////////////////////
 	$scope.currency = $scope.shopping.currency;
-	 $http({
-				method: 'POST',
-				crossDomain : true,
-				url: `https://h0jg4s8gpa.execute-api.eu-central-1.amazonaws.com/v1/open/get/basket`,
-				data: JSON.stringify({basketId:$scope.basketId, storeId:'KutyaLepcso', countryCode:Shop_getCountryCode($scope.shopping.contact.country), currency:$scope.currency }),
-				headers: {'Content-Type': 'application/json'}
-			}).then(function(res){
-					$scope.order = res.data;
-					$(".basket-num").html(res.data.Items.length);
-			});
+
+	Common_getShopConfig().then(function(res){
+		$scope.config = res;
+		ApiManager.post('open', 'get/basket', null, {
+							basketId:$scope.basketId, 
+							storeId: $scope.config.storeId, 
+							countryCode:Shop_getCountryCode($scope.shopping.contact.country), 
+							currency:$scope.currency 
+						}).then(function(res){
+						$scope.order = res.data;
+						Shop_updateBasketSize(res.data.Items.length);
+		});
+	});
 	
-	///////////////////////////////////////////////
+	//////////Called to submit order/////////////////////////////////////
 	$scope.updatePaymentMethod = function(method, details){
-			//localStorage.removeItem("shopping");
-			//localStorage.removeItem("basketId");
+			
 			$scope.createOrderCode();
 			$scope.shopping['comments']=$scope.temp.comments;
 			$scope.shopping.paymentMethod = 'payBeforeDelivery';
@@ -54,14 +56,14 @@ app.controller('Review', function($scope, $http, $timeout) {
 
 			$scope.shopping.paymentDetails = details;
 			
-			$http({
-				method: 'POST',
-				crossDomain : true,
-				url: 'https://h0jg4s8gpa.execute-api.eu-central-1.amazonaws.com/v1/open/update/basket/order',
-				data: angular.toJson({orderDetails: $scope.shopping, storeId:"KutyaLepcso", basketId:$scope.basketId}),
-				headers: {'Content-Type': 'application/json'}
-			});
-		
+			ApiManager.post('open', 'update/basket/order', null, {
+							orderDetails: $scope.shopping, 
+							storeId: $scope.config.storeId, 
+							basketId:$scope.basketId}
+							).then(function(res){
+								localStorage.removeItem("shopping");
+								localStorage.removeItem("basketId");
+							})
 	}
 	
 	$scope.createOrderCode = function (){
@@ -178,7 +180,7 @@ app.controller('Review', function($scope, $http, $timeout) {
 	}
 	document.head.appendChild(script);
   
-});
+}]);
 
 function createPayPalObject(currency,obj,lang)
 {
@@ -200,10 +202,8 @@ function createPayPalObject(currency,obj,lang)
 			}
 		}
 		let price ={value:"",currency_code:currency};
-		if(currency=='HUF')
-			price.value = obj[i].Price.huf.toString();
-		else
-			price.value = obj[i].Price.eur.toString();
+
+		price.value = obj[i].Price[currency.toLowerCase()].toString();
 		
 		myContainer.push({name:itemName,sku:wholeId,unit_amount:price,quantity:obj[i].Quantity.toString(), currency:currency, category:'PHYSICAL_GOODS'});		
 	}

@@ -26,8 +26,9 @@
 
 <script src="/scripts/v3/common.js" ></script>
 <script src="/scripts/v3/shop.js" ></script>
-<script src="/scripts/v3/product_page.js" ></script>
+<script src="/scripts/v3/product.js" ></script>
 <script src="/scripts/v3/directives/directives.js" ></script>
+<script src="/scripts/v3/services/factories.js" ></script>
 
 <style>
 /* width */
@@ -73,23 +74,19 @@
 </style>
 </head> 
 
-<body ng-app="myApp" ng-controller="ProductDisplay" ng-init="showImg=false">
+<body ng-app="AduguShopApp" ng-controller="ProductDisplay" ng-init="showImg=false">
 
 <div id="header_placeholder"> </div>
-<div id="privacy_placeholder"></div>
-
-
 	
 <div class="w3-row w3-white w3-margin-bottom">
 
 	<slick ng-if="itemInfo!=null" settings="slickConfig" id="img_stage" class="w3-margin-top w3-col l6">
 		<div style="overflow:hidden;" ng-repeat="img in itemInfo.Images.list track by $index">
-			<img class="sub_image" ng-src="http://adugu-common.s3.eu-central-1.amazonaws.com/{{$parent.itemInfo.Images.path}}{{img.name}}" 
+			<img class="sub_image" ng-src="{{config.imgSrc}}/{{$parent.itemInfo.Images.path}}{{img.name}}" 
 				style="margin:auto;" 
 				ng-class="{'show-wide': itemInfo.Images.list[0].sizing == 'width', 'show-high':itemInfo.Images.list[0].sizing == 'height'}"
 				>
 			</img>
-			<!-- To prevent situation where the imgSrc is not loaded causing get errors -->
 		</div>
 	 </slick>
 
@@ -101,43 +98,55 @@
 	</div>
 
 	<!--Currency chooser  -->
-		<div class="w3-large  w3-hide-small">
+		<div class="w3-large">
 			<span class="w3-white w3-round-large hoverable">
-				<span class="button" onclick="Shop_updateCurrency('HUF')" ng-class="{'w3-tag w3-red':currency=='HUF'}">HUF</span> | 
-				<span class="button" onclick="Shop_updateCurrency('EUR')" ng-class="{'w3-tag w3-red':currency=='EUR'}">EURO</span>
-			</span>
-		</div>
-
-		<div class="w3-large w3-hide-large w3-hide-medium">
-			<span class="w3-white w3-round-large hoverable">
-				<span class="button" onclick="Shop_updateCurrency('HUF')" ng-class="{'w3-tag w3-red':currency=='HUF'}">HUF</span> | 
-				<span class="button" onclick="Shop_updateCurrency('EUR')" ng-class="{'w3-tag w3-red':currency=='EUR'}">EURO</span>
+				<span class="button" onclick="Shop_updateCurrency('HUF')" ng-class="{'w3-tag w3-theme':currency=='HUF'}">HUF</span> | 
+				<span class="button" onclick="Shop_updateCurrency('EUR')" ng-class="{'w3-tag w3-theme':currency=='EUR'}">EURO</span>
 			</span>
 		</div>
 	
+	<div class="w3-modal" ng-show="modal.show">
+		<div class="w3-modal-content">
+			<div class="w3-display-container" style="height:350px">
+				<span class="w3-display-topright material-icons w3-xxlarge w3-white hoverable" ng-click="modal.show = false">close</span>
+				<img class="w3-display-middle" ng-src="{{config.imgSrc}}/{{modal.itemToShow.Images.path}}{{modal.itemToShow.Images.list[0].name}}"
+				style="max-width:300px; height: auto"/>
+				<div style="width: 90%" class="w3-display-bottommiddle w3-xlarge">{{modal.itemToShow.Title[backbone.lang]}}</div>
+			</div>
+			
+		</div>
+	</div>
 	<!-- Choosing of Variants-->
 	<form name="selections">
-		<div ng-repeat="variant in itemInfo.Variants.variants" ng-init="parentIndex = $index" class="w3-margin-top">
+		<div ng-repeat="variant in itemInfo.Variants.variants" ng-init="parentIndex = $index" 
+			class="w3-margin-top w3-border w3-border-grey w3-padding">
 			<div  ng-if="variant.type == 'group'" ng-init="info={show: false};"
-				<b class="w3-large">{{variant.text[backbone.lang]}}</b>
+				<b class="w3-large">{{variant.text[backbone.lang]}}: </b> 
+				<span style="color: var(--main-theme)">{{pickedSpec[parentIndex].chosenVariant.Title[backbone.lang]}}</span>
 				<!--Making sliding image gallery for options of type 'group'-->
 				<div ng-repeat="group in variant.options" class="w3-margin-top">
-					<div  class="w3-container" style="width:100%;padding:0;white-space:nowrap;overflow-x:auto;">
-						<img class="w3-circle" lazy-load="http://adugu-common.s3.eu-central-1.amazonaws.com/{{pattern.Images.path}}{{pattern.Images.list[0].name}}" 
-								ng-repeat="pattern in variant.groupInfo[group.name]" 
-								ng-class="{'selected':pickedSpec[parentIndex].chosenVariant.ItemId == pattern.ItemId}"
-								ng-click="$parent.pickedSpec[parentIndex].chosenVariant = pattern;updateProductPrice(); $parent.info.show = true" 
-								style="height:15vh;width:auto;margin:0 1%;"></img>		
+					<div>{{group.text[backbone.lang]}}</div>
+					<div style="width:100%;padding:0;white-space:nowrap;overflow-x:auto;">
+						<span ng-repeat="pattern in variant.groupInfo[group.name]" class="w3-display-container">
+							<img class="w3-circle hoverable" lazy-load="{{config.imgSrc}}/{{pattern.Images.path}}{{pattern.Images.list[0].name}}" 
+									
+									ng-class="{'selected':pickedSpec[parentIndex].chosenVariant.ItemId == pattern.ItemId}"
+									ng-click="$parent.pickedSpec[parentIndex] = group; 
+												$parent.pickedSpec[parentIndex].chosenVariant = pattern;updateProductPrice(); 
+												$parent.info.show = true" 
+									style="height:15vh;width:auto;margin:0 1%;">	
+							</img>	
+							<span class="material-icons w3-xxlarge w3-text-black w3-display-middle w3-white w3-circle hoverable"
+								ng-show="pickedSpec[parentIndex].chosenVariant.ItemId == pattern.ItemId"
+								ng-click="modal.show = true; modal.itemToShow = pattern"
+								>zoom_in
+							</span>	
+						</span>
+						<div></div>
 					</div>
-					<!--div ng-show="info.show" class="animate-height w3-center w3-margin-top w3-display-container">
-						<img class="w3-round-xlarge" style="height:100%;width:auto" 
-						ng-src="https://adugutesting.s3.eu-central-1.amazonaws.com/{{pickedSpec[parentIndex].chosenVariant.Images.path}}{{pickedSpec[parentIndex].chosenVariant.Images.list[0].name}}">  
-						</img>
-						<span class="w3-display-topright material-icons w3-xxlarge hoverable" ng-click="info.show=false">cancel</span>
-					</div-->
 				</div>
 			</div>
-			<div ng-if="variant.type == 'individual'" class="w3-large w3-border w3-border-grey w3-round w3-padding">
+			<div ng-if="variant.type == 'individual'" class="w3-large">
 				<span><b>{{variant.text[backbone.lang]}}</b></span><br>
 				<select required  
 					ng-options="item.text[backbone.lang] for item in variant.options" 
@@ -164,23 +173,26 @@
 		</div>
 	</form>
 	<!--Info about add to basket button-->
-	<div class="w3-row w3-margin-top w3-center">
+	<div class="w3-row w3-center" style="margin-top: 30px;">
 		<button id="add_basket_button" 
 				ng-hide="itemInfo.Quantity <= 0 && itemInfo.TrackStock"
-				class="w3-button w3-xlarge w3-white w3-border w3-border-black w3-hover-black  w3-round w3-col m6 l12" 
-				style="max-width: 600px;" 
-				ng-click="checkBasket();showImg=false">Add To Basket
+				class="w3-button w3-xlarge w3-border w3-border-black w3-hover-white w3-theme w3-round w3-col m6 l12" 
+				style="max-width: 400px;" 
+				ng-click="addToBasket();showImg=false">Add To Basket
 		</button>
 		<span class="w3-text-red w3-large" ng-show="itemInfo.Quantity <= 0 && itemInfo.TrackStock">
 			<b>Item is out of stock</b>
 		</span>
 	</div>
-	<div class="w3-container w3-margin-top w3-row " id="added-prompt" style="padding:0;opacity:0">
-		<div class="w3-center w3-animate-left w3-padding w3-green w3-large w3-col m6 l12">Item has been added to your basket</div>
+	<div class="w3-container w3-margin-top w3-row" id="added-prompt" style="padding:0;opacity:0">
+		<div class="w3-center w3-animate-left w3-padding w3-blue w3-large w3-col m6 l12"
+			style="max-width: 400px">
+			Item has been added to your basket
+		</div>
 	</div>
 	
 	
-	<div class="gapper w3-hide-small w3-hide-medium" style="height:50px">
+	<div class="gapper w3-hide-small w3-hide-medium" style="height:40px">
 	</div>
 	
 	<div ng-controller="Accordions" ng-init="des=false;del=false;ret=false;" class="w3-margin-bottom more-info">

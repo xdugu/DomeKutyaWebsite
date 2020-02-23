@@ -9,23 +9,32 @@ Storage.prototype.getObj = function(key) {
 
 var categoryName="steps";
 
-var app = angular.module('myApp', ['ngSanitize']);
-app.controller('Categories', function($scope, $http, $timeout, $location) {
+var app = angular.module('AduguShopApp', ['ngSanitize']);
+app.controller('Categories', ['$scope', '$http', 'ApiManager', function($scope, $http, ApiManager) {
 	$scope.products=[];
 	//Language stuff
-	$scope.backbone = {lang:null};
-	$scope.backbone.lang= localStorage.getObj("lang");//for choosing of language	
+	$scope.backbone = {lang:null};	
 	$scope.changeLanguage = Common_changeLanguage;
-	$scope.currency = localStorage.getObj("shopping").currency;
-	
+
+
+	// Get config for app specific stuff
+	Common_getShopConfig().then(function(res){
+		$scope.config = res;
+
+		let shopData = localStorage.getObj("shopping");
+		if(shopData == null){
+			$scope.currency = res.shopping.currency;
+			$scope.backbone.lang = res.shopping.contact.lang;//for choosing of language	
+		}else{
+			$scope.currency = shopData.currency;
+			$scope.backbone.lang= shopData.contact.lang;//for choosing of language	
+		}
+	});
 	
 	/////////////////////////////////
 	let params = Common_parseUrlParam();
-	$http.get('https://h0jg4s8gpa.execute-api.eu-central-1.amazonaws.com/v1/open/get/category?category='
-			 + params.category + '&storeId='+ params.storeId + '>Product').then(function(res){
+	ApiManager.get('open', 'get/category', {'category': params.category, 'storeId': params.storeId + '>Product'}).then(function(res){
 		$scope.categoryData = res.data;
-		$scope.lang = 'hu';
-		$scope.cur= 'huf';
 
 		let level = $scope.categoryData[0].Category.split('>');
 
@@ -44,14 +53,13 @@ app.controller('Categories', function($scope, $http, $timeout, $location) {
 		
 		$('#category-name').append(level[level.length -1]);
 			
-		
 	});
 	
 
 	
 
 
-});
+}]);
 
 
 

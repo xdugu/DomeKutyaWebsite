@@ -8,53 +8,43 @@ Storage.prototype.getObj = function(key) {
     return JSON.parse(this.getItem(key))
 }
 
-var currentVersion=5;//add dog's name variable
-
-var shopping={ contact:{firstName: null ,lastName:null,email:null,address1:null,address2:null,city:null,
-				country:"default",number:null,postCode:null, countryCode:null, dogsName:null, 
-				lang:"hu"},
-				currency:"HUF", paymentMethod:'payBeforeDelivery',
-				paymentType:"bankTransfer", lastBasketSize: 0,
-				deliveryMethod: "Posta"
-}
-	
-
-
-
-
-
-
+var shopping;
 //To ensure continuity of user experience, this function is called on every page to update the items in the Basket
 function Shop_refreshBasket()
 {
-	let old=localStorage.getObj("order");
-	if (old!=null){//old local storage item tobe removed
-		localStorage.removeItem("order");
-	}
-	let savedVersion = parseInt(localStorage.getItem("version"));//This is important so we know to refresh everything if we have just updated the software
-	let myOrder=localStorage.getObj("shopping");
+	Common_getShopConfig().then(function(config){
+		let savedVersion = parseInt(localStorage.getItem("version"));//This is important so we know to refresh everything if we have just updated the software
+		let myOrder = localStorage.getObj("shopping");
+		let currentVersion = config.version;
+		
+		if(myOrder==null || isNaN(savedVersion) || savedVersion < currentVersion)
+		{
+			myOrder = config.shopping;
+			localStorage.setObj("shopping", myOrder);
+			localStorage.setItem("version", currentVersion.toString());
+		}
+		Common_checkLang();
+		
+		if (myOrder.lastBasketSize>0)
+		{
+			$(".basket-num").show();
+			$(".basket-num").html(myOrder.lastBasketSize);
+		}
+		else{
+			$(".basket-num").html('');
+			$(".basket-num").hide();
+		}
+	})
 	
-	if(myOrder==null || isNaN(savedVersion) || savedVersion<currentVersion)
-	{
-		myOrder=shopping;
-		localStorage.setObj("shopping",myOrder);
-		localStorage.setItem("version", currentVersion.toString());
-	}
-	Common_checkLang();
-	
-	if (myOrder.lastBasketSize>0)
-	{
-		$(".basket-num").html(myOrder.lastBasketSize);
-	}
-	else
-		$(".basket-num").html('');
 }
 
 function Shop_updateBasketSize(len){//function is called to store the last given basket size
-	if(len>0)
+	if(len>0){
+		$(".basket-num").show();
 		$(".basket-num").html(len);	
+	}
 	else
-		$(".basket-num").html('');
+		$(".basket-num").hide();
 	
 	let myOrder=localStorage.getObj("shopping");
 	myOrder.lastBasketSize = len;

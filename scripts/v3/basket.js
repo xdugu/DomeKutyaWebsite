@@ -9,83 +9,100 @@ Storage.prototype.getObj = function(key) {
 }
 
 
-var app = angular.module('myApp',[]);
-app.controller('Basket', function($scope, $http) {
+var app = angular.module('AduguShopApp',[]);
+app.controller('Basket', ['$scope', 'ApiManager', function($scope, ApiManager) {
 	$scope.basketId = localStorage.getObj("basketId");
 	$scope.shopping= localStorage.getObj("shopping");
 	$scope.currency = $scope.shopping.currency;
 	$scope.backbone = {lang:null};
+	$scope.couriers = [];
 	$scope.backbone.lang= $scope.shopping.contact.lang;//for choosing of language
 	
 	if($scope.basketId==null || $scope.basketId=="" || $scope.basketId.length<2){
 		$scope.order=null;
 		return;
 	}
-		
-	 $http({
-				method: 'POST',
-				crossDomain : true,
-				url: `https://h0jg4s8gpa.execute-api.eu-central-1.amazonaws.com/v1/open/get/basket`,
-				data: JSON.stringify({basketId:$scope.basketId, storeId:'KutyaLepcso', countryCode:Shop_getCountryCode($scope.shopping.contact.country), currency:$scope.currency }),
-				headers: {'Content-Type': 'application/json'}
-			}).then(function(res){
+	// Get config for app specific stuff
+	Common_getShopConfig().then(function(res){
+		$scope.config = res;
+
+		ApiManager.post('open', 'get/basket', null, {
+				basketId:$scope.basketId, 
+				storeId: $scope.config.storeId, 
+				countryCode:Shop_getCountryCode($scope.shopping.contact.country), 
+				currency:$scope.currency }).then(function(res){
 					$scope.order = res.data;
 					Shop_updateBasketSize($scope.order.Items.length);
-			}).catch(function(err){
-				Shop_updateBasketSize(0);//Probably the basket could not be found
-				//localStorage.setObj("basketId","");
-				//$scope.order=null;
-			});
-	
-
-	
+					if($scope.order.hasOwnProperty('Costs')){
+						$scope.couriers = Object.keys($scope.order.Costs);
+						$scope.shopping.deliveryMethod = $scope.couriers[0];
+					}
+				}).catch(function(err){
+					Shop_updateBasketSize(0);//Probably the basket could not be found
+				});
+	});
+		
+	// Called to change quantity of item
 	$scope.changeQuantity= function (index, direction){
 		if($scope.order.Items[index].Quantity + direction>=1){
 			Shop_updateBasketSize($scope.order.Items[index].Quantity + direction);
-		$http({
-				method: 'POST',
-				crossDomain : true,
-				url: 'https://h0jg4s8gpa.execute-api.eu-central-1.amazonaws.com/v1/open/update/basket/quantity',
-				data: JSON.stringify({basketId:$scope.basketId, storeId: 'KutyaLepcso', index: index, increment: direction, countryCode:Shop_getCountryCode($scope.shopping.contact.country),currency:$scope.currency}),
-				headers: {'Content-Type': 'application/json'}
+
+		ApiManager.post('open', 'update/basket/quantity', null, {
+				basketId:$scope.basketId, 
+				storeId: $scope.config.storeId, 
+				index: index, 
+				increment: direction, 
+				countryCode:Shop_getCountryCode($scope.shopping.contact.country),
+				currency:$scope.currency
 			}).then(function(res){
 					$scope.order = res.data;
 			});
 		}
 	}
 	
+	//called to remove item from basket 
 	$scope.removeItem = function(index)
 	{
 		$scope.order.Items.splice(index,1);//pre splice the removed item to make the ui seem for responsive
-		$http({
-				method: 'POST',
-				crossDomain : true,
-				url: 'https://h0jg4s8gpa.execute-api.eu-central-1.amazonaws.com/v1/open/update/basket/remove',
-				data: JSON.stringify({basketId:$scope.basketId, storeId:'KutyaLepcso', index: index, countryCode: Shop_getCountryCode($scope.shopping.contact.country), currency:$scope.currency}),
-				headers: {'Content-Type': 'application/json'}
+		ApiManager.post('open', 'update/basket/remove', null, {
+				basketId:$scope.basketId, 
+				storeId: $scope.config.storeId, 
+				index: index, 
+				countryCode: Shop_getCountryCode($scope.shopping.contact.country), 
+				currency:$scope.currency
 			}).then(function(res){
 					$scope.order = res.data;
 					Shop_updateBasketSize($scope.order.Items.length);
 			});
 	}
 	
-	$scope.updateDeliveryCost = function()//called when customer chooses/changes the Country to post 
+	//called when customer chooses/changes the Country to post 
+	$scope.updateDeliveryCost = function()
 	{
-		$http({
-				method: 'POST',
-				crossDomain : true,
-				url: `https://h0jg4s8gpa.execute-api.eu-central-1.amazonaws.com/v1/open/get/basket`,
-				data: JSON.stringify({basketId:$scope.basketId, storeId: 'KutyaLepcso',  countryCode: Shop_getCountryCode($scope.shopping.contact.country), currency:$scope.currency}),
-				headers: {'Content-Type': 'application/json'}
-			}).then(function(res){
-					$scope.order = res.data;
-					Shop_updateBasketSize($scope.order.Items.length);
-					$scope.shopping.contact.countryCode = Shop_getCountryCode($scope.shopping.contact.country);
-					localStorage.setObj("shopping",$scope.shopping);
-			});
+		ApiManager.post('open', 'get/basket', null, {
+			basketId:$scope.basketId, 
+			storeId: $scope.config.storeId,  
+			countryCode: Shop_getCountryCode($scope.shopping.contact.country), 
+			currency:$scope.currency
+		}).then(function(res){
+			$scope.order = res.data;
+			Shop_updateBasketSize($scope.order.Items.length);
+			$scope.shopping.contact.countryCode = Shop_getCountryCode($scope.shopping.contact.country);
+			$scope.couriers = Object.keys($scope.order.Costs);
+			$scope.shopping.deliveryMethod = $scope.couriers[0];
+			$([document.documentElement, document.body]).animate({
+				scrollTop: $("#cost-details").offset().top
+			}, 1000);
+		});
 	}
 
-	// will return the most appropriateimage to be displayed
+	$scope.proceedToCheckout = function(){
+		localStorage.setObj("shopping", $scope.shopping);
+		window.location.href = 'Checkout.html';
+	}
+
+
+	// will return the most appropriate image to be displayed
 	$scope.getVariantImage = function (item){
 		 let itemCombi = [];
 
@@ -103,10 +120,7 @@ app.controller('Basket', function($scope, $http) {
 
 		 return item.Images.list[0].name;
 	}
-	
-	
-	
-});
+}]);
 
 
 

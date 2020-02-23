@@ -2,19 +2,19 @@
 var scrollingElement = (document.scrollingElement || document.body);
 
 
-var app = angular.module('myApp', []);
+var app = angular.module('AduguShopApp', []);
 app.run(function() {
 // Trigger input event on change to fix auto-complete
 $('input, select').on('change',function() { $(this).trigger('input'); });
 });
-app.controller('Checkout', function($scope, $http, $timeout) {
+app.controller('Checkout', function($scope, $timeout) {
 	$scope.order = localStorage.getObj("shopping");
 	$scope.user=$scope.order.contact;
 	
 	$scope.proceedToPayment= function (){
 		$scope.order.contact = $scope.user;
 		localStorage.setObj("shopping", $scope.order);
-		window.location.href = 'review.html';
+		window.location.href = 'Review.html';
 	}
 
 	$scope.$watch('agreed',function(newValue, oldValue) {

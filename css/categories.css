@@ -4,25 +4,14 @@
 @import url('https://fonts.googleapis.com/css?family=Muli');
 
 
-:root /*Variables*/
-{
-	/*--main-theme: Goldenrod;*//*Crimson;*/
-	--secondary-color: #606060;
-} 
-
-div#product-shelf-placeholder
-{
-	font-family: 'Montserrat', serif;	
-}
 
 #product-shelf-placeholder a:nth-child(odd){
- clear:left;
+ 	clear:left;
 }
 
 .price
 {
 	/*font-family: Verdana, serif;	*/
-	font-family: Muli, serif;
 	letter-spacing:	2px;
 	color: var(--main-theme);
 	font-weight: bold;

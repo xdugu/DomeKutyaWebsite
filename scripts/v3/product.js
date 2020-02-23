@@ -23,24 +23,38 @@ var currentProductId;
  
  
 
-var app = angular.module('myApp', ['ngAnimate','ngSanitize', 'slickCarousel']);
+var app = angular.module('AduguShopApp', ['ngAnimate', 'ngSanitize', 'slickCarousel']);
 app.controller('Accordions', function() {
 	
 });
 
 
-app.controller('ProductDisplay',function($scope, $http){
-	$scope.shopping = localStorage.getObj("shopping");
-	$scope.currency = $scope.shopping.currency;
-
+app.controller('ProductDisplay', ['$scope', 'ApiManager', function($scope, ApiManager){
 	$scope.pickedSpec = [];
 	
 	$scope.backbone = {lang:null};
-	$scope.backbone.lang= $scope.shopping.contact.lang;//for choosing of language
 	$scope.basketId = localStorage.getObj("basketId");
 	$scope.changeLanguage = Common_changeLanguage;
 	$scope.itemInfo;
 	$scope.showAllErrors = false;
+	$scope.modal = {show: false, itemToShow: null}
+
+	// Make modal ready to be visible. Will be over written by angular
+	$('.w3-modal').css('display', 'block');
+
+	// Get config for app specific stuff
+	Common_getShopConfig().then(function(res){
+		$scope.config = res;
+
+		let shopData = localStorage.getObj("shopping");
+		if(shopData == null){
+			$scope.currency = res.shopping.currency;
+			$scope.backbone.lang = res.shopping.contact.lang;//for choosing of language	
+		}else{
+			$scope.currency = shopData.currency;
+			$scope.backbone.lang= shopData.contact.lang;//for choosing of language	
+		}
+	});
 
 	$scope.slickConfig={
 		dots: true,
@@ -92,6 +106,13 @@ app.controller('ProductDisplay',function($scope, $http){
 		}
 	}
 
+	$scope.selectGroupItem = function(variantIndex, group, pattern){
+		$scope.pickedSpec[variantIndex] = group; 
+		$scope.pickedSpec[parentIndex].chosenVariant = pattern;
+		updateProductPrice(); 
+		$scope.info.show = true
+	}
+
 	// called after item is loaded
 	function setupVariants(){
 		if($scope.itemInfo.Variants.variants.length > 0){
@@ -129,12 +150,12 @@ app.controller('ProductDisplay',function($scope, $http){
 	let params = Common_parseUrlParam();
 	//$scope.product.id = params.itemId;
 		
-	$http.get('https://h0jg4s8gpa.execute-api.eu-central-1.amazonaws.com/v1/open/get/product?itemId='
-			+ params.itemId + `&storeId=${params.storeId}` ).then(function(res){
+	ApiManager.get('open', 'get/product', {itemId: params.itemId, storeId: params.storeId}).then(function(res){
 		loadProduct(res);
 	});
-	  
-	$scope.checkBasket = function(){//called when customer presses the "Add to Basket" button			
+	
+	//called when customer presses the "Add to Basket" button	
+	$scope.addToBasket = function(){		
 			if($scope.selections.$invalid){
 				$scope.showAllErrors = true;
 				return;
@@ -142,20 +163,15 @@ app.controller('ProductDisplay',function($scope, $http){
 			let data = {itemId: $scope.itemInfo.ItemId, basketId:$scope.basketId, storeId: 'KutyaLepcso'};
 			data.combination = $scope.pickedSpec;
 						 
-			
-			 $http({
-				method: 'POST',
-				crossDomain : true,
-				url: `https://h0jg4s8gpa.execute-api.eu-central-1.amazonaws.com/v1/open/update/basket`,
-				data: angular.toJson(data),
-				headers: {'Content-Type': 'application/json'}
-			}).then(function(res){
+			ApiManager.post('open', 'update/basket', null, data).then(function(res){
 					$scope.basketId = res.data.BasketId;
 					localStorage.setObj("basketId", $scope.basketId);
 					Shop_updateBasketSize(res.data.Items.length);
+					$([document.documentElement, document.body]).animate({
+						scrollTop: $("#added-prompt").offset().top
+					}, 1000);
 					runButtonAnimation();
 			});
-
 	 }
 	 
  
@@ -171,7 +187,7 @@ app.controller('ProductDisplay',function($scope, $http){
 		})
 		setupVariants();
 	}
-});
+}]);
 
 
 

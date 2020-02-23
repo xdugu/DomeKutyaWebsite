@@ -7,16 +7,44 @@ Storage.prototype.getObj = function(key) {
 }
 
 var fixedMenu=false;
+var shopConfig = null;
 
-  $(document).ready(function() {
-	  if(isPathCorrect())//if we can't find any of these strings in the path in means that we are in the 
-	  //root directory so we will then default to the hungarian header
-         $('#header_placeholder').load("header.html", Shop_refreshBasket);	
-	  else
-		  $('#header_placeholder').load("/hu/header.html", Shop_refreshBasket);	 
-		 checkCookie();
+// returns a promise which when successful contains data of the shopping config
+function Common_getShopConfig(){
+	return  new Promise(function(resolve, reject){
+		if(shopConfig != null)
+			resolve(shopConfig);
+		else {
+			$.get('/config.json', function(res){
+				shopConfig = res;
+				resolve(shopConfig);
+			}).fail(function(err){
+				reject(err);
+			});
+		}
+	});
 
-    }); 
+	
+}
+
+function Common_sideBar(state){
+	if(state == 'toggle')
+		$('#sidebar').toggle();
+	else if(state == 'on')
+		$('#sidebar').show();
+   else
+	  $('#sidebar').hide();
+}
+
+$(document).ready(function() {
+	if(isPathCorrect())//if we can't find any of these strings in the path in means that we are in the 
+	//root directory so we will then default to the hungarian header
+		$('#header_placeholder').load("header.html", Shop_refreshBasket);	
+	else
+		$('#header_placeholder').load("/hu/header.html", Shop_refreshBasket);	 
+		checkCookie();
+
+}); 
 
 function checkCookie(){
 	
@@ -51,7 +79,7 @@ function isPathCorrect(){//function to check if path has either /hu or /en to in
 	
 }
 
-//Sanity to check to make sure we always reflect the right languages. Clled on every page refresh
+//Sanity to check to make sure we always reflect the right languages. Called on every page refresh
 function Common_checkLang(){
 	let shopping=localStorage.getObj("shopping");
 	let path = window.location.href;
@@ -71,21 +99,17 @@ function Common_menuClicked()
 	$("#mobile-submenu .toHide").hide();
 }
 
-function Common_showBackground()
-{
-	$('#background_img').css('opacity','0.2');	
-}
 
 function Common_changeCookie(setting){
 	localStorage.setItem("useCookie",setting);
 	$('#privacy_placeholder').hide();
 	if(setting==true)
-		window['ga-disable-UA-131830139-2']=false;
+		window['ga-disable-UA-131830139-2'] = false;
 		
 	
 }
 
-function Common_checkSubMenu(menu)
+/*function Common_checkSubMenu(menu)
 {
 	allMenu = $("#mobile-submenu .toHide");
 	prevState = menu.nextElementSibling.style.display;
@@ -101,7 +125,9 @@ function Common_checkSubMenu(menu)
 		menu.firstElementChild.innerHTML= "arrow_drop_up";
 	}
 }
+*/
 
+//Parses the url parameters
 function Common_parseUrlParam(){
 	url =  decodeURI(window.location.href);
 	let returnParams = {};
@@ -168,31 +194,6 @@ $(window).scroll(function(){
 
 });
 
-//This function will search for the item id in the product xml file and return the tag
-function Common_getItemById(library, pathname)
-{
-	 path='//item';
-		let nodes = library.evaluate(path, library, null, XPathResult.ANY_TYPE, null);
-		let tags =  nodes.iterateNext();
-		while (tags)
-		{
-			if(pathname.search(tags.id)>=0){
-				return tags;
-			}
-			tags = nodes.iterateNext();
-		}
-		
-	return null;
-}
-
-function Common_getItemInner(library,path){
-	let nodes = library.evaluate(path, library, null, XPathResult.ANY_TYPE, null);
-	let tags =  nodes.iterateNext();
-	if(tags==null)
-		return null;
-	return tags.innerHTML;
-}
-
 function Common_isElementInView(elem)
 {
     var elementTop = $(elem).offset().top;
@@ -215,11 +216,7 @@ function Common_mergeObject(obj,src){
     return obj;	
 }
 
-function Common_getNestedValue(obj, key) {
-    return key.split(".").reduce(function(result, key) {
-       return result[key] 
-    }, obj);
-}
+
 
 
 

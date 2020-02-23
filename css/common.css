@@ -1,16 +1,15 @@
 @import url('https://fonts.googleapis.com/css?family=Parisienne');
 @import url('https://fonts.googleapis.com/css?family=Montserrat');
-@import url('https://fonts.googleapis.com/css?family=El+Messiri');
+@import url('https://fonts.googleapis.com/css?family=Muli');
 @import url('https://fonts.googleapis.com/css?family=Charm');
 @import url('https://fonts.googleapis.com/css?family=Indie+Flower');
+@import url('https://fonts.googleapis.com/css?family=Kalam');
 
 body {
   width: 100%;
   -webkit-overflow-scrolling: touch;
-  font-family: 'Montserrat', calibri, aria, verdana, sans-serif;
+  font-family: 'Kalam', calibri, aria, verdana, sans-serif;
   background-color: white;
-  background-image: url("/images/background.jpg");
-  /*background-repeat: repeat;*/
   color: black;
 }
 html
@@ -19,7 +18,7 @@ html
 }
 
 h1, h2, h5 {
-  font-family: 'Montserrat', tahoma, arial, verdana, sans-serif;
+  font-family: 'Kalam', tahoma, arial, verdana, sans-serif;
   color: black;
   text-align: center;
 }
@@ -39,12 +38,23 @@ p {
   margin-right: 1vw;
   text-align: left;
   font-size: 1.3vw;
-  font-family: 'Montserrat', calibri; 
+  font-family: 'Kalam', calibri; 
 }
 a
 {
 	text-decoration: none;
 }
+
+.w3-bar-item.heading{
+	border-bottom: 4px solid transparent;
+}
+.w3-bar-item.heading:hover{
+	border-bottom: 4px solid white;
+	transition: border-bottom 0.3s linear;
+}
+
+
+
 
 
 button:hover
@@ -57,153 +67,68 @@ button:hover
 
 :root /*Variables*/
 {
-	--main-theme: #E00000;/*Crimson;*/
-	--secondary-color: black;
+	--main-theme:rgb(219, 194, 161);	
+	--secondary-color: rgb(141, 103, 54);
 } 
 
-/*Yati trend header*/
-div#header_main {
-  position: relative;
-  width: 100%;
-  display: block;
-  height: 14vh;
-
- }
- 
- div#header_main img{
-	 height: 80%;
-	 width: auto;
-	
- }
-
- 
- div#header_main span span{
-	 font-family: 'Charm';
- }
-.brand_text{ /*YATI Trend*/
-	 font-family: Parisienne, sans-serif;
-	 color: black;
- }
-
- 
- /*Mobile Navigation*/
-div#mobile-menu-nav {
-	color: white;
-	background-color:var(--main-theme);
+.w3-theme{
+	background-color: var(--main-theme) !important;
 }
 
- 
-ul#mobile-submenu{ /* main list */
-  position: relative;
-  display: none;
-  cursor: pointer;
-  list-style-type: none; /* prevent bullets from appearing */
-  background-color: var(--main-theme);
-  padding: 0vw;
-  margin: 0vw;
-  clear: both;
-  z-index:1000;
-}
-ul#mobile-submenu > li /*li as direct children/*/
-{
-	padding: 5vw 0vw;
-	display: block;
-	text-align: center;
-	vertical-align: middle;
-	border-bottom: 0.4vw solid white;
-	text-decoration: none;
-	text-align: center;
-	cursor: pointer;
-	color: white;
+.w3-theme-2{
+	background-color: var(--secondary-color) !important;
 }
 
-ul#mobile-submenu > li:last-child
-{
-	border-bottom: 0;
+.grow-on-hover{
+	overflow: hidden;
 }
+.grow-on-hover img{ transition: all .35s ease-in-out; }
+.grow-on-hover:hover img{ transform: scale(1.1); }
+
+.advertised a{
+	width:33%;
+	height: auto;
+	}
+	.advertised a div{
+		width:100%;
+		overflow-y: hidden;
+		max-height: 400px;
+	}
+	h1{
+	font-size: 1.6em;
+	}
 
 
-ul#mobile-submenu  >li:hover
-{
-	background-color: white;
-	color: black;
-}
-ul#mobile-submenu  >li.toHide:hover{ /*this is to undo the above when the list item is actually a submenu*/
-	 background-color: var(--main-theme);
-	 color: white;
-}
+	@media (max-width:600px){
+		.advertised{
+			overflow-x: scroll;
+		}
+		.advertised a{
+			width: 70%;
+		}
+		.advertised a div{
+			overflow-y: hidden;
+			max-height: 220px;
+		}
 
-/*Below is for the sub sub menu */
-ul#mobile-submenu .toHide{
-	display:none;	
-}
+	}
 
-ul#mobile-submenu li ul{
-	text-decoration:none;
-	margin: 0vw;
-	list-style: none;
-	padding: 0;
-	list-style-type: none;	
-}
-ul#mobile-submenu li ul li a
-{
-	text-align: center;
-	cursor: pointer;
-	border-bottom: 0vw;
-	padding: 3vw;
-	color: var(--secondary-color);	
-}
-/*We fill the list space so a large area is clickable*/
-li a
-{
-	display:block;	
-}
-
-/*For desktops and tablets*/
-#desk_menu{
-	background-color: var(--main-theme);
-}
-
-#desk_menu div, #desk_menu a
-{
-	line-height: 35px;
-}
-
-
-ul#mobile-submenu ul li:hover
-{
-	background-color: white;
-	color: black;
-}
-
-
-#background_img
-{
-	position: fixed;
-	top: 15vw;
-	left: 5vw;
-	z-index: -100;
-	opacity: 0;
-	height: 150vw;
-	width: auto;
-	transition: opacity 3s linear;
-}
-
-/*#shop_list ul:nth-of-type(even)/* Every second item to have margin left */
-/*{
-	margin-left: 3vw;
-}
-
-#shop_list ul:nth-of-type(odd)/* Every second item to have margin left */
-/*{
-	clear: both;
-	margin-left: 5vw;
-}*/
 
 
 .price-total{
+	font-family: Muli, serif;
 	font-weight: bold;
 	color: var(--main-theme);
+	letter-spacing:	2px;
+}
+
+.price
+{
+	/*font-family: Verdana, serif;	*/
+	font-family: Muli, serif;
+	color: var(--main-theme);
+	font-weight: bold;
+	letter-spacing:	2px;
 }
 
 /*slick*/
