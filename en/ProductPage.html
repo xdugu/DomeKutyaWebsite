@@ -82,10 +82,8 @@
 
 	<slick ng-if="itemInfo!=null" settings="slickConfig" id="img_stage" class="w3-margin-top w3-col l6">
 		<div style="overflow:hidden;" ng-repeat="img in itemInfo.Images.list track by $index">
-			<img class="sub_image" ng-src="{{config.imgSrc}}/{{$parent.itemInfo.Images.path}}{{img.name}}" 
-				style="margin:auto;" 
-				ng-class="{'show-wide': itemInfo.Images.list[0].sizing == 'width', 'show-high':itemInfo.Images.list[0].sizing == 'height'}"
-				>
+			<img class="sub_image" data-lazy="{{config.imgSrc}}/{{$parent.itemInfo.Images.path}}{{img.name}}" 
+				style="margin:auto; width: 100%; height: auto ">
 			</img>
 		</div>
 	 </slick>

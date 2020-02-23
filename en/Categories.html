@@ -51,8 +51,7 @@
 	<a ng-repeat="product in categoryData" href="ProductPage.html?{{product.href}}" class="w3-left w3-center w3-large w3-mobile my-product w3-white" style="width:48.5%;margin-top:2vh;">
 
 			<div style="width:100%; overflow:hidden;" class="category-image">
-				<img class="shop_img w3-center" lazy-load="{{config.imgSrc}}/{{product.Images.path}}{{product.Images.list[0].name}}" 
-					ng-class="{'show-wide': product.Images.list[0].sizing == 'width', 'show-high': product.Images.list[0].sizing == 'height'}"
+				<img class="category-image w3-center" lazy-load="{{config.imgSrc}}/{{product.Images.path}}{{product.Images.list[0].name}}" 
 					style="margin:auto;">
 				</img> 
 			</div>

@@ -17,34 +17,19 @@
 	font-weight: bold;
 }
 
-
+.category-image {
+	width: 100%;
+	height: auto;
+}
 
 @media only screen and (min-width: 601px) {
 	.my-product{
 		margin-left: 1%;
 	}
-}
-
-.category-image {
-	height:60vh;
-}
-@media only screen and (min-width: 1200px) {/*for desktop*/
-.category-image {
-	height:70vh;
-}
-}
-@media only screen and (max-width: 1000px) and (min-height: 800px)  {/*For tablets in portrait*/
-.category-image {
-	height:30vh;
-}
-
-}
-
-@media only screen and (min-width: 1000px) and (min-height: 1000px)  {/*For ipad pro*/
-.category-image {
-	height:35vh;
-}
-
+	.category-image{
+		height: 300px;
+		width: auto;
+	}
 }
 
 

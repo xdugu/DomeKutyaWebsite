@@ -39,16 +39,7 @@ app.controller('Categories', ['$scope', '$http', 'ApiManager', function($scope, 
 		let level = $scope.categoryData[0].Category.split('>');
 
 		for(let i = 0; i < $scope.categoryData.length; i++){
-			$scope.categoryData[i].Images.list.forEach(function(img, index){
-				//checking aspect ratio to work out how to display image
-				if(img.width/img.height < 0.9)
-					$scope.categoryData[i].Images.list[index].sizing = "height";
-				else
-					$scope.categoryData[i].Images.list[index].sizing = "width";
-
-			});
 			$scope.categoryData[i].href = 'itemId=' + $scope.categoryData[i].ItemId + '&storeId=' + $scope.categoryData[i].StoreId;
-
 		}
 		
 		$('#category-name').append(level[level.length -1]);

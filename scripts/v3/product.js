@@ -68,21 +68,16 @@ app.controller('ProductDisplay', ['$scope', 'ApiManager', function($scope, ApiMa
 				// Work on dynamic height of slider
 				let relDiv = slick.$slider[0];
 				currImage = $scope.itemInfo.Images.list[0];
-				if(currImage.sizing == 'width'){
-					let idealHeight = (slick.listWidth * currImage.height)/currImage.width;
-					$(relDiv).height(idealHeight);
-				}
-				
+				let idealHeight = (slick.listWidth * currImage.height)/currImage.width;
+				$(relDiv).height(idealHeight);				
 			},
 			afterChange: function (event, slick, currentSlide, nextSlide) {
 				// Work on dynamic height of slider
 				let relDiv = slick.$slider[0];
 				currImage = $scope.itemInfo.Images.list[currentSlide];
-				if(currImage.sizing == 'width'){
-					let idealHeight = (slick.listWidth * currImage.height)/currImage.width;
-					$(relDiv).animate({height: idealHeight});
-				}
 
+				let idealHeight = (slick.listWidth * currImage.height)/currImage.width;
+				$(relDiv).animate({height: idealHeight});
 			}
 		}	
 		};
