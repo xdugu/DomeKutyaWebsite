@@ -20,9 +20,6 @@ const pluginIgnoreParams={
 	 }
 	
 }
-
-
-
             
 // Cache the Google Fonts webfont files with a cache first strategy for 1 year.
 workbox.routing.registerRoute(
@@ -101,7 +98,7 @@ workbox.routing.registerRoute(
   }),
 );
 workbox.routing.registerRoute(//Cache get response api server to reduce unnecessary duplicate requests
- /^https:\/\/api.kutyalepcso.com/,
+ /^https:\/\/h0jg4s8gpa.execute-api.eu-central-1.amazonaws.com/,
   new workbox.strategies.CacheFirst({
     cacheName: 'product-info-cache',
     plugins: [
@@ -109,7 +106,7 @@ workbox.routing.registerRoute(//Cache get response api server to reduce unnecess
         statuses: [0, 200],
       }),
       new workbox.expiration.Plugin({
-        maxAgeSeconds: 60 * 20
+        maxAgeSeconds: 60 * 5 // 5 minutes cache
       }),
     ],
   }),
@@ -125,32 +122,18 @@ workbox.routing.registerRoute(
     cacheName: 'js-css-html-json-xml-cache',
 	plugins: [
       new workbox.expiration.Plugin({
-        maxAgeSeconds: 60 * 5 //expire after 30 minutes
+        maxAgeSeconds: 60 * 30 //expire after 30 minutes
       }),
 	  pluginIgnoreParams
     ],
   })
 );
 
-//since img_1.jpg files appear first, for faster loading, we will save then in their own cache
-workbox.routing.registerRoute(
-  /\img_1.(?:png|gif|jpg|jpeg|svg)$/,
-  new workbox.strategies.CacheFirst({
-    cacheName: 'first-img-cache',
-    plugins: [
-      new workbox.expiration.Plugin({
-        maxEntries: 50,
-        maxAgeSeconds: 86400 * 30, // 1 month
-      }),
-    ],
-  }),
-); 
-
 //to reduce network load, secondary image caches have been added
 workbox.routing.registerRoute(
   /\.(?:png|gif|jpg|jpeg|svg)$/,
   new workbox.strategies.CacheFirst({
-    cacheName: 'secondary-img-cache',
+    cacheName: 'img-cache',
     plugins: [
       new workbox.expiration.Plugin({
         maxEntries: 30,

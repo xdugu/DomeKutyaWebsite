@@ -106,14 +106,14 @@
 		</div>
 	
 	<div class="w3-modal" ng-show="modal.show">
-		<div class="w3-modal-content">
+		<div class="w3-modal-content w3-animate-zoom">
 			<div class="w3-display-container" style="height:350px">
 				<span class="w3-display-topright material-icons w3-xxlarge w3-white hoverable" ng-click="modal.show = false">close</span>
 				<img class="w3-display-middle" ng-src="{{config.imgSrc}}/{{modal.itemToShow.Images.path}}{{modal.itemToShow.Images.list[0].name}}"
 				style="max-width:300px; height: auto"/>
-				<div style="width: 90%" class="w3-display-bottommiddle w3-xlarge">{{modal.itemToShow.Title[backbone.lang]}}</div>
+				
 			</div>
-			
+			<div class="w3-center w3-large">{{modal.itemToShow.Title[backbone.lang]}}</div>
 		</div>
 	</div>
 	<!-- Choosing of Variants-->
@@ -134,7 +134,7 @@
 									ng-click="$parent.pickedSpec[parentIndex] = group; 
 												$parent.pickedSpec[parentIndex].chosenVariant = pattern;updateProductPrice(); 
 												$parent.info.show = true" 
-									style="height:15vh;width:auto;margin:0 1%;">	
+									style="height: 90px;width:auto;margin:0 1%;">	
 							</img>	
 							<span class="material-icons w3-xxlarge w3-text-black w3-display-middle w3-white w3-circle hoverable"
 								ng-show="pickedSpec[parentIndex].chosenVariant.ItemId == pattern.ItemId"
@@ -185,7 +185,7 @@
 		</span>
 	</div>
 	<div class="w3-container w3-margin-top w3-row" id="added-prompt" style="padding:0;opacity:0">
-		<div class="w3-center w3-animate-left w3-padding w3-blue w3-large w3-col m6 l12"
+		<div class="w3-center w3-animate-left w3-padding w3-theme-2 w3-text-white w3-large w3-col m6 l12"
 			style="max-width: 400px">
 			Item has been added to your basket
 		</div>

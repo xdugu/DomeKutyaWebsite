@@ -49,21 +49,21 @@ $(document).ready(function() {
 function checkCookie(){
 	
 	  window.dataLayer = window.dataLayer || [];
-	  window['ga-disable-UA-131830139-2'] = true;
+	  // ga enabled by default
+	  window['ga-disable-UA-131830139-2'] = false;
 	  
-	 
 	 let useCookie = localStorage.getItem("useCookie");
-	 if(useCookie == null){
-		 if(isPathCorrect())
-			$('#privacy_placeholder').load("legal/privacy.html");
-		 else
-			$('#privacy_placeholder').load("/hu/legal/privacy.html"); 
-	 }
-	else if (useCookie=="true"){
-		 window['ga-disable-UA-131830139-2'] = false;
-	 }
+	//  if(useCookie == null){
+	// 	 if(isPathCorrect())
+	// 		$('#privacy_placeholder').load("legal/privacy.html");
+	// 	 else
+	// 		$('#privacy_placeholder').load("/hu/legal/privacy.html"); 
+	//  }
+	// else 
+	if (useCookie == "false")
+		 window['ga-disable-UA-131830139-2'] = true;
+
 		 
-	
 	  function gtag(){dataLayer.push(arguments);}
 	  gtag('js', new Date());
 	  gtag('config', 'UA-131830139-2', { 'anonymize_ip': true });
@@ -104,9 +104,7 @@ function Common_changeCookie(setting){
 	localStorage.setItem("useCookie",setting);
 	$('#privacy_placeholder').hide();
 	if(setting==true)
-		window['ga-disable-UA-131830139-2'] = false;
-		
-	
+		window['ga-disable-UA-131830139-2'] = false;	
 }
 
 /*function Common_checkSubMenu(menu)
