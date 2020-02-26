@@ -147,6 +147,8 @@ app.controller('ProductDisplay', ['$scope', 'ApiManager', function($scope, ApiMa
 		
 	ApiManager.get('open', 'get/product', {itemId: params.itemId, storeId: params.storeId}).then(function(res){
 		loadProduct(res);
+	}).catch(function(err){
+		console.log(err);
 	});
 	
 	//called when customer presses the "Add to Basket" button	
@@ -174,6 +176,22 @@ app.controller('ProductDisplay', ['$scope', 'ApiManager', function($scope, ApiMa
 	function loadProduct(res)
 	{
 		$scope.itemInfo = res.data.data;
+
+		// seperate category into an array
+		let level = $scope.itemInfo.Category.split('>');
+		// assign hierarchy to lower length name variable
+		let hierarchy = $scope.itemInfo.ProductHierarchy;
+
+		// put the firt level into an array
+		let finalHierarchy = [hierarchy.find(item => item.name == level[0])];
+
+		for(let i = 1; i < level.length; i++){
+			// push lower level category data 
+			finalHierarchy.push(finalHierarchy[i-1].sub.find(item => item.name == level[i]))
+		}
+		
+		$scope.itemInfo.ProductHierarchy = finalHierarchy;
+
 		$scope.itemInfo.Images.list.forEach(function(img, index){
 			if(img.width / img.height < 1)
 				$scope.itemInfo.Images.list[index].sizing ='height'

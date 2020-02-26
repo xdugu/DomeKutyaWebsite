@@ -79,7 +79,12 @@
 <div id="header_placeholder"> </div>
 	
 <div class="w3-row w3-white w3-margin-bottom">
-
+	<div class="w3-center">
+		<span ng-repeat="level in itemInfo.ProductHierarchy">
+			<a href="Categories.html?storeId=KutyaLepcso&category=">{{level.text[backbone.lang]}}</a>
+			<span ng-hide="$last">></span>
+		</span>
+	</div>
 	<slick ng-if="itemInfo!=null" settings="slickConfig" id="img_stage" class="w3-margin-top w3-col l6">
 		<div style="overflow:hidden;" ng-repeat="img in itemInfo.Images.list track by $index">
 			<img class="sub_image" data-lazy="{{config.imgSrc}}/{{$parent.itemInfo.Images.path}}{{img.name}}" 

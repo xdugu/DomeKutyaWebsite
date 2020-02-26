@@ -42,7 +42,12 @@ app.controller('Categories', ['$scope', '$http', 'ApiManager', function($scope, 
 			$scope.categoryData[i].href = 'itemId=' + $scope.categoryData[i].ItemId + '&storeId=' + $scope.categoryData[i].StoreId;
 		}
 		
-		$('#category-name').append(level[level.length -1]);
+		// looping through the product hierarchy to get the displayable name of the category
+		let category = $scope.categoryData[0].ProductHierarchy.find(item => item.name == level[0]);
+		for(let i = 1; i < level.length; i++){
+			category = category.sub.find(item => item.name == level[i]);
+		}
+		$('#category-name').append(category.text['hu']);
 			
 	});
 	
