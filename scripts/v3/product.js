@@ -200,6 +200,19 @@ app.controller('ProductDisplay', ['$scope', 'ApiManager', function($scope, ApiMa
 		})
 		setupVariants();
 	}
+
+	//This function returns the search category string
+	$scope.getCategoryForLink = function(levelIndex){
+		let levels = $scope.itemInfo.Category.split('>');
+		let strToReturn= levels[0];
+
+		for(let i = 1; i < levelIndex + 1; i++){
+			strToReturn += '>' + levels[i];
+		}
+
+		return strToReturn;
+
+	}
 }]);
 
 

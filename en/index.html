@@ -28,6 +28,9 @@
 <script src="/scripts/v3/index.js" ></script>
 <script src="/scripts/v3/shop.js" ></script>
 <script src="/scripts/v3/directives/directives.js" ></script>
+<script src="/scripts/v3/services/factories.js" ></script>
+<script type="text/javascript" src="/slick/slick.min.js"></script>
+<script type="text/javascript" src="/slick/angular-slick.js"></script>
 
 
 
@@ -67,33 +70,24 @@
 		</a>
 	</div>
 
-	<div class="w3-xxlarge w3-center w3-margin-top">Our Other Products</div>
-	<div class="w3-margin-top advertised w3-large" my-image-sizerv2 style="width: 100%; white-space: nowrap !important;">		
-		<a class="w3-show-inline-block" href="product.html?type=dresses&itemId=Lisa">
+	<div class="bold w3-xlarge w3-center w3-margin-top">Our Other Products</div>
+	<div class="w3-margin-top advertised w3-large" my-image-sizerv2 
+			style="width: 100%; white-space: nowrap !important;">		
+		<a  ng-repeat="product in products" class="w3-show-inline-block" 
+			ng-if="otherProducts.indexOf(product.ItemId) >= 0"
+			href="ProductPage.html?storeId={{config.storeId}}&itemId={{product.ItemId}}"
+			ng-class="{'list-margin': !$first}">
 			<div class="grow-on-hover">
-				<img lazy-load="/images/res/bujozsak_1.jpg" style="width: 100%;"/>
+				<img lazy-load="{{config.imgSrc}}/{{product.Images.path}}{{product.Images.list[0].name}}" style="width: 100%;"/>
 			</div>
-			<div class="w3-center w3-large">Blanket</div>
-			<div class="price-total w3-center">59999 Ft</div>
-		</a>
-		<a class="w3-show-inline-block" href="product.html?type=dresses&itemId=Claudia">
-			<div class="grow-on-hover">
-				<img class="grow"  lazy-load="/images/res/babzsak_1.jpg" style="width: 100%;"/>
-			</div>
-			<div class="w3-center w3-large"">Bean Bag</div>
-			<div class="price-total w3-center">59999 Ft</div>
-		</a>
-		<a class="w3-show-inline-block" href="product.html?type=dresses&itemId=Anne">
-			<div class="grow-on-hover">
-				<img class="grow"  lazy-load="/images/res/groomer_1.jpg" style="width: 100%; "/>
-			</div>
-			<div class="w3-center w3-large"">Groomer</div>
-			<div class="price-total w3-center">59999 Ft</div>
+			<div class="w3-center w3-large">{{product.Title[backbone.lang]}}</div>
+			<div class="price-total w3-center">{{product.Price[currency.toLowerCase()] | myCurrency : currency}}</div>
 		</a>
 	</div>
 
-	<div class="w3-xxlarge w3-center w3-margin-top">Specially made for you</div>
-	<div class="w3-margin-top advertised w3-large" my-image-sizerv2 style="width: 100%; white-space: nowrap !important;">		
+	<div class="bold w3-xlarge w3-center w3-margin-top">Specially made for you</div>
+	<div class="w3-margin-top advertised w3-large" my-image-sizerv2 
+				style="width: 100%; white-space: nowrap !important;">		
 		<a class="w3-show-inline-block" href="product.html?type=dresses&itemId=Lisa">
 			<div class="grow-on-hover">
 				<img lazy-load="/images/res/ramp_custom.jpg" style="width: 100%;"/>
@@ -113,7 +107,19 @@
 			<div class="w3-center w3-large"">Dog Loft</div>
 		</a>
 	</div>
+
+	<!-- Container for customer photos-->
+	<div class="w3-xlarge w3-center w3 w3-margin-top">Customer Photos</div>
+	<slick settings="slickConfig" class="w3-margin-top"> 
+		<div style=" overflow-x:auto; height: 300px;" class="w3-margin-left" ng-repeat="x in [].constructor(10) track by $index">
+			<img data-lazy="/images/customer/img_{{$index+1}}.jpg" style="height:100%;width:auto;" class="w3-round"/>
+		</div>
+	</slick>
+	<div class="w3-center w3-margin-top">
+			<a class="w3-theme w3-button w3-xlarge" href="Gallery.html" style="width: 200px">More Photos</a></div>
 </div>
+
+
 
 
 

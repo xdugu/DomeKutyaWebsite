@@ -50,6 +50,8 @@ app.controller('Categories', ['$scope', '$http', 'ApiManager', function($scope, 
 		$('#category-name').append(category.text['hu']);
 			
 	});
+
+	
 	
 
 	

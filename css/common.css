@@ -133,7 +133,8 @@ button:hover
 
 /*slick*/
  .slick-prev:before, .slick-next:before{
-    color:black;
+	color:black;
+	height: 45px;
 }
 	
 .slick-prev {

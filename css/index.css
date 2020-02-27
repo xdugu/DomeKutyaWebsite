@@ -6,7 +6,9 @@
 .halo-product:hover span{
 	padding: 15%;
 }
-
+.list-margin{
+	margin-left: 0.5%;
+}
 /* Using mobile first design so setting for bigger screens*/
 @media only screen and (min-width: 601px) {
 #list a:nth-child(odd){
