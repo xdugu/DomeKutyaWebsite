@@ -59,11 +59,9 @@ app.controller('Review', ['$scope', 'ApiManager', function($scope, ApiManager) {
 			ApiManager.post('open', 'update/basket/order', null, {
 							orderDetails: $scope.shopping, 
 							storeId: $scope.config.storeId, 
-							basketId:$scope.basketId}
-							).then(function(res){
-								localStorage.removeItem("shopping");
-								localStorage.removeItem("basketId");
-							})
+							basketId:$scope.basketId});
+			localStorage.removeItem("shopping");
+			localStorage.removeItem("basketId");
 	}
 	
 	$scope.createOrderCode = function (){

@@ -2,24 +2,37 @@
 var scrollingElement = (document.scrollingElement || document.body);
 
 
-var app = angular.module('myApp', []);
+var app = angular.module('AduguShopApp', []);
 
-app.controller('Contact', function($scope, $http, $timeout) {
+app.controller('Contact', ['$scope', 'ApiManager', function($scope, ApiManager) {
 
-	$scope.user = {name:"",email:"", comments:"", requestType:"Request"};
+	$scope.user = {name:"",email:"", topic: "", comments:"", requestType:"Request"};
+	$scope.backbone = {lang: Common_getLang(), formSubmitted: false, submitError: false};
 	
+	$scope.config;
+
+	Common_getShopConfig().then(function(res){
+		$scope.config = res;
+		$scope.user.storeId = $scope.config.storeId;
+	})
+	let generalTopic = {en:"General", hu:"Általános"}
+	let params = Common_parseUrlParam();
+	if(!params.hasOwnProperty('topic')){
+		$scope.user.topic = generalTopic[$scope.backbone.lang];
+	} else
+		$scope.user.topic = params.topic;
 	
 	$scope.sendRequest = function(){
-	
-	$http({
-				method: 'POST',
-				crossDomain : true,
-				url: 'https://api.kutyalepcso.com/v2/Request/CustomerRequest',
-				data: JSON.stringify($scope.user),
-				headers: {'Content-Type': 'application/json'}
-			});
+		$scope.backbone.formSubmitted = false;
+		$scope.backbone.submitError = false;
+
+		ApiManager.post('open', 'create/request', {storeId: $scope.config.storeId}, $scope.user).then(function(){
+			$scope.backbone.formSubmitted = true;
+		}).catch(function(err){
+			$scope.backbone.submitError = true;
+		})
 	}
-});
+}]);
 
 
 	

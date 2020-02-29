@@ -35,14 +35,19 @@
 <div class="w3-row" ng-hide="order.Items.length==0 || order==null">
 
 <!--Currency chooser  -->
-<div class="w3-large w3-margin">
+<div class="w3-large w3-margin w3-center">
 	<span class="w3-white w3-padding w3-round-large hoverable">
 		<span class="button" onclick="Shop_updateCurrency('HUF')" ng-class="{'w3-tag w3-theme':currency=='HUF'}">HUF</span> | 
 		<span class="button" onclick="Shop_updateCurrency('EUR')" ng-class="{'w3-tag w3-theme':currency=='EUR'}">EURO</span>
 	</span>
 </div>
 
-	<div class="w3-col l6 w3-padding">
+<!-- Loading Indication-->
+<div ng-show="backbone.loading" class="w3-container w3-center">
+	<img class="w3-mobile" src="/images/loading.gif"/>
+</div>
+
+	<div class="w3-col l6 w3-padding" ng-if="order != null">
 		<div ng-repeat="item in order.Items" class="w3-card w3-margin-top w3-padding w3-white animate-order" style="width: 100%;overflow:hidden;">
 				<div ng-init="pickedImage = getVariantImage(item)">
 					<img ng-src="{{config.imgSrc}}/{{item.Images.path}}{{pickedImage}}"
@@ -67,18 +72,18 @@
 				</div>
 				<div class="w3-display-container" style="height:10vh;">
 					<div id="" class="w3-display-middle quantity w3-hide-small" style="height: 2vw;">
-						<span ng-click="changeQuantity($index,-1)" class="w3-black w3-round w3-padding w3-hover-grey">-</span>
+						<span ng-click="changeQuantity($index,-1)" class="w3-black w3-round w3-padding hoverable w3-hover-grey">-</span>
 						<span class="w3-padding">{{item.Quantity}}</span>
-						<span ng-click="changeQuantity($index,1)" class="w3-black w3-round w3-padding w3-hover-grey">+</span>
+						<span ng-click="changeQuantity($index,1)" class="w3-black w3-round w3-padding hoverable w3-hover-grey">+</span>
 					</div>
 					<!-- Duplicate of above for positioning-->
 					<div id="" class="w3-display-left quantity w3-hide-large w3-hide-medium" style="height: 2vw;">
-						<span ng-click="changeQuantity($index,-1)" class="w3-black w3-round w3-padding w3-hover-grey">-</span>
+						<span ng-click="changeQuantity($index,-1)" class="w3-black w3-round hoverable w3-padding w3-hover-grey">-</span>
 						<span class="w3-padding">{{item.Quantity}}</span>
-						<span ng-click="changeQuantity($index,1)" class="w3-black w3-round w3-padding w3-hover-grey">+</span>
+						<span ng-click="changeQuantity($index,1)" class="w3-black w3-round hoverable w3-padding w3-hover-grey">+</span>
 					</div>
 					<div id="price" class="w3-display-right price">{{item.Price[currency.toLowerCase()] * item.Quantity | myCurrency : currency}}</div>
-					<div id="remove" ng-click="removeItem($index)" class="w3-display-bottomright" style="text-decoration: underline">Remove</div>
+					<div id="remove" ng-click="removeItem($index)" class="w3-display-bottomright hoverable" style="text-decoration: underline">Remove</div>
 				</div>		
 		</div>
 	</div>

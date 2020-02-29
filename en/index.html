@@ -8,8 +8,8 @@
 <meta name="theme-color" content="white">
 <link rel="icon" type="image/jpeg" href="/images/logo.jpg">
 
-<link rel="stylesheet" type="text/css" href="../slick/slick.css"/>
-<link rel="stylesheet" type="text/css" href="../slick/slick-theme.css"/>
+<link rel="stylesheet" type="text/css" href="/slick/slick.css"/>
+<link rel="stylesheet" type="text/css" href="/slick/slick-theme.css"/>
 <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/icon?family=Material+Icons"/>
 <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
 <link rel="stylesheet" type="text/css" href="/css/w3.css"/>
@@ -22,17 +22,14 @@
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.4/angular.min.js"></script>
-<script type="text/javascript" src="/slick/slick.min.js"></script>
+<script  src="/slick/slick.min.js"></script>
  
 <script src="/scripts/v3/common.js" ></script>
 <script src="/scripts/v3/index.js" ></script>
 <script src="/scripts/v3/shop.js" ></script>
 <script src="/scripts/v3/directives/directives.js" ></script>
 <script src="/scripts/v3/services/factories.js" ></script>
-<script type="text/javascript" src="/slick/slick.min.js"></script>
-<script type="text/javascript" src="/slick/angular-slick.js"></script>
-
-
+<script src="/slick/angular-slick.js"></script>
 
 </head> 
 
@@ -70,56 +67,23 @@
 		</a>
 	</div>
 
-	<div class="bold w3-xlarge w3-center w3-margin-top">Our Other Products</div>
-	<div class="w3-margin-top advertised w3-large" my-image-sizerv2 
-			style="width: 100%; white-space: nowrap !important;">		
-		<a  ng-repeat="product in products" class="w3-show-inline-block" 
-			ng-if="otherProducts.indexOf(product.ItemId) >= 0"
-			href="ProductPage.html?storeId={{config.storeId}}&itemId={{product.ItemId}}"
-			ng-class="{'list-margin': !$first}">
-			<div class="grow-on-hover">
-				<img lazy-load="{{config.imgSrc}}/{{product.Images.path}}{{product.Images.list[0].name}}" style="width: 100%;"/>
-			</div>
-			<div class="w3-center w3-large">{{product.Title[backbone.lang]}}</div>
-			<div class="price-total w3-center">{{product.Price[currency.toLowerCase()] | myCurrency : currency}}</div>
-		</a>
-	</div>
+	<my-exhibition ng-repeat="lines in config.homePage" ng-if="config !=null" 
+					mainConfig="config" config="lines" 
+					lang="backbone.lang" currency="currency"
+					">
 
-	<div class="bold w3-xlarge w3-center w3-margin-top">Specially made for you</div>
-	<div class="w3-margin-top advertised w3-large" my-image-sizerv2 
-				style="width: 100%; white-space: nowrap !important;">		
-		<a class="w3-show-inline-block" href="product.html?type=dresses&itemId=Lisa">
-			<div class="grow-on-hover">
-				<img lazy-load="/images/res/ramp_custom.jpg" style="width: 100%;"/>
-			</div>
-			<div class="w3-center w3-large">Ramp 2:1</div>
-		</a>
-		<a class="w3-show-inline-block" href="product.html?type=dresses&itemId=Claudia">
-			<div class="grow-on-hover">
-				<img lazy-load="/images/res/step_custom.jpg" style="width: 100%;"/>
-			</div>
-			<div class="w3-center w3-large"">Step 2:1</div>
-		</a>
-		<a class="w3-show-inline-block" href="product.html?type=dresses&itemId=Anne">
-			<div class="grow-on-hover">
-				<img lazy-load="/images/res/dog_loft_1.jpg" style="width: 100%; "/>
-			</div>
-			<div class="w3-center w3-large"">Dog Loft</div>
-		</a>
-	</div>
+	</my-exhibition>
 
 	<!-- Container for customer photos-->
-	<div class="w3-xlarge w3-center w3 w3-margin-top">Customer Photos</div>
+	<div class="w3-xlarge w3-center bold" style="margin-top: 50px; color: var(--main-theme)">Customer Photos</div>
 	<slick settings="slickConfig" class="w3-margin-top"> 
 		<div style=" overflow-x:auto; height: 300px;" class="w3-margin-left" ng-repeat="x in [].constructor(10) track by $index">
 			<img data-lazy="/images/customer/img_{{$index+1}}.jpg" style="height:100%;width:auto;" class="w3-round"/>
 		</div>
 	</slick>
 	<div class="w3-center w3-margin-top">
-			<a class="w3-theme w3-button w3-xlarge" href="Gallery.html" style="width: 200px">More Photos</a></div>
+			<a class="w3-theme w3-button w3-large w3-round" href="Gallery.html" style="width: 200px">More Photos</a></div>
 </div>
-
-
 
 
 

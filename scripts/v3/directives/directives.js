@@ -66,7 +66,7 @@ angular.module('AduguShopApp').directive('myImageSizerv2', function($interval) {
 	  restrict: 'A',
 	  link: function($scope,elem, attr) {
 		  let lastSize = 0;
-		  let promise = $interval(function(){
+		  $interval(function(){
 			  indexOfShortestImage=0;
 			  shortestHeight=2000;
 			  images = $(elem).find('img');
@@ -81,12 +81,10 @@ angular.module('AduguShopApp').directive('myImageSizerv2', function($interval) {
 			  }
 			  if(shortestHeight != lastSize && shortestHeight!=2000){
 				  //check if image has changed size and that also all the images are not just loading gifs
-			  //$(elem).find('img').css({'height': shortestHeight.toString() + 'px'});
 			  for(let i =0; i <images.length; i++){
 				  let diff = shortestHeight - images[i].height;
 				  $(images[i]).parent().css({'height':  shortestHeight.toString() + 'px', 'overflow-y': 'hidden'})
 			  }
-			   //$(elem).find('img').css({'margin-bottom':  '100px'});
 			   lastSize = shortestHeight;
 			  }
   
@@ -94,3 +92,28 @@ angular.module('AduguShopApp').directive('myImageSizerv2', function($interval) {
 	  }
 	};
   });
+
+  
+  angular.module('AduguShopApp').directive('myExhibition',['ApiManager', function(ApiManager) {
+	
+	return{
+		restrict : 'E',
+		templateUrl: '/scripts/templates/Exhibition.html',
+		scope:{
+			mainConfig: "=mainconfig",
+			config : "=config",
+			lang: "=lang",
+			currency: "=currency"
+		},
+		link: function($scope, $elem, $attr){
+			ApiManager.get('open', 'get/products', {
+							storeId:$scope.mainConfig.storeId, 
+							items: $scope.config.list.toString()
+			}).then(function(res){
+				$scope.products = res.data;
+			})
+		}
+	}
+
+  }]);
+  

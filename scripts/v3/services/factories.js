@@ -57,3 +57,17 @@ angular.module('AduguShopApp').factory('ApiManager',['$http', function ($http) {
     }
 
 }]);
+
+// common functions accross controllers will be saved here
+angular.module('AduguShopApp').factory('CommonFuncs', function () {
+    return{
+    //// Get data from the specified metadata. Returns a null if not found
+        getMeta: function(product, name){
+            for(let i = 0; i < product.Metadata.length; i++){
+                if(product.Metadata[i].name == name)
+                    return product.Metadata[i].value;
+            }   
+            return null;
+        }
+    }
+});

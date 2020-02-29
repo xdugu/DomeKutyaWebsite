@@ -93,6 +93,18 @@ function Common_checkLang(){
 	}	
 }
 
+// Get current language of website
+function Common_getLang(){
+	let path = window.location.href;
+
+	if (path.search("/hu/") > 0)
+		return "hu"
+	else if(path.search("/en/") > 0)
+		return 'en';
+	else
+		return 'hu';
+}
+
 function Common_menuClicked()
 {
 	$("#mobile-submenu").toggle();

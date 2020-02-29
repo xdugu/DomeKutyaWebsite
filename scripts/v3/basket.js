@@ -26,11 +26,13 @@ app.controller('Basket', ['$scope', 'ApiManager', function($scope, ApiManager) {
 	Common_getShopConfig().then(function(res){
 		$scope.config = res;
 
+		$scope.backbone.loading = true;
 		ApiManager.post('open', 'get/basket', null, {
 				basketId:$scope.basketId, 
 				storeId: $scope.config.storeId, 
 				countryCode:Shop_getCountryCode($scope.shopping.contact.country), 
 				currency:$scope.currency }).then(function(res){
+					$scope.backbone.loading = false;
 					$scope.order = res.data;
 					Shop_updateBasketSize($scope.order.Items.length);
 					if($scope.order.hasOwnProperty('Costs')){

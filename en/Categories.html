@@ -46,8 +46,12 @@
 	</span>
 </div>
 
-
 <div id="product-shelf-placeholder" class="w3-container" style="padding:0;margin:0">
+	<!-- Loading Indication-->
+	<div ng-show="backbone.loading" class="w3-container w3-center">
+		<img class="w3-mobile" src="/images/loading.gif"/>
+	</div>
+
 	<a ng-repeat="product in categoryData" href="ProductPage.html?{{product.href}}" class="w3-left w3-center w3-large w3-mobile my-product w3-white" style="width:48.5%;margin-top:2vh;">
 
 			<div style="width:100%; overflow:hidden;" class="category-image">
@@ -58,11 +62,11 @@
 
 		<div class="description w3-padding w3-large">{{product.Title[backbone.lang]}}</div>
 		<div ng-hide="product.Metadata == null || product.Metadata.length == 0">
-			<div ng-repeat="meta in product.Metadata" ng-show="meta.name = 'meret'">
+			<div ng-hide="meta.hide" ng-repeat="meta in product.Metadata">
 				{{meta.value}}
 			</div>
 		</div>
-		<div  class="price w3-padding">{{product.Price[currency.toLowerCase()] | myCurrency: currency}}</div>
+		<div ng-hide="product.isCustom" class="price w3-padding">{{product.Price[currency.toLowerCase()] | myCurrency: currency}}</div>
 		<div style="border: 2px solid var(--main-theme); margin: auto; width: 90%"></div>
 	</a>
 

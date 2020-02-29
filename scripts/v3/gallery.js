@@ -11,13 +11,11 @@ var currentProductId;
 
  
 
-var app = angular.module('myApp', []);
+var app = angular.module('AduguShopApp', ['slickCarousel']);
 
 
-app.controller('Gallery',function($scope, $timeout,$http,$location,$window){
-		
-		$timeout( function(){
-			$('#img_stage').slick({
+app.controller('Gallery',function($scope){
+	$scope.slickConfig = {
 				dots: false,
 				infinite: true,
 				slidesToShow: 1,
@@ -28,12 +26,7 @@ app.controller('Gallery',function($scope, $timeout,$http,$location,$window){
 				variableWidth: true,
 				lazyLoad: 'ondemand'
 				
-				//asNavFor: '.preview-stage'				
-			  });
-
-			}
-			,100);    
-			
+		};
 });
 
 

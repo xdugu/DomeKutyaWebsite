@@ -10,11 +10,12 @@ Storage.prototype.getObj = function(key) {
 var categoryName="steps";
 
 var app = angular.module('AduguShopApp', ['ngSanitize']);
-app.controller('Categories', ['$scope', '$http', 'ApiManager', function($scope, $http, ApiManager) {
-	$scope.products=[];
+app.controller('Categories', ['$scope', 'CommonFuncs', 'ApiManager', function($scope, CommonFuncs, ApiManager) {
+	$scope.products = [];
 	//Language stuff
 	$scope.backbone = {lang:null};	
 	$scope.changeLanguage = Common_changeLanguage;
+	$scope.CommonFuncs = CommonFuncs
 
 
 	// Get config for app specific stuff
@@ -33,13 +34,17 @@ app.controller('Categories', ['$scope', '$http', 'ApiManager', function($scope, 
 	
 	/////////////////////////////////
 	let params = Common_parseUrlParam();
+	$scope.backbone.loading = true;
 	ApiManager.get('open', 'get/category', {'category': params.category, 'storeId': params.storeId + '>Product'}).then(function(res){
+		$scope.backbone.loading = false;
 		$scope.categoryData = res.data;
 
 		let level = $scope.categoryData[0].Category.split('>');
 
 		for(let i = 0; i < $scope.categoryData.length; i++){
 			$scope.categoryData[i].href = 'itemId=' + $scope.categoryData[i].ItemId + '&storeId=' + $scope.categoryData[i].StoreId;
+			let custom = CommonFuncs.getMeta($scope.categoryData[i], 'custom');
+			$scope.categoryData[i].isCustom = custom != null;
 		}
 		
 		// looping through the product hierarchy to get the displayable name of the category
@@ -47,7 +52,7 @@ app.controller('Categories', ['$scope', '$http', 'ApiManager', function($scope, 
 		for(let i = 1; i < level.length; i++){
 			category = category.sub.find(item => item.name == level[i]);
 		}
-		$('#category-name').append(category.text['hu']);
+		$('#category-name').append(category.text[$scope.backbone.lang]);
 			
 	});
 

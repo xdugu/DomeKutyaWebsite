@@ -5,9 +5,8 @@ Storage.prototype.setObj = function(key, obj) {
 Storage.prototype.getObj = function(key) {
     return JSON.parse(this.getItem(key))
 }
-products =  null;
 			
-var currentProductId;
+
 
  function runButtonAnimation(){
 	$('#added-prompt').css({'opacity':0.6});
@@ -29,18 +28,17 @@ app.controller('Accordions', function() {
 });
 
 
-app.controller('ProductDisplay', ['$scope', 'ApiManager', function($scope, ApiManager){
+app.controller('ProductDisplay', ['$scope', 'ApiManager','CommonFuncs', function($scope, ApiManager, CommonFuncs){
 	$scope.pickedSpec = [];
 	
 	$scope.backbone = {lang:null};
 	$scope.basketId = localStorage.getObj("basketId");
 	$scope.changeLanguage = Common_changeLanguage;
-	$scope.itemInfo;
+	$scope.itemInfo = null;
 	$scope.showAllErrors = false;
 	$scope.modal = {show: false, itemToShow: null}
 
-	// Make modal ready to be visible. Will be over written by angular
-	$('.w3-modal').css('display', 'block');
+
 
 	// Get config for app specific stuff
 	Common_getShopConfig().then(function(res){
@@ -145,8 +143,10 @@ app.controller('ProductDisplay', ['$scope', 'ApiManager', function($scope, ApiMa
 	let params = Common_parseUrlParam();
 	//$scope.product.id = params.itemId;
 		
+	$scope.backbone.loading = true;
 	ApiManager.get('open', 'get/product', {itemId: params.itemId, storeId: params.storeId}).then(function(res){
 		loadProduct(res);
+		$scope.backbone.loading = false;
 	}).catch(function(err){
 		console.log(err);
 	});
@@ -176,7 +176,8 @@ app.controller('ProductDisplay', ['$scope', 'ApiManager', function($scope, ApiMa
 	function loadProduct(res)
 	{
 		$scope.itemInfo = res.data.data;
-
+		let custom = CommonFuncs.getMeta($scope.itemInfo, 'custom');
+		$scope.itemInfo.isCustom =  custom != null;
 		// seperate category into an array
 		let level = $scope.itemInfo.Category.split('>');
 		// assign hierarchy to lower length name variable
@@ -213,6 +214,7 @@ app.controller('ProductDisplay', ['$scope', 'ApiManager', function($scope, ApiMa
 		return strToReturn;
 
 	}
+
 }]);
 
 

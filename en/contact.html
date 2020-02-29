@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html lang="hu">
+<html lang="en">
 <head>
-<title> Dome Kutya | Lépjen kapcsolatba velünk</title>
+<title> Dome Kutya | Contact Us</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="icon" type="image/jpeg" href="../images/logo.jpg">
+<link rel="icon" type="image/jpeg" href="/images/logo.jpg">
 <meta charset="utf-8"/>
 
-<link rel="stylesheet" type="text/css" href="../css/w3.css"/>
+<link rel="stylesheet" type="text/css" href="/css/w3.css"/>
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
  <!-- Global site tag (gtag.js) - Google Analytics -->
@@ -15,14 +15,14 @@
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.4/angular.min.js"></script>
 
 
-<link rel="stylesheet" href="../css/normalize.css"/>
-<link rel="stylesheet" href="../css/common.css"/>
-<link rel="stylesheet" href="../css/contact.css"/>
+<link rel="stylesheet" href="/css/normalize.css"/>
+<link rel="stylesheet" href="/css/common.css"/>
+<link rel="stylesheet" href="/css/contact.css"/>
 
-<script src="../scripts/v3/common.js" ></script>
-<script src="../scripts/v3/shop.js" ></script>
-<script src="../scripts/v3/contact.js" ></script>
-
+<script src="/scripts/v3/common.js" ></script>
+<script src="/scripts/v3/shop.js" ></script>
+<script src="/scripts/v3/contact.js" ></script>
+<script src="/scripts/v3/services/factories.js" ></script>
 </head> 
 
 <body>
@@ -30,13 +30,14 @@
 <div id="header_placeholder"> </div>
 <div id="privacy_placeholder"></div>
 
-<div id="product_shelf_placeholder" class="w3-container w3-margin-top" ng-app="myApp" ng-controller="Contact" ng-init="formSubmitted=false">
+<div id="product_shelf_placeholder" class="w3-container w3-margin-top" ng-app="AduguShopApp" ng-controller="Contact" ng-init="formSubmitted=false">
 	
 
 	<div class="w3-row">
-	<form class="w3-mobile w3-col w3-white l7 m9 w3-padding w3-card-4" name="form1" ng-hide="formSubmitted" novalidate class="entry">
+	<form class="w3-mobile w3-col w3-white l7 m9 w3-padding w3-card-4" name="form1" 
+			ng-hide="backbone.formSubmitted" novalidate class="entry">
 		<div class="w3-large w3-center" ><b>Contact Us</b></div>
-		
+		<div class="w3-padding">Topic: {{user.topic}}</div>
 		<input type="text" class="w3-input" name="name" ng-model="user.name" required placeholder="Name"  autocomplete="name"/>
 		<span class="w3-text-red" ng-show="form1.name.$touched && form1.name.$invalid">Name is required</span>
 		
@@ -44,10 +45,10 @@
 		<span class="w3-text-red" ng-show="form1.email.$touched && form1.email.$invalid">E-mail address is required</span>
 		
 		<br>Comment: Max Length ({{user.comments.length}}/500)<br>
-		<textarea type="text" style="width:100%" rows="5" name="comment" ng-model="user.comments" maxlength="500" required></textarea>
+		<textarea type="text" style="width:100%; font-family: Arial, Helvetica, sans-serif;" rows="5" name="comment" ng-model="user.comments" maxlength="500" required></textarea>
 		<span class="w3-text-red" ng-show="form1.comment.$touched && form1.comment.$invalid">Comment is required</span>
 		<br>
-		<button ng-click="formSubmitted=true;sendRequest()" ng-disabled="form1.$invalid" class="w3-button w3-red w3-margin-bottom w3-padding w3-mobile">
+		<button ng-click="sendRequest()" ng-disabled="form1.$invalid" class="w3-button w3-theme w3-margin-bottom w3-padding w3-mobile">
 			Send
 		</button>	
 
@@ -57,8 +58,11 @@
 	
 	<div class="w3-row ">
 	
-		<div ng-show="formSubmitted" class="w3-medium w3-col l7 m9 w3-padding w3-white w3-card-4">
+		<div ng-show="backbone.formSubmitted" class="w3-medium w3-col l7 m9 w3-padding w3-white w3-card-4">
 			<b>Thank you. We will reply back soon</b>
+		</div>
+		<div ng-show="backbone.submitError" class="w3-medium w3-col l7 m9 w3-padding w3-white w3-text-red w3-card-4">
+			<b>We are sorry that something went wrong. Please try again later :-(</b>
 		</div>
 	
 	</div>

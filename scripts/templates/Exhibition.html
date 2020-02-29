@@ -1,0 +1,17 @@
+<div style="margin-top: 50px !important;">
+    <div class="w3-center w3-xlarge bold" style="color: var(--main-theme)">{{config.title[lang]}}</div>
+    <div class="w3-margin-top advertised w3-large" my-image-sizerv2 
+                style="width: 100%; white-space: nowrap !important;">		
+            <a  ng-repeat="product in products" class="w3-show-inline-block  w3-display-container" 
+                href="{{config.linkToPage}}?storeId={{mainConfig.storeId}}&itemId={{product.ItemId}}"
+                ng-class="{'list-margin': !$first}">
+                <div class="grow-on-hover">
+                    <img lazy-load="{{mainConfig.imgSrc}}/{{product.Images.path}}{{product.Images.list[0].name}}" style="width: 100%;"/>
+                </div>
+                <div class="w3-xlarge w3-center">{{product.Title[lang]}}</div>
+                <div class="price-total w3-center" ng-show="config.showPrice">
+                        {{product.Price[currency.toLowerCase()] | myCurrency : currency}}
+                </div>
+            </a>
+    </div>
+</div>

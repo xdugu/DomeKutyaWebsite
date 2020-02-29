@@ -5,14 +5,14 @@
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 <meta charset="UTF-8">
 <meta name="description" content="Browse through our product page. We have made it easy to find all the information you are looking for about our products">
-<link rel="icon" type="image/jpeg" href="../images/logo.jpg">
-<link rel="stylesheet" type="text/css" href="../slick/slick.css"/>
-<link rel="stylesheet" type="text/css" href="../slick/slick-theme.css"/>
+<link rel="icon" type="image/jpeg" href="/images/logo.jpg">
+<link rel="stylesheet" type="text/css" href="/slick/slick.css"/>
+<link rel="stylesheet" type="text/css" href="/slick/slick-theme.css"/>
 <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/icon?family=Material+Icons" >
-<link rel="stylesheet" type="text/css" href="../css/w3.css"/>
-<link rel="stylesheet" type="text/css" href="../css/normalize.css"/>
-<link rel="stylesheet" type="text/css" href="../css/common.css"/>
-<link rel="stylesheet" type="text/css" href="../css/product.css"/>
+<link rel="stylesheet" type="text/css" href="/css/w3.css"/>
+<link rel="stylesheet" type="text/css" href="/css/normalize.css"/>
+<link rel="stylesheet" type="text/css" href="/css/common.css"/>
+<link rel="stylesheet" type="text/css" href="/css/product.css"/>
 
  <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-131830139-2"></script>
@@ -54,21 +54,6 @@
 ::-webkit-scrollbar-thumb :hover {
   background: #555; 
 }
-#img_stage div{
-	max-height:90vh;
-}
-
-
-@media only screen and (min-width: 600px) and (max-width: 900px) {
-#img_stage div{
-	max-height:900px;
-}
-}
-@media only screen and (min-width: 901px){
-#img_stage div{
-	max-height:800px;
-}
-}
 
 
 </style>
@@ -77,8 +62,13 @@
 <body ng-app="AduguShopApp" ng-controller="ProductDisplay" ng-init="showImg=false">
 
 <div id="header_placeholder"> </div>
-	
-<div class="w3-row w3-white w3-margin-bottom">
+
+<div class="w3-row w3-white w3-margin-bottom" >
+	<!-- Loading Indication-->
+	<div ng-show="backbone.loading" class="w3-container w3-center">
+		<img class="w3-mobile" src="/images/loading.gif"/>
+	</div>
+
 	<div class="w3-center" ng-if="itemInfo.ProductHierarchy.length >= 2">
 		<span ng-repeat="level in itemInfo.ProductHierarchy">
 			<span ng-if="$first">{{level.text[backbone.lang]}}</span>
@@ -97,19 +87,20 @@
 
  <div class="w3-container w3-col l6 w3-white">
 	<div id="product_title"  class="w3-margin-top w3-margin-bottom w3-large" ng-bind-html="itemInfo.Title[backbone.lang]"></div>
-	<div  id="product_price" class="w3-margin-top w3-margin-bottom price w3-wide w3-large">
+	<div  id="product_price" class="w3-margin-top w3-margin-bottom price w3-wide w3-large"
+		 ng-show="!itemInfo.isCustom">
 		{{itemInfo.Price[currency.toLowerCase()] | myCurrency: currency}}
 	</div>
 
 	<!--Currency chooser  -->
-		<div class="w3-large">
+		<div class="w3-large" ng-show="!itemInfo.isCustom">
 			<span class="w3-white w3-round-large hoverable">
 				<span class="button" onclick="Shop_updateCurrency('HUF')" ng-class="{'w3-tag w3-theme':currency=='HUF'}">HUF</span> | 
 				<span class="button" onclick="Shop_updateCurrency('EUR')" ng-class="{'w3-tag w3-theme':currency=='EUR'}">EURO</span>
 			</span>
 		</div>
-	
-	<div class="w3-modal" ng-show="modal.show">
+	<!-- Overlay of chosen pattern-->
+	<div class="w3-modal" ng-show="modal.show" style="display: block;">
 		<div class="w3-modal-content w3-animate-zoom">
 			<div class="w3-display-container" style="height:350px">
 				<span class="w3-display-topright material-icons w3-xxlarge w3-white hoverable" ng-click="modal.show = false">close</span>
@@ -179,18 +170,21 @@
 	<!--Info about add to basket button-->
 	<div class="w3-row w3-center" style="margin-top: 30px;">
 		<button id="add_basket_button" 
-				ng-hide="itemInfo.Quantity <= 0 && itemInfo.TrackStock"
-				class="w3-button w3-xlarge w3-border w3-border-black w3-hover-white w3-theme w3-round w3-col m6 l12" 
-				style="max-width: 400px;" 
+				ng-hide="(itemInfo.Quantity <= 0 && itemInfo.TrackStock) || itemInfo.isCustom"
+				class="w3-button w3-xlarge w3-border w3-border-black w3-hover-white w3-theme w3-round w3-col m6 l9" 
 				ng-click="addToBasket();showImg=false">Add To Basket
 		</button>
 		<span class="w3-text-red w3-large" ng-show="itemInfo.Quantity <= 0 && itemInfo.TrackStock">
 			<b>Item is out of stock</b>
 		</span>
+		<a class="w3-button w3-large w3-border w3-border-black w3-hover-white w3-theme w3-round w3-col m6 l9" 
+			ng-show="itemInfo.isCustom"
+			href="Contact.html?topic={{itemInfo.ItemId}}">
+			Contact Us For More Information
+		</a>
 	</div>
 	<div class="w3-container w3-margin-top w3-row" id="added-prompt" style="padding:0;opacity:0">
-		<div class="w3-center w3-animate-left w3-padding w3-theme-2 w3-text-white w3-large w3-col m6 l12"
-			style="max-width: 400px">
+		<div class="w3-center w3-animate-left w3-padding w3-theme-2 w3-text-white w3-large w3-col m6 l9">
 			Item has been added to your basket
 		</div>
 	</div>
@@ -211,7 +205,7 @@
 		<div ng-click="del=!del;des=false;ret=false" class="w3-border-bottom w3-border-black w3-padding" style="width:100%;height=auto;overflow:auto">
 				<span class="w3-left w3-large">Delivery Information</span>
 				<span class="w3-right w3-large"> <i ng-show="del==false">+</i><i ng-show="del==true">-</i></span>
-		<br><div ng-show="del==true" class="w3-margin-top"><div ng-include="'legal/delivery-min.html'"></div></div>
+		<br><div ng-show="del==true" class="w3-margin-top w3-small"><div ng-include="'legal/delivery-min.html'"></div></div>
 		</div>
 		<div ng-click="ret=!ret;del=false;des=false" class="w3-border-bottom w3-border-black w3-padding" style="width:100%;height=auto;overflow:auto">
 				<span class="w3-left w3-large">Returns</span>

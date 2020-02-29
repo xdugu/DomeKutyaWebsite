@@ -13,5 +13,21 @@
         "lastBasketSize": 0,
         "deliveryMethod": ""
     },
+    "homePage":[
+        {
+         "title":{"en": "Our Other Products", "hu": "A masik termekeink"},
+         "list": ["Lora-rampa", "Bodza-3-step", "Molly-Rampa"],
+         "showPrice": true,
+         "linkToPage": "ProductPage.html"
+
+        },
+        {
+            "title":{"en": "Specially made for you", "hu": "Kulonleges termekeink"},
+            "list": ["Carlos-2:1-lepcso", "Minnie-2:1-rampa", "Molly-Rampa"],
+            "showPrice": false,
+            "linkToPage": "ProductPage.html"
+   
+        }
+    ],
     "version": 7
 }
