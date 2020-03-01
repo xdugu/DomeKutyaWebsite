@@ -8,11 +8,13 @@
 		<div class="w3-margin-top"><i class="fa fa-copyright w3-text-white"></i> Copyright Döme-Kutya 2020</div>
 		<div class="w3-xxlarge">
 			<a href="https://www.facebook.com/domekutyalepcso/" target="_blank" class="fa fa-facebook "></a>
-			<i class="fa fa-instagram"></i>
+			<a href="https://www.instagram.com/domelepcsorampa/" class="fa fa-instagram"></a>
+		</div>
+		<div ng-include="'legal/privacy.html'" ng-init="forFooter = true">
 		</div>
 		<div>
-			<a class="underlined w3-small" href="help.html?show=use-of-personal-data">Use Of Personal Data  </a>|
-			<a class="underlined w3-small" href="help.html?show=contract">Legal Information</a>
+			<a class="underlined w3-small" href="{{backbone.lang}}/help.html?show=use-of-personal-data">Use Of Personal Data  </a>|
+			<a class="underlined w3-small" href="{{backbone.lang}}/help.html?show=contract">Legal Information</a>
 		</div>
 	</div>
 </div>

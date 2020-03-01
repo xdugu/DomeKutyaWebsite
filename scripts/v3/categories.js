@@ -13,9 +13,8 @@ var app = angular.module('AduguShopApp', ['ngSanitize']);
 app.controller('Categories', ['$scope', 'CommonFuncs', 'ApiManager', function($scope, CommonFuncs, ApiManager) {
 	$scope.products = [];
 	//Language stuff
-	$scope.backbone = {lang:null};	
+	$scope.backbone = {lang:null, categoryName: "Categories"};	
 	$scope.changeLanguage = Common_changeLanguage;
-	$scope.CommonFuncs = CommonFuncs
 
 
 	// Get config for app specific stuff
@@ -52,8 +51,7 @@ app.controller('Categories', ['$scope', 'CommonFuncs', 'ApiManager', function($s
 		for(let i = 1; i < level.length; i++){
 			category = category.sub.find(item => item.name == level[i]);
 		}
-		$('#category-name').append(category.text[$scope.backbone.lang]);
-			
+		$scope.backbone.categoryName = category.text;			
 	});
 
 	

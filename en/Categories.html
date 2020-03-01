@@ -1,7 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+
+<html lang="{{backbone.lang}}" ng-app="AduguShopApp" ng-controller="Categories">
+
 <head>
-<title> Dome Kutya | Product Categories </title>
+<title>{{backbone.categoryName[backbone.lang]}}</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta charset="UTF-8">
 <meta name="description" content="Browse through our product categories which include stairs, ramps, dog lofts, beanbags and more!">
@@ -31,12 +33,12 @@
 
 </head> 
 
-<body ng-app="AduguShopApp" ng-controller="Categories">
+<body >
 
 
 <div id="header_placeholder"> </div>
 
-<div id="category-name" class="w3-xxlarge w3-center"></div>
+<div class="w3-xxlarge w3-center">{{categoryName[backbone.lang]}}</div>
 
 <!--Currency chooser  -->
 <div class="w3-large w3-center w3-margin">
@@ -46,13 +48,15 @@
 	</span>
 </div>
 
-<div id="product-shelf-placeholder" class="w3-container" style="padding:0;margin:0">
+<div  class="w3-content w3-container" style="max-width: 1200px;">
 	<!-- Loading Indication-->
 	<div ng-show="backbone.loading" class="w3-container w3-center">
 		<img class="w3-mobile" src="/images/loading.gif"/>
 	</div>
 
-	<a ng-repeat="product in categoryData" href="ProductPage.html?{{product.href}}" class="w3-left w3-center w3-large w3-mobile my-product w3-white" style="width:48.5%;margin-top:2vh;">
+	<a ng-repeat="product in categoryData" href="ProductPage.html?{{product.href}}" 
+			class="w3-left w3-center w3-large w3-mobile my-product w3-white" 
+			style="width:48.5%;margin-top:2vh;">
 
 			<div style="width:100%; overflow:hidden;" class="category-image">
 				<img class="category-image w3-center" lazy-load="{{config.imgSrc}}/{{product.Images.path}}{{product.Images.list[0].name}}" 
@@ -72,7 +76,7 @@
 
 </div>
 
-<div ng-include="'footer.html'" class="w3-margin-top"></div>
+<div ng-include="'footer.html'" class="w3-container w3-stretch" style="margin-top: 20px !important;"></div>
 
 </body>
 </html>

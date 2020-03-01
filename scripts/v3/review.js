@@ -44,7 +44,6 @@ app.controller('Review', ['$scope', 'ApiManager', function($scope, ApiManager) {
 	//////////Called to submit order/////////////////////////////////////
 	$scope.updatePaymentMethod = function(method, details){
 			
-			$scope.createOrderCode();
 			$scope.shopping['comments']=$scope.temp.comments;
 			$scope.shopping.paymentMethod = 'payBeforeDelivery';
 			if(method == 'payOnDelivery'){
@@ -64,16 +63,7 @@ app.controller('Review', ['$scope', 'ApiManager', function($scope, ApiManager) {
 			localStorage.removeItem("basketId");
 	}
 	
-	$scope.createOrderCode = function (){
-		let currDate = new Date();
-		let str = currDate.getFullYear() + Common_pad(currDate.getMonth()+1) + Common_pad(currDate.getDate()) + $scope.shopping.contact.firstName;
-		let pos = str.search(" ");//We will take only the first or last name as part of the reference
-		if(pos>0){
-			str = str.substring(0,pos);
-		}
-		$scope.shopping.orderCode = str;
-	}
-	
+
 	$scope.backButtonPressed = function (){
 		if( $scope.backbone.showConfirmed==true || $scope.backbone.showPaypalReceipt==true )
 		{
