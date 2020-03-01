@@ -119,15 +119,15 @@ app.controller('Review', ['$scope', 'ApiManager', function($scope, ApiManager) {
 			},
 			purchase_units: [{
 			  amount: {
-				value:  $scope.order.Costs.Posta.total.toString(),
+				value:  $scope.order.Costs[shopping.deliveryMethod].total.toString(),
 				currency_code: $scope.currency,		
 				breakdown: {
 				  item_total: {
-					  value: $scope.order.Costs.Posta.subTotal.toString(),
+					  value: $scope.order.Costs[shopping.deliveryMethod].subTotal.toString(),
 					  currency_code: $scope.currency
 				  },
 				  shipping: {
-					  value: $scope.order.Costs.Posta.delivery.toString(),
+					  value: $scope.order.Costs[shopping.deliveryMethod].delivery.toString(),
 					  currency_code: $scope.currency
 				  }
 				}
