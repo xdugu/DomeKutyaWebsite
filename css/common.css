@@ -34,11 +34,7 @@ h5 {
   font-size: 0.8vw;
 }
 p {
-  margin-left: 1vw;
-  margin-right: 1vw;
-  text-align: left;
-  font-size: 1.3vw;
-  font-family: 'Kalam', calibri; 
+	font-size: 0.8em !important; 
 }
 a
 {

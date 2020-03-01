@@ -23,15 +23,16 @@
 <script src="/scripts/v3/review.js" ></script>
 <script src="/scripts/v3/directives/directives.js" ></script>
 <script src="/scripts/v3/services/factories.js" ></script>
+<script src="/scripts/v3/directives/translator.js" ></script>
 
 </head> 
 
-<body ng-app="AduguShopApp">
+<body ng-app="AduguShopApp" ng-controller="Review" >
 
 
-<div id="header_placeholder"> </div>
-<div class="w3-margin-top" ng-controller="Review" ng-init="showBank=false;comment=''">
-	<div class="w3-large w3-center w3-xxlarge" style="font-weight:bold">Order Review</div>
+<div ng-include="'header.html'"> </div>
+<div class="w3-margin-top" ng-init="showBank=false;comment=''">
+	<div class="w3-large w3-center w3-xxlarge" style="font-weight:bold">{{'order-review' | myTranslator : backbone.lang}}</div>
 	<div class="w3-row">
 	<div class="w3-col l6 w3-padding">
 		<div ng-repeat="item in order.Items" class="w3-card w3-margin-top w3-padding w3-white animate-order" style="width: 100%;overflow:hidden;">
@@ -58,44 +59,45 @@
 			</div>
 			<div class="w3-display-container" style="height:10vh;">
 				<div id="" class="w3-display-bottomleft quantity w3-hide-small" style="height: 2vw;">
-					<span><b>Quantity:</b> {{item.Quantity}}</span>
+					<span><b>{{'quantity' | myTranslator : backbone.lang}}:</b> {{item.Quantity}}</span>
 				</div>
 				<!-- Duplicate of above for positioning-->
 				<div id="" class="w3-display-left quantity w3-hide-large w3-hide-medium" style="height: 2vw;">
-					<span><b>Quantity:</b> {{item.Quantity}}</span>
+					<span><b>{{'quantity' | myTranslator : backbone.lang}}:</b> {{item.Quantity}}</span>
 				</div>
 				<div id="price" class="w3-display-right price">{{item.Price[currency.toLowerCase()] * item.Quantity | myCurrency : currency}}</div>
 			</div>		
 	</div>
-	<div ng-hide="shopping.contact.country =='default'" class="w3-white w3-padding w3-margin-top">
-		<div class="w3-large w3-margin-top">Subtotal: <span class="price">{{order.Costs[shopping.deliveryMethod].subTotal | myCurrency : currency}}</span></div>
-		<div class="w3-large w3-margin-top">Delivery: <span class="price">{{order.Costs[shopping.deliveryMethod].delivery | myCurrency : currency}}</span></div>
-		<div class="w3-xlarge w3-margin-top">Total: <span class="price-total">{{order.Costs[shopping.deliveryMethod].total | myCurrency : currency}}</span></div>
+	<div class="w3-white w3-padding w3-margin-top">
+		<div class="w3-large w3-margin-top">{{'subtotal' | myTranslator : backbone.lang}}: <span class="price">{{order.Costs[shopping.deliveryMethod].subTotal | myCurrency : currency}}</span></div>
+		<div class="w3-large w3-margin-top">{{'delivery' | myTranslator : backbone.lang}}: <span class="price">{{order.Costs[shopping.deliveryMethod].delivery | myCurrency : currency}}</span></div>
+		<div class="w3-xlarge w3-margin-top">{{'total' | myTranslator : backbone.lang}}: <span class="price-total">{{order.Costs[shopping.deliveryMethod].total | myCurrency : currency}}</span></div>
 	</div>
 	</div>
 	
 	<div class="w3-col l6 w3-padding">	
 		<div class="w3-card w3-padding w3-margin-top w3-white">
-		<div class="w3-large w3-center w3-large" style="font-weight:bold">Contact Information</div>
+		<div class="w3-large w3-center w3-large" style="font-weight:bold">{{'contact-info' | myTranslator : backbone.lang}}</div>
 			<div>{{shopping.contact.firstName}}</div>
 			<div>{{shopping.contact.email}}</div>
 			<div>{{shopping.contact.number}}</div>
 			
-			<div class="w3-margin-top"><strong>Deliver To:</strong></div>
+			<div class="w3-margin-top"><strong>{{'deliver-to' | myTranslator : backbone.lang}}</strong></div>
 			<div>{{shopping.contact.firstName}}</div>
 			<div>{{shopping.contact.address1}}</div>
 			<div ng-hide="shopping.contact.address2==''">{{shopping.contact.address2}}</div>
 			<div>{{shopping.contact.city}}</div>
 			<div>{{shopping.contact.postCode}}</div>
-			<div>{{shopping.contact.country}}</div>
+			<div>{{shopping.contact.country.toLowerCase() | myTranslator : backbone.lang}}</div>
 		</div>
 	</div>
 	</div>
 	
 	<div class="w3-row w3-padding"> 
 	<div class="w3-col l5">
-		<b>Comments: Maximum length  ({{temp.comments.length}}/500)</b><br>
-		<textarea style="width:100%" rows="5" name="fname" ng-model="temp.comments" maxlength="500"></textarea>
+		<b>{{'comments' | myTranslator : backbone.lang}}: {{'max-length' | myTranslator : backbone.lang}}  
+			({{temp.comments.length}}/500)</b><br>
+		<textarea style="width:100%; font-family: Arial, Helvetica, sans-serif;" rows="5" name="fname" ng-model="temp.comments" maxlength="500"></textarea>
 	</div>
 	</div>
 	
@@ -104,11 +106,11 @@
 		<div class="w3-row">
 			<div id="paypal-button" class="w3-col l3 m6 w3-mobile w3-margin-top w3-white w3-round"></div>
 		</div>
-		<div class="w3-row" ng-show="shopping.contact.country=='Hungary' && currency=='HUF'">
-			<div ng-click="backbone.showBank=true" class="w3-col l3 m6 w3-mobile w3-button w3-black  w3-margin-bottom w3-margin-top w3-padding w3-round">Bank Transfer</div>	
+		<div class="w3-row" ng-show="shopping.contact.country=='Hungary' && currency == 'HUF'">
+			<div ng-click="backbone.showBank=true" class="w3-col l3 m6 w3-mobile w3-button w3-black  w3-margin-bottom w3-margin-top w3-padding w3-round">{{'bank-transfer' | myTranslator : backbone.lang}}</div>	
 		</div>
 		<div class="w3-row">
-			<div ng-show="shopping.contact.country=='Hungary' && currency=='HUF'" ng-click="backbone.showPayLater=true" class="w3-col l3 m6 w3-mobile w3-button w3-brown w3-margin-bottom w3-margin-top w3-padding w3-round">Pay On Delivery</div>	
+			<div ng-show="shopping.contact.country=='Hungary' && currency=='HUF'" ng-click="backbone.showPayLater=true" class="w3-col l3 m6 w3-mobile w3-button w3-brown w3-margin-bottom w3-margin-top w3-padding w3-round">{{'pay-on-delivery' | myTranslator : backbone.lang}}</div>	
 		</div>
 	</div>
 	
@@ -116,15 +118,27 @@
 		<div class="w3-modal-content w3-animate-top w3-card-4" style="top:25vh;">
 		 <span ng-click="backButtonPressed()" class="material-icons w3-large w3-display-topright" style="cursor:pointer">cancel</span>
 		  <div class="w3-container" ng-show="backbone.showConfirmed==false">
-			<div class="w3-medium" style="margin-top:1vh">Please confirm that you want to pay by bank transfer. We will send you an email
-			with our account details and payment reference number
+			<div class="w3-medium" style="margin-top:1vh">
+			<span ng-show="backbone.lang == 'en'">Please confirm that you want to pay by bank transfer. We will send you an email
+				with our account details and payment reference number
+			</span>
+			<span ng-show="backbone.lang == 'hu'">
+				Kérjük erősítse meg, hogy valóban banki átutalással szerete-e fizetni. Amennyiben megerősíti, küldeni fogunk Önnek egy e-mailt, 
+				amelyben megtalálja az utaláshoz szükséges adatokat, illetve a referencia számot.
+			</span>
 			</div>
 			<a ng-click="backbone.showConfirmed=true;updatePaymentMethod('bankTransfer');" class="w3-button w3-red w3-margin-top w3-margin-bottom">Confirm</a>
 		  </div>
 		   <div class="w3-container" ng-show="backbone.showConfirmed==true">
 		   
-			<div class="w3-medium" style="margin-top:1vh">We have sent an email to <strong>{{shopping.contact.email}}</strong> with instructions of bank transfer. Please do
-				this within 24 hours to allow us to process your order.
+			<div class="w3-medium" style="margin-top:1vh">
+				<span ng-show="backbone.lang == 'en'">We have sent an email to <strong>{{shopping.contact.email}}</strong> with instructions of bank transfer. Please do
+					this within 24 hours to allow us to process your order.
+				</span>
+				<span ng-show="backbone.lang == 'hu'">
+					A következő e-mail címre <strong>{{shopping.contact.email}}</strong> küldjük el az utaláshoz szükséges információkat.
+					Kérjük, hogy az utalást 24 órán belül tegye meg, hogy legyen időnk feldolgozni a rendelését.
+				</span>
 			</div>
 		  </div>
 		</div>
@@ -133,8 +147,14 @@
 		<div class="w3-modal-content w3-animate-top w3-card-4" style="top:25vh;">
 		 <span ng-click="backButtonPressed()" class="material-icons w3-large w3-display-topright" style="cursor:pointer">cancel</span>
 		  <div class="w3-container">
-			<div class="w3-large w3-text-green" style="font-weight:bold">Order Confirmation</div>
-			<div class="w3-medium" style="margin-top:1vh">Thank you for placing your order. We will work hard to get it to you as quickly as possible.
+			<div class="w3-large w3-text-green" style="font-weight:bold">{{'order-confirmation' | myTranslator : backbone.lang}}</div>
+			<div class="w3-medium" style="margin-top:1vh">
+				<span ng-show="backbone.lang == 'en'">Thank you for placing your order. We will work hard to get it to you as quickly as possible.
+					  Please note that for our ramps and stairs it takes approx. <b>10 working days</b> to make and deliver
+				</span>
+				<span ng-show="backbone.lang == 'hu'">
+					Köszönjük, hogy leadta rendelését. Igyekszünk, hogy a megrendelt termék minél hamarabb eljusson Önhöz.
+				</span>
 			</div>
 		  </div>
 		</div>
@@ -144,14 +164,26 @@
 		<div class="w3-modal-content w3-animate-top w3-card-4" style="top:25vh;">
 		 <span ng-click="backButtonPressed()" class="material-icons w3-large w3-display-topright" style="cursor:pointer">cancel</span>
 		  <div class="w3-container" ng-show="backbone.showConfirmed==false">
-			<div class="w3-medium" style="margin-top:1vh">Please confirm that you want to pay on delivery. We will send you an email to confirm.
-			Please note that this will increase the total price by <span class="price">{{order.Costs.Posta.payOnDeliveryAdditional}} Ft</span>. 
-			Your total to pay will be <span class="price">{{order.Costs.Posta.total + order.Costs.Posta.payOnDeliveryAdditional | myCurrency : currency}}</span>
+			<div class="w3-medium" style="margin-top:1vh">
+				<span ng-show="backbone.lang == 'en'">
+					Please confirm that you want to pay on delivery. We will send you an email to confirm.
+					Please note that this will increase the total price by <span class="price">{{order.Costs[shopping.deliveryMethod].payOnDeliveryAdditional}} Ft</span>. 
+					Your total to pay will be</span>
+				</span>
+				<span ng-show="backbone.lang == 'hu'">
+					Kérjük erősítse meg, hogy utánvéttel szeretne fizetni.
+					 A megerősítéshez küldünk Önnek egy e-mailt. Kérjük vegye figyelembe, hogy utánvét esetén a végösszeghez hozzáadódik az utánvét díja, mely 
+					 <span class="price">{{order.Costs[shopping.deliveryMethod].payOnDeliveryAdditional}} Ft</span>. 
+					 Így a végösszeg</span>
+				</span>
+				<span class="price">{{order.Costs[shopping.deliveryMethod].total + order.Costs[shopping.deliveryMethod].payOnDeliveryAdditional | myCurrency : currency}}</span>
 			</div>
 			<a ng-click="backbone.showConfirmed=true;updatePaymentMethod('payOnDelivery')" class="w3-button w3-red w3-margin-top w3-margin-bottom">Confirm</a>
 		  </div>
-		   <div class="w3-container" ng-show="backbone.showConfirmed==true">
-			<div class="w3-medium" style="margin-top:1vh">Thank you. We have sent an email to  <strong>{{shopping.contact.email}}</strong>. We will dispatch your order soon
+		   <div class="w3-container" ng-show="backbone.showConfirmed == true">
+			<div class="w3-medium" style="margin-top:1vh">
+				<span ng-show="backbone.lang == 'en'">Thank you. We have sent an email to  <strong>{{shopping.contact.email}}</strong>. We will dispatch your order soon</span>
+				<span ng-show="backbone.lang == 'hu'">A megrendelés megerősítését a következő e-mail címre küldjük <strong>{{shopping.contact.email}}</strong>. Megrendelését hamarosan kézbesítjük!</span>
 			</div>
 		  </div>
 		</div>

@@ -1,14 +1,14 @@
 
 <!--Sidebar that slides from right-->
 <div class="w3-sidebar w3-theme-2 w3-text-white w3-bar-block w3-right w3-large" style="display:none; right: 0px; max-height: 400px;" id="sidebar">
-		<button onclick="Common_sideBar('off')" class="w3-bar-item w3-button w3-large">Close &times;</button>
-		<a class="w3-bar-item w3-button w3-animate-left w3-border-top w3-border-white" href="Categories.html?storeId=KutyaLepcso&category=Kutyalepcso>Lepcsok">Stairs</a>
-		<a class="w3-bar-item w3-button w3-animate-left w3-border-top w3-border-white" href="Categories.html?storeId=KutyaLepcso&category=Kutyalepcso>Rampak">Ramps</a>
+		<button onclick="Common_sideBar('off')" class="w3-bar-item w3-button w3-large">{{ 'close' | myTranslator : backbone.lang}} &times;</button>
+		<a class="w3-bar-item w3-button w3-animate-left w3-border-top w3-border-white" href="Categories.html?storeId=KutyaLepcso&category=Kutyalepcso>Lepcsok">{{ 'stairs' | myTranslator : backbone.lang}}</a>
+		<a class="w3-bar-item w3-button w3-animate-left w3-border-top w3-border-white" href="Categories.html?storeId=KutyaLepcso&category=Kutyalepcso>Rampak">{{ 'ramps' | myTranslator : backbone.lang}}</a>
                 <a class="w3-bar-item w3-button w3-animate-left w3-border-top w3-border-white" href="Categories.html?storeId=KutyaLepcso&category=My-Bulldog">MyBulldog</a>
-                <a class="w3-bar-item w3-button w3-animate-left w3-border-top w3-border-white" href="Gallery.html">Customer Photos</a>
-                <a class="w3-bar-item w3-button w3-animate-left w3-border-top w3-border-white" href="Contact.html">Contact us</a>
-                <a class="w3-bar-item w3-button w3-animate-left w3-border-top w3-border-white" href="About.html">About Us</a>
-                <a class="w3-bar-item w3-button w3-animate-left w3-border-top w3-border-bottom w3-border-white" href="Settings.html">Settings</a>
+                <a class="w3-bar-item w3-button w3-animate-left w3-border-top w3-border-white" href="Gallery.html">{{'customer-photos' | myTranslator : backbone.lang}}</a>
+                <a class="w3-bar-item w3-button w3-animate-left w3-border-top w3-border-white" href="Contact.html">{{'contact' | myTranslator : backbone.lang}}</a>
+                <a class="w3-bar-item w3-button w3-animate-left w3-border-top w3-border-white" href="About.html">{{ 'about-us' | myTranslator : backbone.lang}}</a>
+                <a class="w3-bar-item w3-button w3-animate-left w3-border-top w3-border-bottom w3-border-white" href="Settings.html">{{ 'settings' | myTranslator : backbone.lang}}</a>
 </div>
 
 <!--Main mernu-->
@@ -21,9 +21,9 @@
                 <span class="material-icons w3-xlarge">shopping_cart</span>
                 <span class="basket-num w3-text-white w3-small bold w3-badge"></span>
         </a>
-        <a class="w3-bar-item heading w3-right w3-hide-small w3-hide-medium" href="Contact.html">Contact</a>
-        <a class="w3-bar-item heading w3-right w3-hide-small w3-hide-medium" href="Categories.html?storeId=KutyaLepcso&category=Kutyalepcso>Lepcsok">Stairs</a>
-        <a class="w3-bar-item heading w3-right w3-hide-small w3-hide-medium" href="Categories.html?storeId=KutyaLepcso&category=Kutyalepcso>Rampak">Ramps</a>	
+        <a class="w3-bar-item heading w3-right w3-hide-small w3-hide-medium" href="Contact.html">{{'contact' | myTranslator : backbone.lang}}</a>
+        <a class="w3-bar-item heading w3-right w3-hide-small w3-hide-medium" href="Categories.html?storeId=KutyaLepcso&category=Kutyalepcso>Lepcsok">{{'stairs' | myTranslator : backbone.lang}}</a>
+        <a class="w3-bar-item heading w3-right w3-hide-small w3-hide-medium" href="Categories.html?storeId=KutyaLepcso&category=Kutyalepcso>Rampak">{{'ramps' | myTranslator : backbone.lang}}</a>	
 
         <!-- Icons from mobile and tablets-->
         <button class="w3-bar-item  w3-transparent w3-hide-large w3-text-white w3-right material-icons" onclick="Common_sideBar('toggle')">menu</button>

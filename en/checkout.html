@@ -22,55 +22,69 @@
 <script src="/scripts/v3/common.js" ></script>
 <script src="/scripts/v3/shop.js" ></script>
 <script src="/scripts/v3/checkout.js" ></script>
+<script src="/scripts/v3/directives/translator.js" ></script>
 
 </head> 
 
-<body>
+<body ng-app="AduguShopApp" ng-controller="Checkout" >
 
-<div id="header_placeholder"> </div>
-<div id="product_shelf_placeholder" class="w3-container w3-margin-top" ng-app="AduguShopApp" ng-controller="Checkout" ng-init="agreed=false">
+<div ng-include="'header.html'"> </div>
+
+<div class="w3-container w3-margin-top" ng-init="agreed=false">
 	
-
 	<div class="w3-card w3-mobile" style="width:70%">
-	<div class="w3-large w3-center">Contact Information</div>
-	<form name="form1" novalidate class="entry">
-		<input type="text" class="w3-input" name="name" ng-model="user.firstName" required placeholder="Full Name"  autocomplete="name"/>
-		<span class="w3-text-red" ng-show="form1.name.$touched && form1.name.$invalid">Your name is required</span>
+	<div class="w3-large w3-center">{{'contact-info' | myTranslator : backbone.lang}}</div>
+	<form name="form1" novalidate class="entry w3-padding" >
+		<input type="text" class="w3-input" name="name" ng-model="user.firstName" required  autocomplete="name"/>
+		<label style="color: var(--main-theme)">{{'full-name' | myTranslator : backbone.lang}}</label>
+		<span class="w3-text-red" ng-show="form1.name.$touched && form1.name.$invalid">{{'required' | myTranslator : backbone.lang}}</span>
 		
-		<input type="text" class="w3-input" name="dogs" ng-model="user.dogsName" placeholder="Your dog's name"  />
+		<input type="text" class="w3-input" name="dogs" ng-model="user.dogsName" />
+		<label style="color: var(--main-theme)">{{'dogs-name' | myTranslator : backbone.lang}}</label>
+
+		<input type="email" class="w3-input" name="email" ng-model="user.email" placeholder="" required  autocomplete="email"/>
+		<label style="color: var(--main-theme)">{{'email' | myTranslator : backbone.lang}}</label>
+		<span class="w3-text-red" ng-show="form1.email.$touched && form1.email.$invalid">{{'required' | myTranslator : backbone.lang}}</span>
 		
-		<input type="email" class="w3-input" name="email" ng-model="user.email" placeholder="Email address" required  autocomplete="email"/>
-		<span class="w3-text-red" ng-show="form1.email.$touched && form1.email.$invalid">E-mail address is required</span>
-		
-		<input type="tel" class="w3-input" name="number" ng-model="user.number" placeholder="Telephone Number" autocomplete="tel" required /><br/>
-		<span class="w3-text-red" ng-show="form1.number.$touched && form1.number.$invalid">Telephone Number Required</span>
+		<input type="tel" class="w3-input" name="number" ng-model="user.number" placeholder="" autocomplete="tel" required />
+		<label style="color: var(--main-theme)">{{'telephone' | myTranslator : backbone.lang}}</label>
+		<span class="w3-text-red" ng-show="form1.number.$touched && form1.number.$invalid">{{'required' | myTranslator : backbone.lang}}</span>
 	</form>
 	</div>
 	<div class="w3-card w3-margin-top w3-mobile" style="width:70%">
-		<div class="w3-large w3-center">Delivery Information</div>
-		<form  name="form" novalidate class="entry">
-			<input type="text" class="w3-input" name="addr" ng-model="user.address1" required placeholder="Address line 1"  autocomplete="address-line1" />
-			<span class="w3-text-red" ng-show="form.addr.$touched && form.addr.$invalid">Your address line is required</span>
+		<div class="w3-large w3-center">{{'delivery-information' | myTranslator : backbone.lang}}</div>
+		<form  name="form" novalidate class="entry w3-padding">
+			<input type="text" class="w3-input" name="addr" ng-model="user.address1" required placeholder=""  autocomplete="address-line1" />
+			<label style="color: var(--main-theme)">{{'address' | myTranslator : backbone.lang}} 1</label>
+			<span class="w3-text-red" ng-show="form.addr.$touched && form.addr.$invalid">{{'required' | myTranslator : backbone.lang}}</span>
 			
-			<input type="text" class="w3-input" ng-model="user.address2" placeholder="Address 2 (optional)"  autocomplete="address-line2"/>
-			<input type="text" class="w3-input" name="city" ng-model="user.city" required placeholder="City"/>
-			<span class="w3-text-red" ng-show="form.city.$touched && form.city.$invalid">City is required</span>
+			<input type="text" class="w3-input" ng-model="user.address2" placeholder=""  autocomplete="address-line2"/>
+			<label style="color: var(--main-theme)">{{'address' | myTranslator : backbone.lang}} 2 (optional)</label>
 			
-			<input type="text" class="w3-input" name="pcode"ng-model="user.postCode" required placeholder="Post Code"  autocomplete="postal-code"/>
-			<span class="w3-text-red" ng-show="form.pcode.$touched && form.pcode.$invalid">Postcode is required</span>
+			<input type="text" class="w3-input" name="city" ng-model="user.city" required placeholder=""/>
+			<label style="color: var(--main-theme)">{{'city' | myTranslator : backbone.lang}}</label>
+			<span class="w3-text-red" ng-show="form.city.$touched && form.city.$invalid">{{'required' | myTranslator : backbone.lang}}</span>
 			
 			
-			<input type="text" class="w3-input" name="country" ng-model="user.country" disabled />
+			<input type="text" class="w3-input" name="pcode"ng-model="user.postCode" required placeholder=""  autocomplete="postal-code"/>
+			<label style="color: var(--main-theme)">{{'postcode' | myTranslator : backbone.lang}}</label>
+			<span class="w3-text-red" ng-show="form.pcode.$touched && form.pcode.$invalid">{{'required' | myTranslator : backbone.lang}}</span>
+			
+			<br><br>
+			<input type="text" class="w3-input" name="country" value="{{user.country.toLowerCase() | myTranslator : backbone.lang}}" disabled/>
 
 		</form>
 	</div>
 
 	<label id="terms"  class="w3-block w3-margin-bottom w3-margin-top w3-white w3-round w3-padding w3-mobile" style="width:70%">
-		<input type="checkbox" ng-disabled="!form.$valid || !form1.$valid" ng-model="agreed"> I agree with the <a class="underlined" href="help.html?show=contract" target="_blank">terms and conditions</a>
-		in regards to this order
+		<input type="checkbox" ng-disabled="!form.$valid || !form1.$valid" ng-model="agreed"> 
+			<span ng-if="backbone.lang == 'en'">I agree with the <a class="underlined" href="Help.html?show=contract" target="_blank">terms and conditions</a> in regards to this order</span>
+	 		<span ng-if="backbone.lang == 'hu'">Ezzel a rendeléssel elfogadom az <a class="underlined" href="Help.html?show=contract" target="_blank">Általános Szerződési Felételeket</a></span> 
 	</label>
 	
-	<a id="payment-proceed" ng-show="agreed" ng-click="proceedToPayment()" class="w3-button w3-black  w3-margin-bottom w3-padding w3-mobile" style="width:50%">Proceed to Payment</a>		
+	<a id="payment-proceed" ng-show="agreed" ng-click="proceedToPayment()" 
+			class="w3-button w3-black  w3-margin-bottom w3-padding w3-mobile" 
+			style="width:50%">{{'proceed-to-payment' | myTranslator : backbone.lang}}</a>		
 
 
 	

@@ -29,6 +29,7 @@
 <script src="/scripts/v3/product.js" ></script>
 <script src="/scripts/v3/directives/directives.js" ></script>
 <script src="/scripts/v3/services/factories.js" ></script>
+<script src="/scripts/v3/directives/translator.js" ></script>
 
 <style>
 /* width */
@@ -61,7 +62,7 @@
 
 <body ng-init="showImg=false">
 
-<div id="header_placeholder"> </div>
+<div ng-include="'header.html'"> </div>
 
 <div class="w3-content" style="max-width: 1200px;">
 	<div class="w3-row w3-white w3-margin-bottom" >
@@ -112,6 +113,29 @@
 				<div class="w3-center w3-large">{{modal.itemToShow.Title[backbone.lang]}}</div>
 			</div>
 		</div>
+
+		<!--Info about add to basket button-->
+		<div class="w3-row w3-center w3-margin-top">
+			<button id="add_basket_button" 
+					ng-hide="(itemInfo.Quantity <= 0 && itemInfo.TrackStock) || itemInfo.isCustom"
+					class="w3-button w3-xlarge w3-border w3-border-black w3-hover-white w3-theme w3-round w3-col m6 l9" 
+					ng-click="addToBasket();showImg=false">{{'add-to-basket' | myTranslator : backbone.lang}}
+			</button>
+			<span class="w3-text-red w3-large" ng-show="itemInfo.Quantity <= 0 && itemInfo.TrackStock">
+				<b>{{'out-of-stock' | myTranslator : backbone.lang}}</b>
+			</span>
+			<a class="w3-button w3-large w3-border w3-border-black w3-hover-white w3-theme w3-round w3-col m6 l9" 
+				ng-show="itemInfo.isCustom"
+				href="Contact.html?topic={{itemInfo.ItemId}}">
+				{{'contact-for-pricing' | myTranslator : backbone.lang}}
+			</a>
+		</div>
+				
+		<div class="w3-container w3-margin-top w3-row" id="added-prompt" style="padding:0;opacity:0">
+			<div class="w3-center w3-animate-left w3-padding w3-theme-2 w3-text-white w3-large w3-col m6 l9">
+				{{'added-to-basket' | myTranslator : backbone.lang}}
+			</div>
+		</div>
 		<!-- Choosing of Variants-->
 		<form name="selections">
 			<div ng-repeat="variant in itemInfo.Variants.variants" ng-init="parentIndex = $index" 
@@ -158,62 +182,46 @@
 					<div class="w3-text-red"
 						ng-show="(selections['var_num_' + $index].$touched && selections['var_num_' + $index].$invalid) ||
 								(selections['var_num_' + $index].$invalid && showAllErrors)">
-						Please enter a number between {{pickedSpec[$index].min}} and {{pickedSpec[$index].max}}
+						<span ng-show="backbone.lang == 'en'">Please enter a number between {{pickedSpec[$index].min}} and {{pickedSpec[$index].max}}</span>
+						<span ng-show="backbone.lang == 'hu'"> Kérjük valasszon {{pickedSpec[$index].min}} és {{pickedSpec[$index].max}}  között</span>
 					</div>
 					<div ng-show="(selections['var_text_' + $index].$touched && selections['var_text_' + $index].$invalid) ||
 									(selections['var_text_' + $index].$invalid && showAllErrors)"
 						class="w3-text-red">
-						Please enter a valid text
+						{{'invalid-text' | myTranslator : backbone.lang}}
 					</div>
 				</div>
 			</div>
-		</form>
-		<!--Info about add to basket button-->
-		<div class="w3-row w3-center" style="margin-top: 30px;">
-			<button id="add_basket_button" 
-					ng-hide="(itemInfo.Quantity <= 0 && itemInfo.TrackStock) || itemInfo.isCustom"
-					class="w3-button w3-xlarge w3-border w3-border-black w3-hover-white w3-theme w3-round w3-col m6 l9" 
-					ng-click="addToBasket();showImg=false">Add To Basket
-			</button>
-			<span class="w3-text-red w3-large" ng-show="itemInfo.Quantity <= 0 && itemInfo.TrackStock">
-				<b>Item is out of stock</b>
-			</span>
-			<a class="w3-button w3-large w3-border w3-border-black w3-hover-white w3-theme w3-round w3-col m6 l9" 
-				ng-show="itemInfo.isCustom"
-				href="Contact.html?topic={{itemInfo.ItemId}}">
-				Contact Us For More Information
-			</a>
-		</div>
-		<div class="w3-container w3-margin-top w3-row" id="added-prompt" style="padding:0;opacity:0">
-			<div class="w3-center w3-animate-left w3-padding w3-theme-2 w3-text-white w3-large w3-col m6 l9">
-				Item has been added to your basket
-			</div>
-		</div>
+		</form>		
 		
-		
-		<div class="gapper w3-hide-small w3-hide-medium" style="height:40px">
+		<div class="gapper" style="height:50px">
 		</div>
 		
 		<div ng-controller="Accordions" ng-init="des=false;del=false;ret=false;" class="w3-margin-bottom more-info">
-			<div ng-click="des=!des;del=false;ret=false" class="w3-border-bottom w3-border-black w3-padding" style="width:100%;height=auto;overflow:auto">
-					<span class="w3-left w3-large">Product Description</span>
+			<div ng-click="des=!des;del=false;ret=false" class="w3-border-bottom w3-border-black w3-padding" style="width:100%;height:auto;overflow:auto">
+					<span class="w3-left w3-large">{{'description' | myTranslator : backbone.lang}}</span>
 					<span class="w3-right w3-large"> <i ng-show="des==false">+</i><i ng-show="des==true">-</i></span>
 			<div ng-show="des==true" class="w3-margin-top">
-				<img ng-if="product.category=='Steps'" ng-src="{{product.imgSrc}}/description_1.jpg" style="width:100%;height:auto;margin:auto"></img>
 				<br><div ng-bind-html="itemInfo.Description[backbone.lang]"></div>
 			</div>
 			</div>
-			<div ng-click="del=!del;des=false;ret=false" class="w3-border-bottom w3-border-black w3-padding" style="width:100%;height=auto;overflow:auto">
-					<span class="w3-left w3-large">Delivery Information</span>
+			<div ng-click="del=!del;des=false;ret=false" class="w3-border-bottom w3-border-black w3-padding" style="width:100%;height:auto;overflow:auto">
+					<span class="w3-left w3-large">{{'delivery' | myTranslator : backbone.lang}}</span>
 					<span class="w3-right w3-large"> <i ng-show="del==false">+</i><i ng-show="del==true">-</i></span>
-			<br><div ng-show="del==true" class="w3-margin-top w3-small"><div ng-include="'legal/delivery-min.html'"></div></div>
+			<br><div ng-if="del==true" class="w3-margin-top w3-large"><div ng-include="'legal/' + backbone.lang + '/delivery-min.html'"></div></div>
 			</div>
-			<div ng-click="ret=!ret;del=false;des=false" class="w3-border-bottom w3-border-black w3-padding" style="width:100%;height=auto;overflow:auto">
-					<span class="w3-left w3-large">Returns</span>
+			<div ng-click="ret=!ret;del=false;des=false" class="w3-border-bottom w3-border-black w3-padding" style="width:100%;height:auto;overflow:auto">
+					<span class="w3-left w3-large">{{'returns' | myTranslator : backbone.lang}}</span>
 					<span class="w3-right w3-large"> <i ng-show="ret==false">+</i><i ng-show="ret==true">-</i></span>
-			<div ng-show="ret==true" class="w3-margin-top"><br>Products can only be returned in their original condition, without any missing items.
-					<br>For returns not related to the quality of the product, we don't refund delivery costs
-			</div>
+				<div ng-show="ret==true && backbone.lang == 'en'" class="w3-margin-top"><br>Products can only be returned in their original condition, without any missing items.
+						<br>For returns not related to the quality of the product, we don't refund delivery costs
+				</div>
+				<div ng-show="ret==true && backbone.lang == 'hu'" class="w3-margin-top">
+					<br>
+						A terméket csak eredeti állapotában és csomagolásában, hiánytalan mennyiségi, minőségi állapotában vesszük vissza.
+						Amennyiben a visszaküldött terméket utánvéttel adja fel, azt nem áll módunkban átvenni.
+						Az esetleges méret problémából adódó cserék esetén, a felmerülő költségek (szállítási költség, utánvét költsége), minden esetben a vevőt terhelik
+				</div>
 			</div>
 		
 		</div>

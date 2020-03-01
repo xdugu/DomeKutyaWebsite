@@ -1,29 +1,29 @@
-<div ng-if="!forFooter">
-	<div style="font-size: 1em" class="w3-margin-top w3-center" ng-if="backbone.lang == 'en'">
+<div ng-if="(cookie.inFooter == 'no' || cookie.inFooter == null) && cookie.show">
+	<div  class="w3-margin-top w3-center" ng-if="lang == 'en'">
 		We use cookies to understand how our website is being used. To disable all cookies, please
 		<a class="underlined" href="Settings.html">follow this link</a> to our website settings
 		<div class="w3-center" ng-show="!forFooter">
-			<button class="w3-theme w3-button w3-round" onclick="Common_changeCookie(true)">Okay</button>
+			<button class="w3-theme w3-button w3-round" ng-click="changeCookie(true)">Okay</button>
 		</div>	
 	</div>
 
-	<div class="w3-margin-top w3-center" style="font-size: 1em" ng-if="backbone.lang == 'hu'">
+	<div class="w3-margin-top w3-center"  ng-if="lang == 'hu'">
 		Szeretnénk minél felhasználó barátabbá és egyszerűbbé tenni weboldalunk használatát.
 		Emiatt weboldalunkon Sütiket (cookies) használunk, hogy jobban megismerhessük a Vevők érdeklődési körét.
 		Ha nem szeretnéd használni a sütiket, akkor kattints <a class="underlined" href="Settings.html"> erre a linkre</a>
 		<div class="w3-center" ng-show="!forFooter">
-			<button class="w3-theme w3-button w3-round" onclick="Common_changeCookie(true)">Rendben</button>
+			<button class="w3-theme w3-button w3-round" ng-click="changeCookie(true)">Rendben</button>
 		</div>
 	</div>
 </div>
 
-<div ng-if="forFooter">
-	<div style="font-size: 1em" ng-if="backbone.lang == 'en'">
+<div ng-if="cookie.inFooter == 'yes'">
+	<div  ng-if="lang == 'en'">
 		We use cookies to understand how our website is being used. To disable all cookies, please
 		<a class="underlined" href="Settings.html">follow this link</a> to our website settings
 	</div>
 
-	<div style="font-size: 1em" ng-if="backbone.lang == 'hu'">
+	<div  ng-if="lang == 'hu'">
 		Szeretnénk minél felhasználó barátabbá és egyszerűbbé tenni weboldalunk használatát.
 		Emiatt weboldalunkon Sütiket (cookies) használunk, hogy jobban megismerhessük a Vevők érdeklődési körét.
 		Ha nem szeretnéd használni a sütiket, akkor kattints <a class="underlined" href="Settings.html"> erre a linkre</a>

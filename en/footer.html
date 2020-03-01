@@ -10,11 +10,11 @@
 			<a href="https://www.facebook.com/domekutyalepcso/" target="_blank" class="fa fa-facebook "></a>
 			<a href="https://www.instagram.com/domelepcsorampa/" class="fa fa-instagram"></a>
 		</div>
-		<div ng-include="'legal/privacy.html'" ng-init="forFooter = true">
+		<my-cookie lang="backbone.lang" inFooter="yes"></my-cookie>
 		</div>
-		<div>
-			<a class="underlined w3-small" href="{{backbone.lang}}/help.html?show=use-of-personal-data">Use Of Personal Data  </a>|
-			<a class="underlined w3-small" href="{{backbone.lang}}/help.html?show=contract">Legal Information</a>
+		<div style="font-family: Arial, Helvetica, sans-serif;">
+			<a class="underlined w3-small" href="{{backbone.lang}}/help.html?show=use-of-personal-data">{{'use-of-personal-data' | myTranslator : backbone.lang}}</a> |
+			<a class="underlined w3-small" href="{{backbone.lang}}/help.html?show=contract">{{'legal-information' | myTranslator : backbone.lang}}</a>
 		</div>
 	</div>
 </div>

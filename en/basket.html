@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" ng-app="AduguShopApp" ng-controller="Basket">
 <head>
 <title> Dome Kutya | Basket </title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -21,14 +21,15 @@
 <script src="/scripts/v3/basket.js" ></script>
 <script src="/scripts/v3/directives/directives.js" ></script>
 <script src="/scripts/v3/services/factories.js" ></script>
+<script src="/scripts/v3/directives/translator.js" ></script>
 </head> 
 
 <body>
 
-<div id="header_placeholder"> </div>
-<div id="product_shelf_placeholder" class="" ng-app="AduguShopApp" ng-controller="Basket">
-	<div ng-hide="order.Items.length==0 || order==null" class="w3-xlarge w3-center w3-margin-top" style="font-weight: bold">Your Basket</div>
-	<div ng-show="order.Items.length==0 || order==null" class="w3-xlarge w3-center w3-margin-top" style="font-weight: bold">Your basket is empty</div>
+<div ng-include="'header.html'"> </div>
+<div id="product_shelf_placeholder" class="" >
+	<div ng-hide="order.Items.length==0 || order==null" class="w3-xlarge w3-center w3-margin-top" style="font-weight: bold">{{'your-basket' | myTranslator : backbone.lang}}</div>
+	<div ng-show="order.Items.length==0 || order==null" class="w3-xlarge w3-center w3-margin-top" style="font-weight: bold">{{'basket-is-empty' | myTranslator : backbone.lang}}</div>
 	
 
 	
@@ -83,25 +84,25 @@
 						<span ng-click="changeQuantity($index,1)" class="w3-black w3-round hoverable w3-padding w3-hover-grey">+</span>
 					</div>
 					<div id="price" class="w3-display-right price">{{item.Price[currency.toLowerCase()] * item.Quantity | myCurrency : currency}}</div>
-					<div id="remove" ng-click="removeItem($index)" class="w3-display-bottomright hoverable" style="text-decoration: underline">Remove</div>
+					<div id="remove" ng-click="removeItem($index)" class="w3-display-bottomright hoverable" style="text-decoration: underline">{{'remove' | myTranslator : backbone.lang}}</div>
 				</div>		
 		</div>
 	</div>
 	<div class="w3-col l6 w3-padding w3-mobile">
 		<div ng-hide="order.length==0">
 			<select class="w3-padding w3-margin-top" ng-model="shopping.contact.country" ng-change="updateDeliveryCost()" style="width:100%;">
-							<option value="default">Choose your country</option>
-							<option value="Hungary">Hungary</option>
-							<option value="Germany">Germany</option>
-							<option value="Italy">Italy</option>
-							<option value="Switzerland">Switzerland</option>
-							<option value="Romania">Romania</option>
-							<option value="France">France</option>
-							<option value="UK">United Kingdom</option>
+							<option value="default">{{'choose-country' | myTranslator : backbone.lang}}</option>
+							<option value="Hungary">{{'hungary' | myTranslator : backbone.lang}}</option>
+							<option value="Germany">{{'germany' | myTranslator : backbone.lang}}</option>
+							<option value="Italy">{{'italy' | myTranslator : backbone.lang}}</option>
+							<option value="Switzerland">{{'switzerland' | myTranslator : backbone.lang}}</option>
+							<option value="Romania">{{'romania' | myTranslator : backbone.lang}}</option>
+							<option value="France">{{'france' | myTranslator : backbone.lang}}</option>
+							<option value="UK">{{'united-kingdom' | myTranslator : backbone.lang}}</option>
 			</select>
 				
 			<form ng-if="couriers.length > 1" name="deliveryMethod" class="w3-margin-top" >
-				<div class="w3-large"><b>Choose a courier</b></div>
+				<div class="w3-large"><b>{{'choose-courier' | myTranslator : backbone.lang}}</b></div>
 				<label ng-repeat="(key, value) in order.Costs">
 					<input type="radio" ng-model="$parent.shopping.deliveryMethod" ng-value="key" class="w3-radio">
 					{{key}} (<b>{{order.Costs[key].delivery | myCurrency : currency}}</b>)
@@ -109,9 +110,9 @@
 			</form>
 			
 			<div id="cost-details" ng-hide="shopping.contact.country =='default'" class="w3-white w3-margin-top">
-				<div class="w3-large w3-margin-top">Subtotal: <span class="price">{{order.Costs[shopping.deliveryMethod].subTotal | myCurrency : currency}}</span></div>
-				<div class="w3-large w3-margin-top">Delivery: <span class="price">{{order.Costs[shopping.deliveryMethod].delivery | myCurrency : currency}}</span></div>
-				<div class="w3-xlarge w3-margin-top">Total: <span class="price-total">{{ order.Costs[shopping.deliveryMethod].total | myCurrency : currency}}</span></div>
+				<div class="w3-large w3-margin-top">{{'subtotal' | myTranslator : backbone.lang}}: <span class="price">{{order.Costs[shopping.deliveryMethod].subTotal | myCurrency : currency}}</span></div>
+				<div class="w3-large w3-margin-top">{{'delivery' | myTranslator : backbone.lang}}: <span class="price">{{order.Costs[shopping.deliveryMethod].delivery | myCurrency : currency}}</span></div>
+				<div class="w3-xlarge w3-margin-top">{{'total' | myTranslator : backbone.lang}}: <span class="price-total">{{ order.Costs[shopping.deliveryMethod].total | myCurrency : currency}}</span></div>
 				
 				<button class="w3-button w3-black w3-round w3-large w3-margin-top w3-padding" ng-click="proceedToCheckout()"">Proceed to Checkout</button>
 			</div>

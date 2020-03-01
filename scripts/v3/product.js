@@ -31,7 +31,7 @@ app.controller('Accordions', function() {
 app.controller('ProductDisplay', ['$scope', 'ApiManager','CommonFuncs', function($scope, ApiManager, CommonFuncs){
 	$scope.pickedSpec = [];
 	
-	$scope.backbone = {lang:null};
+	$scope.backbone = {lang: Common_getLang()};
 	$scope.basketId = localStorage.getObj("basketId");
 	$scope.changeLanguage = Common_changeLanguage;
 	$scope.itemInfo = null;
@@ -47,10 +47,8 @@ app.controller('ProductDisplay', ['$scope', 'ApiManager','CommonFuncs', function
 		let shopData = localStorage.getObj("shopping");
 		if(shopData == null){
 			$scope.currency = res.shopping.currency;
-			$scope.backbone.lang = res.shopping.contact.lang;//for choosing of language	
 		}else{
-			$scope.currency = shopData.currency;
-			$scope.backbone.lang= shopData.contact.lang;//for choosing of language	
+			$scope.currency = shopData.currency;	
 		}
 	});
 
@@ -164,9 +162,6 @@ app.controller('ProductDisplay', ['$scope', 'ApiManager','CommonFuncs', function
 					$scope.basketId = res.data.BasketId;
 					localStorage.setObj("basketId", $scope.basketId);
 					Shop_updateBasketSize(res.data.Items.length);
-					$([document.documentElement, document.body]).animate({
-						scrollTop: $("#added-prompt").offset().top
-					}, 1000);
 					runButtonAnimation();
 			});
 	 }

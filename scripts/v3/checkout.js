@@ -10,7 +10,7 @@ $('input, select').on('change',function() { $(this).trigger('input'); });
 app.controller('Checkout', function($scope, $timeout) {
 	$scope.order = localStorage.getObj("shopping");
 	$scope.user=$scope.order.contact;
-	
+	$scope.backbone = {lang: Common_getLang()};
 	$scope.proceedToPayment= function (){
 		$scope.order.contact = $scope.user;
 		localStorage.setObj("shopping", $scope.order);

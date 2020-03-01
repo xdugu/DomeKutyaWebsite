@@ -1,5 +1,4 @@
 
-
 angular.module('AduguShopApp').filter('myCurrency', function() {
   return function (myCost, currency){
 			if(myCost==null)
@@ -105,7 +104,7 @@ angular.module('AduguShopApp').directive('myImageSizerv2', function($interval) {
 			lang: "=lang",
 			currency: "=currency"
 		},
-		link: function($scope, $elem, $attr){
+		link: function($scope){
 			ApiManager.get('open', 'get/products', {
 							storeId:$scope.mainConfig.storeId, 
 							items: $scope.config.list.toString()
@@ -116,4 +115,24 @@ angular.module('AduguShopApp').directive('myImageSizerv2', function($interval) {
 	}
 
   }]);
+
+  angular.module('AduguShopApp').directive('myCookie', function() {
+	return{
+		restrict : 'E',
+		templateUrl: 'legal/privacy.html',
+		scope:{
+			lang: '=lang'
+		},
+		link: function($scope, elem, attr){
+			$scope.cookie = {show: false, inFooter: attr.infooter};
+			if (localStorage.getObj("useCookie") == null){
+				$scope.cookie.show = true;
+			}
+			$scope.changeCookie = function(state){
+				$scope.cookie.show = false;
+				Common_changeCookie(state);
+			}
+		}
+	}
+  });
   
