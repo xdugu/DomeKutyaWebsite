@@ -127,7 +127,7 @@
 				amelyben megtalálja az utaláshoz szükséges adatokat, illetve a referencia számot.
 			</span>
 			</div>
-			<a ng-click="backbone.showConfirmed=true;updatePaymentMethod('bankTransfer');" class="w3-button w3-red w3-margin-top w3-margin-bottom">Confirm</a>
+			<a ng-click="backbone.showConfirmed=true;updatePaymentMethod('bankTransfer');" class="w3-button w3-red w3-margin-top w3-margin-bottom">{{'confirm' | myTranslator : backbone.lang}}</a>
 		  </div>
 		   <div class="w3-container" ng-show="backbone.showConfirmed==true">
 		   
@@ -178,7 +178,7 @@
 				</span>
 				<span class="price">{{order.Costs[shopping.deliveryMethod].total + order.Costs[shopping.deliveryMethod].payOnDeliveryAdditional | myCurrency : currency}}</span>
 			</div>
-			<a ng-click="backbone.showConfirmed=true;updatePaymentMethod('payOnDelivery')" class="w3-button w3-red w3-margin-top w3-margin-bottom">Confirm</a>
+			<a ng-click="backbone.showConfirmed=true;updatePaymentMethod('payOnDelivery')" class="w3-button w3-red w3-margin-top w3-margin-bottom">{{'confirm' | myTranslator : backbone.lang}}</a>
 		  </div>
 		   <div class="w3-container" ng-show="backbone.showConfirmed == true">
 			<div class="w3-medium" style="margin-top:1vh">

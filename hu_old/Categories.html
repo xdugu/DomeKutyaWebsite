@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+<title> Dome Kutya | Bevásárlási Kategória </title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="UTF-8">
+<meta name="description" content="Nézz körül termékeink között: lépcsők, rámpák, Dömötör kutya galériák, bújózsák és babzsák">
+<link rel="icon" type="image/jpeg" href="../images/logo.jpg">
+<link rel="stylesheet" type="text/css" href="../slick/slick.css"/>
+<link rel="stylesheet" type="text/css" href="../slick/slick-theme.css"/>
+<link rel="stylesheet" type="text/css" href="../css/w3.css"/>
+<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons"/>
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
+
+<link rel="stylesheet" href="../css/normalize.css"/>
+<link rel="stylesheet" href="../css/common.css"/>
+<link rel="stylesheet" href="../css/categories.css"/>
+
+ <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-131830139-2"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.4/angular.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.4/angular-sanitize.js"></script>
+<script type="text/javascript" src="../slick/slick.min.js"></script>
+ 
+<script src="../scripts/v3/common.js" ></script>
+<script src="../scripts/v3/shop.js" ></script>
+<script src="../scripts/v3/categories.js"></script>
+<script src="../scripts/v3/directives/directives.js" ></script>
+
+<style>
+.category-image {
+	height:45vh;
+}
+@media only screen and (min-width: 1200px) {/*for desktop*/
+.category-image {
+	height:70vh;
+}
+}
+@media only screen and (max-width: 1000px) and (min-height: 800px)  {/*For tablets in portrait*/
+.category-image {
+	height:30vh;
+}
+
+}
+
+@media only screen and (min-width: 1000px) and (min-height: 1000px)  {/*For ipad pro*/
+.category-image {
+	height:35vh;
+}
+
+}
+
+
+</style>
+</head> 
+
+<body ng-app="myApp" ng-controller="Categories">
+
+
+<div id="header_placeholder"> </div>
+<div id="privacy_placeholder"></div>
+<div id="category-name" class="w3-xxlarge w3-center" style="font-family: Charm"></div>
+
+
+<!--Currency chooser  -->
+<div class="w3-large  w3-hide-small w3-margin">
+	<span class="w3-white w3-padding w3-round-large hoverable">
+		<span class="button" onclick="Shop_updateCurrency('HUF')" ng-class="{'w3-tag w3-red':currency=='HUF'}">HUF</span> | 
+		<span class="button" onclick="Shop_updateCurrency('EUR')" ng-class="{'w3-tag w3-red':currency=='EUR'}">EURO</span>
+	</span>
+</div>
+
+<div class="w3-large w3-center w3-hide-large w3-hide-medium w3-margin">
+	<span class="w3-white w3-padding w3-round-large hoverable">
+		<span class="button" onclick="Shop_updateCurrency('HUF')" ng-class="{'w3-tag w3-red':currency=='HUF'}">HUF</span> | 
+		<span class="button" onclick="Shop_updateCurrency('EUR')" ng-class="{'w3-tag w3-red':currency=='EUR'}">EURO</span>
+	</span>
+</div>
+
+
+<div id="product-shelf-placeholder" class="w3-container" style="padding:0;margin:0">
+	<a ng-repeat="product in products" href="{{product.href}}" class="w3-left w3-center w3-large w3-mobile my-product w3-white" style="width:48.5%;margin-top:2vh;">
+
+			<div style="width:100%; overflow:hidden;" class="category-image">
+				<img class="shop_img w3-center" ng-src="{{product.imgSrc}}/img_1.jpg" style="width:auto; height:100%; margin:auto"></img> 
+			</div>
+
+		<div class="description w3-padding w3-large" ng-bind-html="product.description"></div>
+		<div ng-show="currency=='HUF'" my-cost-str="product.price.huf" class="price w3-padding "></div>
+		<div ng-show="currency=='EUR'" my-cost-str="product.price.eur" class="price w3-padding "></div>
+	</a>
+	<a ng-if="categoryData[0].Category =='Steps'" href="contact.html" class="w3-left w3-center w3-large w3-mobile my-product w3-white" style="width:48.5%; margin-top:2vh;">
+			<div style="width:100%; overflow-y:hidden;" class="category-image">
+				<img class="shop_img w3-center" ng-src="/images/shop/steps/step_custom/img_1.jpg" style="width:100%; height:auto;"></img> 
+			</div>
+
+		<div class="description w3-padding">Carlos 2:1 kutya lépcső</div>
+		<div class="w3-paddingtop" style="color: var(--main-theme)"> Árajánlatot a képre kattintva küldhet</div>
+	</a>
+	
+	<a ng-if="categoryData[0].Category =='Ramps'" href="contact.html" class="w3-left w3-center w3-large w3-mobile my-product w3-white" style="width:48.5%; margin-top:2vh;">
+			<div style="width:100%; overflow-y:hidden;" class="category-image">
+				<img class="shop_img w3-center" ng-src="/images/shop/ramps/ramp_custom/img_1.jpg" style="width:100%; height:auto;"></img> 
+			</div>
+		<div class="description w3-padding">Minnie 2:1 rámpa</div>
+		<div class="w3-paddingtop" style="color: var(--main-theme)"> Árajánlatot a képre kattintva küldhet</div>
+	</a>
+
+</div>
+
+<div ng-include="'footer.html'" class="w3-margin-top">
+
+
+</div>
+
+</body>
+</html>

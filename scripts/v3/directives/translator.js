@@ -7,7 +7,7 @@ angular.module('AduguShopApp').filter('myTranslator', function() {
 });
 
 var dict = {
-	hu:{
+	en:{
 		'and': 'and',
 		'or': 'or',
 		'okay': 'Okay',
@@ -33,7 +33,7 @@ var dict = {
 		'invalid-text': 'Invalid text or empty',
 		'your-basket': 'Your Basket',
 		'basket-is-empty': 'Your basket is empty',
-		'choose-country': 'choose country',
+		'choose-country': 'Choose country',
 		'hungary': 'Hungary',
 		'germany': 'Germany',
 		'italy':'Italy',
@@ -64,10 +64,13 @@ var dict = {
 		'max-length': 'Maximum Length',
 		'bank-transfer': 'Bank Transfer',
 		'pay-on-delivery': 'Pay On Delivery',
-		'order-confirmation': 'Order Confirmation'
+		'order-confirmation': 'Order Confirmation',
+		'confirm': 'Confirm',
+		'topic': 'Topic',
+		'send-message': 'Send Request'
 
 	},
-	en:{
+	hu:{
 		'and': 'és',
 		'or': 'vagy',
 		'okay': 'Rendben',
@@ -124,7 +127,10 @@ var dict = {
 		'max-length': 'Maximális hossz',
 		'bank-transfer': 'Banki átutalás',
 		'pay-on-delivery': 'Utánvétes fizetés',
-		'order-confirmation': 'Rendelés megerősítése'
+		'order-confirmation': 'Rendelés megerősítése',
+		'confirm': 'Megerősít',
+		'topic': 'Téma',
+		'send-message': 'Üzenet küldése'
 	}
 }
   

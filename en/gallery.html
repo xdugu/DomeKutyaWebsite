@@ -25,15 +25,16 @@
 <script src="/scripts/v3/gallery.js" ></script>
 <script src="/scripts/v3/directives/directives.js" ></script>
 <script src="/slick/angular-slick.js"></script>
+<script src="/scripts/v3/directives/translator.js" ></script>
 
 </head> 
 
 <body ng-app="AduguShopApp" ng-controller="Gallery">
 
-<div id="header_placeholder"> </div>
+<div ng-include="'header.html'"> </div>
 
 <div style="max-width: 1200px;" class="w3-content">
-	<div class="w3-xlarge w3-bold w3-center w3-margin-top" style="color: var(--main-theme)"> Customer Photos </div>
+	<div class="w3-xlarge w3-bold w3-center w3-margin-top" style="color: var(--main-theme)">{{'customer-photos' | myTranslator : backbone.lang}}</div>
 
 	<slick settings="slickConfig" class="w3-margin-top"> 
 		<div style=" overflow-x:auto; height: 80vh;" class="w3-margin-left" ng-repeat="x in [].constructor(24) track by $index">

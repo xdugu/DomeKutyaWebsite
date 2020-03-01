@@ -1,7 +1,7 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="hu">
 <head>
-<title>{{'settings' | myTranslator : backbone.lang}}</title>
+<title> Dome Kutya | Webhely beállításai</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta charset="UTF-8">
 <meta name="theme-color" content="white">
@@ -21,11 +21,11 @@
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.4/angular.min.js"></script>
+<script type="text/javascript" src="/slick/slick.min.js"></script>
  
 <script src="/scripts/v3/common.js" ></script>
 <script src="/scripts/v3/settings.js" ></script>
 <script src="/scripts/v3/shop.js" ></script>
-<script src="/scripts/v3/directives/translator.js" ></script>
 
 <style>
 .container {
@@ -100,18 +100,19 @@
 
 </head> 
 
-<body ng-app="AduguShopApp" ng-controller="Settings">
+<body ng-app="myApp" ng-controller="Settings">
 
-<div ng-include="'header.html'" class="w3-white"></div>
+<div id="header_placeholder" class="w3-white">
+</div>
 
  
  <div class="w3-container w3-white w3-card w3-mobile" style="width:50%">
-	 <div class="w3-xlarge w3-margin-top"> <b>{{'cookie-settings' | myTranslator : backbone.lang}}</b> </div><br>
+	 <div class="w3-xlarge"> <b>Sütik beállítása(Cookie)</b> </div><br>
 	<label class="container">Google Analytics
 	  <input type="checkbox" ng-model="cookie" ng-change="changeCookie(cookie)">
 	  <span class="checkmark"></span>
 	</label>
-	<div ng-include="'legal/' + backbone.lang + '/cookie_policy.html'"> </div>
+	<!--div ng-include="'legal/cookie_policy.html'"> </div-->
  </div>
 
 </body>

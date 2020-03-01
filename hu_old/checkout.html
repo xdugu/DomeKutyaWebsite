@@ -1,0 +1,81 @@
+(30-50cm)<!DOCTYPE html>
+<html lang="hu">
+<head>
+<title> Dome Kutya |  | Tovább a pénztárhoz </title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="utf-8"/>
+
+<!--link rel="stylesheet" href="css/shop-list-design.css"/-->
+<link rel="stylesheet" type="text/css" href="../css/w3.css"/>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+ <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-131830139-2"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.4/angular.min.js"></script>
+
+
+<link rel="stylesheet" href="../css/normalize.css"/>
+<link rel="stylesheet" href="../css/common.css"/>
+<link rel="stylesheet" href="../css/checkout.css"/>
+
+<script src="../scripts/v3/common.js" ></script>
+<script src="../scripts/v3/shop.js" ></script>
+<script src="../scripts/v3/checkout.js" ></script>
+
+</head> 
+
+<body>
+
+<div id="header_placeholder"> </div>
+<div id="product_shelf_placeholder" class="w3-container w3-margin-top" ng-app="myApp" ng-controller="Checkout" ng-init="agreed=false">
+	
+
+	<div class="w3-card w3-mobile" style="width:70%">
+	<div class="w3-large w3-center">Elérhetőség</div>
+	<form name="form1" novalidate class="entry">
+		<input type="text" class="w3-input" name="name" ng-model="user.firstName" required placeholder="Név"  autocomplete="name"/>
+		<span class="w3-text-red" ng-show="form1.name.$touched && form1.name.$invalid">Név megadása szükséges</span>
+		
+		<input type="text" class="w3-input" name="dogs" ng-model="user.dogsName" placeholder="A kutyád neve"  />
+		
+		<input type="email" class="w3-input" name="email" ng-model="user.email" placeholder="Email cím" required  autocomplete="email"/>
+		<span class="w3-text-red" ng-show="form1.email.$touched && form1.email.$invalid">E-mail cím megadása szüksége</span>
+		
+		<input type="tel" class="w3-input" name="number" ng-model="user.number" placeholder="Telefonszám" autocomplete="tel" required /><br/>
+		<span class="w3-text-red" ng-show="form1.number.$touched && form1.number.$invalid">Telefonszám megadása szükséges</span>
+	</form>
+	</div>
+	<div class="w3-card w3-margin-top w3-mobile" style="width:70%">
+		<div class="w3-large w3-center" >Szállítási információk</div>
+		<form  name="form" novalidate class="entry">
+			<input type="text" class="w3-input" name="addr" ng-model="user.address1" required placeholder="Szállítási cím"  autocomplete="address-line1" />
+			<span class="w3-text-red" ng-show="form.addr.$touched && form.addr.$invalid">Szállítási cím megadása szükséges</span>
+			
+			<input type="text" class="w3-input" ng-model="user.address2" placeholder="Szállítási cím 2 (optional)"  autocomplete="address-line2"/>
+			<input type="text" class="w3-input" name="city" ng-model="user.city" required placeholder="Város"/>
+			<span class="w3-text-red" ng-show="form.city.$touched && form.city.$invalid">Város megadása szükséges</span>
+			
+			<input type="text" class="w3-input" name="pcode"ng-model="user.postCode" required placeholder="Irányítószám"  autocomplete="postal-code"/>
+			<span class="w3-text-red" ng-show="form.pcode.$touched && form.pcode.$invalid">Irányítószám megadása szükséges</span>
+			
+			
+			<input type="text" class="w3-input" name="country" ng-model="user.country" disabled />
+
+		</form>
+	</div>
+
+	<label id="terms"  class="w3-block w3-margin-bottom w3-margin-top w3-white w3-round w3-padding w3-mobile" style="width:70%">
+		<input type="checkbox" ng-disabled="!form.$valid || !form1.$valid" ng-model="agreed"> Ezzel a rendeléssel elfogadom az <a class="underlined" href="help.html?show=contract" target="_blank">Általános Szerződési Felételeket</a> 
+	</label>
+	
+	<a id="payment-proceed" ng-show="agreed" ng-click="proceedToPayment()" class="w3-button w3-black  w3-margin-bottom w3-padding w3-mobile" style="width:50%">Tovább a fizetéshez</a>		
+
+
+	
+
+</div>
+
+
+</body>
+</html>

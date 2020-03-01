@@ -1,7 +1,7 @@
 <!DOCTYPE html>
-<html lang="hu">
+<html lang="{{backbone.lang}}" ng-app="AduguShopApp" ng-controller="Contact" >
 <head>
-<title> Dome Kutya | Lépjen kapcsolatba velünk</title>
+<title>{{'contact-us' | myTranslator : backbone.lang}}</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="icon" type="image/jpeg" href="/images/logo.jpg">
 <meta charset="utf-8"/>
@@ -22,34 +22,34 @@
 <script src="/scripts/v3/common.js" ></script>
 <script src="/scripts/v3/shop.js" ></script>
 <script src="/scripts/v3/contact.js" ></script>
+<script src="/scripts/v3/services/factories.js" ></script>
 <script src="/scripts/v3/directives/translator.js" ></script>
-
 </head> 
 
 <body>
 
-<div id="header_placeholder"> </div>
-<div id="privacy_placeholder"></div>
+<div ng-include="'header.html'"> </div>
 
-<div id="product_shelf_placeholder" class="w3-container w3-margin-top" ng-app="myApp" ng-controller="Contact" ng-init="formSubmitted=false">
+<div id="product_shelf_placeholder" class="w3-container w3-margin-top">
 	
 
 	<div class="w3-row">
-	<form class="w3-mobile w3-col w3-white l7 m9 w3-padding w3-card-4" name="form1" ng-hide="formSubmitted" novalidate class="entry">
-		<div class="w3-large w3-center" ><b>Lépjen kapcsolatba velünk</b></div>
+	<form class="w3-mobile w3-col w3-white l7 m9 w3-padding w3-card-4" name="form1" 
+			ng-hide="backbone.formSubmitted" novalidate class="entry">
+		<div class="w3-large w3-center" ><b>{{'contact-us' | myTranslator : backbone.lang}}</b></div>
+		<div class="w3-padding">{{'topic' | myTranslator : backbone.lang}}: {{user.topic}}</div>
+		<input type="text" class="w3-input" name="name" ng-model="user.name" required placeholder="{{'full-name' | myTranslator : backbone.lang}}"  autocomplete="name"/>
+		<span class="w3-text-red" ng-show="form1.name.$touched && form1.name.$invalid">{{'required' | myTranslator : backbone.lang}}</span>
 		
-		<input type="text" class="w3-input" name="name" ng-model="user.name" required placeholder="Név"  autocomplete="name"/>
-		<span class="w3-text-red" ng-show="form1.name.$touched && form1.name.$invalid">Név megadása szükséges</span>
+		<input type="email" class="w3-input" name="email" ng-model="user.email" placeholder="{{'email' | myTranslator : backbone.lang}}" required  autocomplete="email"/>
+		<span class="w3-text-red" ng-show="form1.email.$touched && form1.email.$invalid">{{'required' | myTranslator : backbone.lang}}</span>
 		
-		<input type="email" class="w3-input" name="email" ng-model="user.email" placeholder="Email cim" required  autocomplete="email"/>
-		<span class="w3-text-red" ng-show="form1.email.$touched && form1.email.$invalid">E-mail cím megadása szükséges</span>
-		
-		<br>Megjegyzés: Maximális hossz ({{user.comments.length}}/500)<br>
-		<textarea type="text" style="width:100%" rows="5" name="comment" ng-model="user.comments" maxlength="500" required></textarea>
-		<span class="w3-text-red" ng-show="form1.comment.$touched && form1.comment.$invalid">Megjegyzés megadása szükséges</span>
+		<br>{{'comments' | myTranslator : backbone.lang}}: {{'max-length' | myTranslator : backbone.lang}}({{user.comments.length}}/500)<br>
+		<textarea type="text" style="width:100%; font-family: Arial, Helvetica, sans-serif;" rows="5" name="comment" ng-model="user.comments" maxlength="500" required></textarea>
+		<span class="w3-text-red" ng-show="form1.comment.$touched && form1.comment.$invalid">{{'required' | myTranslator : backbone.lang}}</span>
 		<br>
-		<button ng-click="formSubmitted=true;sendRequest()" ng-disabled="form1.$invalid" class="w3-button w3-red w3-margin-bottom w3-padding w3-mobile">
-			Üzenet küldése
+		<button ng-click="sendRequest()" ng-disabled="form1.$invalid" class="w3-button w3-theme w3-margin-bottom w3-padding w3-mobile">
+			{{'send-message' | myTranslator : backbone.lang}}
 		</button>	
 
 	</form>
@@ -58,8 +58,11 @@
 	
 	<div class="w3-row ">
 	
-		<div ng-show="formSubmitted" class="w3-medium w3-col l7 m9 w3-padding w3-white w3-card-4">
-			<b>Köszönyünk szépen. Gyorssan vissza fogunk válaszni</b>
+		<div ng-show="backbone.formSubmitted" class="w3-medium w3-col l7 m9 w3-padding w3-white w3-card-4">
+			<b>Thank you. We will reply back soon</b>
+		</div>
+		<div ng-show="backbone.submitError" class="w3-medium w3-col l7 m9 w3-padding w3-white w3-text-red w3-card-4">
+			<b>We are sorry that something went wrong. Please try again later :-(</b>
 		</div>
 	
 	</div>

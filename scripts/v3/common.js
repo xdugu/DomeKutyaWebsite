@@ -36,12 +36,8 @@ function Common_sideBar(state){
 	  $('#sidebar').hide();
 }
 
-$(document).ready(function() {
-	if(isPathCorrect())//if we can't find any of these strings in the path in means that we are in the 
-	//root directory so we will then default to the hungarian header
-		$('#header_placeholder').load("header.html", Shop_refreshBasket);	
-	else
-		$('#header_placeholder').load("/hu/header.html", Shop_refreshBasket);	 
+$(document).ready(function() {	
+		Shop_refreshBasket();
 		checkCookie();
 
 }); 
@@ -53,13 +49,7 @@ function checkCookie(){
 	  window['ga-disable-UA-131830139-2'] = false;
 	  
 	 let useCookie = localStorage.getItem("useCookie");
-	 if(useCookie == null){
-		 if(isPathCorrect())
-			$('#privacy_placeholder').load("legal/privacy.html");
-		 else
-			$('#privacy_placeholder').load("/hu/legal/privacy.html"); 
-	 }
-	else 
+
 	if (useCookie == "false")
 		 window['ga-disable-UA-131830139-2'] = true;
 
@@ -70,14 +60,6 @@ function checkCookie(){
 
 }
 
-function isPathCorrect(){//function to check if path has either /hu or /en to indicate 
-//if we are in the website root or have made it to the correct directly
-	  let pathname = window.location.href;
-	  if(pathname.search("/hu/")>=0 || pathname.search("/en/")>=0)
-		  return true;
-	  else return false;
-	
-}
 
 //Sanity to check to make sure we always reflect the right languages. Called on every page refresh
 function Common_checkLang(){

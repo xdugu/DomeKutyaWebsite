@@ -48,6 +48,7 @@
 	<img class="w3-mobile" src="/images/loading.gif"/>
 </div>
 
+<div class="w3-content" style="max-width: 1200px">
 	<div class="w3-col l6 w3-padding" ng-if="order != null">
 		<div ng-repeat="item in order.Items" class="w3-card w3-margin-top w3-padding w3-white animate-order" style="width: 100%;overflow:hidden;">
 				<div ng-init="pickedImage = getVariantImage(item)">
@@ -98,7 +99,7 @@
 							<option value="Switzerland">{{'switzerland' | myTranslator : backbone.lang}}</option>
 							<option value="Romania">{{'romania' | myTranslator : backbone.lang}}</option>
 							<option value="France">{{'france' | myTranslator : backbone.lang}}</option>
-							<option value="UK">{{'united-kingdom' | myTranslator : backbone.lang}}</option>
+							<option value="UK">{{'united kingdom' | myTranslator : backbone.lang}}</option>
 			</select>
 				
 			<form ng-if="couriers.length > 1" name="deliveryMethod" class="w3-margin-top" >
@@ -117,7 +118,8 @@
 				<button class="w3-button w3-black w3-round w3-large w3-margin-top w3-padding" ng-click="proceedToCheckout()"">Proceed to Checkout</button>
 			</div>
 		</div>
-	</div>
+	</div> <!--col-->
+</div><!--content-->
 </div>
 
 
