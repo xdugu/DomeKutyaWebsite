@@ -1,10 +1,13 @@
 <!DOCTYPE html>
 <html lang="{{backbone.lang}}"  ng-app="AduguShopApp" ng-controller="HomePage">
 <head>
-<title> {{'title-home' | myTranslator : backbone.lang}}</title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="We are a family run business. We sell dog stairs, ramps, beanbags, dog blankets and more">
+<title ng-if="backbone.lang == 'hu'"> Dome Kutya - Kutya lépcso és rámpa web uszlet</title>
+<title ng-if="backbone.lang == 'en'"> Dome Kutya - Dog Stairs and Ramps Shop</title>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta ng-if="backbone.lang == 'hu'" name="description" content="Kutya lépcsők, rámpák, Dömötör kutya galériák, bújózsák és babzsák eládunk">
+<meta ng-if="backbone.lang == 'en'" name="description" content="We are a family run business. We sell dog stairs, ramps, beanbags, dog blankets and more">
+
 <meta name="theme-color" content="white">
 <link rel="icon" type="image/jpeg" href="/images/logo.jpg">
 
@@ -36,7 +39,7 @@
 
 <body>
 
-<div ng-include="'header.html'" class="w3-white"> </div>
+<header ng-include="'header.html'" class="w3-white"> </header>
 
 <div class="w3-display-container" style="overflow: hidden; height: 400px">	
 	<img id="landing_img" src="/images/back.jpg" class="" style="width: 100%; height: auto"/>	
@@ -88,10 +91,7 @@
 
 
 
-<div ng-include="'footer.html'" class="w3-margin-top">
-
-
-</div>
+<footer ng-include="'footer.html'" class="w3-margin-top"></footer>
 
 
 </body>

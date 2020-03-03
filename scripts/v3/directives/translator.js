@@ -29,7 +29,7 @@ var dict = {
 		'contact-us': 'Contact Us',
 		'use-of-personal-data': 'Use of personal data',
 		'legal-information': 'Legal Information',
-		'contact-for-more': 'Contact us for pricing',
+		'contact-for-pricing': 'Contact us for pricing',
 		'invalid-text': 'Invalid text or empty',
 		'your-basket': 'Your Basket',
 		'basket-is-empty': 'Your basket is empty',
@@ -46,6 +46,7 @@ var dict = {
 		'subtotal': 'Subtotal',
 		'total': 'Total',
 		'proceed-to-payment': 'Proceed To Payment',
+		'proceed-to-checkout': 'Proceed to checkout',
 		'cookie-settings': 'Cookie Settings',
 		'contact-info': 'Contact Information',
 		'full-name': 'Full Name',
@@ -67,7 +68,12 @@ var dict = {
 		'order-confirmation': 'Order Confirmation',
 		'confirm': 'Confirm',
 		'topic': 'Topic',
-		'send-message': 'Send Request'
+		'send-message': 'Send Request',
+		'introduction': 'Introduction',
+		'terms': 'General Terms & Conditions',
+		'shipping-and-delivery': "Shipping & Delivery",
+		"use-of-cookies": "Use Of Cookies",
+		'dog-beds': 'Dog beds'
 
 	},
 	hu:{
@@ -109,6 +115,7 @@ var dict = {
 		'subtotal': 'Részösszeg',
 		'total': 'Végösszeg',
 		'proceed-to-payment': 'Tovább a fizetéshez',
+		'proceed-to-checkout': 'Tovább a fizetéshez',
 		'cookie-settings': 'Sütik beállítása(Cookie)',
 		'required': 'Megadása szükséges',
 		'contact-info': 'Elérhetőség',
@@ -130,7 +137,12 @@ var dict = {
 		'order-confirmation': 'Rendelés megerősítése',
 		'confirm': 'Megerősít',
 		'topic': 'Téma',
-		'send-message': 'Üzenet küldése'
+		'send-message': 'Üzenet küldése',
+		'introduction': 'Impresszum',
+		'terms': 'Általános Szerződési Feltételek. (ÁSZF)',
+		'shipping-and-delivery': "Szállítás és kézbesítés",
+		"use-of-cookies": "Sütik",
+		'dog-beds': 'Fekhelyek'
 	}
 }
   

@@ -1,20 +1,20 @@
 <!DOCTYPE html>
-<html lang="hu">
+<html lang="{{backbone.lang}}" ng-app="AduguShopApp" ng-controller="HomePage">
 <head>
-<title> Dome Kutya | About Us</title>
+<title>{{'about-us' | myTranslator : backbone.lang}}</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta charset="UTF-8">
 <meta name="theme-color" content="white">
-<link rel="icon" type="image/jpeg" href="../images/logo.jpg">
+<link rel="icon" type="image/jpeg" href="/images/logo.jpg">
 
-<link rel="stylesheet" type="text/css" href="../slick/slick.css"/>
-<link rel="stylesheet" type="text/css" href="../slick/slick-theme.css"/>
+<link rel="stylesheet" type="text/css" href="/slick/slick.css"/>
+<link rel="stylesheet" type="text/css" href="/slick/slick-theme.css"/>
 <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/icon?family=Material+Icons"/>
 <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
-<link rel="stylesheet" type="text/css" href="../css/w3.css"/>
-<link rel="stylesheet" type="text/css" href="../css/normalize.css"/>
-<link rel="stylesheet" type="text/css" href="../css/common.css"/>
-<link rel="stylesheet" type="text/css" href="../css/index.css"/>
+<link rel="stylesheet" type="text/css" href="/css/w3.css"/>
+<link rel="stylesheet" type="text/css" href="/css/normalize.css"/>
+<link rel="stylesheet" type="text/css" href="/css/common.css"/>
+<link rel="stylesheet" type="text/css" href="/css/index.css"/>
 
  <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-131830139-2"></script>
@@ -23,52 +23,33 @@
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.4/angular.min.js"></script>
 <script type="text/javascript" src="/slick/slick.min.js"></script>
  
-<script src="../scripts/v3/common.js" ></script>
-<script src="../scripts/v3/index.js" ></script>
-<script src="../scripts/v3/shop.js" ></script>
+<script src="/scripts/v3/common.js" ></script>
+<script src="/scripts/v3/shop.js" ></script>
 
 <style>
 .main-color{
-
-color: var(--main-theme);
+    color: var(--main-theme);
 }
-
-
 </style>
+
+<script>
+var app = angular.module('AduguShopApp', []);
+app.controller('HomePage', ['$scope', function($scope) {
+    $scope.backbone = {lang: Common_getLang()};
+}]);
+</script>
+<script src="/scripts/v3/directives/translator.js" ></script>
 
 </head> 
 
-<body  ng-app="myApp" ng-controller="HomePage">
+<body>
 
-<div id="header_placeholder" class="w3-white"> </div>
-<div id="privacy_placeholder"></div>
+<header ng-include="'header.html'"></header>
 
-<div class="w3-container w3-white"> 
-<img src="/images/about_pic.jpg" alt="about pic" style="height:50vh; width:auto" class="w3-right"/>
-<h1 class="w3-xlarge main-color bold">About Us</h1>
-<p class="w3-large black">Thank you for spending some time to read our short story<br><br>
-My dad and I made our first dog stairs and ramps for our Yorkshireterrier, Döme in 2018.<br><br>
-Döme is 10 years old and he started to struggle to jump on the sofa and the bed due to his knee problems. 
-During the years it has become natural that he’s on the bed with us so we wanted to make jumping easier for him by putting the ramp or the stair next to the bed.
-He also loves spending time in bed when we are not at home so this was a big help for him.<br><br>
-Döme was our inspiration to start making ramps and stairs for other dogs too, because we were so happy that finally he can come on the bed without our help and we wanted to share this with others.
-We run Döme Kutyalépcső és Rámpa website as a family business. <br>
-My dad, Horváth László István plans and carries out the products, while me, Nagyné Horváth Alexandra do the upholstery and managing the orders.
-Our products help young, old, weak or sick dogs being able to go on the bed or in the car easier than before. It protects the dog’s joints, especially around the hips and the spine.
-It is suggested for dogs that have not jumped for a long time or dogs due to their age that have inflammation of the joints or have been operated with hernia.
-<br>
-Mainly recommended for smaller dogs to solve their height problems.
-<br><br> 
-Because of our love towards dogs, we are very happy to receive even the simplest questions, as we are happy to share the experiences of our satisfied customers with those who are also best friends with dogs.
-</p>
+<div class="w3-content w3-padding" style="max-width: 1200px"> 
+    <div ng-include="'legal/' + backbone.lang + '/about.html'"></div>
 </div>
-
-
-
-<div ng-include="'footer.html'" class="w3-margin-top">
-
-
-</div>
+<footer ng-include="'footer.html'"></footer>
 
 
 </body>

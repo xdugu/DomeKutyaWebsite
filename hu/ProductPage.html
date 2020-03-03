@@ -62,7 +62,7 @@
 
 <body ng-init="showImg=false">
 
-<div ng-include="'header.html'"> </div>
+<header ng-include="'header.html'"> </header>
 
 <div class="w3-content" style="max-width: 1200px;">
 	<div class="w3-row w3-white w3-margin-bottom" >
@@ -199,24 +199,24 @@
 		
 		<div ng-controller="Accordions" ng-init="des=false;del=false;ret=false;" class="w3-margin-bottom more-info">
 			<div ng-click="des=!des;del=false;ret=false" class="w3-border-bottom w3-border-black w3-padding" style="width:100%;height:auto;overflow:auto">
-					<span class="w3-left w3-large">{{'description' | myTranslator : backbone.lang}}</span>
+					<span class="w3-left w3-large bold">{{'description' | myTranslator : backbone.lang}}</span>
 					<span class="w3-right w3-large"> <i ng-show="des==false">+</i><i ng-show="des==true">-</i></span>
-			<div ng-show="des==true" class="w3-margin-top">
+			<div ng-show="des==true" class="w3-margin-top  important-text">
 				<br><div ng-bind-html="itemInfo.Description[backbone.lang]"></div>
 			</div>
 			</div>
 			<div ng-click="del=!del;des=false;ret=false" class="w3-border-bottom w3-border-black w3-padding" style="width:100%;height:auto;overflow:auto">
-					<span class="w3-left w3-large">{{'delivery' | myTranslator : backbone.lang}}</span>
+					<span class="w3-left w3-large bold">{{'delivery' | myTranslator : backbone.lang}}</span>
 					<span class="w3-right w3-large"> <i ng-show="del==false">+</i><i ng-show="del==true">-</i></span>
-			<br><div ng-if="del==true" class="w3-margin-top w3-large"><div ng-include="'legal/' + backbone.lang + '/delivery-min.html'"></div></div>
+			<br><div ng-if="del==true" class="w3-margin-top important-text"><div ng-include="'legal/' + backbone.lang + '/delivery-min.html'"></div></div>
 			</div>
 			<div ng-click="ret=!ret;del=false;des=false" class="w3-border-bottom w3-border-black w3-padding" style="width:100%;height:auto;overflow:auto">
-					<span class="w3-left w3-large">{{'returns' | myTranslator : backbone.lang}}</span>
+					<span class="w3-left w3-large bold">{{'returns' | myTranslator : backbone.lang}}</span>
 					<span class="w3-right w3-large"> <i ng-show="ret==false">+</i><i ng-show="ret==true">-</i></span>
-				<div ng-show="ret==true && backbone.lang == 'en'" class="w3-margin-top"><br>Products can only be returned in their original condition, without any missing items.
+				<div ng-show="ret==true && backbone.lang == 'en'" class="w3-margin-top important-text"><br>Products can only be returned in their original condition, without any missing items.
 						<br>For returns not related to the quality of the product, we don't refund delivery costs
 				</div>
-				<div ng-show="ret==true && backbone.lang == 'hu'" class="w3-margin-top">
+				<div ng-show="ret==true && backbone.lang == 'hu'" class="w3-margin-top important-text">
 					<br>
 						A terméket csak eredeti állapotában és csomagolásában, hiánytalan mennyiségi, minőségi állapotában vesszük vissza.
 						Amennyiben a visszaküldött terméket utánvéttel adja fel, azt nem áll módunkban átvenni.
@@ -231,10 +231,7 @@
 </div><!--content-->
 	
 
-<div ng-include="'footer.html'" class="w3-margin-top">
-
-
-</div>
+<footer ng-include="'footer.html'" class="w3-margin-top"></footer>
 
 </body>
 </html>
