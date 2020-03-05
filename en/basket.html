@@ -26,7 +26,7 @@
 
 <body>
 
-<header ng-include="'header.html'"> </header>
+<header ng-include="'header.html'" onload="Shop_refreshBasket()"> </header>
 <div id="product_shelf_placeholder" >
 	<div ng-hide="order.Items.length==0 || order==null" 
 			class="w3-xlarge w3-center w3-margin-top" style="font-weight: bold">{{'your-basket' | myTranslator : backbone.lang}}</div>
@@ -117,7 +117,7 @@
 				<div class="w3-large w3-margin-top">{{'delivery' | myTranslator : backbone.lang}}: <span class="price">{{order.Costs[shopping.deliveryMethod].delivery | myCurrency : currency}}</span></div>
 				<div class="w3-xlarge w3-margin-top">{{'total' | myTranslator : backbone.lang}}: <span class="price-total">{{ order.Costs[shopping.deliveryMethod].total | myCurrency : currency}}</span></div>
 				
-				<button class="w3-button w3-black w3-round w3-large w3-margin-top w3-padding" ng-click="proceedToCheckout()"">{{'proceed-to-checkout' | myTranslator : backbone.lang}}t</button>
+				<button class="w3-button w3-black w3-round w3-large w3-margin-top w3-padding" ng-click="proceedToCheckout()"">{{'proceed-to-checkout' | myTranslator : backbone.lang}}</button>
 			</div>
 		</div>
 	</div> <!--col-->

@@ -17,6 +17,10 @@ app.controller('Checkout', function($scope, $timeout) {
 		window.location.href = 'Review.html';
 	}
 
+	$scope.$on('$includeContentLoaded', function () {
+		Shop_refreshBasket();
+	});
+
 	$scope.$watch('agreed',function(newValue, oldValue) {
         if (newValue !== oldValue) {
             if(newValue==true){

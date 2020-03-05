@@ -10,7 +10,6 @@
 <link rel="stylesheet" type="text/css" href="/slick/slick-theme.css"/>
 <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/icon?family=Material+Icons" >
 <link rel="stylesheet" type="text/css" href="/css/w3.css"/>
-<link rel="stylesheet" type="text/css" href="/css/normalize.css"/>
 <link rel="stylesheet" type="text/css" href="/css/common.css"/>
 <link rel="stylesheet" type="text/css" href="/css/product.css"/>
 
@@ -78,7 +77,7 @@
 				<span ng-hide="$last">></span>
 			</span>
 		</div>
-		<slick ng-if="itemInfo!=null" settings="slickConfig" id="img_stage" class="w3-margin-top w3-col l6">
+		<slick ng-if="itemInfo!=null" settings="slickConfig" id="img_stage" class="w3-margin-top w3-col l5">
 			<div style="overflow:hidden;" ng-repeat="img in itemInfo.Images.list track by $index">
 				<img class="sub_image" data-lazy="{{config.imgSrc}}/{{$parent.itemInfo.Images.path}}{{img.name}}" 
 					style="margin:auto; width: 100%; height: auto ">
@@ -87,7 +86,7 @@
 		</slick>
 
 
-	<div class="w3-container w3-col l6 w3-white">
+	<div class="w3-container w3-col l7 w3-white">
 		<div id="product_title"  class="w3-margin-top w3-margin-bottom w3-large" ng-bind-html="itemInfo.Title[backbone.lang]"></div>
 		<div  id="product_price" class="w3-margin-top w3-margin-bottom price w3-wide w3-large"
 			ng-show="!itemInfo.isCustom">
@@ -102,7 +101,7 @@
 				</span>
 			</div>
 		<!-- Overlay of chosen pattern-->
-		<div class="w3-modal" ng-show="modal.show" style="display: block;">
+		<div class="w3-modal" ng-show="modal.show">
 			<div class="w3-modal-content w3-animate-zoom">
 				<div class="w3-display-container" style="height:350px">
 					<span class="w3-display-topright material-icons w3-xxlarge w3-white hoverable" ng-click="modal.show = false">close</span>
@@ -115,16 +114,16 @@
 		</div>
 
 		<!--Info about add to basket button-->
-		<div class="w3-row w3-center w3-margin-top">
+		<div class="w3-margin-top">
 			<button id="add_basket_button" 
 					ng-hide="(itemInfo.Quantity <= 0 && itemInfo.TrackStock) || itemInfo.isCustom"
-					class="w3-button w3-xlarge w3-border w3-border-black w3-hover-white w3-theme w3-round w3-col m6 l9" 
+					class="w3-button w3-xlarge w3-border w3-border-black w3-hover-white w3-theme w3-round" 
 					ng-click="addToBasket();showImg=false">{{'add-to-basket' | myTranslator : backbone.lang}}
 			</button>
 			<span class="w3-text-red w3-large" ng-show="itemInfo.Quantity <= 0 && itemInfo.TrackStock">
 				<b>{{'out-of-stock' | myTranslator : backbone.lang}}</b>
 			</span>
-			<a class="w3-button w3-large w3-border w3-border-black w3-hover-white w3-theme w3-round w3-col m6 l9" 
+			<a class="w3-button w3-large w3-border w3-border-black w3-hover-white w3-theme w3-round" 
 				ng-show="itemInfo.isCustom"
 				href="Contact.html?topic={{itemInfo.ItemId}}">
 				{{'contact-for-pricing' | myTranslator : backbone.lang}}

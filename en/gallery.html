@@ -1,7 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="{{backbone.lang}}" ng-app="AduguShopApp" ng-controller="Gallery">
 <head>
-<title> Dome Kutya | Customer Photos</title>
+<link rel="alternate" hreflang="hu" href="https://dome.kutyalepcso.com/hu/Gallery.html" />
+<link rel="alternate" hreflang="en" href="https://dome.kutyalepcso.com/en/Gallery.html" />
+<title>{{'customer-photos' | myTranslator : backbone.lang}}</title>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 <meta charset="UTF-8">
 <link rel="icon" type="image/jpeg" href="/images/logo.jpg">
@@ -29,9 +31,9 @@
 
 </head> 
 
-<body ng-app="AduguShopApp" ng-controller="Gallery">
+<body >
 
-<div ng-include="'header.html'"> </div>
+<header ng-include="'header.html'" onload="Shop_refreshBasket()"> </header>
 
 <div style="max-width: 1200px;" class="w3-content">
 	<div class="w3-xlarge w3-bold w3-center w3-margin-top" style="color: var(--main-theme)">{{'customer-photos' | myTranslator : backbone.lang}}</div>
@@ -43,7 +45,7 @@
 	</slick>
 </div>
  
-<div ng-include="'footer.html'" class="w3-margin-top"></div>
+<footer ng-include="'footer.html'" class="w3-margin-top"></footer>
 
 </body>
 </html>

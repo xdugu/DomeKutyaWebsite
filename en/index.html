@@ -1,8 +1,11 @@
 <!DOCTYPE html>
 <html lang="{{backbone.lang}}"  ng-app="AduguShopApp" ng-controller="HomePage">
 <head>
-<title ng-if="backbone.lang == 'hu'"> Dome Kutya - Kutya lépcso és rámpa web uszlet</title>
-<title ng-if="backbone.lang == 'en'"> Dome Kutya - Dog Stairs and Ramps Shop</title>
+<link rel="alternate" hreflang="hu" href="https://dome.kutyalepcso.com/hu/index.html" />
+<link rel="alternate" hreflang="en" href="https://dome.kutyalepcso.com/en/index.html" />
+
+<title ng-if="backbone.lang == 'hu'"> Döme Kutya - Kutya lépcso és rámpa web uszlet</title>
+<title ng-if="backbone.lang == 'en'"> Döme Kutya - Dog Stairs and Ramps Shop</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta ng-if="backbone.lang == 'hu'" name="description" content="Kutya lépcsők, rámpák, Dömötör kutya galériák, bújózsák és babzsák eládunk">
@@ -39,7 +42,7 @@
 
 <body>
 
-<header ng-include="'header.html'" class="w3-white"> </header>
+<header ng-include="'header.html'" onload="Shop_refreshBasket()"> </header>
 
 <div class="w3-display-container" style="overflow: hidden; height: 400px">	
 	<img id="landing_img" src="/images/back.jpg" class="" style="width: 100%; height: auto"/>	

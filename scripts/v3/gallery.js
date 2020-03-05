@@ -16,6 +16,11 @@ var app = angular.module('AduguShopApp', ['slickCarousel']);
 
 app.controller('Gallery',function($scope){
 	$scope.backbone = {lang: Common_getLang()}
+
+	$scope.$on('$includeContentLoaded', function () {
+		Shop_refreshBasket();
+	});
+	
 	$scope.slickConfig = {
 				dots: false,
 				infinite: true,

@@ -22,6 +22,10 @@ app.controller('Review', ['$scope', 'ApiManager', function($scope, ApiManager) {
 	$scope.order={};
 	$scope.temp = {comments: null};
 	$scope.sourceUrl = ""
+
+	$scope.$on('$includeContentLoaded', function () {
+		Shop_refreshBasket();
+	});
 	
 	$scope.backbone =  {showPaypalReceipt:false, showBank:false, showConfirmed:false, showPayLater:false};
 	$scope.backbone.lang= $scope.shopping.contact.lang;//for choosing of language

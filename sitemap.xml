@@ -13,81 +13,81 @@
 <priority>1.00</priority>
 </url>
 <url>
-<loc>https://dome.kutyalepcso.com/hu/Categories.html?steps</loc>
+<loc>https://dome.kutyalepcso.com/hu/Categories.html?storeId=KutyaLepcso&amp;category=Kutyalepcso%3ERampak</loc>
 <xhtml:link 
                rel="alternate"
                hreflang="en"
-               href="https://dome.kutyalepcso.com/en/Categories.html?steps"/>
+               href="https://dome.kutyalepcso.com/hu/Categories.html?storeId=KutyaLepcso&amp;category=Kutyalepcso%3ERampak"/>
 	<xhtml:link 
                rel="alternate"
                hreflang="hu"
-               href="https://dome.kutyalepcso.com/hu/Categories.html?steps"/>
+               href="https://dome.kutyalepcso.com/hu/Categories.html?storeId=KutyaLepcso&amp;category=Kutyalepcso%3ERampak"/>
 <priority>0.80</priority>
 <changefreq>monthly</changefreq>
 </url>
 <url>
-<loc>https://dome.kutyalepcso.com/hu/Categories.html?ramps</loc>
+<loc>https://dome.kutyalepcso.com/hu/Categories.html?storeId=KutyaLepcso&amp;category=Kutyalepcso%3ELepcsok</loc>
 <xhtml:link 
                rel="alternate"
                hreflang="en"
-               href="https://dome.kutyalepcso.com/en/Categories.html?ramps"/>
+               href="https://dome.kutyalepcso.com/en/Categories.html?storeId=KutyaLepcso&amp;category=Kutyalepcso%3ELepcsok"/>
 <xhtml:link 
                rel="alternate"
                hreflang="hu"
-               href="https://dome.kutyalepcso.com/hu/Categories.html?ramps"/>
+               href="https://dome.kutyalepcso.com/hu/Categories.html?storeId=KutyaLepcso&amp;category=Kutyalepcso%3ELepcsok"/>
 <priority>0.80</priority>
 <changefreq>monthly</changefreq>
 </url>
 <url>
-<loc>https://dome.kutyalepcso.com/hu/Categories.html?others</loc>
+<loc>https://dome.kutyalepcso.com/hu/Categories.html?storeId=KutyaLepcso&amp;category=Kutyalepcso%3EFekhelyek</loc>
 <xhtml:link 
                rel="alternate"
                hreflang="en"
-               href="https://dome.kutyalepcso.com/en/Categories.html?others"/>
+               href="https://dome.kutyalepcso.com/hu/Categories.html?storeId=KutyaLepcso&amp;category=Kutyalepcso%3EFekhelyek"/>
 <xhtml:link 
                rel="alternate"
                hreflang="hu"
-               href="https://dome.kutyalepcso.com/hu/Categories.html?others"/>
+               href="https://dome.kutyalepcso.com/hu/Categories.html?storeId=KutyaLepcso&amp;category=Kutyalepcso%3EFekhelyek"/>
 <priority>0.6</priority>
 <changefreq>monthly</changefreq>
 </url>
 
 <url>
-<loc>https://dome.kutyalepcso.com/hu/contact.html</loc>
+<loc>https://dome.kutyalepcso.com/hu/Contact.html</loc>
 <xhtml:link 
                rel="alternate"
                hreflang="en"
-               href="https://dome.kutyalepcso.com/en/contact.html"/>
+               href="https://dome.kutyalepcso.com/en/Contact.html"/>
 <xhtml:link 
                rel="alternate"
                hreflang="hu"
-               href="https://dome.kutyalepcso.com/hu/contact.html"/>
+               href="https://dome.kutyalepcso.com/hu/Contact.html"/>
 <priority>0.8</priority>
 <changefreq>monthly</changefreq>
 </url>
 <url>
-<loc>https://dome.kutyalepcso.com/hu/about.html</loc>
+<loc>https://dome.kutyalepcso.com/hu/About.html</loc>
 <xhtml:link 
                rel="alternate"
                hreflang="en"
-               href="https://dome.kutyalepcso.com/en/about.html"/>
+               href="https://dome.kutyalepcso.com/en/About.html"/>
 <xhtml:link 
                rel="alternate"
                hreflang="hu"
-               href="https://dome.kutyalepcso.com/hu/about.html"/>
+               href="https://dome.kutyalepcso.com/hu/About.html"/>
 <priority>0.80</priority>
 <changefreq>monthly</changefreq>
 </url>
 <url>
-<loc>https://dome.kutyalepcso.com/hu/gallery.html</loc>
+<loc>https://dome.kutyalepcso.com/hu/Gallery.html</loc>
 <xhtml:link 
                rel="alternate"
                hreflang="en"
-               href="https://dome.kutyalepcso.com/en/gallery.html"/>
+               href="https://dome.kutyalepcso.com/en/Gallery.html"/>
 <xhtml:link 
                rel="alternate"
                hreflang="hu"
-               href="https://dome.kutyalepcso.com/hu/gallery.html"/>
+               href="https://dome.kutyalepcso.com/hu/Gallery.html"/>
 <priority>0.80</priority>
 <changefreq>monthly</changefreq>
 </url>

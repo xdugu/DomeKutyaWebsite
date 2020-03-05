@@ -31,6 +31,10 @@ $scope.slickConfig = {
 	lazyLoad: 'ondemand'
 };
 
+$scope.$on('$includeContentLoaded', function () {
+    Shop_refreshBasket();
+});
+
 Common_getShopConfig().then(
  function(config){
 	let shopData = localStorage.getObj("shopping");

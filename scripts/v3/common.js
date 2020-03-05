@@ -37,9 +37,7 @@ function Common_sideBar(state){
 }
 
 $(document).ready(function() {	
-		Shop_refreshBasket();
 		checkCookie();
-
 }); 
 
 function checkCookie(){

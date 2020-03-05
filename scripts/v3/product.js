@@ -38,7 +38,11 @@ app.controller('ProductDisplay', ['$scope', 'ApiManager','CommonFuncs', function
 	$scope.showAllErrors = false;
 	$scope.modal = {show: false, itemToShow: null}
 
+	$scope.$on('$includeContentLoaded', function () {
+		Shop_refreshBasket();
+	});
 
+	$('.w3-modal').css('display', 'block');
 
 	// Get config for app specific stuff
 	Common_getShopConfig().then(function(res){

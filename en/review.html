@@ -30,7 +30,7 @@
 <body ng-app="AduguShopApp" ng-controller="Review" >
 
 
-<header ng-include="'header.html'"> </header>
+<header ng-include="'header.html'" onload="Shop_refreshBasket()"> </header>
 <div class="w3-margin-top" ng-init="showBank=false;comment=''">
 	<div class="w3-large w3-center w3-xxlarge" style="font-weight:bold">{{'order-review' | myTranslator : backbone.lang}}</div>
 	<div class="w3-row">
@@ -123,7 +123,7 @@
 				with our account details and payment reference number
 			</span>
 			<span ng-show="backbone.lang == 'hu'">
-				Kérjük erősítse meg, hogy valóban banki átutalással szerete-e fizetni. Amennyiben megerősíti, küldeni fogunk Önnek egy e-mailt, 
+				Kérjük erősítse meg, hogy valóban banki átutalással szeretne-e fizetni. Amennyiben megerősíti, küldeni fogunk Önnek egy e-mailt, 
 				amelyben megtalálja az utaláshoz szükséges adatokat, illetve a referencia számot.
 			</span>
 			</div>
@@ -148,7 +148,7 @@
 		 <span ng-click="backButtonPressed()" class="material-icons w3-large w3-display-topright" style="cursor:pointer">cancel</span>
 		  <div class="w3-container">
 			<div class="w3-large w3-text-green" style="font-weight:bold">{{'order-confirmation' | myTranslator : backbone.lang}}</div>
-			<div class="w3-medium" style="margin-top:1vh">
+			<div style="margin-top:1vh">
 				<span ng-show="backbone.lang == 'en'">Thank you for placing your order. We will work hard to get it to you as quickly as possible.
 					  Please note that for our ramps and stairs it takes approx. <b>10 working days</b> to make and deliver
 				</span>

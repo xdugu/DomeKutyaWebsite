@@ -16,6 +16,9 @@ app.controller('Categories', ['$scope', 'CommonFuncs', 'ApiManager', function($s
 	$scope.backbone = {lang:null, categoryName: "Categories"};	
 	$scope.changeLanguage = Common_changeLanguage;
 
+	$scope.$on('$includeContentLoaded', function () {
+		Shop_refreshBasket();
+	});
 
 	// Get config for app specific stuff
 	Common_getShopConfig().then(function(res){

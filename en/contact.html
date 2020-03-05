@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html lang="{{backbone.lang}}" ng-app="AduguShopApp" ng-controller="Contact" >
 <head>
+<link rel="alternate" hreflang="hu" href="https://dome.kutyalepcso.com/hu/Contact.html" />
+<link rel="alternate" hreflang="en" href="https://dome.kutyalepcso.com/en/Contact.html" />
+
 <title>{{'contact-us' | myTranslator : backbone.lang}}</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="icon" type="image/jpeg" href="/images/logo.jpg">
@@ -28,7 +31,7 @@
 
 <body>
 
-<header ng-include="'header.html'"> </header>
+<header ng-include="'header.html'" onload="Shop_refreshBasket()"> </header>
 
 <div id="product_shelf_placeholder" class="w3-container w3-margin-top">
 	

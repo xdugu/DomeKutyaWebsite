@@ -10,6 +10,9 @@ app.controller('Contact', ['$scope', 'ApiManager', function($scope, ApiManager) 
 	$scope.backbone = {lang: Common_getLang(), formSubmitted: false, submitError: false};
 	
 	$scope.config;
+	$scope.$on('$includeContentLoaded', function () {
+		Shop_refreshBasket();
+	});
 
 	Common_getShopConfig().then(function(res){
 		$scope.config = res;

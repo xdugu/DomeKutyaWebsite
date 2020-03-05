@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="{{backbone.lang}}" ng-app="AduguShopApp" ng-controller="HomePage">
 <head>
+<link rel="alternate" hreflang="hu" href="https://dome.kutyalepcso.com/hu/About.html" />
+<link rel="alternate" hreflang="en" href="https://dome.kutyalepcso.com/en/About.html" />
 <title>{{'about-us' | myTranslator : backbone.lang}}</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta charset="UTF-8">
@@ -44,7 +46,7 @@ app.controller('HomePage', ['$scope', function($scope) {
 
 <body>
 
-<header ng-include="'header.html'"></header>
+<header ng-include="'header.html'" onload="Shop_refreshBasket()"></header>
 
 <div class="w3-content w3-padding" style="max-width: 1200px"> 
     <div ng-include="'legal/' + backbone.lang + '/about.html'"></div>

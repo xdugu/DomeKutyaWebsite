@@ -34,7 +34,7 @@ app.controller('Basket', ['$scope', 'ApiManager', function($scope, ApiManager) {
 				currency:$scope.currency }).then(function(res){
 					$scope.backbone.loading = false;
 					$scope.order = res.data;
-					Shop_updateBasketSize($scope.order.Items.length);
+					Shop_updateBasketSize($scope.order.Count);
 					if($scope.order.hasOwnProperty('Costs')){
 						$scope.couriers = Object.keys($scope.order.Costs);
 						$scope.shopping.deliveryMethod = $scope.couriers[0];
@@ -58,6 +58,7 @@ app.controller('Basket', ['$scope', 'ApiManager', function($scope, ApiManager) {
 				currency:$scope.currency
 			}).then(function(res){
 					$scope.order = res.data;
+					Shop_updateBasketSize($scope.order.Count);
 			});
 		}
 	}
@@ -74,7 +75,7 @@ app.controller('Basket', ['$scope', 'ApiManager', function($scope, ApiManager) {
 				currency:$scope.currency
 			}).then(function(res){
 					$scope.order = res.data;
-					Shop_updateBasketSize($scope.order.Items.length);
+					Shop_updateBasketSize($scope.order.Count);
 			});
 	}
 	
