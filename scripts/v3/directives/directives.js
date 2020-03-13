@@ -32,34 +32,43 @@ angular.module('AduguShopApp').filter('myCurrency', function() {
 		}
 });
 
-
+// This function handles lazy loading ofitems
 angular
     .module('AduguShopApp')
     .directive('lazyLoad', lazyLoad)
 
-function lazyLoad(){
-    return {
-        restrict: 'A',
-        link: function(scope, element, attrs){
-			const img = angular.element(element)[0];
-			img.src = "/images/loading.gif";
-            const observer = new IntersectionObserver(loadImg);           
-            observer.observe(img)
-
-            function loadImg(changes){
-                changes.forEach(change => {
-                    if(change.intersectionRatio > 0){
-						if(!change.target.src.includes(attrs.lazyLoad)){
-							change.target.src = attrs.lazyLoad;
+	function lazyLoad(){
+		return {
+			restrict: 'A',
+			link: function(scope, element, attrs){
+				//at the moment, looking at intersection for just one image of group
+				const img = angular.element(element)[0];
+				img.src = "/images/loading.gif";
+				let options = {
+					root: null,
+					rootMargin: '10% 10% 30% 10%', //setting margin to prempt loading
+					threshold: [0, 0.25, 0.5, 0.75, 1.0]
+				}
+				const observer = new IntersectionObserver(loadImg, options);           
+				observer.observe(img)
+	
+				function loadImg(changes){
+					changes.forEach(change => {
+						if(change.intersectionRatio > 0){
+							if(!change.target.src.includes(attrs.lazyLoad)){
+								change.target.src = attrs.lazyLoad;
+								observer.unobserve(img);
+							}
 						}
-                    }
-                })
-            }    
+					})
+				}    
+	
+			}
+		}
+	}
 
-        }
-    }
-}
-
+// This function will check the size of all images under element and keep them all 
+//at the same size
 angular.module('AduguShopApp').directive('myImageSizerv2', function($interval) {
 	return {
 	  restrict: 'A',
@@ -92,7 +101,7 @@ angular.module('AduguShopApp').directive('myImageSizerv2', function($interval) {
 	};
   });
 
-  
+ // This function will show products specified in params with prices and descriptions 
   angular.module('AduguShopApp').directive('myExhibition',['ApiManager', function(ApiManager) {
 	
 	return{
@@ -135,4 +144,32 @@ angular.module('AduguShopApp').directive('myImageSizerv2', function($interval) {
 		}
 	}
   });
-  
+
+  angular.module('AduguShopApp').directive('myAnimate', function() {
+	return {
+        restrict: 'EA',
+        link: function(scope, element, attrs){
+			const elem  = angular.element(element)[0];
+			$(elem).css('visibility', 'hidden')
+			let options = {
+				root: null,
+				rootMargin: '0px',
+				threshold: [0, 0.25, 0.5, 0.75, 1.0]
+			}
+            const observer = new IntersectionObserver(animate, options);           
+            observer.observe(elem)
+
+            function animate(changes){
+				changes.forEach(change => {
+					if(change.intersectionRatio >= 0.9){
+						$(elem).addClass('my-animate-appearance')
+						observer.unobserve(elem);
+					}
+				});
+				
+            }    
+
+        }
+    }
+
+  });

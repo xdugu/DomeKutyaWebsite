@@ -44,9 +44,10 @@
 
 <header ng-include="'header.html'" onload="Shop_refreshBasket()"> </header>
 
-<div class="w3-display-container" style="overflow: hidden; height: 400px">	
-	<img id="landing_img" src="/images/back.jpg" class="" style="width: 100%; height: auto"/>	
-	<img src="/images/logo2.jpg" style="height: 30%; width: auto" class="w3-display-topmiddle w3-padding"/>
+<div class="w3-display-container" style="overflow: hidden;">	
+	<img id="landing_img" src="/images/back.jpg" class="w3-hide-small" style="width: 100%; height: auto"/>	
+	<img id="landing_img" src="/images/back_mobile.jpg" class="w3-hide-medium w3-hide-large" style="width: 100%; height: auto"/>
+	<img src="/images/logo2.jpg" style="height: 30%; width: auto" class="w3-display-topmiddle w3-padding w3-circle my-animate-opacity"/>
 	<div style="font-size: 1.3em;"
 	  class="w3-text-white w3-display-left w3-padding" >
 		<span id="landing_text" style="opacity: 0">
@@ -60,7 +61,7 @@
 			<div>
 				<img src="/images/res/step.jpg" style="width: 100%;" />
 			</div>
-			<span class="w3-display-middle w3-border w3-border w3-border-white w3-text-white w3-xxlarge">
+			<span my-animate class="w3-display-middle w3-border w3-border w3-border-white w3-text-white w3-xxlarge">
 				{{'stairs' | myTranslator : backbone.lang}}
 			</span>
 		</a>
@@ -68,7 +69,7 @@
 			<div>
 				<img src="/images/res/ramp.jpg" style="width: 100%;"/>
 			</div>
-			<span class="w3-display-middle w3-border w3-border w3-border-white w3-text-white w3-xxlarge">
+			<span my-animate class="w3-display-middle w3-border w3-border w3-border-white w3-text-white w3-xxlarge">
 				{{'ramps' | myTranslator : backbone.lang}}
 			</span>
 		</a>
