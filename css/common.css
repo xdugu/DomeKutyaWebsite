@@ -177,7 +177,7 @@ input[type=checkbox]
 	animation-name: opacity-animation;
 	animation-duration: 2s;
 	animation-delay: 1s;
-	animation-timing-function: ease;
+	animation-timing-function: ease-in;
 	/* Stop at animation end with opacity of 1 */
 	animation-fill-mode: forwards;
 	opacity: 0;
@@ -189,26 +189,18 @@ input[type=checkbox]
 
 @keyframes opacity-animation {
 	0%   {opacity: 0}
-	25%  {opacity: 0.25}
-	50%  {opacity: 0.5}
-	75%  {opacity: 0.75}
-	85%  {opacity: 0.9}
 	100% {opacity: 1}
   }
 
 .my-animate-appearance{
 	animation-name: appearance-animation;
 	animation-duration: 1.1s;
-	animation-timing-function: ease;
+	animation-timing-function: ease-in;
 	visibility: visible !important;
 }
 
 @keyframes appearance-animation {
-	0%   {margin-top: 100px}
-	25%  {margin-top: 80px}
-	50%  {margin-top: 60px}
-	75%  {margin-top: 50px}
-	85%  {margin-top: 30px}
+	0%   {margin-top: 130px}
 	100% {margin-top: 0px}
   }
 

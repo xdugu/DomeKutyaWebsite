@@ -47,7 +47,7 @@ app.controller('Review', ['$scope', 'ApiManager', function($scope, ApiManager) {
 	
 	//////////Called to submit order/////////////////////////////////////
 	$scope.updatePaymentMethod = function(method, details){
-			
+
 			$scope.shopping['comments']=$scope.temp.comments;
 			$scope.shopping.paymentMethod = 'payBeforeDelivery';
 			if(method == 'payOnDelivery'){
@@ -58,6 +58,9 @@ app.controller('Review', ['$scope', 'ApiManager', function($scope, ApiManager) {
 				$scope.shopping.paymentType = method;
 
 			$scope.shopping.paymentDetails = details;
+			
+			// Data to be stored in database cannot have empty strings
+			$scope.shopping = Common_removeEmptyStrings($scope.shopping);
 			
 			ApiManager.post('open', 'update/basket/order', null, {
 							orderDetails: $scope.shopping, 

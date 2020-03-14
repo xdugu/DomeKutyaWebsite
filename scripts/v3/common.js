@@ -166,16 +166,24 @@ $(window).scroll(function(){
 
 });
 
-function Common_isElementInView(elem)
-{
-    var elementTop = $(elem).offset().top;
-	var elementBottom = elementTop + $(elem).outerHeight();
-	var viewportTop = $(window).scrollTop();
-	var viewportBottom = viewportTop + $(window).height();
-	
-	return elementBottom > viewportTop && elementTop < viewportBottom;	
-}
+// Recursively loops through every key in an object and checks for empty strings
+//which it removes by setting to null
+function Common_removeEmptyStrings(obj){
+	 switch(typeof obj){
+		 case 'object':
+			 for(let key in obj){
+				 obj[key] = Common_removeEmptyStrings(obj[key]);
+			 }
+			break;
+		 case 'string':
+			 if(obj.length <= 0){
+				 obj = null;
+			 }
+			break;
+	 }
 
+	 return obj;
+}
 function Common_pad(val){
 	return val<10 ? '0'+val : val.toString();
 }
