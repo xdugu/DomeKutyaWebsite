@@ -4,6 +4,10 @@
 @import url('https://fonts.googleapis.com/css?family=Catamaran');
 
 
+.animate-height{
+	width: 100%;
+	overflow: hidden;
+}
 
 .animate-height.ng-hide-add, .animate-height.ng-hide-remove{
 	transition: all linear 1s;
@@ -11,9 +15,8 @@
 }
 
 .animate-height.ng-hide{
-	max-height: 0px;;
+	max-height: 0px;
 }
-
 
 .selected{
 	border: 5px solid black;
@@ -22,11 +25,10 @@
 input.ng-invalid.ng-dirty{
 	border: 3px solid red;
 }
+
 input.ng-invalid.ng-touched{
 	border: 3px solid red;
 }
-
-
 
 .more-info
 {

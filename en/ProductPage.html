@@ -88,8 +88,8 @@
 
 	<div class="w3-container w3-col l7 w3-white">
 		<div id="product_title"  class="w3-margin-top w3-margin-bottom w3-large">
-			{{itemInfo.Title[backbone.lang]}} - 
-			<span ng-repeat="meta in itemInfo.Metadata" ng-hide="meta.hide"> {{meta.value}}</span>
+			{{itemInfo.Title[backbone.lang]}} 
+			<span ng-repeat="meta in itemInfo.Metadata" ng-hide="meta.hide"> - {{meta.value}}</span>
 		</div>
 		<div  id="product_price" class="w3-margin-top w3-margin-bottom price w3-wide w3-large"
 			ng-show="!itemInfo.isCustom">

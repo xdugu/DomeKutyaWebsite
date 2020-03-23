@@ -87,7 +87,10 @@
 
 
 	<div class="w3-container w3-col l7 w3-white">
-		<div id="product_title"  class="w3-margin-top w3-margin-bottom w3-large" ng-bind-html="itemInfo.Title[backbone.lang]"></div>
+		<div id="product_title"  class="w3-margin-top w3-margin-bottom w3-large">
+			{{itemInfo.Title[backbone.lang]}} 
+			<span ng-repeat="meta in itemInfo.Metadata" ng-hide="meta.hide"> - {{meta.value}}</span>
+		</div>
 		<div  id="product_price" class="w3-margin-top w3-margin-bottom price w3-wide w3-large"
 			ng-show="!itemInfo.isCustom">
 			{{itemInfo.Price[currency.toLowerCase()] | myCurrency: currency}}
@@ -176,8 +179,10 @@
 						type="number" min="{{pickedSpec[$index].min}}" max="{{pickedSpec[$index].max}}"
 						ng-model="$parent.pickedSpec[$index].enteredValue"/>
 					<input required ng-if="pickedSpec[$index].requiresInput && pickedSpec[$index].inputType == 'text'"
-						name="var_text_{{$index}}"
-						type="text" class="w3-input" ng-model="$parent.pickedSpec[$index].enteredValue"/>
+						name="var_text_{{$index}}" maxlength="{{pickedSpec[$index].max || 8}}"
+						class="important-text"
+						type="text" class="w3-input" ng-model="$parent.pickedSpec[$index].enteredValue"
+						placeholder="{{'max-length' | myTranslator : backbone.lang}}{{pickedSpec[$index].max || 8}}"/>
 					<div class="w3-text-red"
 						ng-show="(selections['var_num_' + $index].$touched && selections['var_num_' + $index].$invalid) ||
 								(selections['var_num_' + $index].$invalid && showAllErrors)">
@@ -200,22 +205,22 @@
 			<div ng-click="des=!des;del=false;ret=false" class="w3-border-bottom w3-border-black w3-padding" style="width:100%;height:auto;overflow:auto">
 					<span class="w3-left w3-large bold">{{'description' | myTranslator : backbone.lang}}</span>
 					<span class="w3-right w3-large"> <i ng-show="des==false">+</i><i ng-show="des==true">-</i></span>
-			<div ng-show="des==true" class="w3-margin-top  important-text">
-				<br><div ng-bind-html="itemInfo.Description[backbone.lang]"></div>
-			</div>
+				<div ng-show="des==true" class="w3-margin-top  important-text animate-height">
+					<br><div ng-bind-html="itemInfo.Description[backbone.lang]"></div>
+				</div>
 			</div>
 			<div ng-click="del=!del;des=false;ret=false" class="w3-border-bottom w3-border-black w3-padding" style="width:100%;height:auto;overflow:auto">
 					<span class="w3-left w3-large bold">{{'delivery' | myTranslator : backbone.lang}}</span>
 					<span class="w3-right w3-large"> <i ng-show="del==false">+</i><i ng-show="del==true">-</i></span>
-			<br><div ng-if="del==true" class="w3-margin-top important-text"><div ng-include="'legal/' + backbone.lang + '/delivery-min.html'"></div></div>
+			<br><div ng-if="del==true" class="w3-margin-top important-text animate-height"><div ng-include="'legal/' + backbone.lang + '/delivery-min.html'"></div></div>
 			</div>
 			<div ng-click="ret=!ret;del=false;des=false" class="w3-border-bottom w3-border-black w3-padding" style="width:100%;height:auto;overflow:auto">
 					<span class="w3-left w3-large bold">{{'returns' | myTranslator : backbone.lang}}</span>
 					<span class="w3-right w3-large"> <i ng-show="ret==false">+</i><i ng-show="ret==true">-</i></span>
-				<div ng-show="ret==true && backbone.lang == 'en'" class="w3-margin-top important-text"><br>Products can only be returned in their original condition, without any missing items.
+				<div ng-show="ret==true && backbone.lang == 'en'" class="w3-margin-top important-text  animate-height"><br>Products can only be returned in their original condition, without any missing items.
 						<br>For returns not related to the quality of the product, we don't refund delivery costs
 				</div>
-				<div ng-show="ret==true && backbone.lang == 'hu'" class="w3-margin-top important-text">
+				<div ng-show="ret==true && backbone.lang == 'hu'" class="w3-margin-top important-text  animate-height">
 					<br>
 						A terméket csak eredeti állapotában és csomagolásában, hiánytalan mennyiségi, minőségi állapotában vesszük vissza.
 						Amennyiben a visszaküldött terméket utánvéttel adja fel, azt nem áll módunkban átvenni.
