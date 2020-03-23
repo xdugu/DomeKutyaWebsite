@@ -93,11 +93,17 @@ app.controller('ProductDisplay', ['$scope', 'ApiManager','CommonFuncs', function
 				return JSON.stringify(combi.combination) == JSON.stringify(chosenArray);
 			}
 			let combi = $scope.itemInfo.Variants.combinations.find(combiMatches);
-			$scope.itemInfo.Price = Object.assign($scope.itemInfo.Price, combi.price);
-			$scope.itemInfo.Quantity = combi.quantity;
-			$([document.documentElement, document.body]).animate({
-				scrollTop: $("#product_price").offset().top
-			}, 1000);
+			prevPrice = $scope.itemInfo.Price[$scope.currency.toLowerCase()];
+			
+			// only need to scroll or update price if there is a difference between the current 
+			// and the previous price
+			if(prevPrice != combi.price[$scope.currency.toLowerCase()]){
+				$scope.itemInfo.Price = Object.assign($scope.itemInfo.Price, combi.price);
+				$scope.itemInfo.Quantity = combi.quantity;
+				$([document.documentElement, document.body]).animate({
+					scrollTop: $("#product_price").offset().top
+				}, 1000);
+			}
 		}
 	}
 
