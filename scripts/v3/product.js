@@ -101,6 +101,7 @@ app.controller('ProductDisplay', ['$scope', 'ApiManager','CommonFuncs', function
 		}
 	}
 
+	// called when an item inside a group is selected
 	$scope.selectGroupItem = function(variantIndex, group, pattern){
 		$scope.pickedSpec[variantIndex] = group; 
 		$scope.pickedSpec[parentIndex].chosenVariant = pattern;
@@ -157,6 +158,10 @@ app.controller('ProductDisplay', ['$scope', 'ApiManager','CommonFuncs', function
 	$scope.addToBasket = function(){		
 			if($scope.selections.$invalid){
 				$scope.showAllErrors = true;
+				// scroll to first item in error
+				$([document.documentElement, document.body]).animate({
+					scrollTop: $($scope.selections.$error.required[0].$$element[0]).offset().top
+				}, 1000);
 				return;
 			}
 			let data = {itemId: $scope.itemInfo.ItemId, basketId:$scope.basketId, storeId: 'KutyaLepcso'};

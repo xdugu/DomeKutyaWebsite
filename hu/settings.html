@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="{{backbone.lang}}"  ng-app="AduguShopApp" ng-controller="Settings">
 <head>
 <title>{{'settings' | myTranslator : backbone.lang}}</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -12,7 +12,6 @@
 <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/icon?family=Material+Icons"/>
 <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
 <link rel="stylesheet" type="text/css" href="/css/w3.css"/>
-<link rel="stylesheet" type="text/css" href="/css/normalize.css"/>
 <link rel="stylesheet" type="text/css" href="/css/common.css"/>
 <link rel="stylesheet" type="text/css" href="/css/index.css"/>
 
@@ -100,7 +99,7 @@
 
 </head> 
 
-<body ng-app="AduguShopApp" ng-controller="Settings">
+<body>
 
 <header ng-include="'header.html'" class="w3-white"></header>
 

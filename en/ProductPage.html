@@ -176,7 +176,7 @@
 						type="number" min="{{pickedSpec[$index].min}}" max="{{pickedSpec[$index].max}}"
 						ng-model="$parent.pickedSpec[$index].enteredValue"/>
 					<input required ng-if="pickedSpec[$index].requiresInput && pickedSpec[$index].inputType == 'text'"
-						name="var_text_{{$index}}"
+						name="var_text_{{$index}}" maxlength="{{pickedSpec[$index].max || 8}}"
 						type="text" class="w3-input" ng-model="$parent.pickedSpec[$index].enteredValue"/>
 					<div class="w3-text-red"
 						ng-show="(selections['var_num_' + $index].$touched && selections['var_num_' + $index].$invalid) ||

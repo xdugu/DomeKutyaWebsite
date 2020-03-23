@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="{{backbone.lang}}" ng-app="AduguShopApp" ng-controller="Help">
 <head>
+<link rel="alternate" hreflang="hu" href="https://dome.kutyalepcso.com/hu/Help.html" />
+<link rel="alternate" hreflang="en" href="https://dome.kutyalepcso.com/en/Help.html" />
 <title>{{'legal-information' | myTranslator : backbone.lang}}</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -26,7 +28,7 @@
 </head> 
 
 <body >
- <header ng-include="'header.html'"> </header>
+ <header ng-include="'header.html'" onload="Shop_refreshBasket()"> </header>
  
 	<div class="w3-white">
 		<div ng-click="content.showInfo=true;content.info='our-details'" 
