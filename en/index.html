@@ -30,12 +30,12 @@
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.4/angular.min.js"></script>
 <script  src="/slick/slick.min.js"></script>
  
-<script src="/scripts/v3/common.js" ></script>
-<script src="/scripts/v3/index.js" ></script>
-<script src="/scripts/v3/shop.js" ></script>
-<script src="/scripts/v3/directives/directives.js" ></script>
-<script src="/scripts/v3/directives/translator.js" ></script>
-<script src="/scripts/v3/services/factories.js" ></script>
+<script src="/scripts/v1/common.js" ></script>
+<script src="/scripts/v1/index.js" ></script>
+<script src="/scripts/v1/shop.js" ></script>
+<script src="/scripts/v1/directives/directives.js" ></script>
+<script src="/scripts/v1/directives/translator.js" ></script>
+<script src="/scripts/v1/services/factories.js" ></script>
 <script src="/slick/angular-slick.js"></script>
 
 </head> 
@@ -86,11 +86,12 @@
 	<div class="w3-xlarge w3-center bold" style="margin-top: 50px; color: var(--main-theme)">{{'customer-photos' | myTranslator : backbone.lang}}</div>
 	<slick settings="slickConfig" class="w3-margin-top"> 
 		<div style=" overflow-x:auto; height: 300px;" class="w3-margin-left" ng-repeat="x in [].constructor(10) track by $index">
-			<img data-lazy="/images/customer/img_{{$index+1}}.jpg" style="height:100%;width:auto;" class="w3-round"/>
+			<img data-lazy="/images/customer/img_{{$index+1}}.jpg" style="height:100%;width:auto;" class="w3-round w3-card-4"/>
 		</div>
 	</slick>
 	<div class="w3-center w3-margin-top">
-			<a class="w3-theme w3-button w3-large w3-round" href="Gallery.html" style="width: 200px">{{'more' | myTranslator : backbone.lang}}</a></div>
+			<a class="w3-theme w3-button w3-large w3-round" href="Gallery.html" style="width: 200px">{{'more' | myTranslator : backbone.lang}}</a>
+		</div>
 </div>
 
 
