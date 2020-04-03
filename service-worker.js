@@ -129,6 +129,23 @@ workbox.routing.registerRoute(
   })
 );
 
+workbox.routing.registerRoute(//Cache get response api server to reduce unnecessary duplicate requests
+  /^https:\/\/adugu-common.s3.eu-central-1.amazonaws.com/,
+   new workbox.strategies.CacheFirst({
+     cacheName: 'img-cache',
+     plugins: [
+       new workbox.cacheableResponse.Plugin({
+         statuses: [0, 200],
+       }),
+       new workbox.expiration.Plugin({
+         maxEntries: 50,
+         maxAgeSeconds: 24 * 60 * 60, // 1 day cache for external images
+         purgeOnQuotaError: true, // Opt-in to automatic cleanup.
+       }),
+     ],
+   }),
+ );
+
 //to reduce network load, secondary image caches have been added
 workbox.routing.registerRoute(
   /\.(?:png|gif|jpg|jpeg|svg)$/,
@@ -136,9 +153,8 @@ workbox.routing.registerRoute(
     cacheName: 'img-cache',
     plugins: [
       new workbox.expiration.Plugin({
-        maxEntries: 30,
+        maxEntries: 20,
         maxAgeSeconds:  86400 * 30, // 1 month 
-		 purgeOnQuotaError: true, // Opt-in to automatic cleanup.
       }),
     ],
   }),

@@ -112,6 +112,9 @@
 	</label>
 	<div ng-include="'legal/' + backbone.lang + '/cookie_policy.html'"> </div>
  </div>
+ <div class="w3-container">
+   {{'your-basket' | myTranslator : backbone.lang}}: {{backbone.basketId}}
+ </div>
 
 </body>
 </html>

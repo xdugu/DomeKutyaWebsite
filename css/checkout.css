@@ -1,17 +1,8 @@
-/* We will use a table to store each item in the store*/
-:root /*Variables*/
-{
-	--home-button: #C0C0C0;
-}
+/* Make input text officially legible*/
 
-.entry input.ng-touched {
-	
-  
- }
- 
- .entry input.ng-invalid.ng-touched {
-	
- }
- 
+input
+{
+	font-family: 'Montserrat', Arial, Helvetica, sans-serif !important;
+}
  
 

@@ -3,7 +3,7 @@
 var app = angular.module('AduguShopApp', []);
 app.controller('Settings', function($scope) {
 
-	$scope.backbone = {lang: Common_getLang()};
+	$scope.backbone = {lang: Common_getLang(), basketId: localStorage.getItem('basketId')};
 
 	$scope.$on('$includeContentLoaded', function () {
 		Shop_refreshBasket();

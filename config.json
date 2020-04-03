@@ -1,5 +1,5 @@
 {
-    "imgSrc": "http://adugu-common.s3.eu-central-1.amazonaws.com",
+    "imgSrc": "https://adugu-common.s3.eu-central-1.amazonaws.com",
     "storeId": "KutyaLepcso",
     "shopping":{
         "contact":{
@@ -15,7 +15,7 @@
     },
     "homePage":[
         {
-         "title":{"en": "Our Other Products", "hu": "Másik termékeink"},
+         "title":{"en": "Our Other Products", "hu": "Egyéb termékeink"},
          "list": ["Benny-fekhely", "Cocco-bujozsak", "Masuta-babzsak"],
          "showPrice": true,
          "linkToPage": "ProductPage.html"
