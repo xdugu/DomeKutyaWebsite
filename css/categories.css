@@ -5,7 +5,7 @@
 
 
 
-#product-shelf-placeholder a:nth-child(odd){
+a:nth-child(even).product-shelf-placeholder {
  	clear:left;
 }
 
