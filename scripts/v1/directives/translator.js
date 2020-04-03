@@ -94,7 +94,7 @@ var dict = {
 		'customer-photos': 'Vásárlói képek',
 		'more': 'Több',
 		'title-home': 'Dome Kutya | Kutya lépcso és rámpa web uszlet',
-		'close': 'Bezárt',
+		'close': 'Bezár',
 		'about-us': 'Rólunk',
 		'settings': 'Beállítások',
 		'contact': 'Kapcsolat',
