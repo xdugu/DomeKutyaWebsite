@@ -73,7 +73,7 @@ angular.module('AduguShopApp').directive('myImageSizerv2', function($interval) {
 	return {
 	  restrict: 'A',
 	  link: function($scope,elem, attr) {
-		  let lastSize = 0;
+
 		  $interval(function(){
 			  indexOfShortestImage=0;
 			  shortestHeight=2000;
@@ -87,15 +87,14 @@ angular.module('AduguShopApp').directive('myImageSizerv2', function($interval) {
 					  indexOfShortestImage = i;
 				  }
 			  }
-			  if(shortestHeight != lastSize && shortestHeight!=2000){
+			  if(shortestHeight!=2000){
 				  //check if image has changed size and that also all the images are not just loading gifs
-			  for(let i =0; i <images.length; i++){
-				  let diff = shortestHeight - images[i].height;
-				  // for margin top and bottom
-				  diff = diff / 2;
-				  $(images[i]).css({'margin':  diff.toString() + 'px 0px'})
-			  }
-			   lastSize = shortestHeight;
+				for(let i =0; i <images.length; i++){
+					let diff = shortestHeight - images[i].height;
+					// for margin top and bottom
+					diff = diff / 2;
+					$(images[i]).css({'margin':  diff.toString() + 'px 0px'})
+				}
 			  }
   
 		  },1000);

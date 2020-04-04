@@ -80,13 +80,14 @@ button:hover
 
 .advertised a{
 	width:33%;
-	height: auto;
+	height: 100%;
 	}
-	.advertised a div{
-		width:100%;
-		overflow-y: hidden;
-		max-height: 400px;
-	}
+.advertised a div{
+	width:100%;
+	overflow-y: hidden;
+	max-height: 400px;
+}
+
 	h1{
 	font-size: 1.6em;
 	}
