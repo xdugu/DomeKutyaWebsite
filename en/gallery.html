@@ -11,9 +11,9 @@
 <link rel="stylesheet" type="text/css" href="/slick/slick-theme.css"/>
 <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/icon?family=Material+Icons" >
 <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
-<link rel="stylesheet" type="text/css" href="/css/w3.css"/>
-<link rel="stylesheet" type="text/css" href="/css/normalize.css"/>
-<link rel="stylesheet" type="text/css" href="/css/common.css"/>
+<link rel="stylesheet" type="text/css" href="/css/v1/w3.css"/>
+<link rel="stylesheet" type="text/css" href="/css/v1/normalize.css"/>
+<link rel="stylesheet" type="text/css" href="/css/v1/common.css"/>
 
  <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-131830139-2"></script>
@@ -33,7 +33,7 @@
 
 <body >
 
-<header ng-include="'header.html'" onload="Shop_refreshBasket()"> </header>
+<header ng-include="'header/header.html'" onload="Shop_refreshBasket()"> </header>
 
 <div style="max-width: 1200px;" class="w3-content">
 	<div class="w3-xlarge w3-bold w3-center w3-margin-top" style="color: var(--main-theme)">{{'customer-photos' | myTranslator : backbone.lang}}</div>
@@ -45,7 +45,7 @@
 	</slick>
 </div>
  
-<footer ng-include="'footer.html'" class="w3-margin-top"></footer>
+<footer ng-include="'header/footer.html'" class="w3-margin-top"></footer>
 
 </body>
 </html>

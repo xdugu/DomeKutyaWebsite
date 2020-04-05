@@ -6,11 +6,11 @@
 <meta charset="utf-8"/>
 
 <link rel="icon" type="image/jpeg" href="/images/logo.jpg">
-<link rel="stylesheet" type="text/css" href="/css/w3.css"/>
+<link rel="stylesheet" type="text/css" href="/css/v1/w3.css"/>
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-<link rel="stylesheet" href="/css/normalize.css"/>
-<link rel="stylesheet" href="/css/common.css"/>
-<link rel="stylesheet" href="/css/categories.css"/>
+<link rel="stylesheet" href="/css/v1/normalize.css"/>
+<link rel="stylesheet" href="/css/v1/common.css"/>
+<link rel="stylesheet" href="/css/v1/categories.css"/>
 
  <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-131830139-2"></script>
@@ -30,7 +30,7 @@
 <body ng-app="AduguShopApp" ng-controller="Review" >
 
 
-<header ng-include="'header.html'" onload="Shop_refreshBasket()"> </header>
+<header ng-include="'header/header.html'" onload="Shop_refreshBasket()"> </header>
 <div class="w3-margin-top" ng-init="showBank=false;comment=''">
 	<div class="w3-large w3-center w3-xxlarge" style="font-weight:bold">{{'order-review' | myTranslator : backbone.lang}}</div>
 	<div class="w3-row">

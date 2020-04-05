@@ -1,0 +1,76 @@
+
+
+div#main  img
+{
+	height: 15vw;
+	box-shadow: 0.2vw 0.2vw 0.8vw gray;
+	width: auto;
+	float: left;
+	margin: 2vw 1vw 0vw 0vw;
+}
+
+div#main img:hover
+{
+	opacity: 0.8;
+	cursor: pointer;
+}
+
+/* when the user clicks an image in the gallery, this will be displayed in full using the stage */
+
+div#stage 
+{
+	display: none; /* Will change this when user clicks on one of the images*/
+	top: 0vw;
+	position: fixed;
+	width: 100vw;
+	height: 100vw;
+	z-index: 1000;
+	background-color: rgba(0,0,0,0.9);
+}
+
+div#stage img
+{
+	display: block;
+	height: 40vw;
+	width:  auto;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 5vw;
+}
+
+div#prevArrow
+{
+	padding-left: 1vw;
+	left: 5vw;
+}
+
+div#nextArrow
+{
+	right: 5vw;
+	padding: 0vw 0.5vw;	
+}
+
+#close
+{
+	top:1vw;
+	right: 1vw;
+}
+.arrows i
+{
+	font-size: 3vw;
+}
+.arrows
+{
+	position: fixed;
+	top: 20vw;
+	background-color:white;
+	z-index: 1000;
+	border-radius: 0.3vw;
+}
+.arrows:hover
+{
+	box-shadow: 0.2vw 0.2vw 0.8vw gray;
+	cursor: pointer;
+}
+
+

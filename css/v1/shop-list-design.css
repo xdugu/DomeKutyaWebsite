@@ -1,0 +1,26 @@
+/* We will use a table to store each item in the store*/
+
+.shop_item
+{
+	display: inline-block;
+	float: left;
+	margin-top: 3vw;
+	border-radius: 1vw;
+	box-shadow: 0.5vw 0.5vw 2vw grey;
+	list-style-type: none;
+	padding: 0;
+	background-color: white;
+	max-width: 43vw;
+}
+
+.shop_item img
+{
+	width: 43vw;
+	height: auto;
+}
+
+
+
+
+
+
