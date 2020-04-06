@@ -22,12 +22,13 @@
 
 <script type="text/javascript" src="/slick/slick.min.js"></script>
 
-<script src="/scripts/v1/common.js" ></script>
-<script src="/scripts/v1/shop.js" ></script>
-<script src="/scripts/v1/gallery.js" ></script>
-<script src="/scripts/v1/directives/directives.js" ></script>
+<script src="/scripts/v2/common.js" ></script>
+<script src="/scripts/v2/shop.js" ></script>
+<script src="/scripts/v2/gallery.js" ></script>
+<script src="/scripts/v2/directives/directives.js" ></script>
 <script src="/slick/angular-slick.js"></script>
-<script src="/scripts/v1/directives/translator.js" ></script>
+<script src="/scripts/v2/directives/translator.js" ></script>
+<script src="/scripts/v2/services/factories.js" ></script>
 
 </head> 
 
@@ -38,9 +39,10 @@
 <div style="max-width: 1200px;" class="w3-content">
 	<div class="w3-xlarge w3-bold w3-center w3-margin-top" style="color: var(--main-theme)">{{'customer-photos' | myTranslator : backbone.lang}}</div>
 
-	<slick settings="slickConfig" class="w3-margin-top"> 
-		<div style=" overflow-x:auto; height: 80vh;" class="w3-margin-left" ng-repeat="x in [].constructor(24) track by $index">
-			<img data-lazy="/images/customer/img_{{$index+1}}.jpg" style="height:100%;width:auto;" class="w3-round"/>
+	<slick settings="slickConfig" class="w3-margin-top" ng-if="galleryImages != null"> 
+		<div style=" overflow-x:auto; height: 80vh;" class="w3-margin-left" ng-repeat="image in galleryImages.list">
+			<img data-lazy="{{config.imgSrc}}/{{galleryImages.path}}{{image.name}}" 
+				style="height:100%;width:auto;" class="w3-round w3-card-4" alt="Customer Images"/>
 		</div>
 	</slick>
 </div>
