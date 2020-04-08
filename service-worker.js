@@ -122,7 +122,7 @@ workbox.routing.registerRoute(
     cacheName: 'js-css-html-json-xml-cache',
 	plugins: [
       new workbox.expiration.Plugin({
-        maxAgeSeconds: 60 * 30 //expire after 30 minutes
+        maxAgeSeconds: 60 * 10 //expire after 30 minutes
       }),
 	  pluginIgnoreParams
     ],
