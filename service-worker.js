@@ -122,7 +122,7 @@ workbox.routing.registerRoute(
     cacheName: 'js-css-html-json-xml-cache',
 	plugins: [
       new workbox.expiration.Plugin({
-        maxAgeSeconds: 60 * 10 //expire after 30 minutes
+        maxAgeSeconds: 60 * 30 //expire after 30 minutes
       }),
 	  pluginIgnoreParams
     ],
@@ -138,8 +138,8 @@ workbox.routing.registerRoute(//Cache get response api server to reduce unnecess
          statuses: [0, 200],
        }),
        new workbox.expiration.Plugin({
-         maxEntries: 50,
-         maxAgeSeconds: 24 * 60 * 60, // 1 day cache for external images
+         maxEntries: 100,
+         maxAgeSeconds: 24 * 60 * 60 * 7, // 1 week cache for external images
          purgeOnQuotaError: true, // Opt-in to automatic cleanup.
        }),
      ],
@@ -153,7 +153,7 @@ workbox.routing.registerRoute(
     cacheName: 'img-cache',
     plugins: [
       new workbox.expiration.Plugin({
-        maxEntries: 20,
+        maxEntries: 50,
         maxAgeSeconds:  86400 * 30, // 1 month 
       }),
     ],

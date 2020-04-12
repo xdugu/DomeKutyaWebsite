@@ -196,6 +196,11 @@ function Common_mergeObject(obj,src){
     return obj;	
 }
 
+// limits a number to its min and max value
+function Common_limit(val, min, max){
+	return val < min ? min : (val > max ? max : val);
+}
+
 
 
 

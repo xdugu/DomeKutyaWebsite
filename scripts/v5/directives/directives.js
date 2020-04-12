@@ -115,12 +115,27 @@ angular.module('AduguShopApp').directive('myImageSizerv2', function($interval) {
 			currency: "=currency"
 		},
 		link: function($scope){
-			ApiManager.get('open', 'get/products', {
-							storeId:$scope.mainConfig.storeId, 
-							items: $scope.config.list.toString()
-			}).then(function(res){
-				$scope.products = res.data;
-			})
+			$scope.products = [];
+			switch($scope.config.type){
+				case 'category':
+					ApiManager.get('open', 'get/category', 
+									{'category': $scope.config.list[0], 
+									 'storeId': $scope.mainConfig.storeId + '>Product'
+					}).then(function(res){
+						$scope.products = res.data;
+					});
+					break;
+
+				case 'product':
+				default:
+					ApiManager.get('open', 'get/products', {
+									storeId:$scope.mainConfig.storeId, 
+									items: $scope.config.list.toString()
+					}).then(function(res){
+						$scope.products = res.data;
+					})
+					break;
+		}
 		}
 	}
 
@@ -174,3 +189,4 @@ angular.module('AduguShopApp').directive('myImageSizerv2', function($interval) {
     }
 
   });
+

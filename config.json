@@ -15,18 +15,25 @@
     },
     "homePage":[
         {
-         "title":{"en": "Our Other Products", "hu": "Egyéb termékeink"},
-         "list": ["Benny-fekhely", "Cocco-bujozsak", "Masuta-babzsak"],
-         "showPrice": true,
-         "linkToPage": "ProductPage.html"
-
+            "title":{"en": "Our Other Products", "hu": "Egyéb termékeink"},
+            "type": "product",
+            "list": ["Benny-fekhely", "Cocco-bujozsak", "Masuta-babzsak"],
+            "showPrice": true,
+            "linkToPage": "ProductPage.html"
         },
         {
             "title":{"en": "Specially made for you", "hu": "Különleges termékeink"},
+            "type": "product",
             "list": ["Carlos-2:1-lepcso", "Minnie-2:1-rampa", "Steppelt-premium-lepcso"],
             "showPrice": false,
-            "linkToPage": "ProductPage.html"
-   
+            "linkToPage": "ProductPage.html"  
+        },
+        {
+            "title":{"en": "Items in stock", "hu": "Raktáron"},
+            "type": "category",
+            "list": ["Kutyalepcso>Raktaron"],
+            "showPrice": true,
+            "linkToPage": "ProductPage.html" 
         }
     ],
     "version": 7

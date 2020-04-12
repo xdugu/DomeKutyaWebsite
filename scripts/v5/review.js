@@ -83,15 +83,17 @@ app.controller('Review', ['$scope', 'ApiManager', function($scope, ApiManager) {
 		}
 			
 	}
-
+	
 	// will return the most appropriate image to be displayed
 	$scope.getVariantImage = function (item){
 		let itemCombi = [];
 
-		item.Combination.forEach(function(combi){
-			itemCombi.push(combi.name);
-		});
-
+		//Check that item in basket does indeed have a chosen variant
+		if(item.Combination !=null){
+		   item.Combination.forEach(function(combi){
+			   itemCombi.push(combi.name);
+		   });
+	   }
 		for(let i = 0; i <  item.Variants.combinations.length; i++){
 			let combi = item.Variants.combinations[i];
 		   if(JSON.stringify(combi.combination) == JSON.stringify(itemCombi) &&
