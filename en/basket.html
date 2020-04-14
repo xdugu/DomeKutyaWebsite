@@ -16,12 +16,12 @@
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.4/angular.min.js"></script>
 
 
-<script src="/scripts/v5/common.js" ></script>
-<script src="/scripts/v5/shop.js" ></script>
-<script src="/scripts/v5/basket.js" ></script>
-<script src="/scripts/v5/directives/directives.js" ></script>
-<script src="/scripts/v5/services/factories.js" ></script>
-<script src="/scripts/v5/directives/translator.js" ></script>
+<script src="/scripts/v6/common.js" ></script>
+<script src="/scripts/v6/shop.js" ></script>
+<script src="/scripts/v6/basket.js" ></script>
+<script src="/scripts/v6/directives/directives.js" ></script>
+<script src="/scripts/v6/services/factories.js" ></script>
+<script src="/scripts/v6/directives/translator.js" ></script>
 </head> 
 
 <body>
@@ -96,12 +96,10 @@
 			<select class="w3-padding w3-margin-top" ng-model="shopping.contact.country" ng-change="updateDeliveryCost()" style="width:100%;">
 							<option value="default">{{'choose-country' | myTranslator : backbone.lang}}</option>
 							<option value="Hungary">{{'hungary' | myTranslator : backbone.lang}}</option>
+							<option value="Slovakia">{{'slovakia' | myTranslator : backbone.lang}}</option>
 							<option value="Germany">{{'germany' | myTranslator : backbone.lang}}</option>
-							<option value="Italy">{{'italy' | myTranslator : backbone.lang}}</option>
 							<option value="Switzerland">{{'switzerland' | myTranslator : backbone.lang}}</option>
 							<option value="Romania">{{'romania' | myTranslator : backbone.lang}}</option>
-							<option value="France">{{'france' | myTranslator : backbone.lang}}</option>
-							<option value="UK">{{'united kingdom' | myTranslator : backbone.lang}}</option>
 			</select>
 				
 			<form ng-if="couriers.length > 1" name="deliveryMethod" class="w3-margin-top" >
