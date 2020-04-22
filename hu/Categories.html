@@ -6,7 +6,9 @@
 <title>{{backbone.categoryName[backbone.lang]}}</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta charset="UTF-8">
-<meta name="description" content="Browse through our product categories which include stairs, ramps, dog lofts, beanbags and more!">
+
+<meta ng-if="backbone.lang == 'en'" name="description" content="Browse through our product categories which include stairs, ramps, dog lofts, beanbags and more!">
+<meta ng-if="backbone.lang == 'hu'" name="description" content="Nézz körül termékeink között: lépcsők, rámpák, Dömötör kutya galériák, bújózsák és babzsák">
 <link rel="icon" type="image/jpeg" href="/images/logo.jpg">
 <link rel="stylesheet" type="text/css" href="/slick/slick.css"/>
 <link rel="stylesheet" type="text/css" href="/slick/slick-theme.css"/>

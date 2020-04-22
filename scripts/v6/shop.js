@@ -79,6 +79,8 @@ function Shop_getCountryCode(country){
 			return "IT";
 		case "Slovakia":
 			return "SK";
+		case 'Austria':
+			 return "AT";
 		default:
 			return "HU";
 		
