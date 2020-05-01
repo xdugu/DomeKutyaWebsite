@@ -42,7 +42,7 @@
 		<input type="text" class="w3-input" name="dogs" ng-model="user.dogsName" />
 		<label style="color: var(--main-theme)">{{'dogs-name' | myTranslator : backbone.lang}}</label>
 
-		<input type="email" class="w3-input" name="email" ng-model="user.email" placeholder="" required  autocomplete="email"/>
+		<input type="email" class="w3-input"  name="email" ng-model="user.email" placeholder="" required  autocomplete="email"/>
 		<label style="color: var(--main-theme)">{{'email' | myTranslator : backbone.lang}}</label>
 		<span class="w3-text-red" ng-show="form1.email.$touched && form1.email.$invalid">{{'required' | myTranslator : backbone.lang}}</span>
 		
