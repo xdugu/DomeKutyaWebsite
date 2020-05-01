@@ -54,7 +54,10 @@ app.controller('Categories', ['$scope', 'CommonFuncs', 'ApiManager', function($s
 		for(let i = 1; i < level.length; i++){
 			category = category.sub.find(item => item.name == level[i]);
 		}
-		$scope.backbone.categoryName = category.text;			
+		
+		$scope.backbone.categoryName = category.text;
+		// Replace title with category name
+		document.title = category.text[$scope.backbone.lang];		
 	});
 
 	

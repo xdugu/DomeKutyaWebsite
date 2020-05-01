@@ -187,6 +187,11 @@ app.controller('ProductDisplay', ['$scope', 'ApiManager','CommonFuncs', function
 	function loadProduct(res)
 	{
 		$scope.itemInfo = res.data.data;
+
+		// Replace title with item's actual title and also meta description
+		document.title = $scope.itemInfo.Title[$scope.backbone.lang];
+		document.querySelector('meta[name="description"]').setAttribute("content", $scope.itemInfo.Description[$scope.backbone.lang].replace(/<(\/|\w)+>/gi, '.'));
+		
 		let custom = CommonFuncs.getMeta($scope.itemInfo, 'custom');
 		$scope.itemInfo.isCustom =  custom != null;
 		// seperate category into an array
