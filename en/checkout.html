@@ -46,7 +46,7 @@
 		<label style="color: var(--main-theme)">{{'email' | myTranslator : backbone.lang}}</label>
 		<span class="w3-text-red" ng-show="form1.email.$touched && form1.email.$invalid">{{'required' | myTranslator : backbone.lang}}</span>
 		
-		<input type="tel" class="w3-input" name="number" ng-model="user.number" placeholder="" autocomplete="tel" required />
+		<input type="tel" pattern='\d{0,15}' class="w3-input" name="number" ng-model="user.number" placeholder="e.g. 0036123456789" autocomplete="tel" required />
 		<label style="color: var(--main-theme)">{{'telephone' | myTranslator : backbone.lang}}</label>
 		<span class="w3-text-red" ng-show="form1.number.$touched && form1.number.$invalid">{{'required' | myTranslator : backbone.lang}}</span>
 	</form>
@@ -77,7 +77,7 @@
 	</div>
 
 	<label id="terms"  class="w3-block w3-margin-bottom w3-margin-top w3-white w3-round w3-padding w3-mobile" style="width:70%">
-		<input class="w3-check" type="checkbox" ng-disabled="!form.$valid || !form1.$valid" ng-model="agreed"> 
+		<input class="w3-check" type="checkbox" ng-disabled="form.$invalid || form1.$invalid" ng-model="agreed"> 
 			<span ng-if="backbone.lang == 'en'">I agree with the <a class="underlined" href="Help.html?show=contract" target="_blank">terms and conditions</a> in regards to this order</span>
 	 		<span ng-if="backbone.lang == 'hu'">Ezzel a rendeléssel elfogadom az <a class="underlined" href="Help.html?show=contract" target="_blank">Általános Szerződési Felételeket</a></span> 
 	</label>
