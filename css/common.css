@@ -46,8 +46,10 @@ a
 	transition: border-bottom 0.3s linear;
 }
 
-
-
+input[type=text]
+{
+	font-family: 'Montserrat', Arial, Helvetica, sans-serif !important;
+}
 
 
 button:hover
@@ -156,10 +158,6 @@ button:hover
 
 .bold{
 	font-weight: bold;
-}
-.discount-info{
-	font-family:' El Messiri', calibri;
-	
 }
 
 /* Will control opacity of div item */

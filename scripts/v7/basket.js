@@ -14,7 +14,7 @@ app.controller('Basket', ['$scope', 'ApiManager', function($scope, ApiManager) {
 	$scope.basketId = localStorage.getObj("basketId");
 	$scope.shopping= localStorage.getObj("shopping");
 	$scope.currency = $scope.shopping.currency;
-	$scope.backbone = {lang:null, loading: false};
+	$scope.backbone = {lang:null, loading: false, couponFail: false};
 	$scope.couriers = [];
 	$scope.backbone.lang= $scope.shopping.contact.lang;//for choosing of language
 	
@@ -29,16 +29,11 @@ app.controller('Basket', ['$scope', 'ApiManager', function($scope, ApiManager) {
 		$scope.backbone.loading = true;
 		ApiManager.post('open', 'get/basket', null, {
 				basketId:$scope.basketId, 
-				storeId: $scope.config.storeId, 
-				countryCode:Shop_getCountryCode($scope.shopping.contact.country), 
-				currency:$scope.currency }).then(function(res){
+				storeId: $scope.config.storeId
+				}).then(function(res){
 					$scope.backbone.loading = false;
 					$scope.order = res.data;
 					Shop_updateBasketSize($scope.order.Count);
-					if($scope.order.hasOwnProperty('Costs')){
-						$scope.couriers = Object.keys($scope.order.Costs);
-						$scope.shopping.deliveryMethod = $scope.couriers[0];
-					}
 				}).catch(function(err){
 					Shop_updateBasketSize(0);//Probably the basket could not be found
 				});
@@ -54,8 +49,6 @@ app.controller('Basket', ['$scope', 'ApiManager', function($scope, ApiManager) {
 				storeId: $scope.config.storeId, 
 				index: index, 
 				increment: direction, 
-				countryCode:Shop_getCountryCode($scope.shopping.contact.country),
-				currency:$scope.currency
 			}).then(function(res){
 					$scope.order = res.data;
 					Shop_updateBasketSize($scope.order.Count);
@@ -71,33 +64,12 @@ app.controller('Basket', ['$scope', 'ApiManager', function($scope, ApiManager) {
 				basketId:$scope.basketId, 
 				storeId: $scope.config.storeId, 
 				index: index, 
-				countryCode: Shop_getCountryCode($scope.shopping.contact.country), 
-				currency:$scope.currency
 			}).then(function(res){
 					$scope.order = res.data;
 					Shop_updateBasketSize($scope.order.Count);
 			});
 	}
 	
-	//called when customer chooses/changes the Country to post 
-	$scope.updateDeliveryCost = function()
-	{
-		ApiManager.post('open', 'get/basket', null, {
-			basketId:$scope.basketId, 
-			storeId: $scope.config.storeId,  
-			countryCode: Shop_getCountryCode($scope.shopping.contact.country), 
-			currency:$scope.currency
-		}).then(function(res){
-			$scope.order = res.data;
-			Shop_updateBasketSize($scope.order.Items.length);
-			$scope.shopping.contact.countryCode = Shop_getCountryCode($scope.shopping.contact.country);
-			$scope.couriers = Object.keys($scope.order.Costs);
-			$scope.shopping.deliveryMethod = $scope.couriers[0];
-			$([document.documentElement, document.body]).animate({
-				scrollTop: $("#cost-details").offset().top
-			}, 1000);
-		});
-	}
 
 	$scope.proceedToCheckout = function(){
 		localStorage.setObj("shopping", $scope.shopping);
@@ -125,6 +97,39 @@ app.controller('Basket', ['$scope', 'ApiManager', function($scope, ApiManager) {
 
 		 return item.Images.list[0].name;
 	}
+
+	// gets keys in given object
+	$scope.getKeys = function (obj){
+		if( obj == null || obj == undefined)
+			return [];
+		return Object.keys(obj);
+	}
+
+	// called to apply discount code
+	$scope.applyDiscount = function(code){
+		ApiManager.post('open', 'update/basket/coupon/add', null, {
+			basketId:$scope.basketId, 
+			storeId: $scope.config.storeId, 
+			discountCode : code 
+		}).then(function(res){
+				$scope.order = res.data;
+				$scope.backbone.couponFail = false;
+		}).catch(function(err){
+			$scope.backbone.couponFail = true;
+		});;
+	}
+
+	// called to remove discount code
+	$scope.removeDiscount = function(){
+		ApiManager.post('open', 'update/basket/coupon/remove', null, {
+			basketId:$scope.basketId, 
+			storeId: $scope.config.storeId, 
+			discountCode : $scope.order.Discount.code 
+		}).then(function(res){
+				$scope.order = res.data;
+		})
+	}
+
 }]);
 
 

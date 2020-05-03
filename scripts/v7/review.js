@@ -128,15 +128,19 @@ app.controller('Review', ['$scope', 'ApiManager', function($scope, ApiManager) {
 			},
 			purchase_units: [{
 			  amount: {
-				value:  $scope.order.Costs[$scope.shopping.deliveryMethod].total.toString(),
+				value:  $scope.order.Costs[$scope.shopping.contact.countryCode][$scope.shopping.deliveryMethod].payBeforeDelivery.total[$scope.currency.toLowerCase()].toString(),
 				currency_code: $scope.currency,		
 				breakdown: {
 				  item_total: {
-					  value: $scope.order.Costs[$scope.shopping.deliveryMethod].subTotal.toString(),
+					  value: $scope.order.Costs[$scope.shopping.contact.countryCode][$scope.shopping.deliveryMethod].payBeforeDelivery.subTotal[$scope.currency.toLowerCase()].toString(),
 					  currency_code: $scope.currency
 				  },
+				  discount: {
+					value: $scope.order.Costs[$scope.shopping.contact.countryCode][$scope.shopping.deliveryMethod].payBeforeDelivery.discount[$scope.currency.toLowerCase()].toString(),
+					currency_code: $scope.currency
+				 },
 				  shipping: {
-					  value: $scope.order.Costs[$scope.shopping.deliveryMethod].delivery.toString(),
+					  value: $scope.order.Costs[$scope.shopping.contact.countryCode][$scope.shopping.deliveryMethod].payBeforeDelivery.delivery[$scope.currency.toLowerCase()].toString(),
 					  currency_code: $scope.currency
 				  }
 				}

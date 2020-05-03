@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<title> Dome Kutya | Order Review</title>
+<title> Order Review</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta charset="utf-8"/>
 
@@ -18,12 +18,12 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
 
-<script src="/scripts/v6/common.js" ></script>
-<script src="/scripts/v6/shop.js" ></script>
-<script src="/scripts/v6/review.js" ></script>
-<script src="/scripts/v6/directives/directives.js" ></script>
-<script src="/scripts/v6/services/factories.js" ></script>
-<script src="/scripts/v6/directives/translator.js" ></script>
+<script src="/scripts/v7/common.js" ></script>
+<script src="/scripts/v7/shop.js" ></script>
+<script src="/scripts/v7/review.js" ></script>
+<script src="/scripts/v7/directives/directives.js" ></script>
+<script src="/scripts/v7/services/factories.js" ></script>
+<script src="/scripts/v7/directives/translator.js" ></script>
 
 </head> 
 
@@ -65,13 +65,35 @@
 				<div id="" class="w3-display-left quantity w3-hide-large w3-hide-medium" style="height: 2vw;">
 					<span><b>{{'quantity' | myTranslator : backbone.lang}}:</b> {{item.Quantity}}</span>
 				</div>
-				<div id="price" class="w3-display-right price">{{item.Price[currency.toLowerCase()] * item.Quantity | myCurrency : currency}}</div>
+				<div class="w3-display-right price">
+					<div>{{item.Price[currency.toLowerCase()] * item.Quantity | myCurrency : currency}}</div>
+					<div ng-show="item.Price.original.discountEnabled"
+							style="text-decoration: line-through; color: black">
+							{{item.Price.original[currency.toLowerCase()] * item.Quantity | myCurrency : currency}}
+					</div>
+				</div>
 			</div>		
 	</div>
 	<div class="w3-white w3-padding w3-margin-top">
-		<div class="w3-large w3-margin-top">{{'subtotal' | myTranslator : backbone.lang}}: <span class="price">{{order.Costs[shopping.deliveryMethod].subTotal | myCurrency : currency}}</span></div>
-		<div class="w3-large w3-margin-top">{{'delivery' | myTranslator : backbone.lang}}: <span class="price">{{order.Costs[shopping.deliveryMethod].delivery | myCurrency : currency}}</span></div>
-		<div class="w3-xlarge w3-margin-top">{{'total' | myTranslator : backbone.lang}}: <span class="price-total">{{order.Costs[shopping.deliveryMethod].total | myCurrency : currency}}</span></div>
+		<div class="w3-large w3-margin-top">{{'subtotal' | myTranslator : backbone.lang}}: 
+			<span class="price">{{order.Costs[shopping.contact.countryCode][shopping.deliveryMethod].payBeforeDelivery.subTotal[currency.toLowerCase()] | myCurrency : currency}}
+			</span>
+		</div>
+		<div class="w3-large w3-margin-top">{{'delivery' | myTranslator : backbone.lang}}: 
+			<span class="price">
+				{{order.Costs[shopping.contact.countryCode][shopping.deliveryMethod].payBeforeDelivery.delivery[currency.toLowerCase()] | myCurrency : currency}}
+			</span>
+		</div>
+		<div class="w3-large w3-margin-top" ng-show="order.hasOwnProperty('Discount')">{{'discount' | myTranslator : backbone.lang}}: 
+			<span class="price">
+				-{{order.Costs[shopping.contact.countryCode][shopping.deliveryMethod].payBeforeDelivery.discount[currency.toLowerCase()] | myCurrency : currency}}
+			</span>
+		</div>
+		<div class="w3-xlarge w3-margin-top">{{'total' | myTranslator : backbone.lang}}: 
+			<span class="price-total">
+				{{order.Costs[shopping.contact.countryCode][shopping.deliveryMethod].payBeforeDelivery.total[currency.toLowerCase()] | myCurrency : currency}}
+			</span>
+		</div>
 	</div>
 	</div>
 	
@@ -88,7 +110,7 @@
 			<div ng-hide="shopping.contact.address2==''">{{shopping.contact.address2}}</div>
 			<div>{{shopping.contact.city}}</div>
 			<div>{{shopping.contact.postCode}}</div>
-			<div>{{shopping.contact.country.toLowerCase() | myTranslator : backbone.lang}}</div>
+			<div>{{shopping.contact.countryCode | myTranslator : backbone.lang}}</div>
 		</div>
 	</div>
 	</div>
@@ -106,11 +128,14 @@
 		<div class="w3-row">
 			<div id="paypal-button" class="w3-col l3 m6 w3-mobile w3-margin-top w3-white w3-round"></div>
 		</div>
-		<div class="w3-row" ng-show="shopping.contact.country=='Hungary' && currency == 'HUF'">
+		<div class="w3-row" ng-show="shopping.contact.countryCode=='HU' && currency == 'HUF'">
 			<div ng-click="backbone.showBank=true" class="w3-col l3 m6 w3-mobile w3-button w3-black  w3-margin-bottom w3-margin-top w3-padding w3-round">{{'bank-transfer' | myTranslator : backbone.lang}}</div>	
 		</div>
 		<div class="w3-row">
-			<div ng-show="shopping.contact.country=='Hungary' && currency=='HUF'" ng-click="backbone.showPayLater=true" class="w3-col l3 m6 w3-mobile w3-button w3-brown w3-margin-bottom w3-margin-top w3-padding w3-round">{{'pay-on-delivery' | myTranslator : backbone.lang}}</div>	
+			<div ng-show="shopping.contact.countryCode=='HU' && currency=='HUF'" 
+			ng-click="backbone.showPayLater=true"
+			 class="w3-col l3 m6 w3-mobile w3-button w3-brown w3-margin-bottom w3-margin-top w3-padding w3-round">
+			 {{'pay-on-delivery' | myTranslator : backbone.lang}}</div>	
 		</div>
 	</div>
 	
@@ -167,16 +192,23 @@
 			<div class="w3-medium" style="margin-top:1vh">
 				<span ng-show="backbone.lang == 'en'">
 					Please confirm that you want to pay on delivery. We will send you an email to confirm.
-					Please note that this will increase the total price by <span class="price">{{order.Costs[shopping.deliveryMethod].payOnDeliveryAdditional}} Ft</span>. 
+					Please note that this will increase the total price by 
+					<span class="price">
+						{{order.Costs[shopping.contact.countryCode][shopping.deliveryMethod].payOnDelivery.total[currency.toLowerCase()] -
+							order.Costs[shopping.contact.countryCode][shopping.deliveryMethod].payBeforeDelivery.total[currency.toLowerCase()] | myCurrency : currency}}
+					</span>. 
 					Your total to pay will be</span>
 				</span>
 				<span ng-show="backbone.lang == 'hu'">
 					Kérjük erősítse meg, hogy utánvéttel szeretne fizetni.
 					 A megerősítéshez küldünk Önnek egy e-mailt. Kérjük vegye figyelembe, hogy utánvét esetén a végösszeghez hozzáadódik az utánvét díja, mely 
-					 <span class="price">{{order.Costs[shopping.deliveryMethod].payOnDeliveryAdditional}} Ft</span>. 
+					 <span class="price">
+						{{order.Costs[shopping.contact.countryCode][shopping.deliveryMethod].payOnDelivery.total[currency.toLowerCase()] -
+							order.Costs[shopping.contact.countryCode][shopping.deliveryMethod].payBeforeDelivery.total[currency.toLowerCase()] | myCurrency : currency}}
+					</span>. 
 					 Így a végösszeg</span>
 				</span>
-				<span class="price">{{order.Costs[shopping.deliveryMethod].total + order.Costs[shopping.deliveryMethod].payOnDeliveryAdditional | myCurrency : currency}}</span>
+				<span class="price">{{order.Costs[shopping.contact.countryCode][shopping.deliveryMethod].payOnDelivery.total[currency.toLowerCase()] | myCurrency : currency}}</span>
 			</div>
 			<a ng-click="backbone.showConfirmed=true;updatePaymentMethod('payOnDelivery')" class="w3-button w3-red w3-margin-top w3-margin-bottom">{{'confirm' | myTranslator : backbone.lang}}</a>
 		  </div>

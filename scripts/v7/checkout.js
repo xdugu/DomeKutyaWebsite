@@ -21,6 +21,16 @@ app.controller('Checkout', function($scope, $timeout) {
 		Shop_refreshBasket();
 	});
 
+	//solve issue with users using a + when paypal cannot have this for numbers
+	$scope.$watch(function(){ return $scope.user.number}, function(newValue, oldValue) {
+		if(newValue != undefined || newValue !=null){
+			newValue = newValue.replace('+', '00');
+
+			// also remove all not digits
+			$scope.user.number = newValue.replace(/\D/g, '');
+		}
+	});
+
 	$scope.$watch('agreed',function(newValue, oldValue) {
         if (newValue !== oldValue) {
             if(newValue==true){

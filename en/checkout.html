@@ -19,10 +19,10 @@
 <link rel="stylesheet" href="/css/v1/common.css"/>
 <link rel="stylesheet" href="/css/v1/checkout.css"/>
 
-<script src="/scripts/v6/common.js" ></script>
-<script src="/scripts/v6/shop.js" ></script>
-<script src="/scripts/v6/checkout.js" ></script>
-<script src="/scripts/v6/directives/translator.js" ></script>
+<script src="/scripts/v7/common.js" ></script>
+<script src="/scripts/v7/shop.js" ></script>
+<script src="/scripts/v7/checkout.js" ></script>
+<script src="/scripts/v7/directives/translator.js" ></script>
 
 </head> 
 
@@ -46,7 +46,7 @@
 		<label style="color: var(--main-theme)">{{'email' | myTranslator : backbone.lang}}</label>
 		<span class="w3-text-red" ng-show="form1.email.$touched && form1.email.$invalid">{{'required' | myTranslator : backbone.lang}}</span>
 		
-		<input type="tel" pattern='\d{0,15}' class="w3-input" name="number" ng-model="user.number" placeholder="e.g. 0036123456789" autocomplete="tel" required />
+		<input type="tel" class="w3-input" name="number" ng-model="user.number" placeholder="e.g. 0036123456789" autocomplete="tel" required />
 		<label style="color: var(--main-theme)">{{'telephone' | myTranslator : backbone.lang}}</label>
 		<span class="w3-text-red" ng-show="form1.number.$touched && form1.number.$invalid">{{'required' | myTranslator : backbone.lang}}</span>
 	</form>
@@ -71,7 +71,7 @@
 			<span class="w3-text-red" ng-show="form.pcode.$touched && form.pcode.$invalid">{{'required' | myTranslator : backbone.lang}}</span>
 			
 			<br><br>
-			<input type="text" class="w3-input" name="country" value="{{user.country.toLowerCase() | myTranslator : backbone.lang}}" disabled/>
+			<input type="text" class="w3-input" name="country" value="{{user.countryCode | myTranslator : backbone.lang}}" disabled/>
 
 		</form>
 	</div>

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
-<html lang="en" ng-app="AduguShopApp" ng-controller="Basket">
+<html lang="{{backbone.lang}}" ng-app="AduguShopApp" ng-controller="Basket">
 <head>
-<title> Dome Kutya | Basket </title>
+<title> {{'your-basket' | myTranslator : backbone.lang}}</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta charset="utf-8"/>
 <link rel="icon" type="image/jpeg" href="/images/logo.jpg">
@@ -16,12 +16,12 @@
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.4/angular.min.js"></script>
 
 
-<script src="/scripts/v6/common.js" ></script>
-<script src="/scripts/v6/shop.js" ></script>
-<script src="/scripts/v6/basket.js" ></script>
-<script src="/scripts/v6/directives/directives.js" ></script>
-<script src="/scripts/v6/services/factories.js" ></script>
-<script src="/scripts/v6/directives/translator.js" ></script>
+<script src="/scripts/v7/common.js" ></script>
+<script src="/scripts/v7/shop.js" ></script>
+<script src="/scripts/v7/basket.js" ></script>
+<script src="/scripts/v7/directives/directives.js" ></script>
+<script src="/scripts/v7/services/factories.js" ></script>
+<script src="/scripts/v7/directives/translator.js" ></script>
 </head> 
 
 <body>
@@ -52,7 +52,7 @@
 
 <div class="w3-content" style="max-width: 1200px">
 	<div class="w3-col l6 w3-padding" ng-if="order != null">
-		<div ng-repeat="item in order.Items" class="w3-card w3-margin-top w3-padding w3-white animate-order" style="width: 100%;overflow:hidden;">
+		<div ng-repeat="item in order.Items" class="w3-card w3-margin-top w3-padding w3-white w3-display-container" style="width: 100%;overflow:hidden;">
 				<div ng-init="pickedImage = getVariantImage(item)">
 					<img ng-src="{{config.imgSrc}}/{{item.Images.path}}{{pickedImage}}"
 						style="height:70px; width:auto">
@@ -74,50 +74,96 @@
 					</span>
 
 				</div>
-				<div class="w3-display-container" style="height:10vh;">
-					<div id="" class="w3-display-middle quantity w3-hide-small" style="height: 2vw;">
+				<div class="w3-margin-top w3-margin-bottom">
+					<span class="w3-left">
 						<span ng-click="changeQuantity($index,-1)" class="w3-black w3-round w3-padding hoverable w3-hover-grey">-</span>
 						<span class="w3-padding">{{item.Quantity}}</span>
 						<span ng-click="changeQuantity($index,1)" class="w3-black w3-round w3-padding hoverable w3-hover-grey">+</span>
+					</span>
+					<div id="price" class="w3-right">
+						<div class="price">{{item.Price[currency.toLowerCase()] * item.Quantity | myCurrency : currency}}</div>
+						<div ng-show="item.Price.original.discountEnabled"
+							style="text-decoration: line-through; color: black"
+							class="price">
+							{{item.Price.original[currency.toLowerCase()] * item.Quantity | myCurrency : currency}}
+						</div>
 					</div>
-					<!-- Duplicate of above for positioning-->
-					<div id="" class="w3-display-left quantity w3-hide-large w3-hide-medium" style="height: 2vw;">
-						<span ng-click="changeQuantity($index,-1)" class="w3-black w3-round hoverable w3-padding w3-hover-grey">-</span>
-						<span class="w3-padding">{{item.Quantity}}</span>
-						<span ng-click="changeQuantity($index,1)" class="w3-black w3-round hoverable w3-padding w3-hover-grey">+</span>
+					<div 	id="remove" ng-click="removeItem($index)" 
+							class="w3-display-topright w3-padding hoverable" 
+							style="text-decoration: underline">
+							{{'remove' | myTranslator : backbone.lang}}
 					</div>
-					<div id="price" class="w3-display-right price">{{item.Price[currency.toLowerCase()] * item.Quantity | myCurrency : currency}}</div>
-					<div id="remove" ng-click="removeItem($index)" class="w3-display-bottomright hoverable" style="text-decoration: underline">{{'remove' | myTranslator : backbone.lang}}</div>
 				</div>		
 		</div>
 	</div>
 	<div class="w3-col l6 w3-padding w3-mobile">
 		<div ng-hide="order.length==0">
-			<select class="w3-padding w3-margin-top" ng-model="shopping.contact.country" ng-change="updateDeliveryCost()" style="width:100%;">
-							<option value="default">{{'choose-country' | myTranslator : backbone.lang}}</option>
-							<option value="Hungary">{{'hungary' | myTranslator : backbone.lang}}</option>
-							<option value="Slovakia">{{'slovakia' | myTranslator : backbone.lang}}</option>
-							<option value="Austria">{{'austria' | myTranslator : backbone.lang}}</option>
-							<option value="Germany">{{'germany' | myTranslator : backbone.lang}}</option>
-							<option value="Switzerland">{{'switzerland' | myTranslator : backbone.lang}}</option>
-							<option value="Romania">{{'romania' | myTranslator : backbone.lang}}</option>
-			</select>
-				
-			<form ng-if="couriers.length > 1" name="deliveryMethod" class="w3-margin-top" >
-				<div class="w3-large"><b>{{'choose-courier' | myTranslator : backbone.lang}}</b></div>
-				<label ng-repeat="(key, value) in order.Costs">
-					<input type="radio" ng-model="$parent.shopping.deliveryMethod" ng-value="key" class="w3-radio">
-					{{key}} (<b>{{order.Costs[key].delivery | myCurrency : currency}}</b>)
-				</label><br/>
-			</form>
+			<select class="w3-padding w3-margin-top" ng-model="shopping.contact.countryCode" style="width:100%;">
+							<option value="">{{'choose-country' | myTranslator : backbone.lang}}</option>
+							<option value="HU">{{'HU' | myTranslator : backbone.lang}}</option>
+							<option value="SK">{{'SK' | myTranslator : backbone.lang}}</option>
+							<option value="AT">{{'AT' | myTranslator : backbone.lang}}</option>
+							<option value="DE">{{'DE' | myTranslator : backbone.lang}}</option>
+							<option value="CH">{{'CH' | myTranslator : backbone.lang}}</option>
+							<option value="RO">{{'RO' | myTranslator : backbone.lang}}</option>
+			</select>	
 			
-			<div id="cost-details" ng-hide="shopping.contact.country =='default'" class="w3-white w3-margin-top">
-				<div class="w3-large w3-margin-top">{{'subtotal' | myTranslator : backbone.lang}}: <span class="price">{{order.Costs[shopping.deliveryMethod].subTotal | myCurrency : currency}}</span></div>
-				<div class="w3-large w3-margin-top">{{'delivery' | myTranslator : backbone.lang}}: <span class="price">{{order.Costs[shopping.deliveryMethod].delivery | myCurrency : currency}}</span></div>
-				<div class="w3-xlarge w3-margin-top">{{'total' | myTranslator : backbone.lang}}: <span class="price-total">{{ order.Costs[shopping.deliveryMethod].total | myCurrency : currency}}</span></div>
-				
-				<button class="w3-button w3-black w3-round w3-large w3-margin-top w3-padding" ng-click="proceedToCheckout()"">{{'proceed-to-checkout' | myTranslator : backbone.lang}}</button>
+			<div ng-if="shopping.contact.countryCode.length > 0 && order != null">
+
+				<div class="w3-margin-top" ng-if="!order.hasOwnProperty('Discount')" ng-init="discount = {value: ''}">
+					<input style="font-family: Arial, Helvetica" class="w3-large w3-input" ng-model="discount.value" 
+							placeholder="{{'coupon-code' | myTranslator : backbone.lang}}"/>
+					<button ng-disabled="discount.value.length < 5" 
+							ng-click="applyDiscount(discount.value)" 
+							class=" w3-button w3-theme w3-round">{{'apply-code' | myTranslator : backbone.lang}}
+					</button>				
+				</div>
+				<div ng-show="backbone.couponFail" class="w3-text-red">
+					<span ng-show="backbone.lang == 'en'">Coupon code is invalid</span>
+					<span ng-show="backbone.lang == 'hu'">A kuponkód helytelen</span>
+				</div>
+				<div class="w3-margin-top" ng-if="order.hasOwnProperty('Discount')" class="w3-large">
+					 {{'coupon-code' | myTranslator : backbone.lang}}: {{order.Discount.code}}
+					 <span class="material-icons w3-xlarge bold hoverable" ng-click="removeDiscount()">close</span>
+				</div>
+
+				<form 	name="deliveryMethod" class="w3-margin-top" 
+						ng-hide="getKeys(order.Costs[shopping.contact.countryCode]).length <= 1"
+						ng-init="shopping.deliveryMethod = getKeys(order.Costs[shopping.contact.countryCode])[0]">
+					<div class="w3-large"><b>{{'choose-courier' | myTranslator : backbone.lang}}</b></div>
+					<label ng-repeat="(key, courier) in order.Costs[shopping.contact.countryCode]">
+						<input type="radio" ng-model="$parent.shopping.deliveryMethod" ng-value="key" class="w3-radio">
+						{{key}} (<b>{{courier.payBeforeDelivery.delivery[currency.toLowerCase()] | myCurrency : currency}}</b>)
+					</label><br/>
+				</form>	
+
+				<div id="cost-details"  class="w3-white w3-margin-top">
+					<div class="w3-large w3-margin-top">{{'subtotal' | myTranslator : backbone.lang}}: 
+						<span class="price">
+							{{order.Costs[shopping.contact.countryCode][shopping.deliveryMethod].payBeforeDelivery.subTotal[currency.toLowerCase()] | myCurrency : currency}}
+						</span>
+					</div>
+					<div class="w3-large w3-margin-top">{{'delivery' | myTranslator : backbone.lang}}: 
+						<span class="price">
+							{{order.Costs[shopping.contact.countryCode][shopping.deliveryMethod].payBeforeDelivery.delivery[currency.toLowerCase()] | myCurrency : currency}}
+						</span>
+					</div>
+					<div class="w3-large w3-margin-top" ng-show="order.hasOwnProperty('Discount')">{{'discount' | myTranslator : backbone.lang}}: 
+						<span class="price">
+							-{{order.Costs[shopping.contact.countryCode][shopping.deliveryMethod].payBeforeDelivery.discount[currency.toLowerCase()] | myCurrency : currency}}
+						</span>
+					</div>
+					<div class="w3-xlarge w3-margin-top">{{'total' | myTranslator : backbone.lang}}: 
+						<span class="price-total">
+							{{ order.Costs[shopping.contact.countryCode][shopping.deliveryMethod].payBeforeDelivery.total[currency.toLowerCase()] | myCurrency : currency}}
+						</span>
+					</div>
+					
+					<button class="w3-button w3-black w3-round w3-large w3-margin-top w3-padding" ng-click="proceedToCheckout()"">{{'proceed-to-checkout' | myTranslator : backbone.lang}}</button>
+				</div>
 			</div>
+			
+			
 		</div>
 	</div> <!--col-->
 </div><!--content-->

@@ -34,15 +34,15 @@ var dict = {
 		'your-basket': 'Your Basket',
 		'basket-is-empty': 'Your basket is empty',
 		'choose-country': 'Choose country',
-		'hungary': 'Hungary',
-		'germany': 'Germany',
+		'HU': 'Hungary',
+		'DE': 'Germany',
 		'italy':'Italy',
-		'switzerland': 'Switzerland',
-		'romania':'Romania',
+		'CH': 'Switzerland',
+		'RO':'Romania',
 		'france':'France',
 		'united kingdom': 'United Kingdom',
-		'slovakia': 'Slovakia',
-		'austria': "Austria",
+		'SK': 'Slovakia',
+		'AT': "Austria",
 		'choose-courier': 'Choose Courier',
 		'remove': 'Remove',
 		'subtotal': 'Subtotal',
@@ -79,8 +79,10 @@ var dict = {
 		"dog-lofts": 'Dog Lofts',
 		'contact-confirm': 'Thank you. We will reply back soon',
 		'contact-fail': 'We are sorry that something went wrong. Please try again later :-(',
-		'in-stock' : 'In Stock'
-
+		'in-stock' : 'In Stock',
+		'discount' : 'Discount',
+		'coupon-code': 'Coupon Code',
+		'apply-code': 'Apply Code'
 	},
 	hu:{
 		'and': 'és',
@@ -109,15 +111,15 @@ var dict = {
 		'your-basket': 'Kosár',
 		'basket-is-empty': 'Az Ön kosara üres',
 		'choose-country': 'Válasszon országot a szállítási költség kalkulálásához',
-		'hungary': 'Magyarország',
-		'germany': 'Németország',
+		'HU': 'Magyarország',
+		'DE': 'Németország',
 		'italy':'Olaszország',
-		'switzerland': 'Svájc',
-		'romania':'Románia',
+		'CH': 'Svájc',
+		'RO':'Románia',
 		'france':'Franciaország',
 		'united kingdom': 'Egyesült Királyság',
-		'slovakia': 'Szlovákia',
-		'austria': "Ausztria",
+		'SK': 'Szlovákia',
+		'AT': "Ausztria",
 		'choose-courier': 'Válasszon futárt',
 		'remove': 'Eltávolít',
 		'subtotal': 'Részösszeg',
@@ -154,7 +156,10 @@ var dict = {
 		"dog-lofts": 'Kutya galéria',
 		'contact-confirm': 'Köszönjük. Hamarosan jelentkezünk.',
 		'contact-fail': 'valami elromlott :-(',
-		'in-stock' : 'Raktáron'
+		'in-stock' : 'Raktáron',
+		'discount' : 'Kedvezmény',
+		'coupon-code': 'Kupon kód',
+		'apply-code': 'Kuponkód érvényesítése'
 	}
 }
   
