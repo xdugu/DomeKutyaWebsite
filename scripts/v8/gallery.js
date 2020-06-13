@@ -16,6 +16,7 @@ var app = angular.module('AduguShopApp', ['slickCarousel']);
 
 app.controller('Gallery',['$scope', 'ApiManager', function($scope, ApiManager){
 	$scope.backbone = {lang: Common_getLang()}
+	$scope.removeExtension = Common_removeExtension;
 
 	$scope.$on('$includeContentLoaded', function () {
 		Shop_refreshBasket();

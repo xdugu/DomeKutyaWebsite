@@ -35,6 +35,7 @@ app.controller('ProductDisplay', ['$scope', 'ApiManager','CommonFuncs', function
 	$scope.groupInfo = {selected: null, list: null};
 	$scope.basketId = localStorage.getObj("basketId");
 	$scope.changeLanguage = Common_changeLanguage;
+	$scope.removeExtension = Common_removeExtension;
 	$scope.itemInfo = null;
 	$scope.showAllErrors = false;
 	$scope.modal = {show: false, itemToShow: null}

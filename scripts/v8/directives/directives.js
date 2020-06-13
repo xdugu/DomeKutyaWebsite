@@ -107,7 +107,7 @@ angular.module('AduguShopApp').directive('myImageSizerv2', function($interval) {
 	
 	return{
 		restrict : 'E',
-		templateUrl: '/scripts/templates/Exhibition.html',
+		templateUrl: '/scripts/templates/v1/Exhibition.html',
 		scope:{
 			mainConfig: "=mainconfig",
 			config : "=config",
@@ -116,6 +116,9 @@ angular.module('AduguShopApp').directive('myImageSizerv2', function($interval) {
 		},
 		link: function($scope){
 			$scope.products = [];
+			$scope.removeExtension = Common_removeExtension;
+			
+			// choose type of config
 			switch($scope.config.type){
 				case 'category':
 					ApiManager.get('open', 'get/category', 

@@ -15,6 +15,7 @@ app.controller('Categories', ['$scope', 'CommonFuncs', 'ApiManager', function($s
 	//Language stuff
 	$scope.backbone = {lang:null, categoryName: "Categories"};	
 	$scope.changeLanguage = Common_changeLanguage;
+	$scope.removeExtension = Common_removeExtension;
 
 	$scope.$on('$includeContentLoaded', function () {
 		Shop_refreshBasket();

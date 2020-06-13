@@ -18,12 +18,12 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
 
-<script src="/scripts/v7/common.js" ></script>
-<script src="/scripts/v7/shop.js" ></script>
-<script src="/scripts/v7/review.js" ></script>
-<script src="/scripts/v7/directives/directives.js" ></script>
-<script src="/scripts/v7/services/factories.js" ></script>
-<script src="/scripts/v7/directives/translator.js" ></script>
+<script src="/scripts/v8/common.js" ></script>
+<script src="/scripts/v8/shop.js" ></script>
+<script src="/scripts/v8/review.js" ></script>
+<script src="/scripts/v8/directives/directives.js" ></script>
+<script src="/scripts/v8/services/factories.js" ></script>
+<script src="/scripts/v8/directives/translator.js" ></script>
 
 </head> 
 
@@ -37,14 +37,14 @@
 	<div class="w3-col l6 w3-padding">
 		<div ng-repeat="item in order.Items" class="w3-card w3-margin-top w3-padding w3-white animate-order" style="width: 100%;overflow:hidden;">
 			<div ng-init="pickedImage = getVariantImage(item)">
-				<img ng-src="{{config.imgSrc}}/{{item.Images.path}}{{pickedImage}}"
+				<img ng-src="{{config.imgSrc}}/{{item.Images.path}}{{removeExtension(pickedImage) + '_100w.jpg'}}"
 					style="height:70px; width:auto">
 				</img>
 				<span>{{item.Title[backbone.lang]}}</span>
 			</div>
 			<div ng-repeat="combi in item.Combination">
 				<span ng-if="item.Variants.variants[$index].type == 'group'">
-					<img ng-src="{{config.imgSrc}}/{{combi.chosenVariant.Images.path}}{{combi.chosenVariant.Images.list[0].name}}"
+					<img ng-src="{{config.imgSrc}}/{{combi.chosenVariant.Images.path}}{{removeExtension(combi.chosenVariant.Images.list[0].name) + '_100w.jpg'}}"
 					style="height:50px; width:auto"/>
 					<span><b>{{item.Variants.variants[$index].text[backbone.lang]}}: </b>
 						 {{combi.chosenVariant.Title[backbone.lang]}}

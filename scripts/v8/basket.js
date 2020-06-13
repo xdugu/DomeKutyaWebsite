@@ -14,6 +14,7 @@ app.controller('Basket', ['$scope', 'ApiManager', function($scope, ApiManager) {
 	$scope.basketId = localStorage.getObj("basketId");
 	$scope.shopping= localStorage.getObj("shopping");
 	$scope.currency = $scope.shopping.currency;
+	$scope.removeExtension = Common_removeExtension;
 	$scope.backbone = {lang:null, loading: false, couponFail: false};
 	$scope.couriers = [];
 	$scope.backbone.lang= $scope.shopping.contact.lang;//for choosing of language

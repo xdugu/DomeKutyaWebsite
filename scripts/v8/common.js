@@ -184,6 +184,23 @@ function Common_removeEmptyStrings(obj){
 
 	 return obj;
 }
+
+// return the string in 'name' without extension
+function Common_removeExtension(name){
+	
+	if(name == undefined || name == null)
+		return null;
+    // search for beginning of extension index
+    let extInd = name.search(/\.[a-z]{2,}$/i);
+    
+    if(extInd >= 0){
+        return name.substring(0, extInd);
+    }
+    else
+        return name;
+    
+}
+
 function Common_pad(val){
 	return val<10 ? '0'+val : val.toString();
 }

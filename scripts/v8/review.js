@@ -19,6 +19,7 @@ app.run(function() {
 app.controller('Review', ['$scope', 'ApiManager', function($scope, ApiManager) {
 	$scope.shopping = localStorage.getObj("shopping");
 	$scope.basketId = localStorage.getObj("basketId");
+	$scope.removeExtension = Common_removeExtension;
 	$scope.order={};
 	$scope.temp = {comments: null};
 	$scope.sourceUrl = ""

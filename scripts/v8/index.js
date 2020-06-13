@@ -16,6 +16,7 @@ app.controller('HomePage', ['$scope','ApiManager', function($scope, ApiManager) 
 //getting a reference to these files so I can check later when both are loaded
 $scope.backbone = {lang : Common_getLang()};
 $scope.changeLanguage = Common_changeLanguage;
+$scope.removeExtension = Common_removeExtension;
 $scope.config = null;
 $scope.products = [];
 $scope.currency = null;

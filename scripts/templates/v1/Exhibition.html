@@ -6,7 +6,7 @@
                 href="{{config.linkToPage}}?storeId={{mainConfig.storeId}}&itemId={{product.ItemId}}"
                 ng-class="{'list-margin': !$first}">
                 <div class="grow-on-hover">
-                    <img lazy-load="{{mainConfig.imgSrc}}/{{product.Images.path}}{{product.Images.list[0].name}}" style="width: 100%;"/>
+                    <img lazy-load="{{mainConfig.imgSrc}}/{{product.Images.path}}{{removeExtension(product.Images.list[0].name) + '_500w.jpg'}}" style="width: 100%;"/>
                 </div>
                 <div style="white-space: normal" class="w3-large w3-center">{{product.Title[lang]}}</div>
                 <div class="price-total w3-center" ng-show="config.showPrice">

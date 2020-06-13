@@ -28,12 +28,12 @@
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.4/angular.min.js"></script>
 <script  src="/slick/slick.min.js"></script>
  
-<script src="/scripts/v7/common.js" ></script>
-<script src="/scripts/v7/index.js" ></script>
-<script src="/scripts/v7/shop.js" ></script>
-<script src="/scripts/v7/directives/directives.js" ></script>
-<script src="/scripts/v7/directives/translator.js" ></script>
-<script src="/scripts/v7/services/factories.js" ></script>
+<script src="/scripts/v8/common.js" ></script>
+<script src="/scripts/v8/index.js" ></script>
+<script src="/scripts/v8/shop.js" ></script>
+<script src="/scripts/v8/directives/directives.js" ></script>
+<script src="/scripts/v8/directives/translator.js" ></script>
+<script src="/scripts/v8/services/factories.js" ></script>
 <script src="/slick/angular-slick.js"></script>
 
 </head> 
@@ -85,7 +85,7 @@
 	<div class="w3-xlarge w3-center bold" style="margin-top: 50px; color: var(--main-theme)">{{'customer-photos' | myTranslator : backbone.lang}}</div>
 	<slick settings="slickConfig" class="w3-margin-top" ng-if="galleryImages != null"> 
 		<div style=" overflow-x:auto; height: 300px;" class="w3-margin-left" ng-repeat="x in [].constructor(10) track by $index">
-			<img data-lazy="{{config.imgSrc}}/{{galleryImages.path}}{{galleryImages.list[$index].name}}" 
+			<img lazy-load="{{config.imgSrc}}/{{galleryImages.path}}{{removeExtension(galleryImages.list[$index].name) + '_300w.jpg'}}" 
 				style="height:100%;width:auto;" class="w3-round w3-card-4" alt="Customer images"/>
 		</div>
 	</slick>
