@@ -71,6 +71,9 @@ app.controller('ProductDisplay', ['$scope', 'ApiManager','CommonFuncs', function
 				let relDiv = slick.$slider[0];
 				currImage = $scope.itemInfo.Images.list[0];
 				let idealHeight = (slick.listWidth * currImage.height)/currImage.width;
+
+				// hack to get height of slick stage to match image height
+				$(slick.$slideTrack).height(idealHeight);
 				$(relDiv).height(idealHeight);				
 			},
 			afterChange: function (event, slick, currentSlide, nextSlide) {
@@ -79,7 +82,10 @@ app.controller('ProductDisplay', ['$scope', 'ApiManager','CommonFuncs', function
 				currImage = $scope.itemInfo.Images.list[currentSlide];
 
 				let idealHeight = (slick.listWidth * currImage.height)/currImage.width;
+
+				// hack to get height of slick stage to match image height
 				$(relDiv).animate({height: idealHeight});
+				$(slick.$slideTrack).height(idealHeight);
 			}
 		}	
 		};
