@@ -144,6 +144,7 @@ angular.module('AduguShopApp').directive('myImageSizerv2', function($interval) {
 
   }]);
 
+  // directive to handle cookie policy
   angular.module('AduguShopApp').directive('myCookie', function() {
 	return{
 		restrict : 'E',
@@ -164,6 +165,7 @@ angular.module('AduguShopApp').directive('myImageSizerv2', function($interval) {
 	}
   });
 
+  // directive to animate showing of element only one in viewport
   angular.module('AduguShopApp').directive('myAnimate', function() {
 	return {
         restrict: 'EA',
@@ -192,4 +194,75 @@ angular.module('AduguShopApp').directive('myImageSizerv2', function($interval) {
     }
 
   });
+
+
+  // directive to handle cookie policy
+  angular.module('AduguShopApp').directive('notificationManager', ['ApiManager', function(ApiManager){
+    return {
+		restrict: 'E',
+		templateUrl: '/scripts/templates/v1/Notification.html',
+		scope:{
+			storeId: '=storeid',
+			lang: '=lang'
+		},
+        link: function ($scope, element, attrs) {
+			// get current cached notifications
+			let cachedNotifications = localStorage.getItem('notifications');
+			$scope.messageToDisplay = null;
+
+			// check if no cache and initial something
+			if(cachedNotifications == null)
+				cachedNotifications = {list:[]};
+			else
+				cachedNotifications = JSON.parse(cachedNotifications);
+
+
+            ApiManager.get('open', 'get/notifications', {storeId: $scope.storeId}).then(res =>{
+
+				// update current cache with fresh data
+				for(let iNoti = 0; iNoti < res.data.length; iNoti ++){
+
+					let ind = cachedNotifications.list.findIndex((item) => item.id == res.data[iNoti].Info.id && item.enabled);
+					
+					if(ind < 0){
+						cachedNotifications.list.push(res.data[iNoti].Info);
+					}else{
+						let lastShown = cachedNotifications.list[ind].lastShown;
+						cachedNotifications.list[ind] = res.data[iNoti].Info;
+						cachedNotifications.list[ind].lastShown = lastShown;
+					} // if
+	
+				}// for
+
+				// now delete from cache, the ids not existing in server i.e. have been deleted
+				let newList = [];
+				
+				cachedNotifications.list.forEach((notification) =>{
+					if (res.data.findIndex((item)=> item.Info.id == notification.id && item.Info.enabled) >= 0){
+						newList.push(notification);
+					}
+				});
+
+				cachedNotifications.list = newList;
+				chooseNotificationToShow(cachedNotifications);
+				
+			});
+
+			function chooseNotificationToShow(notification){
+				for(iList = 0; iList < notification.list.length; iList++){
+
+					// if never shown before, then show or if last shown is longer than frequency to show
+					 if((notification.list[iList].lastShown == null && notification.list[iList].enabled) ||
+					 	(Date.now() - notification.list[iList].lastShown > notification.list[iList].frequency)){
+						 $scope.messageToDisplay  = notification.list[iList];
+						 notification.list[iList].lastShown = Date.now();
+						 break;
+					 }
+				}
+
+				localStorage.setItem('notifications', JSON.stringify(notification));
+			}
+        }
+    }
+ }]);
 

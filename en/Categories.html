@@ -27,12 +27,12 @@
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.4/angular-sanitize.js"></script>
 <script type="text/javascript" src="/slick/slick.min.js"></script>
  
-<script src="/scripts/v8/common.js" ></script>
-<script src="/scripts/v8/shop.js" ></script>
-<script src="/scripts/v8/categories.js"></script>
-<script src="/scripts/v8/directives/directives.js" ></script>
-<script src="/scripts/v8/services/factories.js" ></script>
-<script src="/scripts/v8/directives/translator.js" ></script>
+<script src="/scripts/v9/common.js" ></script>
+<script src="/scripts/v9/shop.js" ></script>
+<script src="/scripts/v9/categories.js"></script>
+<script src="/scripts/v9/directives/directives.js" ></script>
+<script src="/scripts/v9/services/factories.js" ></script>
+<script src="/scripts/v9/directives/translator.js" ></script>
 
 </head> 
 
@@ -41,7 +41,10 @@
 
 <header ng-include="'header/header.html'" onload="Shop_refreshBasket()"> </header>
 
+<!-- title of category-->
 <div class="w3-xxlarge w3-center">{{backbone.categoryName[backbone.lang]}}</div>
+
+<notification-manager lang="backbone.lang" storeId="'KutyaLepcso'"></notification-manager>
 
 <!--Currency chooser  -->
 <div class="w3-large w3-center w3-margin">

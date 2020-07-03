@@ -29,8 +29,7 @@ app.controller('Gallery',['$scope', 'ApiManager', function($scope, ApiManager){
 				infinite: true,
 				slidesToShow: 1,
 				slidesToScroll: 1,
-				autoplay: true,
-				autoplaySpeed: 4000,
+				autoplay: false,
 				centerMode: true,
 				variableWidth: true,
 				lazyLoad: 'ondemand'

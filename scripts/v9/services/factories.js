@@ -1,7 +1,7 @@
 // This function concatenates all api request for each of access of store api
 angular.module('AduguShopApp').factory('ApiManager',['$http', function ($http) {
     return {
-        endPoint: "https://h0jg4s8gpa.execute-api.eu-central-1.amazonaws.com/v1",
+        endPoint: "https://h0jg4s8gpa.execute-api.eu-central-1.amazonaws.com/test",
         setEndPoint: function(address){
             this.endPoint = address;
         },
