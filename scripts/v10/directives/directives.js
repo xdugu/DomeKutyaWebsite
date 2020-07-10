@@ -107,7 +107,7 @@ angular.module('AduguShopApp').directive('myImageSizerv2', function($interval) {
 	
 	return{
 		restrict : 'E',
-		templateUrl: '/scripts/templates/v1/Exhibition.html',
+		templateUrl: '/scripts/templates/v2/Exhibition.html',
 		scope:{
 			mainConfig: "=mainconfig",
 			config : "=config",
@@ -200,7 +200,7 @@ angular.module('AduguShopApp').directive('myImageSizerv2', function($interval) {
   angular.module('AduguShopApp').directive('notificationManager', ['ApiManager', function(ApiManager){
     return {
 		restrict: 'E',
-		templateUrl: '/scripts/templates/v1/Notification.html',
+		templateUrl: '/scripts/templates/v2/Notification.html',
 		scope:{
 			storeId: '=storeid',
 			lang: '=lang'
@@ -234,7 +234,7 @@ angular.module('AduguShopApp').directive('myImageSizerv2', function($interval) {
 	
 				}// for
 
-				// now delete from cache, the ids not existing in server i.e. have been deleted
+				// now delete from cache, the ids not existing in server, i.e. have been deleted
 				let newList = [];
 				
 				cachedNotifications.list.forEach((notification) =>{
