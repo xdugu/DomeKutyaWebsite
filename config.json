@@ -30,8 +30,8 @@
         },
         {
             "title":{"en": "Items in stock", "hu": "Raktáron"},
-            "type": "product",
-            "list": ["Regi-csotany", "Nagy-lepcso", "Bezs-babzsak"],
+            "type": "category",
+            "list": ["Kutyalepcso>Raktaron"],
             "showPrice": true,
             "linkToPage": "ProductPage.html" 
         }

@@ -36,6 +36,7 @@ app.controller('Basket', ['$scope', 'ApiManager', function($scope, ApiManager) {
 					$scope.order = res.data;
 					Shop_updateBasketSize($scope.order.Count);
 				}).catch(function(err){
+					console.log(err);
 					Shop_updateBasketSize(0);//Probably the basket could not be found
 				});
 	});

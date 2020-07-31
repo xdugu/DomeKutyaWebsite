@@ -123,13 +123,14 @@
 	</div>
 	</div>
 	
-	
+	<!--PAYMENT METHOD OPTIONS-->
 	<div class="w3-padding">
+
 		<div class="w3-row">
-			<div id="paypal-button" class="w3-col l3 m6 w3-mobile w3-margin-top w3-white w3-round"></div>
+			<div ng-click="startCIBTransaction()" class="w3-col l3 m6 w3-mobile w3-button w3-black  w3-margin-bottom w3-margin-top w3-padding w3-round">{{'pay-by-card' | myTranslator : backbone.lang}}</div>	
 		</div>
-		<div class="w3-row" ng-show="shopping.contact.countryCode=='HU' && currency == 'HUF'">
-			<div ng-click="backbone.showBank=true" class="w3-col l3 m6 w3-mobile w3-button w3-black  w3-margin-bottom w3-margin-top w3-padding w3-round">{{'bank-transfer' | myTranslator : backbone.lang}}</div>	
+		<div class="w3-row w3-margin-top">
+			<div id="paypal-button" class="w3-col l3 m6 w3-mobile w3-margin-top w3-white w3-round"></div>
 		</div>
 		<div class="w3-row">
 			<div ng-show="shopping.contact.countryCode=='HU' && currency=='HUF'" 
@@ -139,31 +140,21 @@
 		</div>
 	</div>
 	
-	<div class="w3-modal" ng-show="backbone.showBank==true" style="display:block;z-index:1000">
+	<div class="w3-modal" ng-show="backbone.showCardRedirectOption" style="display:block;z-index:1000">
 		<div class="w3-modal-content w3-animate-top w3-card-4" style="top:25vh;">
-		 <span ng-click="backButtonPressed()" class="material-icons w3-large w3-display-topright" style="cursor:pointer">cancel</span>
-		  <div class="w3-container" ng-show="backbone.showConfirmed==false">
-			<div class="w3-medium" style="margin-top:1vh">
-			<span ng-show="backbone.lang == 'en'">Please confirm that you want to pay by bank transfer. We will send you an email
-				with our account details and payment reference number
-			</span>
-			<span ng-show="backbone.lang == 'hu'">
-				Kérjük erősítse meg, hogy valóban banki átutalással szeretne-e fizetni. Amennyiben megerősíti, küldeni fogunk Önnek egy e-mailt, 
-				amelyben megtalálja az utaláshoz szükséges adatokat, illetve a referencia számot.
-			</span>
-			</div>
-			<a ng-click="backbone.showConfirmed=true;updatePaymentMethod('bankTransfer');" class="w3-button w3-red w3-margin-top w3-margin-bottom">{{'confirm' | myTranslator : backbone.lang}}</a>
-		  </div>
-		   <div class="w3-container" ng-show="backbone.showConfirmed==true">
-		   
-			<div class="w3-medium" style="margin-top:1vh">
-				<span ng-show="backbone.lang == 'en'">We have sent an email to <strong>{{shopping.contact.email}}</strong> with instructions of bank transfer. Please do
-					this within 24 hours to allow us to process your order.
+		 <span ng-click="backbone.showCardRedirectOption = false" class="material-icons w3-large w3-display-topright" style="cursor:pointer">cancel</span>
+		  <div class="w3-container">
+			<div style="margin-top:1vh">
+				<span ng-show="backbone.lang == 'en'">We will redirect you to our payment service provider to complete the transaction
 				</span>
 				<span ng-show="backbone.lang == 'hu'">
-					A következő e-mail címre <strong>{{shopping.contact.email}}</strong> küldjük el az utaláshoz szükséges információkat.
-					Kérjük, hogy az utalást 24 órán belül tegye meg, hogy legyen időnk feldolgozni a rendelését.
-				</span>
+					A tranzakció befejezéséhez átirányítjuk Önt fizetési szolgáltatónkhoz
+				</span><br><br>
+				<img src="/images/cib/CIB_payment_logo.png">
+				<img ng-src="{{'/images/cib/CIB_accepted_cards_' + backbone.lang + '.png'}}"><br><br>
+				<div class="w3-center">
+					<a class="w3-green w3-button" href="{{popUpInfo.url}}">{{'okay' | myTranslator : backbone.lang}}</a>
+				</div>
 			</div>
 		  </div>
 		</div>
@@ -179,6 +170,47 @@
 				</span>
 				<span ng-show="backbone.lang == 'hu'">
 					Köszönjük, hogy leadta rendelését. Igyekszünk, hogy a megrendelt termék minél hamarabb eljusson Önhöz.
+				</span>
+			</div>
+		  </div>
+		</div>
+	</div>
+	<div class="w3-modal" ng-show="backbone.showCibReceipt==true" style="display:block;z-index:1000">
+		<div class="w3-modal-content w3-animate-top w3-card-4" style="top:25vh;">
+		 <span ng-click="backButtonPressed()" class="material-icons w3-large w3-display-topright" style="cursor:pointer">cancel</span>
+		  <div class="w3-container">
+			<div class="w3-large w3-text-green" style="font-weight:bold">{{'order-confirmation' | myTranslator : backbone.lang}}</div>
+			<div style="margin-top:1vh">
+				<span ng-show="backbone.lang == 'en'">Thank you for placing your order. We will work hard to get it to you as quickly as possible.
+					  Please note that for our ramps and stairs it takes approx. <b>10 working days</b> to make and deliver. <br>
+					  For your records, please find the transaction details below. We have also sent an email containing this information:<br>
+				</span>
+				<span ng-show="backbone.lang == 'hu'">
+					Köszönjük, hogy leadta rendelését. Igyekszünk, hogy a megrendelt termék minél hamarabb eljusson Önhöz.<br>
+					A tranzakció részleteit alább láthatja illetve a kapott email-ben
+				</span>
+				<span class="important-text"><br>
+					<b>{{'transaction-id' | myTranslator : backbone.lang}}:</b>{{popUpInfo.TRID}}<br>
+					<b>{{'transaction-result-code' | myTranslator : backbone.lang}}:</b>{{popUpInfo.RC}}<br>
+					<b>{{'transaction-result-text' | myTranslator : backbone.lang}}:</b>{{popUpInfo.RT}}<br>
+					<b>{{'total' | myTranslator : backbone.lang}}:</b>{{popUpInfo.AMO | myCurrency : currency}}<br>
+					<b>{{'authorisation-number' | myTranslator : backbone.lang}}:</b>{{popUpInfo.ANUM}}<br><br>
+				</span>
+			</div>
+		  </div>
+		</div>
+	</div>
+	<div class="w3-modal" ng-show="backbone.showPaymentFailed" style="display:block;z-index:1000">
+		<div class="w3-modal-content w3-animate-top w3-card-4" style="top:25vh;">
+		 <span ng-click="backbone.showPaymentFailed = false" class="material-icons w3-large w3-display-topright" style="cursor:pointer">cancel</span>
+		  <div class="w3-container">
+			<div class="w3-large w3-text-red" style="font-weight:bold">{{'failure' | myTranslator : backbone.lang}}</div>
+			<div style="margin-top:1vh">
+				<span ng-show="backbone.lang == 'en'">Something went wrong during the payment process. No money has been taken from your account.
+					Please try again
+				</span>
+				<span ng-show="backbone.lang == 'hu'">
+					A fizetési folyamat során valami hiba történt.  Számlájáról nem került levonásra a pénzösszeg.  Kérjük próbálja újra.
 				</span>
 			</div>
 		  </div>

@@ -112,11 +112,15 @@ angular.module('AduguShopApp').directive('myImageSizerv2', function($interval) {
 			mainConfig: "=mainconfig",
 			config : "=config",
 			lang: "=lang",
-			currency: "=currency"
+			currency: "=currency",
+			maxItems: "=maxitems"
 		},
 		link: function($scope){
 			$scope.products = [];
 			$scope.removeExtension = Common_removeExtension;
+
+			if(typeof $scope.maxItems == "undefined" || $scope.maxItems == null)
+				$scope.maxItems = 3;
 			
 			// choose type of config
 			switch($scope.config.type){
@@ -124,8 +128,33 @@ angular.module('AduguShopApp').directive('myImageSizerv2', function($interval) {
 					ApiManager.get('open', 'get/category', 
 									{'category': $scope.config.list[0], 
 									 'storeId': $scope.mainConfig.storeId + '>Product'
-					}).then(function(res){
-						$scope.products = res.data;
+					}).then(res => {
+						let candidates = res.data;
+
+						// if more returned items than can fit, choose randomly
+						if(candidates.length > $scope.maxItems){
+							let indexesToChoose = [];
+
+							for(let i = 0; i < $scope.maxItems; i++){
+								let rand, index;
+
+								// find a random value that is not already in the index to choose
+								do{
+									rand = Math.floor(Math.random() * candidates.length);
+									index = indexesToChoose.findIndex(val => rand == val);
+								}while(index >= 0)
+
+								indexesToChoose.push(rand);
+							}
+
+							// convert indexes into product ids to view
+							 indexesToChoose.forEach(index =>{
+								$scope.products.push(candidates[index]);
+							});
+						}
+						else
+							$scope.products = candidates;
+						
 					});
 					break;
 

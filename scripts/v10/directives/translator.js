@@ -79,10 +79,20 @@ var dict = {
 		"dog-lofts": 'Dog Lofts',
 		'contact-confirm': 'Thank you. We will reply back soon',
 		'contact-fail': 'We are sorry that something went wrong. Please try again later :-(',
+		'failure': 'Failure',
 		'in-stock' : 'In Stock',
 		'discount' : 'Discount',
 		'coupon-code': 'Coupon Code',
-		'apply-code': 'Apply Code'
+		'apply-code': 'Apply Code',
+		'payment-provider': 'Card payment service provider',
+		'accepted-cards': 'Accepted Cards',
+		'cib-payment-info': 'CIB payment information',
+		'transaction-id': 'Transaction ID',
+		'transaction-result-code': 'Transaction result code',
+		'transaction-result-text': 'Transaction result text',
+		'authorisation-number': 'Authorisation number',
+		'reset':'Reset',
+		'pay-by-card': 'Pay by credit/debit card'
 	},
 	hu:{
 		'and': 'és',
@@ -156,10 +166,20 @@ var dict = {
 		"dog-lofts": 'Kutya galéria',
 		'contact-confirm': 'Köszönjük. Hamarosan jelentkezünk.',
 		'contact-fail': 'valami elromlott :-(',
+		'failure': 'Valami elromlott',
 		'in-stock' : 'Raktáron',
 		'discount' : 'Kedvezmény',
 		'coupon-code': 'Kupon kód',
-		'apply-code': 'Kuponkód érvényesítése'
+		'apply-code': 'Kuponkód érvényesítése',
+		'payment-provider': 'Kártyás fizetés szolgáltatója',
+		'accepted-cards': 'Elfogadott kártyák',
+		'cib-payment-info': 'CIB bankkártyás fizetés',
+		'transaction-id': 'A tranzakció azonosítója',
+		'transaction-result-code': 'A tranzakció eredményének kódja',
+		'transaction-result-text': 'A tranzakció eredményének szöveges ismertetése',
+		'authorisation-number': 'A tranzakció eredményének szöveges ismertetése',
+		'reset': 'Visszaállítás',
+		'pay-by-card': 'Fizetés bankkártyával'
 	}
 }
   

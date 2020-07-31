@@ -18,6 +18,12 @@ app.controller('Settings', function($scope) {
 
 	$scope.changeCookie= Common_changeCookie;
 
+	// if something goes horribly wrong, we can delete this basket id and start again
+	$scope.resetBasketId = function(){
+		localStorage.removeItem("basketId");
+		$scope.backbone.basketId = '';
+	}
+
 
 });
 

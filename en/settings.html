@@ -113,7 +113,8 @@
 	<div ng-include="'legal/' + backbone.lang + '/cookie_policy.html'"> </div>
  </div>
  <div class="w3-container">
-   {{'your-basket' | myTranslator : backbone.lang}}: {{backbone.basketId}}
+   {{'your-basket' | myTranslator : backbone.lang}}: {{backbone.basketId}}<br>
+   <button class="w3-button w3-blue" ng-click="resetBasketId()">{{'reset' | myTranslator : backbone.lang}}</button>
  </div>
 
 </body>

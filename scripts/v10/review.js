@@ -16,19 +16,21 @@ app.run(function() {
 	// Trigger input event on change to fix auto-complete
 	$('input, select').on('change',function() { $(this).trigger('input'); });
 });
-app.controller('Review', ['$scope', 'ApiManager', function($scope, ApiManager) {
+app.controller('Review', ['$scope', 'ApiManager', '$location', function($scope, ApiManager, $location) {
 	$scope.shopping = localStorage.getObj("shopping");
 	$scope.basketId = localStorage.getObj("basketId");
 	$scope.removeExtension = Common_removeExtension;
 	$scope.order={};
 	$scope.temp = {comments: null};
-	$scope.sourceUrl = ""
+	$scope.sourceUrl = "";
+	$scope.popUpInfo = {};
 
 	$scope.$on('$includeContentLoaded', function () {
 		Shop_refreshBasket();
 	});
 	
-	$scope.backbone =  {showPaypalReceipt:false, showBank:false, showConfirmed:false, showPayLater:false};
+	$scope.backbone =  {showPaypalReceipt:false, showCibReceipt:false, showBank:false, showCardRedirectOption: false,
+							showConfirmed:false, showPayLater:false, showPaymentFailed: false};
 	$scope.backbone.lang= $scope.shopping.contact.lang;//for choosing of language
 	//////////////////////////////////////////////
 	$scope.currency = $scope.shopping.currency;
@@ -42,6 +44,7 @@ app.controller('Review', ['$scope', 'ApiManager', function($scope, ApiManager) {
 							currency:$scope.currency 
 						}).then(function(res){
 						$scope.order = res.data;
+						verifyCIBTransaction();
 						Shop_updateBasketSize(res.data.Items.length);
 		});
 	});
@@ -73,7 +76,8 @@ app.controller('Review', ['$scope', 'ApiManager', function($scope, ApiManager) {
 	
 
 	$scope.backButtonPressed = function (){
-		if( $scope.backbone.showConfirmed==true || $scope.backbone.showPaypalReceipt==true )
+		if( $scope.backbone.showConfirmed==true || $scope.backbone.showPaypalReceipt==true ||
+			$scope.backbone.showCibReceipt == true )
 		{
 			window.location.href = 'index.html';
 		}
@@ -105,9 +109,57 @@ app.controller('Review', ['$scope', 'ApiManager', function($scope, ApiManager) {
 
 		return item.Images.list[0].name;
    }
+
+   // cib transaction handler
+   $scope.startCIBTransaction = function(){
+
+	   // package the data we have now to start transaction
+		$scope.shopping['comments']= $scope.temp.comments;
+		$scope.shopping.paymentMethod = 'payBeforeDelivery';
+		$scope.shopping.paymentType = 'cib';
+		
+		// Data to be stored in database cannot have empty strings
+		$scope.shopping = Common_removeEmptyStrings($scope.shopping);
+		$scope.shopping.url= $location.protocol() + '://' + $location.host() + `/${$scope.backbone.lang}/Review.html`;
+		
+		ApiManager.post('open', 'create/transaction', {storeId: $scope.config.storeId}, {
+						orderDetails: $scope.shopping, 
+						basketId: $scope.basketId
+		}).then(res => {
+			// we will receive a specific url to go to and this is what we will do
+			$scope.popUpInfo = res.data;
+			$scope.backbone.showCardRedirectOption = true;
+		});
+
+   }
+
+   // called on every page reload to check if we have a cib transaction
+   function verifyCIBTransaction(){
+		let params = Common_parseUrlParam();
+
+		if(params.PID != null && params.DATA != null){
+
+			// we have a valid transaction parameter that we need to validate
+			ApiManager.post('open', 'update/transaction', {storeId: $scope.config.storeId}, {
+				cibResponse: params.DATA,
+				basketId:$scope.basketId
+			}).then(res => {
+				// log returned params
+				console.log(JSON.stringify(res.data));
+				$scope.popUpInfo = res.data;
+				$scope.backbone.showCibReceipt = true;
+				localStorage.removeItem("shopping");
+				localStorage.removeItem("basketId");
+
+			}).catch(err =>{
+				console.log(err);
+				$scope.backbone.showPaymentFailed = true;
+			});
+		}
+   }
    
 	
-
+   	// add paypal script to site to accept payments
 	var script = document.createElement("script");
 	paypalIdTest = "AXIR5FN2_aHZDPJ0B04WvLl7gtekClOeAInB4B6t4Gt8AgzHW6cHsxhpjle6S1dXc0TlwckcxtwIpnPe";
 	paypalIdLive = "AXb7KnR0LgCQXoWW4uo9XDxgCJVx4cpKUEHJSDUeSRPTZCoHnb7kV0Vd-4MMRWX1Z3-yXfV2Z7k44MTO";
