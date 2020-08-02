@@ -17,14 +17,14 @@
         {
             "title":{"en": "Our Other Products", "hu": "Egyéb termékeink"},
             "type": "product",
-            "list": ["Benny-fekhely", "Cocco-bujozsak", "Masuta-babzsak"],
+            "list": ["Benny-fekhely", "Cocco-bujozsak", "Masuta-babzsak", "Coconut-fekhely"],
             "showPrice": true,
             "linkToPage": "ProductPage.html"
         },
         {
             "title":{"en": "Specially made for you", "hu": "Különleges termékeink"},
             "type": "product",
-            "list": ["Carlos-2-1-lepcso", "Minnie-2-1-rampa", "Steppelt-premium-lepcso"],
+            "list": ["Carlos-2-1-lepcso", "Dome-egyedi-rampa", "Minnie-2-1-rampa", "Steppelt-premium-lepcso"],
             "showPrice": false,
             "linkToPage": "ProductPage.html"  
         },

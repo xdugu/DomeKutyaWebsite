@@ -79,13 +79,15 @@ button:hover
 .grow-on-hover:hover img{ transform: scale(1.1); }
 
 .advertised a{
-	width:33%;
+	width:25%;
 	height: 100%;
+	vertical-align: top;
 	}
 .advertised a div{
 	width:100%;
 	overflow-y: hidden;
 	max-height: 400px;
+	
 }
 
 	h1{
