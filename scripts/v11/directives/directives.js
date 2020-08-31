@@ -107,7 +107,7 @@ angular.module('AduguShopApp').directive('myImageSizerv2', function($interval) {
 	
 	return{
 		restrict : 'E',
-		templateUrl: '/scripts/templates/v2/Exhibition.html',
+		templateUrl: '/scripts/templates/v3/Exhibition.html',
 		scope:{
 			mainConfig: "=mainconfig",
 			config : "=config",
@@ -229,7 +229,7 @@ angular.module('AduguShopApp').directive('myImageSizerv2', function($interval) {
   angular.module('AduguShopApp').directive('notificationManager', ['ApiManager', function(ApiManager){
     return {
 		restrict: 'E',
-		templateUrl: '/scripts/templates/v2/Notification.html',
+		templateUrl: '/scripts/templates/v3/Notification.html',
 		scope:{
 			storeId: '=storeid',
 			lang: '=lang'

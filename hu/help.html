@@ -7,7 +7,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="icon" type="image/jpeg" href="/images/logo.jpg">
-<link rel="stylesheet" type="text/css" href="/css/v1/w3.css"/>
+<link rel="stylesheet" type="text/css" href="/css/v2/w3.css"/>
 
  <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-131830139-2"></script>
@@ -15,14 +15,14 @@
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.4/angular.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
-<link rel="stylesheet" href="/css/v1/common.css"/>
-<link rel="stylesheet" href="/css/v1/help.css"/>
+<link rel="stylesheet" href="/css/v2/common.css"/>
+<link rel="stylesheet" href="/css/v2/help.css"/>
 
 
-<script src="/scripts/v10/common.js" ></script>
-<script src="/scripts/v10/shop.js" ></script>
-<script src="/scripts/v10/help.js" ></script>
-<script src="/scripts/v10/directives/translator.js" ></script>
+<script src="/scripts/v11/common.js" ></script>
+<script src="/scripts/v11/shop.js" ></script>
+<script src="/scripts/v11/help.js" ></script>
+<script src="/scripts/v11/directives/translator.js" ></script>
 
 
 </head> 
@@ -39,9 +39,9 @@
 					class=" w3-padding w3-center heading">{{'terms' | myTranslator : backbone.lang}}
 		</div>
 
-		<div ng-click="content.showInfo=true;content.info='cib-payment-info'" 
+		<!--div ng-click="content.showInfo=true;content.info='cib-payment-info'" 
 					class=" w3-padding w3-center heading">{{'cib-payment-info' | myTranslator : backbone.lang}}
-		</div>
+		</div-->
 		
 		<div ng-click="content.showInfo=true;content.info='use-of-personal-data'" 
 				class=" w3-padding w3-center heading">{{'use-of-personal-data' | myTranslator : backbone.lang}}

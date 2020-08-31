@@ -6,11 +6,11 @@
 <meta charset="utf-8"/>
 
 <link rel="icon" type="image/jpeg" href="/images/logo.jpg">
-<link rel="stylesheet" type="text/css" href="/css/v1/w3.css"/>
+<link rel="stylesheet" type="text/css" href="/css/v2/w3.css"/>
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-<link rel="stylesheet" href="/css/v1/normalize.css"/>
-<link rel="stylesheet" href="/css/v1/common.css"/>
-<link rel="stylesheet" href="/css/v1/categories.css"/>
+<link rel="stylesheet" href="/css/v2/normalize.css"/>
+<link rel="stylesheet" href="/css/v2/common.css"/>
+<link rel="stylesheet" href="/css/v2/categories.css"/>
 
  <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-131830139-2"></script>
@@ -18,12 +18,12 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
 
-<script src="/scripts/v10/common.js" ></script>
-<script src="/scripts/v10/shop.js" ></script>
-<script src="/scripts/v10/review.js" ></script>
-<script src="/scripts/v10/directives/directives.js" ></script>
-<script src="/scripts/v10/services/factories.js" ></script>
-<script src="/scripts/v10/directives/translator.js" ></script>
+<script src="/scripts/v11/common.js" ></script>
+<script src="/scripts/v11/shop.js" ></script>
+<script src="/scripts/v11/review.js" ></script>
+<script src="/scripts/v11/directives/directives.js" ></script>
+<script src="/scripts/v11/services/factories.js" ></script>
+<script src="/scripts/v11/directives/translator.js" ></script>
 
 </head> 
 
@@ -126,9 +126,12 @@
 	<!--PAYMENT METHOD OPTIONS-->
 	<div class="w3-padding">
 
-		<div class="w3-row">
-			<div ng-click="startCIBTransaction()" class="w3-col l3 m6 w3-mobile w3-button w3-black  w3-margin-bottom w3-margin-top w3-padding w3-round">{{'pay-by-card' | myTranslator : backbone.lang}}</div>	
-		</div>
+		<!--div class="w3-row">
+			<div ng-click="startCIBTransaction()" 
+				class="w3-col l3 m6 w3-mobile w3-button w3-black  w3-margin-bottom w3-margin-top w3-padding w3-round">
+				{{'pay-by-card' | myTranslator : backbone.lang}}
+			</div>	
+		</div-->
 		<div class="w3-row w3-margin-top">
 			<div id="paypal-button" class="w3-col l3 m6 w3-mobile w3-margin-top w3-white w3-round"></div>
 		</div>
