@@ -154,7 +154,7 @@ app.controller('Review', ['$scope', 'ApiManager', '$location', function($scope, 
 			}).catch(err =>{
 				console.log(err);
 				$scope.backbone.showPaymentFailed = true;
-				$scope.popUpInfo = err.data;
+				$scope.popUpInfo = err.data.response;
 				console.log(err.data);
 			});
 		}

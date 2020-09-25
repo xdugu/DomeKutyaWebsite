@@ -125,13 +125,16 @@
 	
 	<!--PAYMENT METHOD OPTIONS-->
 	<div class="w3-padding">
-
-		<!--div class="w3-row">
-			<div ng-click="startCIBTransaction()" 
-				class="w3-col l3 m6 w3-mobile w3-button w3-black  w3-margin-bottom w3-margin-top w3-padding w3-round">
-				{{'pay-by-card' | myTranslator : backbone.lang}}
-			</div>	
-		</div-->
+		<div ng-if="currency=='HUF'">
+			<span ng-show="backbone.lang == 'hu'"><span>Magyarország (HU)</span></span>
+			<span ng-show="backbone.lang == 'en'"><span>Hungary (HU)</span></span>
+			<div class="w3-row">
+				<div ng-click="startCIBTransaction()" 
+					class="w3-col l3 m6 w3-mobile w3-button w3-black  w3-margin-bottom w3-margin-top w3-padding w3-round">
+					{{'pay-by-card' | myTranslator : backbone.lang}}
+				</div>	
+			</div>
+		</div>
 		<div class="w3-row w3-margin-top">
 			<div id="paypal-button" class="w3-col l3 m6 w3-mobile w3-margin-top w3-white w3-round"></div>
 		</div>
@@ -193,11 +196,11 @@
 					A tranzakció részleteit alább láthatja illetve a kapott email-ben
 				</span>
 				<span class="important-text"><br>
-					<b>{{'transaction-id' | myTranslator : backbone.lang}}:</b>{{popUpInfo.TRID}}<br>
-					<b>{{'transaction-result-code' | myTranslator : backbone.lang}}:</b>{{popUpInfo.RC}}<br>
-					<b>{{'transaction-result-text' | myTranslator : backbone.lang}}:</b>{{popUpInfo.RT}}<br>
-					<b>{{'total' | myTranslator : backbone.lang}}:</b>{{popUpInfo.AMO | myCurrency : currency}}<br>
-					<b>{{'authorisation-number' | myTranslator : backbone.lang}}:</b>{{popUpInfo.ANUM}}<br><br>
+					<b>{{'transaction-id' | myTranslator : backbone.lang}}:</b> {{popUpInfo.TRID}}<br>
+					<b>{{'transaction-result-code' | myTranslator : backbone.lang}}:</b> {{popUpInfo.RC}}<br>
+					<b>{{'transaction-result-text' | myTranslator : backbone.lang}}:</b> {{popUpInfo.RT}}<br>
+					<b>{{'total' | myTranslator : backbone.lang}}:</b> {{popUpInfo.AMO | myCurrency : currency}}<br>
+					<b>{{'authorisation-number' | myTranslator : backbone.lang}}:</b> {{popUpInfo.ANUM}}<br><br>
 				</span>
 			</div>
 		  </div>
@@ -214,6 +217,11 @@
 				</span>
 				<span ng-show="backbone.lang == 'hu'">
 					A fizetési folyamat során valami hiba történt.  Számlájáról nem került levonásra a pénzösszeg.  Kérjük próbálja újra.
+				</span>
+				<span class="important-text"><br>
+					<b>{{'transaction-id' | myTranslator : backbone.lang}}:</b> {{popUpInfo.TRID}}<br>
+					<b>{{'transaction-result-code' | myTranslator : backbone.lang}}:</b> {{popUpInfo.RC}}<br>
+					<b>{{'transaction-result-text' | myTranslator : backbone.lang}}:</b> {{popUpInfo.RT}}<br>
 				</span>
 			</div>
 		  </div>

@@ -39,9 +39,12 @@
 					class=" w3-padding w3-center heading">{{'terms' | myTranslator : backbone.lang}}
 		</div>
 
-		<!--div ng-click="content.showInfo=true;content.info='cib-payment-info'" 
+		<div ng-click="content.showInfo=true;content.info='cib-payment-info'" 
 					class=" w3-padding w3-center heading">{{'cib-payment-info' | myTranslator : backbone.lang}}
-		</div-->
+		</div>
+		<div ng-click="content.showInfo=true;content.info='cib-faq'" 
+					class=" w3-padding w3-center heading">{{'cib-faq' | myTranslator : backbone.lang}}
+		</div>
 		
 		<div ng-click="content.showInfo=true;content.info='use-of-personal-data'" 
 				class=" w3-padding w3-center heading">{{'use-of-personal-data' | myTranslator : backbone.lang}}
@@ -82,11 +85,12 @@
 			<div class="w3-xlarge"><b>{{'cib-payment-info' | myTranslator : backbone.lang}}</b></div>
 			<div ng-include="'legal/' + backbone.lang + '/cib_payment.html'"></div>
 		  </div>
-		 
-			
-		
+		  <div ng-show="content.info=='cib-faq'" class="w3-container links">
+			<div class="w3-xlarge"><b>{{'cib-faq' | myTranslator : backbone.lang}}</b></div>
+			<div ng-include="'legal/' + backbone.lang + '/cib-faq.html'"></div>
+		  </div>
+
 	</div>
-	
 
 </body>
 

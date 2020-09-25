@@ -87,6 +87,7 @@ var dict = {
 		'payment-provider': 'Card payment service provider',
 		'accepted-cards': 'Accepted Cards',
 		'cib-payment-info': 'CIB payment information',
+		'cib-faq': 'CIB payment FAQs',
 		'transaction-id': 'Transaction ID',
 		'transaction-result-code': 'Transaction result code',
 		'transaction-result-text': 'Transaction result text',
@@ -166,7 +167,7 @@ var dict = {
 		"dog-lofts": 'Kutya galéria',
 		'contact-confirm': 'Köszönjük. Hamarosan jelentkezünk.',
 		'contact-fail': 'valami elromlott :-(',
-		'failure': 'Valami elromlott',
+		'failure': 'Valami hiba történt',
 		'in-stock' : 'Raktáron',
 		'discount' : 'Kedvezmény',
 		'coupon-code': 'Kupon kód',
@@ -174,12 +175,14 @@ var dict = {
 		'payment-provider': 'Kártyás fizetés szolgáltatója',
 		'accepted-cards': 'Elfogadott kártyák',
 		'cib-payment-info': 'CIB bankkártyás fizetés',
+		'cib-faq': 'CIB bankkártyás fizetés GYFK',
 		'transaction-id': 'A tranzakció azonosítója',
 		'transaction-result-code': 'A tranzakció eredményének kódja',
 		'transaction-result-text': 'A tranzakció eredményének szöveges ismertetése',
 		'authorisation-number': 'A tranzakció eredményének szöveges ismertetése',
 		'reset': 'Visszaállítás',
 		'pay-by-card': 'Fizetés bankkártyával'
+		
 	}
 }
   
