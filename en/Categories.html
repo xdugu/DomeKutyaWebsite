@@ -60,7 +60,8 @@
 		<img class="w3-mobile" src="/images/loading.gif"/>
 	</div>
 
-	<a ng-repeat="product in categoryData" href="ProductPage.html?{{product.href}}" 
+	<a ng-repeat="product in categoryData" href="ProductPage.html?{{product.href}}"
+			ng-if="product.Enabled && !(product.Quantity <= 0 && product.TrackStock)" 
 			class="w3-left w3-center w3-large w3-mobile my-product w3-white product-shelf-placeholder" 
 			style="width:48.5%;margin-top:2vh;">
 

@@ -129,7 +129,11 @@ angular.module('AduguShopApp').directive('myImageSizerv2', function($interval) {
 									{'category': $scope.config.list[0], 
 									 'storeId': $scope.mainConfig.storeId + '>Product'
 					}).then(res => {
+						//list all item returned
 						let candidates = res.data;
+						
+						// filter item not enabled or in stock
+						candidates = candidates.filter((item)=> item.Enabled && !(item.Quantity <= 0 && item.TrackStock));
 
 						// if more returned items than can fit, choose randomly
 						if(candidates.length > $scope.maxItems){
