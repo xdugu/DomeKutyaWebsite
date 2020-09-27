@@ -76,7 +76,7 @@
 			<span ng-repeat="level in itemInfo.ProductHierarchy">
 				<span ng-if="$first">{{level.text[backbone.lang]}}</span>
 				<a ng-if="!$first" class="underlined" href="Categories.html?storeId=KutyaLepcso&category={{getCategoryForLink($index)}}">{{level.text[backbone.lang]}}</a>
-				<span ng-hide="$last"></span>
+				<span ng-hide="$last">></span>
 			</span>
 		</div>
 		<slick ng-if="itemInfo!=null" settings="slickConfig" id="img_stage" class="w3-margin-top w3-col l5">
