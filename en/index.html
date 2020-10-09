@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="{{backbone.lang}}"  ng-app="AduguShopApp" ng-controller="HomePage">
+<head>
+<link rel="alternate" hreflang="hu" href="https://dome.kutyalepcso.com/hu/index.html" />
+<link rel="alternate" hreflang="en" href="https://dome.kutyalepcso.com/en/index.html" />
+<title> Döme Kutya - Kutya lépcso és rámpa webshop</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Kutya lépcsők, rámpák, Dömötör kutya galériák, bújózsák és babzsák eládunk">
+
+
+<meta name="theme-color" content="white">
+<link rel="icon" type="image/jpeg" href="/images/logo.jpg">
+
+<link rel="stylesheet" type="text/css" href="/slick/slick.css"/>
+<link rel="stylesheet" type="text/css" href="/slick/slick-theme.css"/>
+<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/icon?family=Material+Icons"/>
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
+<link rel="stylesheet" type="text/css" href="/css/v2/w3.css"/>
+<link rel="stylesheet" type="text/css" href="/css/v2/normalize.css"/>
+<link rel="stylesheet" type="text/css" href="/css/v2/common.css"/>
+<link rel="stylesheet" type="text/css" href="/css/v2/index.css"/>
+
+ <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-131830139-2"></script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.4/angular.min.js"></script>
+<script  src="/slick/slick.min.js"></script>
+ 
+<script src="/scripts/v11/common.js" ></script>
+<script src="/scripts/v11/index.js" ></script>
+<script src="/scripts/v11/shop.js" ></script>
+<script src="/scripts/v11/directives/directives.js" ></script>
+<script src="/scripts/v11/directives/translator.js" ></script>
+<script src="/scripts/v11/services/factories.js" ></script>
+<script src="/slick/angular-slick.js"></script>
+
+</head> 
+
+<body>
+
+<header ng-include="'header/header.html'" onload="Shop_refreshBasket()"> </header>
+<notification-manager lang="backbone.lang" storeId="'KutyaLepcso'"></notification-manager>
+
+<div class="w3-display-container" style="overflow: hidden;">	
+	<img src="/images/back.jpg" class="w3-hide-small landing_img" style="width: 100%; height: auto"/>
+	<!--Will adjust image dimensions for mobile devices-->	
+	<img src="/images/back.jpg" class="w3-hide-medium w3-hide-large landing_img" style="width: 150%; height: auto; margin-left: -50%;"/>
+	<img src="/images/logo2.png" style="height: 20%; width: auto" class="w3-display-topmiddle w3-padding w3-circle my-animate-opacity"/>
+	<div style="font-size: 1.7em; width: 90%;"
+	  		class="w3-text-white w3-display-bottommiddle w3-padding my-animate-opacity w3-center">
+			<span ng-show="backbone.lang == 'en'">Welcome to our webshop!</span>
+			<span ng-show="backbone.lang == 'hu'">Üdvözöljük webáruházunkban!</span>
+	</div>
+</div>
+
+<div style="max-width: 1200px; overflow-x: hidden;" class="w3-content w3-padding">
+	<div style="overflow-y:hidden" my-image-sizerv2>
+		<a class="halo-product w3-left w3-display-container w3-half w3-mobile w3-margin-top" href="Categories.html?storeId=KutyaLepcso&category=Kutyalepcso>Lepcsok">
+			<div>
+				<img src="/images/res/step.jpg" style="width: 100%;" />
+			</div>
+			<span my-animate class="w3-display-middle w3-border w3-border w3-border-white w3-text-white w3-xxlarge">
+				{{'stairs' | myTranslator : backbone.lang}}
+			</span>
+		</a>
+		<a class="halo-product w3-left w3-display-container w3-half  w3-mobile w3-margin-top" href="Categories.html?storeId=KutyaLepcso&category=Kutyalepcso>Rampak">
+			<div>
+				<img src="/images/res/ramp.jpg" style="width: 100%;"/>
+			</div>
+			<span my-animate class="w3-display-middle w3-border w3-border w3-border-white w3-text-white w3-xxlarge">
+				{{'ramps' | myTranslator : backbone.lang}}
+			</span>
+		</a>
+	</div>
+
+	<my-cookie lang="backbone.lang" inFooter="no"></my-cookie>
+
+	<my-exhibition ng-repeat="lines in config.homePage" ng-if="config !=null" 
+					mainConfig="config" config="lines" 
+					lang="backbone.lang" currency="currency" maxitems="4">
+	</my-exhibition>
+
+	<!-- Container for customer photos-->
+	<div class="w3-xlarge w3-center bold" style="margin-top: 50px; color: var(--main-theme)">{{'customer-photos' | myTranslator : backbone.lang}}</div>
+	<slick settings="slickConfig" class="w3-margin-top" ng-if="galleryImages != null"> 
+		<div style=" overflow-x:auto; height: 300px;" class="w3-margin-left" ng-repeat="x in [].constructor(10) track by $index">
+			<img lazy-load="{{config.imgSrc}}/{{galleryImages.path}}{{removeExtension(galleryImages.list[$index].name) + '_300w.jpg'}}" 
+				style="height:100%;width:auto;" class="w3-round w3-card-4" alt="Customer images"/>
+		</div>
+	</slick>
+	<div class="w3-center w3-margin-top">
+		<a class="w3-theme w3-button w3-large w3-round" href="Gallery.html" style="width: 200px">{{'more' | myTranslator : backbone.lang}}</a>
+	</div>
+</div>
+
+
+
+<footer ng-include="'header/footer.html'" class="w3-margin-top"></footer>
+
+
+</body>
+</html>

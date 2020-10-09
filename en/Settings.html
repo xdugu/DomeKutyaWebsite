@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="{{backbone.lang}}"  ng-app="AduguShopApp" ng-controller="Settings">
+<head>
+<title>{{'settings' | myTranslator : backbone.lang}}</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="UTF-8">
+<meta name="theme-color" content="white">
+<link rel="icon" type="image/jpeg" href="/images/logo.jpg">
+
+<link rel="stylesheet" type="text/css" href="/slick/slick.css"/>
+<link rel="stylesheet" type="text/css" href="/slick/slick-theme.css"/>
+<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/icon?family=Material+Icons"/>
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
+<link rel="stylesheet" type="text/css" href="/css/v2/w3.css"/>
+<link rel="stylesheet" type="text/css" href="/css/v2/common.css"/>
+<link rel="stylesheet" type="text/css" href="/css/v2/index.css"/>
+
+ <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-131830139-2"></script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.4/angular.min.js"></script>
+ 
+<script src="/scripts/v11/common.js" ></script>
+<script src="/scripts/v11/settings.js" ></script>
+<script src="/scripts/v11/shop.js" ></script>
+<script src="/scripts/v11/directives/translator.js" ></script>
+
+<style>
+.container {
+  display: block;
+  position: relative;
+  padding-left: 35px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  font-size: 22px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* Hide the browser's default checkbox */
+.container input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+/* Create a custom checkbox */
+.checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 25px;
+  width: 25px;
+  background-color: #eee;
+  border: 2px solid black;
+}
+
+/* On mouse-over, add a grey background color */
+.container:hover input ~ .checkmark {
+  background-color: #ccc;
+}
+
+/* When the checkbox is checked, add a blue background */
+.container input:checked ~ .checkmark {
+  background-color: var(--main-theme);
+}
+
+/* Create the checkmark/indicator (hidden when not checked) */
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+/* Show the checkmark when checked */
+.container input:checked ~ .checkmark:after {
+  display: block;
+}
+
+/* Style the checkmark/indicator */
+.container .checkmark:after {
+  left: 9px;
+  top: 5px;
+  width: 5px;
+  height: 10px;
+  border: solid white;
+  border-width: 0 3px 3px 0;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+
+</style>
+
+</head> 
+
+<body>
+
+<header ng-include="'header/header.html'" class="w3-white"></header>
+
+ 
+ <div class="w3-container w3-white w3-card w3-mobile" style="width:50%">
+	 <div class="w3-xlarge w3-margin-top"> <b>{{'cookie-settings' | myTranslator : backbone.lang}}</b> </div><br>
+	<label class="container">Google Analytics
+	  <input type="checkbox" ng-model="cookie" ng-change="changeCookie(cookie)">
+	  <span class="checkmark"></span>
+	</label>
+	<div ng-include="'legal/' + backbone.lang + '/cookie_policy.html'"> </div>
+ </div>
+ <div class="w3-container">
+   {{'your-basket' | myTranslator : backbone.lang}}: {{backbone.basketId}}<br>
+   <button class="w3-button w3-blue" ng-click="resetBasketId()">{{'reset' | myTranslator : backbone.lang}}</button>
+ </div>
+
+</body>
+</html>
