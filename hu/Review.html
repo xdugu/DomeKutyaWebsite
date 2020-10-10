@@ -1,7 +1,7 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="{{backbone.lang}}"  ng-app="AduguShopApp" ng-controller="Review">
 <head>
-<title> Order Review</title>
+<title>{{'order-review' | myTranslator : backbone.lang}}</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta charset="utf-8"/>
 
@@ -18,16 +18,16 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
 
-<script src="/scripts/v11/common.js" ></script>
-<script src="/scripts/v11/shop.js" ></script>
-<script src="/scripts/v11/review.js" ></script>
-<script src="/scripts/v11/directives/directives.js" ></script>
-<script src="/scripts/v11/services/factories.js" ></script>
-<script src="/scripts/v11/directives/translator.js" ></script>
+<script src="/scripts/v12/common.js" ></script>
+<script src="/scripts/v12/shop.js" ></script>
+<script src="/scripts/v12/review.js" ></script>
+<script src="/scripts/v12/directives/directives.js" ></script>
+<script src="/scripts/v12/services/factories.js" ></script>
+<script src="/scripts/v12/directives/translator.js" ></script>
 
 </head> 
 
-<body ng-app="AduguShopApp" ng-controller="Review" >
+<body >
 
 
 <header ng-include="'header/header.html'" onload="Shop_refreshBasket()"> </header>
