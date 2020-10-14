@@ -27,12 +27,12 @@
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.4/angular-sanitize.js"></script>
 <script type="text/javascript" src="/slick/slick.min.js"></script>
  
-<script src="/scripts/v11/common.js" ></script>
-<script src="/scripts/v11/shop.js" ></script>
-<script src="/scripts/v11/categories.js"></script>
-<script src="/scripts/v11/directives/directives.js" ></script>
-<script src="/scripts/v11/services/factories.js" ></script>
-<script src="/scripts/v11/directives/translator.js" ></script>
+<script src="/scripts/v12/common.js" ></script>
+<script src="/scripts/v12/shop.js" ></script>
+<script src="/scripts/v12/categories.js"></script>
+<script src="/scripts/v12/directives/directives.js" ></script>
+<script src="/scripts/v12/services/factories.js" ></script>
+<script src="/scripts/v12/directives/translator.js" ></script>
 
 </head> 
 
@@ -60,7 +60,8 @@
 		<img class="w3-mobile" src="/images/loading.gif"/>
 	</div>
 
-	<a ng-repeat="product in categoryData" href="ProductPage.html?{{product.href}}" 
+	<a ng-repeat="product in categoryData" href="ProductPage.html?{{product.href}}"
+			ng-if="product.Enabled && !(product.Quantity <= 0 && product.TrackStock)" 
 			class="w3-left w3-center w3-large w3-mobile my-product w3-white product-shelf-placeholder" 
 			style="width:48.5%;margin-top:2vh;">
 

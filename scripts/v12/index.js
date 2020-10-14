@@ -10,7 +10,7 @@ $(document).ready(function() {
   	$('#landing_img').toggleClass('animate');
 });
   
-var app = angular.module('AduguShopApp', ['slickCarousel']);
+var app = angular.module('AduguShopApp', ['slickCarousel', 'ngSanitize']);
 app.controller('HomePage', ['$scope','ApiManager', function($scope, ApiManager) {
 
 //getting a reference to these files so I can check later when both are loaded

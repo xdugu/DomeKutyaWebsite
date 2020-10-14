@@ -107,7 +107,7 @@ angular.module('AduguShopApp').directive('myImageSizerv2', function($interval) {
 	
 	return{
 		restrict : 'E',
-		templateUrl: '/scripts/templates/v3/Exhibition.html',
+		templateUrl: '/scripts/templates/v4/Exhibition.html',
 		scope:{
 			mainConfig: "=mainconfig",
 			config : "=config",
@@ -129,7 +129,11 @@ angular.module('AduguShopApp').directive('myImageSizerv2', function($interval) {
 									{'category': $scope.config.list[0], 
 									 'storeId': $scope.mainConfig.storeId + '>Product'
 					}).then(res => {
+						//list all item returned
 						let candidates = res.data;
+						
+						// filter item not enabled or in stock
+						candidates = candidates.filter((item)=> item.Enabled && !(item.Quantity <= 0 && item.TrackStock));
 
 						// if more returned items than can fit, choose randomly
 						if(candidates.length > $scope.maxItems){
@@ -229,7 +233,7 @@ angular.module('AduguShopApp').directive('myImageSizerv2', function($interval) {
   angular.module('AduguShopApp').directive('notificationManager', ['ApiManager', function(ApiManager){
     return {
 		restrict: 'E',
-		templateUrl: '/scripts/templates/v3/Notification.html',
+		templateUrl: '/scripts/templates/v4/Notification.html',
 		scope:{
 			storeId: '=storeid',
 			lang: '=lang'
