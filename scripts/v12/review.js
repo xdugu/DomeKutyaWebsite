@@ -165,7 +165,7 @@ app.controller('Review', ['$scope', 'ApiManager', '$location', function($scope, 
 	var script = document.createElement("script");
 	paypalIdTest = "AXIR5FN2_aHZDPJ0B04WvLl7gtekClOeAInB4B6t4Gt8AgzHW6cHsxhpjle6S1dXc0TlwckcxtwIpnPe";
 	paypalIdLive = "AXb7KnR0LgCQXoWW4uo9XDxgCJVx4cpKUEHJSDUeSRPTZCoHnb7kV0Vd-4MMRWX1Z3-yXfV2Z7k44MTO";
-	script.src = "https://www.paypal.com/sdk/js?client-id=" + paypalIdLive + "&currency="+ $scope.currency;
+	script.src = "https://www.paypal.com/sdk/js?client-id=" + paypalIdLive + "&currency="+ $scope.currency + '&disable-funding=card';
 	
 	script.onload = function(){
 	paypal.Buttons({
