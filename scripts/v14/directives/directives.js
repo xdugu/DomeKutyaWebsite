@@ -230,7 +230,8 @@ angular.module('AduguShopApp').directive('myImageSizerv2', function($interval) {
 
 
   // directive to handle cookie policy
-  angular.module('AduguShopApp').directive('notificationManager', ['ApiManager', function(ApiManager){
+  angular.module('AduguShopApp').directive('notificationManager', 
+  		['$timeout', '$location', 'ApiManager', function($timeout, $location, ApiManager){
     return {
 		restrict: 'E',
 		templateUrl: '/scripts/templates/v4/Notification.html',
@@ -286,15 +287,26 @@ angular.module('AduguShopApp').directive('myImageSizerv2', function($interval) {
 
 					// if never shown before, then show or if last shown is longer than frequency to show
 					 if((notification.list[iList].lastShown == null && notification.list[iList].enabled) ||
-					 	(Date.now() - notification.list[iList].lastShown > notification.list[iList].frequency)){
-						 $scope.messageToDisplay  = notification.list[iList];
-						 notification.list[iList].lastShown = Date.now();
-						 break;
+					 	(Date.now() - notification.list[iList].lastShown  > notification.list[iList].frequency)){
+
+							exp = new RegExp(notification.list[iList].match);
+
+							if ($location.absUrl().toLowerCase().search(exp) >= 0){
+						 
+								$timeout(()=>{
+										$scope.messageToDisplay = notification.list[iList];
+										notification.list[iList].lastShown = Date.now();
+										localStorage.setItem('notifications', JSON.stringify(notification));
+									}, notification.list[iList]['delay']);
+															
+								break;
+							}
 					 }
 				}
 
 				localStorage.setItem('notifications', JSON.stringify(notification));
 			}
+			
         }
     }
  }]);
