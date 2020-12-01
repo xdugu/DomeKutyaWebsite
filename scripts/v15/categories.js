@@ -41,49 +41,40 @@ app.controller('Categories', ['$scope', 'CommonFuncs', 'ApiManager', function($s
 	ApiManager.get('open', 'get/category', {'category': params.category, 'storeId': params.storeId + '>Product'}).then(function(res){
 		$scope.backbone.loading = false;
 		$scope.categoryData = res.data;
+		
+		// only get enabled items
+		$scope.categoryData = $scope.categoryData.filter(item => item.Enabled);
 
-		let level = $scope.categoryData[0].Category.split('>');
+		let level = params.category.split('>');
 
 		for(let i = 0; i < $scope.categoryData.length; i++){
-			$scope.categoryData[i].href = 'itemId=' + $scope.categoryData[i].ItemId + '&storeId=' + $scope.categoryData[i].StoreId;
+			let index = $scope.categoryData[i].StoreId.indexOf('>');
+			let actualStoreId = $scope.categoryData[i].StoreId;
+
+			if(index >= 0)
+				actualStoreId = actualStoreId.substring(0, index);
+
+			$scope.categoryData[i].href = 'itemId=' + $scope.categoryData[i].ItemId + '&storeId=' + actualStoreId;
 			let custom = CommonFuncs.getMeta($scope.categoryData[i], 'custom');
 			$scope.categoryData[i].isCustom = custom != null;
 		}
 		
 		// looping through the product hierarchy to get the displayable name of the category
-		let category = $scope.categoryData[0].ProductHierarchy.find(item => item.name == level[0]);
-		for(let i = 1; i < level.length; i++){
-			category = category.sub.find(item => item.name == level[i]);
-		}
+		let category;
+		ApiManager.get('open', 'get/productHeirarchy', {storeId: params.storeId}).then((res)=>{
+			category = res.data.find(item => item.name == level[0]);
+			for(let i = 1; i < level.length; i++){
+				category = category.sub.find(item => item.name == level[i]);
+			}
+
+			$scope.backbone.categoryName = category.text;
 		
-		$scope.backbone.categoryName = category.text;
-		// Replace title with category name
-		document.title = category.text[$scope.backbone.lang];		
+			// Replace title with category name
+			document.title = category.text[$scope.backbone.lang];
+		});
+
+				
 	});
-
-	
-	
-
-	
 
 
 }]);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

@@ -39,6 +39,7 @@ app.controller('ProductDisplay', ['$scope', 'ApiManager','CommonFuncs', function
 	$scope.itemInfo = null;
 	$scope.showAllErrors = false;
 	$scope.modal = {show: false, itemToShow: null}
+	$scope.storeId = null;
 
 	$scope.$on('$includeContentLoaded', function () {
 		Shop_refreshBasket();
@@ -124,7 +125,7 @@ app.controller('ProductDisplay', ['$scope', 'ApiManager','CommonFuncs', function
 	}
 
 	// called after item is loaded
-	function setupVariants(){
+	async function setupVariants(){
 		if($scope.itemInfo.Variants.variants.length > 0){
 			//pre-choose the first combination in list
 			function findFirstValid(candidate){
@@ -132,6 +133,17 @@ app.controller('ProductDisplay', ['$scope', 'ApiManager','CommonFuncs', function
 					return !candidate.disabled && candidate.quantity > 0
 				else
 					return !candidate.disabled;
+			}
+
+			for(let variant of $scope.itemInfo.Variants.variants){
+				variant.groupInfo = {};
+				if(variant.type === 'group'){
+					for(let variantOption of variant.options){
+						let resp = await ApiManager.get('open', 'get/category', 
+											{storeId: $scope.storeId + '>Variant', category: variantOption.name});
+						variant.groupInfo[variantOption.name] = resp.data.filter(item => item.Enabled);
+					}
+				}
 			}
 			let combi = $scope.itemInfo.Variants.combinations.find(findFirstValid);
 
@@ -156,6 +168,8 @@ app.controller('ProductDisplay', ['$scope', 'ApiManager','CommonFuncs', function
 			$scope.itemInfo.Price = Object.assign($scope.itemInfo.Price, combi.price);
 			$scope.itemInfo.Quantity = combi.quantity;
 		}
+
+		$scope.$apply();
 	}
 	let params = Common_parseUrlParam();
 	//$scope.product.id = params.itemId;
@@ -178,7 +192,7 @@ app.controller('ProductDisplay', ['$scope', 'ApiManager','CommonFuncs', function
 				}, 1000);
 				return;
 			}
-			let data = {itemId: $scope.itemInfo.ItemId, basketId:$scope.basketId, storeId: 'KutyaLepcso'};
+			let data = {itemId: $scope.itemInfo.ItemId, basketId:$scope.basketId, storeId: $scope.storeId};
 			data.combination = $scope.pickedSpec;
 						 
 			ApiManager.post('open', 'update/basket', null, data).then(function(res){
@@ -194,6 +208,13 @@ app.controller('ProductDisplay', ['$scope', 'ApiManager','CommonFuncs', function
 	function loadProduct(res)
 	{
 		$scope.itemInfo = res.data.data;
+		
+		//get and set actual store id
+		$scope.storeId = $scope.itemInfo.StoreId;
+		let index = $scope.storeId.indexOf('>');
+		if(index >= 0)
+			$scope.storeId = $scope.storeId.substring(0, index);
+
 
 		// Replace title with item's actual title and also meta description
 		document.title = $scope.itemInfo.Title[$scope.backbone.lang];
@@ -203,26 +224,33 @@ app.controller('ProductDisplay', ['$scope', 'ApiManager','CommonFuncs', function
 		$scope.itemInfo.isCustom =  custom != null;
 		// seperate category into an array
 		let level = $scope.itemInfo.Category.split('>');
-		// assign hierarchy to lower length name variable
-		let hierarchy = $scope.itemInfo.ProductHierarchy;
 
-		// put the firt level into an array
-		let finalHierarchy = [hierarchy.find(item => item.name == level[0])];
+		ApiManager.get('open', 'get/productHeirarchy', {storeId: params.storeId}).then((res)=>{
+			let hierarchy = res.data;
 
-		for(let i = 1; i < level.length; i++){
-			// push lower level category data 
-			finalHierarchy.push(finalHierarchy[i-1].sub.find(item => item.name == level[i]))
-		}
+			// put the first level into an array
+			let finalHierarchy = [hierarchy.find(item => item.name == level[0])];
+
+			for(let i = 1; i < level.length; i++){
+				// push lower level category data 
+				finalHierarchy.push(finalHierarchy[i-1].sub.find(item => item.name == level[i]))
+			}
+			
+			$scope.itemInfo.ProductHierarchy = finalHierarchy;
+		});
 		
-		$scope.itemInfo.ProductHierarchy = finalHierarchy;
 
 		$scope.itemInfo.Images.list.forEach(function(img, index){
 			if(img.width / img.height < 1)
 				$scope.itemInfo.Images.list[index].sizing ='height'
 			else
 				$scope.itemInfo.Images.list[index].sizing ='width'
-		})
-		setupVariants();
+		});
+
+
+
+
+		setupVariants()
 	}
 
 	//This function returns the search category string

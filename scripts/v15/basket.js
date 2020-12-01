@@ -50,7 +50,7 @@ app.controller('Basket', ['$scope', 'ApiManager', function($scope, ApiManager) {
 				basketId:$scope.basketId, 
 				storeId: $scope.config.storeId, 
 				index: index, 
-				increment: direction, 
+				newQuantity: $scope.order.Items[index].Quantity + direction, 
 			}).then(function(res){
 					$scope.order = res.data;
 					Shop_updateBasketSize($scope.order.Count);
