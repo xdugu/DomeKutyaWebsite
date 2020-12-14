@@ -17,7 +17,7 @@
         {
             "title":{"en": "Our Other Products", "hu": "Egyéb termékeink"},
             "type": "product",
-            "list": ["Benny-fekhely", "Cocco-bujozsak", "Masuta-babzsak", "Coconut-fekhely"],
+            "list": ["Benny-fekhely", "Cocco-bujozsak", "Masuta-babzsak", "kutya-kanape-szurke"],
             "showPrice": true,
             "linkToPage": "ProductPage.html"
         },
