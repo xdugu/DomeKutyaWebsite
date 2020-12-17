@@ -31,6 +31,15 @@
 
 
 <header ng-include="'header/header.html'" onload="Shop_refreshBasket()"> </header>
+<div class="w3-border w3-border-red w3-padding">
+	Kedves Gazdik!<br>
+	A decemberben leadott rendelések csak JANUÁRBAN kerülnek gyártás alá! 
+	Minden megrendelés időrendi sorrendben kerül készítésre, így várható kézbesítésük 
+	Január 20-31 között várható❗. <br>
+
+	Megértéseteket köszönjük.
+</div>
+
 <div class="w3-margin-top" ng-init="showBank=false;comment=''">
 	<div class="w3-large w3-center w3-xxlarge" style="font-weight:bold">{{'order-review' | myTranslator : backbone.lang}}</div>
 	<div class="w3-row">
