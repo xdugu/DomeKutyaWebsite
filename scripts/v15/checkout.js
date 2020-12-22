@@ -10,6 +10,16 @@ $('input, select').on('change',function() { $(this).trigger('input'); });
 app.controller('Checkout', function($scope, $timeout) {
 	$scope.order = localStorage.getObj("shopping");
 	$scope.user=$scope.order.contact;
+
+	// add address if for pick up orders
+	if($scope.order.deliveryMethod === 'StorePickup'){
+		$scope.user.address1 = 'Döme Tudatos Gazdik Boltja';
+		$scope.user.address2 = 'Baross Gábor u. 1. (coop melett)';
+		$scope.user.city = 'Biatorbàgy';
+		$scope.user.postCode = '2051';
+		//$scope.user.countryCode = 'HU';
+	}
+
 	$scope.backbone = {lang: Common_getLang()};
 	$scope.proceedToPayment= function (){
 		$scope.order.contact = $scope.user;

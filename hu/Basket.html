@@ -141,7 +141,11 @@
 					<div class="w3-large"><b>{{'choose-courier' | myTranslator : backbone.lang}}</b></div>
 					<label ng-repeat="(key, courier) in order.Costs[shopping.contact.countryCode]">
 						<input type="radio" ng-model="$parent.shopping.deliveryMethod" ng-value="key" class="w3-radio">
-						{{key}} (<b>{{courier.payBeforeDelivery.delivery[currency.toLowerCase()] | myCurrency : currency}}</b>)
+							<ng-container ng-repeat="courierOption in couriers" 
+										  ng-if="courierOption.name === key">
+								{{courierOption.text[backbone.lang]}} (<b>{{courier.payBeforeDelivery.delivery[currency.toLowerCase()] | myCurrency : currency}}</b>)
+							</ng-container>
+						<br>
 					</label><br/>
 				</form>	
 

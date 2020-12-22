@@ -98,7 +98,7 @@ workbox.routing.registerRoute(
   }),
 );
 workbox.routing.registerRoute(//Cache get response api server to reduce unnecessary duplicate requests
- /^https:\/\/h0jg4s8gpa.execute-api.eu-central-1.amazonaws.com/,
+ /^https:\/\/*.execute-api.eu-central-1.amazonaws.com/,
   new workbox.strategies.CacheFirst({
     cacheName: 'product-info-cache',
     plugins: [
@@ -106,7 +106,7 @@ workbox.routing.registerRoute(//Cache get response api server to reduce unnecess
         statuses: [0, 200],
       }),
       new workbox.expiration.Plugin({
-        maxAgeSeconds: 60 * 5 // 5 minutes cache
+        maxAgeSeconds: 60 * 10 // 10 minutes cache
       }),
     ],
   }),

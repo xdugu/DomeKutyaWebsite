@@ -35,6 +35,12 @@ app.controller('Basket', ['$scope', 'ApiManager', function($scope, ApiManager) {
 					$scope.backbone.loading = false;
 					$scope.order = res.data;
 					Shop_updateBasketSize($scope.order.Count);
+					ApiManager.get('open', 'get/settings',
+						{storeId: $scope.config.storeId, get: 'ShippingProviders'}).then((res) => {
+							$scope.couriers = res.data.ShippingProviders;
+						}).catch(err => {
+							console.error(err);
+						});
 				}).catch(function(err){
 					console.log(err);
 					Shop_updateBasketSize(0);//Probably the basket could not be found

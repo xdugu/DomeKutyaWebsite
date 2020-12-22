@@ -148,7 +148,7 @@
 			<div id="paypal-button" class="w3-col l3 m6 w3-mobile w3-white w3-round"></div>
 		</div>
 		<div class="w3-row">
-			<div ng-show="shopping.contact.countryCode=='HU' && currency=='HUF'" 
+			<div ng-show="order.Costs[shopping.contact.countryCode][shopping.deliveryMethod].hasOwnProperty('payOnDelivery')" 
 			ng-click="backbone.showPayLater=true"
 			 class="w3-col l3 m6 w3-mobile w3-button w3-brown w3-margin-bottom w3-margin-top w3-padding w3-round">
 			 {{'pay-on-delivery' | myTranslator : backbone.lang}}</div>	

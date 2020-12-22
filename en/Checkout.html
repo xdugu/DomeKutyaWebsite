@@ -54,19 +54,23 @@
 	<div class="w3-card w3-margin-top w3-mobile" style="width:70%">
 		<div class="w3-large w3-center">{{'delivery-information' | myTranslator : backbone.lang}}</div>
 		<form  name="form" novalidate class="entry w3-padding">
-			<input type="text" class="w3-input" name="addr" ng-model="user.address1" required placeholder=""  autocomplete="address-line1" />
+			<input type="text" class="w3-input" name="addr" ng-model="user.address1" 
+					required placeholder=""  autocomplete="address-line1" ng-disabled="order.deliveryMethod === 'StorePickup'"/>
 			<label style="color: var(--main-theme)">{{'address' | myTranslator : backbone.lang}} 1</label>
 			<span class="w3-text-red" ng-show="form.addr.$touched && form.addr.$invalid">{{'required' | myTranslator : backbone.lang}}</span>
 			
-			<input type="text" class="w3-input" ng-model="user.address2" placeholder=""  autocomplete="address-line2"/>
+			<input type="text" class="w3-input" ng-model="user.address2" placeholder=""  
+					autocomplete="address-line2" ng-disabled="order.deliveryMethod === 'StorePickup'"/>
 			<label style="color: var(--main-theme)">{{'address' | myTranslator : backbone.lang}} 2 (optional)</label>
 			
-			<input type="text" class="w3-input" name="city" ng-model="user.city" required placeholder=""/>
+			<input type="text" class="w3-input" name="city" ng-model="user.city" required placeholder=""
+					ng-disabled="order.deliveryMethod === 'StorePickup'"/>
 			<label style="color: var(--main-theme)">{{'city' | myTranslator : backbone.lang}}</label>
 			<span class="w3-text-red" ng-show="form.city.$touched && form.city.$invalid">{{'required' | myTranslator : backbone.lang}}</span>
 			
 			
-			<input type="text" class="w3-input" name="pcode"ng-model="user.postCode" required placeholder=""  autocomplete="postal-code"/>
+			<input type="text" class="w3-input" name="pcode" ng-model="user.postCode" required 
+					placeholder=""  autocomplete="postal-code" ng-disabled="order.deliveryMethod === 'StorePickup'"/>
 			<label style="color: var(--main-theme)">{{'postcode' | myTranslator : backbone.lang}}</label>
 			<span class="w3-text-red" ng-show="form.pcode.$touched && form.pcode.$invalid">{{'required' | myTranslator : backbone.lang}}</span>
 			
