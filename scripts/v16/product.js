@@ -225,8 +225,8 @@ app.controller('ProductDisplay', ['$scope', 'ApiManager','CommonFuncs', function
 		// seperate category into an array
 		let level = $scope.itemInfo.Category.split('>');
 
-		ApiManager.get('open', 'get/productHeirarchy', {storeId: params.storeId}).then((res)=>{
-			let hierarchy = res.data;
+		ApiManager.get('open', 'get/settings', {storeId: params.storeId, get:'ProductHierarchy'}).then((res)=>{
+			let hierarchy = res.data.ProductHierarchy;
 
 			// put the first level into an array
 			let finalHierarchy = [hierarchy.find(item => item.name == level[0])];

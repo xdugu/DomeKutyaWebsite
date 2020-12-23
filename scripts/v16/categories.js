@@ -61,8 +61,8 @@ app.controller('Categories', ['$scope', 'CommonFuncs', 'ApiManager', function($s
 		
 		// looping through the product hierarchy to get the displayable name of the category
 		let category;
-		ApiManager.get('open', 'get/productHeirarchy', {storeId: params.storeId}).then((res)=>{
-			category = res.data.find(item => item.name == level[0]);
+		ApiManager.get('open', 'get/settings', {storeId: params.storeId, get: 'ProductHierarchy'}).then((res)=>{
+			category = res.data.ProductHierarchy.find(item => item.name == level[0]);
 			for(let i = 1; i < level.length; i++){
 				category = category.sub.find(item => item.name == level[i]);
 			}
