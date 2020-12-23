@@ -98,7 +98,7 @@ workbox.routing.registerRoute(
   }),
 );
 workbox.routing.registerRoute(//Cache get response api server to reduce unnecessary duplicate requests
- /^https:\/\/*.execute-api.eu-central-1.amazonaws.com/,
+ /^https:\/\/.+.execute-api.eu-central-1.amazonaws.com/,
   new workbox.strategies.CacheFirst({
     cacheName: 'product-info-cache',
     plugins: [
