@@ -233,7 +233,7 @@ angular.module('AduguShopApp').directive('myImageSizerv2', function($interval) {
   angular.module('AduguShopApp').directive('myDocument', ['ApiManager', function(ApiManager) {
 	return {
 		restrict : 'E',
-		templateUrl: '/scripts/templates/v4/Document.html',
+		template: '<div ng-bind-html="document.Info.content"></div>',
 		scope:{
 			documentId: '=documentid',
 			storeId: '=storeid'
