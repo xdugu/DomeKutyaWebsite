@@ -218,19 +218,19 @@
 			<div ng-click="del=!del;des=false;ret=false" class="w3-border-bottom w3-border-black w3-padding" style="width:100%;height:auto;overflow:auto">
 					<span class="w3-left w3-large bold">{{'delivery' | myTranslator : backbone.lang}}</span>
 					<span class="w3-right w3-large"> <i ng-show="del==false">+</i><i ng-show="del==true">-</i></span>
-			<br><div ng-if="del==true" class="w3-margin-top important-text animate-height"><div ng-include="'legal/' + backbone.lang + '/delivery-min.html'"></div></div>
+			<br><div ng-if="del==true" class="w3-margin-top important-text animate-height">
+					<my-document ng-if="backbone.lang == 'en'" storeid="'KutyaLepcso'" documentid="'1608909345978'"></my-document>
+					<my-document ng-if="backbone.lang == 'hu'" storeid="'KutyaLepcso'" documentid="'1608887311916'"></my-document>
+				</div>
 			</div>
 			<div ng-click="ret=!ret;del=false;des=false" class="w3-border-bottom w3-border-black w3-padding" style="width:100%;height:auto;overflow:auto">
 					<span class="w3-left w3-large bold">{{'returns' | myTranslator : backbone.lang}}</span>
 					<span class="w3-right w3-large"> <i ng-show="ret==false">+</i><i ng-show="ret==true">-</i></span>
-				<div ng-show="ret==true && backbone.lang == 'en'" class="w3-margin-top important-text  animate-height"><br>Products can only be returned in their original condition, without any missing items.
-						<br>For returns not related to the quality of the product, we don't refund delivery costs
+				<div ng-if="ret==true && backbone.lang == 'en'" class="w3-margin-top important-text  animate-height">
+						<br><my-document storeid="'KutyaLepcso'" documentid="'1608909311373'"></my-document>
 				</div>
-				<div ng-show="ret==true && backbone.lang == 'hu'" class="w3-margin-top important-text  animate-height">
-					<br>
-						A terméket csak eredeti állapotában és csomagolásában, hiánytalan mennyiségi, minőségi állapotában vesszük vissza.
-						Amennyiben a visszaküldött terméket utánvéttel adja fel, azt nem áll módunkban átvenni.
-						Az esetleges méret problémából adódó cserék esetén, a felmerülő költségek (szállítási költség, utánvét költsége), minden esetben a vevőt terhelik
+				<div ng-if="ret==true && backbone.lang == 'hu'" class="w3-margin-top important-text  animate-height">
+					<br><my-document storeid="'KutyaLepcso'" documentid="'1608887244923'"></my-document>
 				</div>
 			</div>
 		

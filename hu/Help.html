@@ -12,8 +12,10 @@
  <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-131830139-2"></script>
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.4/angular.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.4/angular.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.4/angular-sanitize.js"></script>
+
 
 <link rel="stylesheet" href="/css/v2/common.css"/>
 <link rel="stylesheet" href="/css/v2/help.css"/>
@@ -22,7 +24,9 @@
 <script src="/scripts/v16/common.js" ></script>
 <script src="/scripts/v16/shop.js" ></script>
 <script src="/scripts/v16/help.js" ></script>
+<script src="/scripts/v16/services/factories.js" ></script>
 <script src="/scripts/v16/directives/translator.js" ></script>
+<script src="/scripts/v16/directives/directives.js" ></script>
 
 
 </head> 
@@ -60,36 +64,41 @@
 	
 	</div>
 	
-	<div class="w3-modal " ng-show="content.showInfo==true" 
+	<div class="w3-modal " ng-if="content.showInfo === true" 
 				style="display:block;padding-top:7vh; font-family: 'Montserrat', Arial;" >
 	 <span ng-click="content.showInfo=false" class="material-icons w3-xxlarge w3-text-white" style="z-index:1000;cursor:pointer;position:fixed;top:0vw;right:2vw">cancel</span>
 		<div class="w3-modal-content w3-animate-top w3-card-4 w3-round " style="overflow:auto;width:100%;max-height:95%">
 
-		  <div ng-if="content.info=='our-details'" class="w3-container links">
-			<div ng-include="'legal/' + backbone.lang + '/our_details.html'"></div>
+		  <div ng-if="content.info === 'our-details'" class="w3-container links">
+			<my-document ng-if="backbone.lang === 'en'" storeid="'KutyaLepcso'" documentid="'1608908882350'"></my-document>
+			<my-document ng-if="backbone.lang === 'hu'" storeid="'KutyaLepcso'" documentid="'1608907789822'"></my-document>
 		  </div>
-		  <div ng-if="content.info=='shipping'" class="w3-container links" style="height:90vh;">
-			<div ng-include="'legal/' + backbone.lang + '/delivery.html'"></div>
+		  <div ng-if="content.info === 'shipping'" class="w3-container links" style="height:90vh;">
+			<my-document ng-if="backbone.lang === 'en'" storeid="'KutyaLepcso'" documentid="'1608909215555'"></my-document>
+			<my-document ng-if="backbone.lang === 'hu'" storeid="'KutyaLepcso'" documentid="'1608908351726'"></my-document>
 		  </div>
-			<div ng-if="content.info=='use-of-personal-data'" class="w3-container links">
-			<div ng-include="'legal/' + backbone.lang + '/use-of-personal-data.html'"></div>
+		  <div ng-if="content.info === 'use-of-personal-data'" class="w3-container links">
+			<my-document ng-if="backbone.lang === 'en'" storeid="'KutyaLepcso'" documentid="'1608909153040'"></my-document>
+			<my-document ng-if="backbone.lang === 'hu'" storeid="'KutyaLepcso'" documentid="'1608908299322'"></my-document>
 		  </div>
-		  <div ng-if="content.info=='contract'" class="w3-container links">
-			<div ng-include="'legal/' + backbone.lang + '/contract.html'"></div>
+		  <div ng-if="content.info === 'contract'" class="w3-container links">
+			<my-document ng-if="backbone.lang === 'en'" storeid="'KutyaLepcso'" documentid="'1608908966597'"></my-document>
+			<my-document ng-if="backbone.lang === 'hu'" storeid="'KutyaLepcso'" documentid="'1608908230596'"></my-document>
 		  </div>
-		  <div ng-show="content.info=='use-of-cookies'" class="w3-container links">
-			<div class="w3-xlarge"><b>{{'use-of-cookies' | myTranslator : backbone.lang}}</b></div>
-			<div ng-include="'legal/' + backbone.lang + '/cookie_policy.html'"></div>
+		  <div ng-if="content.info === 'use-of-cookies'" class="w3-container links">
+			<my-document ng-if="backbone.lang === 'en'" storeid="'KutyaLepcso'" documentid="'1608909260231'"></my-document>
+			<my-document ng-if="backbone.lang === 'hu'" storeid="'KutyaLepcso'" documentid="'1608908398029'"></my-document>
 		  </div>
-		  <div ng-show="content.info=='cib-payment-info'" class="w3-container links">
-			<div class="w3-xlarge"><b>{{'cib-payment-info' | myTranslator : backbone.lang}}</b></div>
-			<div ng-include="'legal/' + backbone.lang + '/cib_payment.html'"></div>
+		  <div ng-if="content.info === 'cib-payment-info'" class="w3-container links">
+			<my-document ng-if="backbone.lang === 'en'" storeid="'KutyaLepcso'" documentid="'1608909013421'"></my-document>
+			<my-document ng-if="backbone.lang === 'hu'" storeid="'KutyaLepcso'" documentid="'1608908490246'"></my-document>
 		  </div>
-		  <div ng-show="content.info=='cib-faq'" class="w3-container links">
-			<div class="w3-xlarge"><b>{{'cib-faq' | myTranslator : backbone.lang}}</b></div>
-			<div ng-include="'legal/' + backbone.lang + '/cib-faq.html'"></div>
+		  <div ng-if="content.info === 'cib-faq'" class="w3-container links">
+			<my-document ng-if="backbone.lang === 'en'" storeid="'KutyaLepcso'" documentid="'1608909109710'"></my-document>
+			<my-document ng-if="backbone.lang === 'hu'" storeid="'KutyaLepcso'" documentid="'1608908591870'"></my-document>
 		  </div>
 
+		</div>
 	</div>
 
 </body>

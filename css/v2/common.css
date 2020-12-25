@@ -46,9 +46,13 @@ a
 	transition: border-bottom 0.3s linear;
 }
 
+my-document .ql-size-large{
+	font-size: 1.6em;
+}
 
-
-
+my-document .ql-align-center{
+	text-align: center;
+}
 
 button:hover
 {

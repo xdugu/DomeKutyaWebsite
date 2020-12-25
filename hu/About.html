@@ -23,10 +23,12 @@
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.4/angular.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.4/angular-sanitize.js"></script>
 <script type="text/javascript" src="/slick/slick.min.js"></script>
  
 <script src="/scripts/v16/common.js" ></script>
 <script src="/scripts/v16/shop.js" ></script>
+
 
 <style>
 .main-color{
@@ -35,12 +37,14 @@
 </style>
 
 <script>
-var app = angular.module('AduguShopApp', []);
+var app = angular.module('AduguShopApp', ['ngSanitize']);
 app.controller('HomePage', ['$scope', function($scope) {
     $scope.backbone = {lang: Common_getLang()};
 }]);
 </script>
 <script src="/scripts/v16/directives/translator.js" ></script>
+<script src="/scripts/v16/directives/directives.js" ></script>
+<script src="/scripts/v16/services/factories.js" ></script>
 
 </head> 
 
@@ -49,7 +53,8 @@ app.controller('HomePage', ['$scope', function($scope) {
 <header ng-include="'header/header.html'" onload="Shop_refreshBasket()"></header>
 
 <div class="w3-content w3-padding" style="max-width: 1200px"> 
-    <div ng-include="'legal/' + backbone.lang + '/about.html'"></div>
+    <!--div ng-include="'legal/' + backbone.lang + '/about.html'"></div-->
+    <my-document documentid="'1608804887671'" storeid="'KutyaLepcso'"></my-document>
 </div>
 <footer ng-include="'header/footer.html'"></footer>
 

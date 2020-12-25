@@ -228,8 +228,27 @@ angular.module('AduguShopApp').directive('myImageSizerv2', function($interval) {
 
   });
 
+  
+  // directive to show document
+  angular.module('AduguShopApp').directive('myDocument', ['ApiManager', function(ApiManager) {
+	return {
+		restrict : 'E',
+		templateUrl: '/scripts/templates/v4/Document.html',
+		scope:{
+			documentId: '=documentid',
+			storeId: '=storeid'
+		},
+		link: function($scope, elem, attr){
+			$scope.document = null;
 
-  // directive to handle cookie policy
+			ApiManager.get('open', 'get/document', {storeId: $scope.storeId, documentId: $scope.documentId}).then((res) => {
+				$scope.document = res.data;
+			});
+		}
+	}
+	}]);
+
+  // directive to handle notification
   angular.module('AduguShopApp').directive('notificationManager', 
   		['$timeout', '$location', 'ApiManager', function($timeout, $location, ApiManager){
     return {
