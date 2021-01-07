@@ -112,7 +112,7 @@ workbox.routing.registerRoute(//Cache get response api server to reduce unnecess
   }),
 );
 
-// the js, css and html files will be cached for 5 minutes to reduce the number of server requests
+// the js, css and html files will be cached for 24 hours to reduce the number of server requests
 workbox.routing.registerRoute(
   // Cache CSS files
   /\.(?:js|css|html|xml|json)/,
@@ -122,7 +122,7 @@ workbox.routing.registerRoute(
     cacheName: 'js-css-html-json-xml-cache',
 	plugins: [
       new workbox.expiration.Plugin({
-        maxAgeSeconds: 60 * 10 //expire after 10 minutes
+        maxAgeSeconds: 60 * 60 *24 //expire after 24 hours
       }),
 	  pluginIgnoreParams
     ],
