@@ -13,7 +13,7 @@ var app = angular.module('AduguShopApp', ['ngSanitize']);
 app.controller('Categories', ['$scope', 'CommonFuncs', 'ApiManager', function($scope, CommonFuncs, ApiManager) {
 	$scope.products = [];
 	//Language stuff
-	$scope.backbone = {lang:null, categoryName: "Categories"};	
+	$scope.backbone = {lang: Common_getLang(), categoryName: "Categories"};	
 	$scope.changeLanguage = Common_changeLanguage;
 	$scope.removeExtension = Common_removeExtension;
 

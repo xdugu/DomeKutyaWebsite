@@ -183,6 +183,26 @@ button:hover
 	opacity: 0;
 }
 
+notification-manager img{
+	max-height: 150px;
+	width: auto;
+}
+
+notification-manager h1, notification-manager h2, notification-manager h3, notification-manager h4{
+	font-size: 1.2em;
+	font-weight: bold;
+}
+
+notification-manager .reduced-height{
+	max-height: 100px;
+	overflow-y: hidden;
+}
+
+notification-manager .full-height{
+	max-height: 1000px;
+	overflow-y: auto;
+}
+
 @keyframes opacity-animation {
 	0%   {opacity: 0}
 	100% {opacity: 1}

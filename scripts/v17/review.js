@@ -11,7 +11,7 @@ Storage.prototype.getObj = function(key) {
 
 var paypalObject, totalAsString;
 
-var app = angular.module('AduguShopApp', []);
+var app = angular.module('AduguShopApp', ['ngSanitize']);
 app.run(function() {
 	// Trigger input event on change to fix auto-complete
 	$('input, select').on('change',function() { $(this).trigger('input'); });

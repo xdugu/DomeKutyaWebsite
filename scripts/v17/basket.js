@@ -9,7 +9,7 @@ Storage.prototype.getObj = function(key) {
 }
 
 
-var app = angular.module('AduguShopApp',[]);
+var app = angular.module('AduguShopApp',['ngSanitize']);
 app.controller('Basket', ['$scope', 'ApiManager', function($scope, ApiManager) {
 	$scope.basketId = localStorage.getObj("basketId");
 	$scope.shopping= localStorage.getObj("shopping");

@@ -241,6 +241,10 @@ angular.module('AduguShopApp').directive('myImageSizerv2', function($interval) {
 		link: function($scope, elem, attr){
 			$scope.document = null;
 
+			if($scope.documentId == null || $scope.documentId == undefined){
+				console.error("Document id is indefined");
+				return;
+			}
 			ApiManager.get('open', 'get/document', {storeId: $scope.storeId, documentId: $scope.documentId}).then((res) => {
 				$scope.document = res.data;
 			});
@@ -260,6 +264,7 @@ angular.module('AduguShopApp').directive('myImageSizerv2', function($interval) {
 		},
         link: function ($scope, element, attrs) {
 			// get current cached notifications
+			$scope.settings = {reducedHeight: true};
 			let cachedNotifications = localStorage.getItem('notifications');
 			$scope.messageToDisplay = null;
 
@@ -269,19 +274,28 @@ angular.module('AduguShopApp').directive('myImageSizerv2', function($interval) {
 			else
 				cachedNotifications = JSON.parse(cachedNotifications);
 
+			// reset if we have this in the old format
+			if(cachedNotifications.list > 0){
+				if(!cachedNotifications.list[0].hasOwnProperty('ItemId')){
+					cachedNotifications = {list:[]};
+				}
+			}
+
 
             ApiManager.get('open', 'get/notifications', {storeId: $scope.storeId}).then(res =>{
 
-				// update current cache with fresh data
-				for(let iNoti = 0; iNoti < res.data.length; iNoti ++){
+				const data = res.data.filter(item => item.Info.lang === $scope.lang);
 
-					let ind = cachedNotifications.list.findIndex((item) => item.id == res.data[iNoti].Info.id && item.enabled);
+				// update current cache with fresh data
+				for(let iNoti = 0; iNoti < data.length; iNoti ++){
+
+					let ind = cachedNotifications.list.findIndex((item) => item.ItemId == data[iNoti].ItemId && item.Info.enabled);
 					
 					if(ind < 0){
-						cachedNotifications.list.push(res.data[iNoti].Info);
+						cachedNotifications.list.push(data[iNoti]);
 					}else{
 						let lastShown = cachedNotifications.list[ind].lastShown;
-						cachedNotifications.list[ind] = res.data[iNoti].Info;
+						cachedNotifications.list[ind] = data[iNoti];
 						cachedNotifications.list[ind].lastShown = lastShown;
 					} // if
 	
@@ -291,7 +305,7 @@ angular.module('AduguShopApp').directive('myImageSizerv2', function($interval) {
 				let newList = [];
 				
 				cachedNotifications.list.forEach((notification) =>{
-					if (res.data.findIndex((item)=> item.Info.id == notification.id && item.Info.enabled) >= 0){
+					if (data.findIndex((item)=> item.ItemId === notification.ItemId && item.Info.enabled) >= 0){
 						newList.push(notification);
 					}
 				});
@@ -305,10 +319,10 @@ angular.module('AduguShopApp').directive('myImageSizerv2', function($interval) {
 				for(iList = 0; iList < notification.list.length; iList++){
 
 					// if never shown before, then show or if last shown is longer than frequency to show
-					 if((notification.list[iList].lastShown == null && notification.list[iList].enabled) ||
-					 	(Date.now() - notification.list[iList].lastShown  > notification.list[iList].frequency)){
+					 if((notification.list[iList].lastShown == null && notification.list[iList].Info.enabled) ||
+					 	(Date.now() - notification.list[iList].lastShown  > notification.list[iList].Info.frequency)){
 
-							exp = new RegExp(notification.list[iList].match);
+							exp = new RegExp(notification.list[iList].Info.match);
 
 							if ($location.absUrl().toLowerCase().search(exp) >= 0){
 						 
@@ -316,7 +330,7 @@ angular.module('AduguShopApp').directive('myImageSizerv2', function($interval) {
 										$scope.messageToDisplay = notification.list[iList];
 										notification.list[iList].lastShown = Date.now();
 										localStorage.setItem('notifications', JSON.stringify(notification));
-									}, notification.list[iList]['delay']);
+									}, notification.list[iList]['Info']['delay']);
 															
 								break;
 							}

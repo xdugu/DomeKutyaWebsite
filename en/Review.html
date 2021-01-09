@@ -16,6 +16,7 @@
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-131830139-2"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.4/angular.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.4/angular-sanitize.js"></script>
 
 
 <script src="/scripts/v17/common.js" ></script>
@@ -31,6 +32,7 @@
 
 
 <header ng-include="'header/header.html'" onload="Shop_refreshBasket()"> </header>
+<notification-manager lang="backbone.lang" storeId="'KutyaLepcso'"></notification-manager>
 
 <div class="w3-margin-top" ng-init="showBank=false;comment=''">
 	<div class="w3-large w3-center w3-xxlarge" style="font-weight:bold">{{'order-review' | myTranslator : backbone.lang}}</div>

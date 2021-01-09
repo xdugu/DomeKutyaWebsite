@@ -41,10 +41,12 @@
 
 <header ng-include="'header/header.html'" onload="Shop_refreshBasket()"> </header>
 
+<notification-manager lang="backbone.lang" storeId="'KutyaLepcso'"></notification-manager>
+
 <!-- title of category-->
 <div class="w3-xxlarge w3-center">{{backbone.categoryName[backbone.lang]}}</div>
 
-<notification-manager lang="backbone.lang" storeId="'KutyaLepcso'"></notification-manager>
+
 
 <!--Currency chooser  -->
 <div class="w3-large w3-center w3-margin">
