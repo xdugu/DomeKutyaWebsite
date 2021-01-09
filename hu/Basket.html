@@ -5,29 +5,30 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta charset="utf-8"/>
 <link rel="icon" type="image/jpeg" href="/images/logo.jpg">
-<link rel="stylesheet" type="text/css" href="/css/v3/w3.css"/>
+<link rel="stylesheet" type="text/css" href="/css/v4/w3.css"/>
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-<link rel="stylesheet" href="/css/v3/normalize.css"/>
-<link rel="stylesheet" href="/css/v3/common.css"/>
+<link rel="stylesheet" href="/css/v4/normalize.css"/>
+<link rel="stylesheet" href="/css/v4/common.css"/>
 
  <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-131830139-2"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>		
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.4/angular.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.4/angular-sanitize.js"></script>
 
 
-<script src="/scripts/v17/common.js" ></script>
-<script src="/scripts/v17/shop.js" ></script>
-<script src="/scripts/v17/basket.js" ></script>
-<script src="/scripts/v17/directives/directives.js" ></script>
-<script src="/scripts/v17/services/factories.js" ></script>
-<script src="/scripts/v17/directives/translator.js" ></script>
+<script src="/scripts/v18/common.js" ></script>
+<script src="/scripts/v18/shop.js" ></script>
+<script src="/scripts/v18/basket.js" ></script>
+<script src="/scripts/v18/directives/directives.js" ></script>
+<script src="/scripts/v18/services/factories.js" ></script>
+<script src="/scripts/v18/directives/translator.js" ></script>
 </head> 
 
 <body>
 
 <header ng-include="'header/header.html'" onload="Shop_refreshBasket()"> </header>
-
+<notification-manager lang="backbone.lang" storeId="'KutyaLepcso'"></notification-manager>
 <div id="product_shelf_placeholder" >
 	<div ng-hide="order.Items.length==0 || order==null" 
 			class="w3-xlarge w3-center w3-margin-top" style="font-weight: bold">{{'your-basket' | myTranslator : backbone.lang}}</div>
