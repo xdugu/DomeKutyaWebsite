@@ -174,11 +174,12 @@
 		  <div class="w3-container">
 			<div class="w3-large w3-text-green" style="font-weight:bold">{{'order-confirmation' | myTranslator : backbone.lang}}</div>
 			<div style="margin-top:1vh">
-				<span ng-show="backbone.lang == 'en'">Thank you for placing your order. We will work hard to get it to you as quickly as possible.
-					  Please note that for our ramps and stairs it takes approx. <b>10 working days</b> to make and deliver
+				<span ng-show="backbone.lang == 'en'">Thank you for placing your order. You should get an email confirmation soon.
+					If you don't receive an email confirmation in 24 hours, please contact us
 				</span>
 				<span ng-show="backbone.lang == 'hu'">
 					Köszönjük, hogy leadta rendelését. Igyekszünk, hogy a megrendelt termék minél hamarabb eljusson Önhöz.
+					A megrendelésről egy automatikus emailt küldünk a megadott email címre. Amennyiben azt nem kapja meg <b>24 órán belül</b>, kérjük vegye fel velünk a kapcsolatot!
 				</span>
 			</div>
 		  </div>
@@ -191,12 +192,13 @@
 			<div class="w3-large w3-text-green" style="font-weight:bold">{{'order-confirmation' | myTranslator : backbone.lang}}</div>
 			<div style="margin-top:1vh">
 				<span ng-show="backbone.lang == 'en'">Thank you for placing your order. We will work hard to get it to you as quickly as possible.
-					  Please note that for our ramps and stairs it takes approx. <b>10 working days</b> to make and deliver. <br>
+					  If you don't receive an email in 24 hours, please contact us
 					  For your records, please find the transaction details below. We have also sent an email containing this information:<br>
 				</span>
 				<span ng-show="backbone.lang == 'hu'">
 					Köszönjük, hogy leadta rendelését. Igyekszünk, hogy a megrendelt termék minél hamarabb eljusson Önhöz.<br>
-					A tranzakció részleteit alább láthatja illetve a kapott email-ben
+					A tranzakció részleteit alább láthatja illetve a kapott email-ben. A megrendelésről egy automatikus emailt küldünk a megadott email címre. 
+					Amennyiben azt nem kapja meg <b>24 órán belül</b>, kérjük vegye fel velünk a kapcsolatot!
 				</span>
 				<span class="important-text"><br>
 					<b>{{'transaction-id' | myTranslator : backbone.lang}}:</b> {{popUpInfo.TRID}}<br>
@@ -260,17 +262,18 @@
 		  </div>
 		   <div class="w3-container" ng-show="backbone.showConfirmed == true">
 			<div class="w3-medium" style="margin-top:1vh">
-				<span ng-show="backbone.lang == 'en'">Thank you. We have sent an email to  <strong>{{shopping.contact.email}}</strong>. We will dispatch your order soon</span>
-				<span ng-show="backbone.lang == 'hu'">A megrendelés megerősítését a következő e-mail címre küldjük <strong>{{shopping.contact.email}}</strong>. Megrendelését hamarosan kézbesítjük!</span>
+				<span ng-show="backbone.lang == 'en'">Thank you. We have sent an email to  <strong>{{shopping.contact.email}}</strong>. We will dispatch your order soon. If you don't receive
+				an email within 24 hours, please contact us</span>
+				<span ng-show="backbone.lang == 'hu'">A megrendelés megerősítését a következő e-mail címre küldjük <strong>{{shopping.contact.email}}</strong>. 
+					A megrendelésről egy automatikus emailt küldünk a megadott email címre. Amennyiben azt nem kapja meg <b>24 órán belül</b>, kérjük vegye fel velünk a kapcsolatot!
+					Megrendelését hamarosan kézbesítjük!
+				</span>
 			</div>
 		  </div>
 		</div>
 	</div>
 	
 </div>
-
-
-
 
 </body>
 </html>
