@@ -93,7 +93,8 @@ var dict = {
 		'transaction-result-text': 'Transaction result text',
 		'authorisation-number': 'Authorisation number',
 		'reset':'Reset',
-		'pay-by-card': 'Pay by credit/debit card'
+		'pay-by-card': 'Pay by credit/debit card',
+		'dog-clothes': 'Dog clothes'
 	},
 	hu:{
 		'and': 'és',
@@ -181,7 +182,8 @@ var dict = {
 		'transaction-result-text': 'A tranzakció eredményének szöveges ismertetése',
 		'authorisation-number': 'A tranzakció eredményének szöveges ismertetése',
 		'reset': 'Visszaállítás',
-		'pay-by-card': 'Fizetés bankkártyával'
+		'pay-by-card': 'Fizetés bankkártyával',
+		'dog-clothes': 'Ruhák'
 		
 	}
 }
