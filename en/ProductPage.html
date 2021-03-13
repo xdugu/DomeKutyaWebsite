@@ -80,7 +80,7 @@
 			</span>
 		</div>
 		<slick ng-if="itemInfo!=null" settings="slickConfig" id="img_stage" class="w3-margin-top w3-col l5">
-			<div style="overflow:hidden;" ng-repeat="img in itemInfo.Images.list track by $index">
+			<div style="overflow:hidden;" ng-repeat="img in itemInfo.Images.list track by $index" ng-if="img.type == 'product'" >
 				<img class="sub_image" data-lazy="{{config.imgSrc}}/{{$parent.itemInfo.Images.path}}{{removeExtension(img.name) + '_700w.jpg'}}" 
 					style="margin:auto; width: 100%; height: auto ">
 				</img>
@@ -110,11 +110,11 @@
 			<div class="w3-modal-content w3-animate-zoom">
 				<div class="w3-display-container" style="height:350px">
 					<span class="w3-display-topright material-icons w3-xxlarge w3-white hoverable" ng-click="modal.show = false">close</span>
-					<img class="w3-display-middle" ng-src="{{config.imgSrc}}/{{modal.itemToShow.Images.path}}{{removeExtension(modal.itemToShow.Images.list[0].name) + '_500w.jpg'}}"
+					<img class="w3-display-middle" ng-src="{{modal.imgToShow}}"
 					style="max-width:300px; height: auto"/>
 					
 				</div>
-				<div class="w3-center w3-large">{{modal.itemToShow.Title[backbone.lang]}}</div>
+				<div class="w3-center w3-large">{{modal.textToShow}}</div>
 			</div>
 		</div>
 
@@ -165,7 +165,9 @@
 							</img>	
 							<span class="material-icons w3-xxlarge w3-text-black w3-display-middle w3-white w3-circle hoverable"
 								ng-show="pickedSpec[parentIndex].chosenVariant.ItemId == pattern.ItemId"
-								ng-click="modal.show = true; modal.itemToShow = pattern"
+								ng-click="modal.show = true; 
+										  modal.imgToShow = config.imgSrc + '/' + pattern.Images.path + removeExtension(pattern.Images.list[0].name) + '_500w.jpg';
+										  modal.textToShow = pattern.Title[backbone.lang];"
 								>zoom_in
 							</span>	
 						</span>
@@ -176,10 +178,32 @@
 				</div>
 				<div ng-if="variant.type == 'individual'" class="w3-large">
 					<span><b>{{variant.text[backbone.lang]}}</b></span><br>
-					<select required  
-						ng-options="item.text[backbone.lang] for item in variant.options" 
-							ng-model="pickedSpec[$index]" ng-change="updateProductPrice()">
+					<select required  ng-if="variant.hasAttachedImage == null"
+							ng-options="item.text[backbone.lang] disable when !item.isSelectable for item in variant.options" 
+							ng-model="pickedSpec[$index]" ng-change="determineSelectableItems(); updateProductPrice();">
 					</select>
+					<!-- Load images-->
+					<div ng-if="variant.hasAttachedImage">
+						<div style="width:100%;padding:0;white-space:nowrap;overflow-x:auto;">
+							<span ng-repeat="option in variant.options" ng-show="option.isSelectable" class="w3-display-container">
+								<img class="w3-circle hoverable" lazy-load="{{config.imgSrc}}/{{itemInfo.Images.path}}{{removeExtension(option.linkedImage) + '_100w.jpg'}}" 
+										ng-class="{'selected': pickedSpec[parentIndex] == option}"
+										ng-click="pickedSpec[parentIndex] = option; determineSelectableItems(); updateProductPrice()" 
+										style="height: 90px;width:auto; margin:0 1%;">	
+								</img>
+								<span class="material-icons w3-xxlarge w3-text-black w3-display-middle w3-white w3-circle hoverable"
+										ng-show="pickedSpec[parentIndex] == option"
+										ng-click="modal.show = true; 
+										  modal.imgToShow = config.imgSrc + '/' + itemInfo.Images.path + removeExtension(option.linkedImage) + '_500w.jpg';
+										  modal.textToShow = option.text[backbone.lang];">
+										zoom_in
+								</span>		
+							</span>
+						</div>
+						<div  class="w3-margin-top"
+						   style="color: var(--main-theme)">{{pickedSpec[parentIndex].text[backbone.lang]}}
+						</div>
+					</div>
 					<input required ng-if="pickedSpec[$index].requiresInput && pickedSpec[$index].inputType == 'number'"
 						name="var_num_{{$index}}"
 						type="number" min="{{pickedSpec[$index].min}}" max="{{pickedSpec[$index].max}}"
@@ -204,8 +228,7 @@
 			</div>
 		</form>		
 		
-		<div class="gapper" style="height:50px">
-		</div>
+		<div class="gapper" style="height:50px"></div>
 		
 		<div ng-controller="Accordions" ng-init="des=false;del=false;ret=false;" class="w3-margin-bottom more-info">
 			<div ng-click="des=!des;del=false;ret=false" class="w3-border-bottom w3-border-black w3-padding" style="width:100%;height:auto;overflow:auto">
