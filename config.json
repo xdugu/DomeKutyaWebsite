@@ -16,8 +16,15 @@
     "homePage":[
         {
             "title":{"en": "Our Other Products", "hu": "Egyéb termékeink"},
-            "type": "product",
-            "list": ["Benny-fekhely", "Cocco-bujozsak", "Masuta-babzsak", "kutya-kanape-szurke"],
+            "type": "category",
+            "list": ["Kutyalepcso>Fekhelyek"],
+            "showPrice": true,
+            "linkToPage": "ProductPage.html"
+        },
+        {
+            "title":{"en": "Dog clothes", "hu": "Ruhák"},
+            "type": "category",
+            "list": ["Ruhak"],
             "showPrice": true,
             "linkToPage": "ProductPage.html"
         },
