@@ -94,7 +94,8 @@ var dict = {
 		'authorisation-number': 'Authorisation number',
 		'reset':'Reset',
 		'pay-by-card': 'Pay by credit/debit card',
-		'dog-clothes': 'Dog clothes'
+		'dog-clothes': 'Dog clothes',
+		'beds': 'Beds'
 	},
 	hu:{
 		'and': 'és',
@@ -183,7 +184,8 @@ var dict = {
 		'authorisation-number': 'A tranzakció eredményének szöveges ismertetése',
 		'reset': 'Visszaállítás',
 		'pay-by-card': 'Fizetés bankkártyával',
-		'dog-clothes': 'Ruhák'
+		'dog-clothes': 'Ruhák',
+		'beds': 'Kutyaágyak'
 		
 	}
 }
