@@ -44,17 +44,17 @@ function checkCookie(){
 	
 	  window.dataLayer = window.dataLayer || [];
 	  // ga enabled by default
-	  window['ga-disable-UA-131830139-2'] = false;
+	  window['ga-disable-G-ZTF84G8RL2'] = false;
 	  
 	 let useCookie = localStorage.getItem("useCookie");
 
 	if (useCookie == "false")
-		 window['ga-disable-UA-131830139-2'] = true;
+		 window['ga-disable-G-ZTF84G8RL2'] = true;
 
 		 
 	  function gtag(){dataLayer.push(arguments);}
 	  gtag('js', new Date());
-	  gtag('config', 'UA-131830139-2', { 'anonymize_ip': true });
+	  gtag('config', 'G-ZTF84G8RL2', { 'anonymize_ip': true });
 
 }
 
@@ -96,7 +96,7 @@ function Common_changeCookie(setting){
 	localStorage.setItem("useCookie",setting);
 	$('#privacy_placeholder').hide();
 	if(setting==true)
-		window['ga-disable-UA-131830139-2'] = false;	
+		window['ga-disable-G-ZTF84G8RL2'] = false;	
 }
 
 //Parses the url parameters
