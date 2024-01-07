@@ -125,7 +125,7 @@
 					class="w3-button w3-xlarge w3-border w3-border-black w3-hover-white w3-theme w3-round" 
 					ng-click="addToBasket();showImg=false">{{'add-to-basket' | myTranslator : backbone.lang}}
 			</button>
-			<span class="w3-text-red w3-large" ng-show="(itemInfo.Quantity <= 0 && itemInfo.TrackStock) || !itemInfo.Enabled">
+			<span class="w3-text-red w3-large" ng-show="((itemInfo.Quantity <= 0 && itemInfo.TrackStock) || !itemInfo.Enabled) && !backbone.loading">
 				<b>{{'out-of-stock' | myTranslator : backbone.lang}}</b>
 			</span>
 			<a class="w3-button w3-large w3-border w3-border-black w3-hover-white w3-theme w3-round" 
