@@ -8,6 +8,7 @@ angular.module('AduguShopApp').filter('myTranslator', function() {
 
 var dict = {
 	en:{
+		'accessories': "Accessories with this item",
 		'and': 'and',
 		'or': 'or',
 		'okay': 'Okay',
@@ -98,6 +99,7 @@ var dict = {
 		'beds': 'Beds'
 	},
 	hu:{
+		'accessories': "Kiegészítők ehhez a termékhez",
 		'and': 'és',
 		'or': 'vagy',
 		'okay': 'Rendben',

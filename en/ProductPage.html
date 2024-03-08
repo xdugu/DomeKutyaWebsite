@@ -257,9 +257,17 @@
 				</div>
 			</div>
 		
-		</div>
-			
-	</div><!--column 2-->		
+		</div>	
+	</div><!--column 2-->	
+	<my-accessories 
+			ng-if="itemInfo!=null" 
+			storeid="'KutyaLepcso'" 
+			accessories="itemInfo.Accessories"
+			imageurl="config.imgSrc"
+			currency="currency"
+			lang="backbone.lang"
+			>
+	</my-accessories>	
 	</div><!--row-->
 </div><!--content-->
 	

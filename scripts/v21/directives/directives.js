@@ -252,6 +252,37 @@ angular.module('AduguShopApp').directive('myImageSizerv2', function($interval) {
 	}
 	}]);
 
+	// directive to show Accesories
+	angular.module('AduguShopApp').directive('myAccessories', ['ApiManager', function(ApiManager) {
+		return {
+			restrict : 'E',
+			templateUrl: '/scripts/templates/v5/Accessories.html',
+			scope:{
+				accessories: '=accessories',
+				storeId: '=storeid',
+				imageUrl: '=imageurl',
+				currency: "=currency",
+				lang: "=lang"
+			},
+			link: function($scope, elem, attr){
+				$scope.products = [];
+				$scope.removeExtension = Common_removeExtension;
+				if ($scope.accessories.length > 0){
+					ApiManager.get(
+						'open', 
+						'get/products', 
+						{
+							storeId:$scope.storeId, 
+							items: $scope.accessories.toString()
+						}
+					).then(function(res){
+						$scope.products = res.data;
+					})
+				}
+			}
+		}
+		}]);
+
   // directive to handle notification
   angular.module('AduguShopApp').directive('notificationManager', 
   		['$timeout', '$location', 'ApiManager', function($timeout, $location, ApiManager){

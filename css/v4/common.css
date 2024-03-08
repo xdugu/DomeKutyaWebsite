@@ -220,5 +220,17 @@ notification-manager .full-height{
 	100% {margin-top: 0px}
   }
 
+/*Fixing sizing for accessories*/
+
+div#accessories {
+	white-space: nowrap;
+overflow-x: scroll;	
+	
+}
+
+/* div#accessories > div{
+	width: 30%;	
+	margin: 16px;
+} */
 
 

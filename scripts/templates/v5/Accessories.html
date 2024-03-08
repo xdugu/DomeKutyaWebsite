@@ -1,0 +1,19 @@
+<div class="w3-block w3-center" style="width:100%">
+    <h1 ng-show="products.length > 0" class="w3-large bold">{{'accessories' | myTranslator : lang}}</h1>
+    <div id="accessories">
+        <div ng-repeat="product in products" class="w3-margin-left" style="display:inline-block">
+            <a href="ProductPage.html?itemId={{product.ItemId}}&storeId={{storeId}}">
+                <img style="width:auto;height:160px" 
+                    ng-src="{{imageUrl}}/{{product.Images.path}}{{removeExtension(product.Images.list[0].name)+ '_300w.jpg'}}">
+                </img>
+            </a>
+            <div my-cost-str="product.Price[currency.toLowerCase()]" class="price w3-wide"></div>
+            <div>{{product.Title[lang]}}</div>
+            <div class="w3-margin-top w3-margin-bottom price w3-wide w3-large"
+			    ng-show="!product.isCustom">
+			    {{product.Price[currency.toLowerCase()] | myCurrency: currency}}
+		    </div>
+        </div>
+    </div>
+
+</div>
