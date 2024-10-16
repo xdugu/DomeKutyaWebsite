@@ -229,7 +229,16 @@
 		</form>		
 		
 		<div class="gapper" style="height:50px"></div>
-		
+		<my-accessories 
+			ng-if="itemInfo!=null" 
+			storeid="'KutyaLepcso'" 
+			accessories="itemInfo.Accessories"
+			imageurl="config.imgSrc"
+			currency="currency"
+			lang="backbone.lang"
+			>	
+		</my-accessories>
+		<div class="gapper" style="height:50px"></div>
 		<div ng-controller="Accordions" ng-init="des=false;del=false;ret=false;" class="w3-margin-bottom more-info">
 			<div ng-click="des=!des;del=false;ret=false" class="w3-border-bottom w3-border-black w3-padding" style="width:100%;height:auto;overflow:auto">
 					<span class="w3-left w3-large bold">{{'description' | myTranslator : backbone.lang}}</span>
@@ -259,15 +268,7 @@
 		
 		</div>	
 	</div><!--column 2-->	
-	<my-accessories 
-			ng-if="itemInfo!=null" 
-			storeid="'KutyaLepcso'" 
-			accessories="itemInfo.Accessories"
-			imageurl="config.imgSrc"
-			currency="currency"
-			lang="backbone.lang"
-			>
-	</my-accessories>	
+		
 	</div><!--row-->
 </div><!--content-->
 	
