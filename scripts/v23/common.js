@@ -42,19 +42,33 @@ $(document).ready(function() {
 
 function checkCookie(){
 	
-	  window.dataLayer = window.dataLayer || [];
-	  // ga enabled by default
-	  window['ga-disable-G-ZTF84G8RL2'] = false;
-	  
-	 let useCookie = localStorage.getItem("useCookie");
+	window.dataLayer = window.dataLayer || [];
+	// ga enabled by default
+	window['ga-disable-G-ZTF84G8RL2'] = false;
+	
+	let useCookie = localStorage.getItem("useCookie");
 
-	if (useCookie == "false")
-		 window['ga-disable-G-ZTF84G8RL2'] = true;
-
-		 
-	  function gtag(){dataLayer.push(arguments);}
-	  gtag('js', new Date());
-	  gtag('config', 'G-ZTF84G8RL2', { 'anonymize_ip': true });
+	if (useCookie !== "false"){
+		// Add facebook tracker
+		const script = document.createElement("script");
+		script.type="text/javascript";
+		script.innerHTML=`
+			!function(f,b,e,v,n,t,s) {if(f.fbq)return;n=f.fbq=function(){n.callMethod? n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+			if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0'; n.queue=[];t=b.createElement(e);
+			t.async=!0; t.src=v;s=b.getElementsByTagName(e)[0];
+			s.parentNode.insertBefore(t,s)}(window, document,'script', 'https://connect.facebook.net/en_US/fbevents.js');
+			fbq('init', '1183373119880101');
+			fbq('track', 'PageView');
+		`;
+		document.getElementsByTagName('head')[0].appendChild(script);
+	}
+	else{
+		window['ga-disable-G-ZTF84G8RL2'] = true;
+		Common_deleteAllCookies();
+	} 
+	function gtag(){dataLayer.push(arguments);}
+	gtag('js', new Date());
+	gtag('config', 'G-ZTF84G8RL2', { 'anonymize_ip': true });
 
 }
 
@@ -153,19 +167,6 @@ function Common_changeLanguage(lang){
 }
 
 
-
-$(window).scroll(function(){ 
- /*if(!Common_isElementInView('#menu_navigation')&& fixedMenu==false){
-	 $('#overall_menu').css({position:'fixed', top: '0', width:'100%'});	 
-	 fixedMenu=true;
- }
- else if(Common_isElementInView('#header_main') && fixedMenu==true){ 
-	 $('#overall_menu').css({position:'relative'});
-	 fixedMenu=false;
- }*/
-
-});
-
 // Recursively loops through every key in an object and checks for empty strings
 //which it removes by setting to null
 function Common_removeEmptyStrings(obj){
@@ -218,10 +219,10 @@ function Common_limit(val, min, max){
 	return val < min ? min : (val > max ? max : val);
 }
 
-
-
-
-
-
-
-
+function Common_deleteAllCookies() {
+    document.cookie.split(';').forEach(cookie => {
+        const eqPos = cookie.indexOf('=');
+        const name = eqPos > -1 ? cookie.substring(0, eqPos) : cookie;
+        document.cookie = name + '=;expires=Thu, 01 Jan 1970 00:00:00 GMT';
+    })
+}
